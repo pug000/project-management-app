@@ -1,3 +1,3 @@
-const baseUrl = 'https://shielded-eyrie-37760.herokuapp.com/';
+const baseUrl = 'https://project-management.up.railway.app/';
 
 export default baseUrl;
