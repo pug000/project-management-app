@@ -7,15 +7,30 @@ interface ButtonProps {
   text?: string;
   id?: string;
   disabled?: boolean;
+  backgroundColor?: string;
+  color?: string;
+  width?: string;
   callback?: () => void;
 }
 
-function Button({ type, text, id, disabled, callback }: ButtonProps) {
+function Button({
+  type,
+  text,
+  id,
+  disabled,
+  backgroundColor,
+  color,
+  width,
+  callback,
+}: ButtonProps) {
   return (
     <StyledButton
       type={type}
       id={id}
       disabled={disabled}
+      $backgroundColor={backgroundColor}
+      $color={color}
+      $width={width}
       onClick={() => callback && callback()}
     >
       {text}
@@ -28,6 +43,9 @@ Button.defaultProps = {
   disabled: false,
   id: undefined,
   callback: undefined,
+  backgroundColor: undefined,
+  color: undefined,
+  width: undefined,
 };
 
 export default Button;

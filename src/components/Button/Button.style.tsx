@@ -1,16 +1,19 @@
 import styled from 'styled-components';
+import { BackgroundColorProps, ColorProps, WidthProps } from 'ts/interfaces';
 
-const StyledButton = styled.button`
+type ButtonProps = ColorProps & BackgroundColorProps & WidthProps;
+
+const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.text};
   align-self: center;
   justify-self: center;
-  color: ${({ theme }) => theme.colors.text};
-  background-color: ${({ theme }) => theme.colors.primaryColor};
+  color: ${({ $color, theme }) => $color ?? theme.colors.textButton};
   border: none;
-  border-radius: 5px;
-  padding: 8px;
-  width: 100%;
+  padding: 8px 0;
+  width: ${({ $width }) => $width ?? '175px'};
+  background-color: ${({ $backgroundColor, theme }) =>
+    $backgroundColor ?? theme.colors.primaryColor};
   transition: ${({ theme }) => theme.effects.transition};
 
   &:hover:enabled {
@@ -24,6 +27,10 @@ const StyledButton = styled.button`
   &:disabled {
     background-color: ${({ theme }) => theme.colors.grey};
     cursor: default;
+  }
+
+  &:active:enabled {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
   }
 `;
 
