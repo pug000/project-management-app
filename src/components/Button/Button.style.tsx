@@ -5,6 +5,7 @@ const StyledButton = styled.button`
   font-size: ${({ theme }) => theme.fontSizes.text};
   align-self: center;
   justify-self: center;
+  color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.primaryColor};
   border: none;
   border-radius: 5px;
