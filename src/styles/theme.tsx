@@ -23,6 +23,11 @@ declare module 'styled-components' {
       title: string;
       text: string;
     };
+    fontsWeight: {
+      regular: number;
+      medium: number;
+      bold: number;
+    };
     fontSizes: {
       h1: string;
       h2: string;
@@ -37,6 +42,7 @@ declare module 'styled-components' {
     effects: {
       transition: string;
       hoverOpacity: string;
+      activeOpacity: string;
       hoverTransform: string;
     };
   }
@@ -64,6 +70,11 @@ const defaultTheme: DefaultTheme = {
     title: 'Fraunces, serif',
     text: 'Inter, sans-serif',
   },
+  fontsWeight: {
+    regular: 400,
+    medium: 500,
+    bold: 700,
+  },
   fontSizes: {
     h1: '58px',
     h2: '42px',
@@ -78,6 +89,7 @@ const defaultTheme: DefaultTheme = {
   effects: {
     transition: 'all 0.2s ease-out',
     hoverOpacity: '0.6',
+    activeOpacity: '0.4',
     hoverTransform: 'scale(1.2)',
   },
 };
