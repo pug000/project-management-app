@@ -2,10 +2,84 @@ import { DefaultTheme } from 'styled-components';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    [key: string]: string;
+    colors: {
+      title: string;
+      text: string;
+      textButton: string;
+      backgroundWhite: string;
+      backgroundGrey: string;
+      backgroundBlue: string;
+      backgroundDarkBlue: string;
+      white: string;
+      pink: string;
+      blue: string;
+      yellow: string;
+      grey: string;
+      black: string;
+      darkBlue: string;
+      primaryColor: string;
+    };
+    fonts: {
+      title: string;
+      text: string;
+    };
+    fontSizes: {
+      h1: string;
+      h2: string;
+      h3: string;
+      h4: string;
+      h5: string;
+      text: string;
+      smallText: string;
+      noteText: string;
+      smallNoteText: string;
+    };
+    effects: {
+      transition: string;
+      hoverOpacity: string;
+      hoverTransform: string;
+    };
   }
 }
 
-const defaultTheme: DefaultTheme = {};
+const defaultTheme: DefaultTheme = {
+  colors: {
+    title: '#1f1f1f',
+    text: '#1f1f1f',
+    textButton: '#ffffff',
+    backgroundWhite: '#ffffff',
+    backgroundGrey: '#f7f9fa',
+    backgroundBlue: '#e6f7ff',
+    backgroundDarkBlue: '#006b99',
+    white: '#ffffff',
+    pink: '#f7cedc',
+    blue: '#cceff6',
+    yellow: '#faea73',
+    grey: '#969FA4',
+    black: '#1f1f1f',
+    darkBlue: '#0070a0',
+    primaryColor: '#0070a0',
+  },
+  fonts: {
+    title: 'Fraunces, serif',
+    text: 'Inter, sans-serif',
+  },
+  fontSizes: {
+    h1: '58px',
+    h2: '42px',
+    h3: '36px',
+    h4: '25px',
+    h5: '21px',
+    text: '18px',
+    smallText: '16px',
+    noteText: '14px',
+    smallNoteText: '13px',
+  },
+  effects: {
+    transition: 'all 0.2s ease-out',
+    hoverOpacity: '0.6',
+    hoverTransform: 'scale(1.2)',
+  },
+};
 
 export default defaultTheme;
