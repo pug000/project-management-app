@@ -1,0 +1,44 @@
+{
+  "en": {
+    "translation": {
+      "signUp": {
+        "title": "Sign Up",
+        "text": "Sign Up",
+        "name": "Name",
+        "login": "Login",
+        "password": "Password",
+        "account": "Don't have an account? Sing Up",
+        "or": "or"
+      },
+      "signIn": {
+        "title": "Sign In",
+        "text": "Sign In",
+        "login": "Login",
+        "password": "Password",
+        "account": "Already have an account? Sign In",
+        "or": "or"
+      }
+    }
+  },
+  "ru": {
+    "translation": {
+      "signUp": {
+        "title": "Регистрация",
+        "text": "Зарегистрироваться",
+        "name": "Имя",
+        "login": "Логин",
+        "password": "Пароль",
+        "account": "Ещё нет учетной записи? Зарегистрироваться",
+        "or": "или"
+      },
+      "signIn": {
+        "title": "Войти",
+        "text": "Войти",
+        "login": "Логин",
+        "password": "Пароль",
+        "account": "Уже есть учетная запись? Войти",
+        "or": "или"
+      }
+    }
+  }
+}
