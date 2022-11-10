@@ -7,15 +7,16 @@
         "name": "Name",
         "login": "Login",
         "password": "Password",
-        "account": "Don't have an account? Sing Up",
+        "account": "Already have an account? Sign In",
         "or": "or"
       },
       "signIn": {
         "title": "Sign In",
         "text": "Sign In",
+        "name": "Name",
         "login": "Login",
         "password": "Password",
-        "account": "Already have an account? Sign In",
+        "account": "Don't have an account? Sing Up",
         "or": "or"
       }
     }
@@ -28,15 +29,16 @@
         "name": "Имя",
         "login": "Логин",
         "password": "Пароль",
-        "account": "Ещё нет учетной записи? Зарегистрироваться",
+        "account": "Уже есть учетная запись? Войти",
         "or": "или"
       },
       "signIn": {
         "title": "Войти",
         "text": "Войти",
+        "name": "Имя",
         "login": "Логин",
         "password": "Пароль",
-        "account": "Уже есть учетная запись? Войти",
+        "account": "Ещё нет учетной записи? Зарегистрироваться",
         "or": "или"
       }
     }
