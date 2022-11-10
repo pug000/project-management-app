@@ -23,6 +23,11 @@ declare module 'styled-components' {
       title: string;
       text: string;
     };
+    fontsWeight: {
+      regular: number;
+      medium: number;
+      bold: number;
+    };
     fontSizes: {
       h1: string;
       h2: string;
@@ -63,6 +68,11 @@ const defaultTheme: DefaultTheme = {
   fonts: {
     title: 'Fraunces, serif',
     text: 'Inter, sans-serif',
+  },
+  fontsWeight: {
+    regular: 400,
+    medium: 500,
+    bold: 700,
   },
   fontSizes: {
     h1: '58px',
