@@ -20,9 +20,23 @@ const GlobalStyle = createGlobalStyle`
 
   #root {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template: auto 1fr auto / 1fr minmax(300px, 1024px) 1fr;
+    grid-template-areas: ". header ."
+  											". main ."
+  											". footer ."
+  }
+
+  header {
+    grid-area: header;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  footer {
+    grid-area: footer;
   }
 `;
 
