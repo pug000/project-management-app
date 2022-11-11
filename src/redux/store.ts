@@ -10,19 +10,19 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import testApi from './api/testApi';
-import testSlice from './slices/testSlice';
+import userApi from './api/userApi';
+import userSlice from './slices/userSlice';
 
 const rootReducer = combineReducers({
-  test: testSlice,
-  [testApi.reducerPath]: testApi.reducer,
+  user: userSlice,
+  [userApi.reducerPath]: userApi.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: [''],
+  blacklist: ['userApi'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -34,7 +34,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(testApi.middleware),
+    }).concat(userApi.middleware),
   devTools: true,
 });
 

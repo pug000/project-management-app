@@ -18,4 +18,11 @@ interface UserFormValues extends FieldValues {
   password: string;
 }
 
-export type { ColorProps, BackgroundColorProps, WidthProps, UserFormValues };
+interface User {
+  _id?: string;
+  name: string;
+  login: string;
+  password?: string;
+}
+
+export type { ColorProps, BackgroundColorProps, WidthProps, UserFormValues, User };

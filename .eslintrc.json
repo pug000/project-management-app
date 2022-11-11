@@ -27,6 +27,7 @@
     "@typescript-eslint/no-explicit-any": "error",
     "comma-dangle": ["error", "only-multiline"],
     "react/jsx-props-no-spreading": "off",
+    "import/no-cycle": "off",
     "no-param-reassign": [
       "error",
       { "props": true, "ignorePropertyModificationsFor": ["state"] }
