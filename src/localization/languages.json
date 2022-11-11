@@ -24,6 +24,10 @@
         "account": "Don't have an account? Sing Up",
         "auth": "User not founded"
       },
+      "board": {
+        "title": "Board",
+        "text": "Board"
+      },
       "other": {
         "or": "or",
         "and": "and"
@@ -54,6 +58,10 @@
         "text": "Войти",
         "account": "Ещё нет учетной записи? Зарегистрироваться",
         "auth": "Пользователь не найден"
+      },
+      "board": {
+        "title": "Доска",
+        "text": "Доска"
       },
       "other": {
         "or": "или",

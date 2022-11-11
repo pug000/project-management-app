@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
   height: 75px;
@@ -6,13 +7,20 @@ const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 20px 15px;
+  position: sticky;
 `;
 
 const HeaderContainerElements = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 `;
 
-export { HeaderContainer, HeaderContainerElements };
+const HeaderLink = styled(NavLink)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+export { HeaderContainer, HeaderContainerElements, HeaderLink };

@@ -10,4 +10,10 @@ interface WidthProps {
   $width?: string;
 }
 
-export type { ColorProps, BackgroundColorProps, WidthProps };
+interface HeaderLink {
+  id: number;
+  text: string;
+  link: string;
+}
+
+export type { ColorProps, BackgroundColorProps, WidthProps, HeaderLink };
