@@ -7,7 +7,7 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 function App() {
   return (
     <>
-      <div>Header</div>
+      <header>Header</header>
       <ErrorBoundary>
         <Routes>
           <Route index path="/" element={<HomePage />} />
@@ -17,7 +17,7 @@ function App() {
           <Route path="*" element={<div>NotFound</div>} />
         </Routes>
       </ErrorBoundary>
-      <div>Footer</div>
+      <footer>Footer</footer>
     </>
   );
 }
