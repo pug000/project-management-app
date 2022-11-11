@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import AppLogo from 'components/AppLogo/AppLogo';
 
+import { authors } from 'utils/constants';
+
 import {
   FooterWrapper,
   FooterContainer,
@@ -16,40 +18,29 @@ import {
 } from './Footer.style';
 
 function Footer() {
-  const { t } = useTranslation('translation');
+  const { t } = useTranslation('translation', { keyPrefix: 'footer' });
   return (
     <FooterWrapper>
       <FooterContainer>
         <AppLogo />
         <AuthorsContainer>
-          <AuthorsTitle>{t('footer.authors')}</AuthorsTitle>
+          <AuthorsTitle>{t('authors')}</AuthorsTitle>
           <Authors>
-            <Author
-              href="https://github.com/pug000"
-              title="Roman on GitHub"
-              target="_blank"
-            >
-              {t('footer.roma')}
-            </Author>
-            <Author
-              href="https://github.com/saachko"
-              title="Anastasiya on GitHub"
-              target="_blank"
-            >
-              {t('footer.nastya')}
-            </Author>
-            <Author
-              href="https://github.com/aArt13"
-              title="Artsiom on GitHub"
-              target="_blank"
-            >
-              {t('footer.artem')}
-            </Author>
+            {authors.map((author) => (
+              <Author
+                key={author.id}
+                href={author.githubLink}
+                title={author.title}
+                target="_blank"
+              >
+                {t(author.name)}
+              </Author>
+            ))}
           </Authors>
         </AuthorsContainer>
       </FooterContainer>
       <Copyright>
-        <CopyrightText>{t('footer.copyright')}</CopyrightText>
+        <CopyrightText>{t('copyright')}</CopyrightText>
         <SchoolLogo href="https://rs.school/react/" title="RS school" target="_blank" />
       </Copyright>
     </FooterWrapper>
