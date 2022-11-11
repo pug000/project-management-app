@@ -5,12 +5,14 @@ import { User } from 'ts/interfaces';
 interface UserState {
   user: User | null;
   token: string | null;
+  userId: string | null;
   isUserLogin: boolean;
 }
 
 const initialState: UserState = {
   user: null,
   token: null,
+  userId: null,
   isUserLogin: false,
 };
 
@@ -20,6 +22,10 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, { payload }: PayloadAction<User>) {
       state.user = payload;
+    },
+
+    setUserId(state, { payload }: PayloadAction<string | null>) {
+      state.userId = payload;
     },
 
     setToken(state, { payload }: PayloadAction<string | null>) {
@@ -32,6 +38,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, setToken, setUserLogin } = userSlice.actions;
+export const { setUser, setUserId, setToken, setUserLogin } = userSlice.actions;
 
 export default userSlice.reducer;

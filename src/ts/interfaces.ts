@@ -19,7 +19,6 @@ interface UserFormValues extends FieldValues {
 }
 
 interface User {
-  _id?: string;
   name: string;
   login: string;
   password?: string;

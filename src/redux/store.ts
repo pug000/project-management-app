@@ -22,7 +22,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['userApi'],
+  blacklist: ['userApi', 'user'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

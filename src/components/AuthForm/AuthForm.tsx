@@ -16,6 +16,8 @@ import {
 import { UserFormValues } from 'ts/interfaces';
 
 import Form from 'styles/styles';
+import { useAppDispatch } from 'hooks/useRedux';
+import { setUser } from 'redux/slices/userSlice';
 
 interface AuthFormProps {
   keyPrefix: string;
@@ -24,6 +26,7 @@ interface AuthFormProps {
 function AuthForm({ keyPrefix }: AuthFormProps) {
   const location = useLocation();
   const { t } = useTranslation('translation');
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -35,7 +38,9 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
     defaultValues: defaultUserFormValues,
   });
 
-  const onSubmit: SubmitHandler<UserFormValues> = useCallback(() => {}, []);
+  const onSubmit: SubmitHandler<UserFormValues> = useCallback((data) => {
+    dispatch(setUser(data));
+  }, []);
 
   return (
     <Form
