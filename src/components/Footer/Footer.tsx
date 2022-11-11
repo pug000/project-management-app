@@ -50,7 +50,7 @@ function Footer() {
       </FooterContainer>
       <Copyright>
         <CopyrightText>{t('footer.copyright')}</CopyrightText>
-        <SchoolLogo href="https://rs.school/js/" title="RS school" target="_blank" />
+        <SchoolLogo href="https://rs.school/react/" title="RS school" target="_blank" />
       </Copyright>
     </FooterWrapper>
   );
