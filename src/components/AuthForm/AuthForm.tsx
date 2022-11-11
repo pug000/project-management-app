@@ -6,7 +6,12 @@ import { useTranslation } from 'react-i18next';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
-import { defaultUserFormValues } from 'utils/constants';
+import {
+  defaultUserFormValues,
+  loginValidation,
+  nameValidation,
+  passwordValidation,
+} from 'utils/constants';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -18,7 +23,7 @@ interface AuthFormProps {
 
 function AuthForm({ keyPrefix }: AuthFormProps) {
   const location = useLocation();
-  const { t } = useTranslation('translation', { keyPrefix });
+  const { t } = useTranslation('translation');
   const {
     register,
     handleSubmit,
@@ -37,7 +42,7 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
       aria-label="form"
       noValidate
       autoComplete="off"
-      onSubmit={() => handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       {location.pathname === '/signup' && (
         <Input<UserFormValues>
@@ -46,7 +51,16 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
           register={register}
           clearErrors={clearErrors}
           errors={errors.name}
-          placeholderText={t('name')}
+          placeholderText={t('authorization.name')}
+          pattern={{
+            value: nameValidation,
+            message: t('authorization.namePattern'),
+          }}
+          minLength={{
+            value: 3,
+            message: t('authorization.nameMinLength', { count: 3 }),
+          }}
+          required={t('authorization.required', { value: t('authorization.name') })}
         />
       )}
       <Input<UserFormValues>
@@ -55,17 +69,41 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
         register={register}
         clearErrors={clearErrors}
         errors={errors.login}
-        placeholderText={t('login')}
+        placeholderText={t('authorization.login')}
+        pattern={{
+          value: loginValidation,
+          message: t('authorization.loginPattern'),
+        }}
+        minLength={{
+          value: 4,
+          message: t('authorization.authMinLength', {
+            value: t('authorization.login'),
+            count: 4,
+          }),
+        }}
+        required={t('authorization.required', { value: t('authorization.login') })}
       />
       <Input<UserFormValues>
-        type="password"
+        type="text"
         name="password"
         register={register}
         clearErrors={clearErrors}
         errors={errors.password}
-        placeholderText={t('password')}
+        placeholderText={t('authorization.password')}
+        pattern={{
+          value: passwordValidation,
+          message: t('authorization.passwordPattern'),
+        }}
+        minLength={{
+          value: 8,
+          message: t('authorization.authMinLength', {
+            value: t('authorization.password'),
+            count: 8,
+          }),
+        }}
+        required={t('authorization.required', { value: t('authorization.password') })}
       />
-      <Button type="submit" disabled={!isDirty} text={t('text')} />
+      <Button type="submit" disabled={!isDirty} text={t(`${keyPrefix}.text`)} />
     </Form>
   );
 }

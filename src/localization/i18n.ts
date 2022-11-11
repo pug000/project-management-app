@@ -10,12 +10,15 @@ i18n
   .init({
     resources: languages,
     fallbackLng: 'en',
+    lng: 'en',
+    debug: true,
     detection: {
       order: ['localStorage'],
       caches: ['localStorage'],
     },
     interpolation: {
       escapeValue: false,
+      format: (value, format) => (format === 'lowercase' ? value.toLowerCase() : value),
     },
   });
 
