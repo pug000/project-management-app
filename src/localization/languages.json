@@ -27,6 +27,13 @@
       "other": {
         "or": "or",
         "and": "and"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App for The Rolling Scopes School",
+        "authors": "Our team on GitHub",
+        "roma": "Roman Troshin",
+        "nastya": "Anastasiya Sachko",
+        "artem": "Artsiom Kharytonchyk"
       }
     }
   },
@@ -58,6 +65,13 @@
       "other": {
         "or": "или",
         "and": "и"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App для The Rolling Scopes School",
+        "authors": "Наша команда на GitHub",
+        "roma": "Роман Трошин",
+        "nastya": "Анастасия Сачко",
+        "artem": "Артём Харитончик"
       }
     }
   }
