@@ -1,0 +1,78 @@
+{
+  "en": {
+    "translation": {
+      "authorization": {
+        "name": "Name",
+        "login": "Login",
+        "password": "Password",
+        "required": "{{value, lowercase}} can't be empty",
+        "nameMinLength": "name should contain more than {{count}} characters",
+        "authMinLength": "{{value, lowercase}} should contain more than {{count}} characters",
+        "namePattern": "name should contain only letters(eng)",
+        "loginPattern": "login should contain only letters(eng) and digits",
+        "passwordPattern": "password should contain only letters(eng), digits and ! @ # ~ &"
+      },
+      "signUp": {
+        "title": "Sign Up",
+        "text": "Sign Up",
+        "account": "Already have an account? Sign In",
+        "auth": "User already exists"
+      },
+      "signIn": {
+        "title": "Sign In",
+        "text": "Sign In",
+        "account": "Don't have an account? Sing Up",
+        "auth": "User not founded"
+      },
+      "other": {
+        "or": "or",
+        "and": "and"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App for The Rolling Scopes School",
+        "authors": "Our team on GitHub",
+        "roma": "Roman Troshin",
+        "nastya": "Anastasiya Sachko",
+        "artem": "Artsiom Kharytonchyk"
+      }
+    }
+  },
+  "ru": {
+    "translation": {
+      "authorization": {
+        "name": "Имя",
+        "login": "Логин",
+        "password": "Пароль",
+        "required": "{{value, lowercase}} не может быть пустым",
+        "nameMinLength": "имя должно состоять как минимум из {{count}} символов",
+        "authMinLength": "{{value, lowercase}} должен состоять как минимум из {{count}} символов",
+        "namePattern": "имя может содержать только латинские буквы",
+        "loginPattern": "логин может содержать только латинские буквы и цифры",
+        "passwordPattern": "пароль может содержать только латинские буквы, цифры и ! @ # ~ &"
+      },
+      "signUp": {
+        "title": "Регистрация",
+        "text": "Зарегистрироваться",
+        "account": "Уже есть учетная запись? Войти",
+        "auth": "Пользователь уже существует"
+      },
+      "signIn": {
+        "title": "Войти",
+        "text": "Войти",
+        "account": "Ещё нет учетной записи? Зарегистрироваться",
+        "auth": "Пользователь не найден"
+      },
+      "other": {
+        "or": "или",
+        "and": "и"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App для The Rolling Scopes School",
+        "authors": "Наша команда на GitHub",
+        "roma": "Роман Трошин",
+        "nastya": "Анастасия Сачко",
+        "artem": "Артём Харитончик"
+      }
+    }
+  }
+}

@@ -10,4 +10,11 @@ interface WidthProps {
   $width?: string;
 }
 
-export type { ColorProps, BackgroundColorProps, WidthProps };
+interface Author {
+  id: number;
+  name: string;
+  githubLink: string;
+  title: string;
+}
+
+export type { ColorProps, BackgroundColorProps, WidthProps, Author };
