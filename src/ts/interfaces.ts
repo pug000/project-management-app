@@ -19,9 +19,29 @@ interface UserFormValues extends FieldValues {
 }
 
 interface User {
-  name: string;
+  name?: string;
   login: string;
-  password?: string;
+  password: string;
 }
 
-export type { ColorProps, BackgroundColorProps, WidthProps, UserFormValues, User };
+interface ParsedJwt {
+  id: string;
+  login: string;
+  exp: number;
+  iat: number;
+}
+
+interface AuthUser {
+  token: string;
+  _id: string;
+}
+
+export type {
+  ColorProps,
+  BackgroundColorProps,
+  WidthProps,
+  UserFormValues,
+  User,
+  ParsedJwt,
+  AuthUser,
+};

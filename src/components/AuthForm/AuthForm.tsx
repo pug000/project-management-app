@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { useAppSelector } from 'hooks/useRedux';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
@@ -16,31 +18,33 @@ import {
 import { UserFormValues } from 'ts/interfaces';
 
 import Form from 'styles/styles';
-import { useAppDispatch } from 'hooks/useRedux';
-import { setUser } from 'redux/slices/userSlice';
 
 interface AuthFormProps {
   keyPrefix: string;
+  onSubmit: SubmitHandler<UserFormValues>;
 }
 
-function AuthForm({ keyPrefix }: AuthFormProps) {
+function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
   const location = useLocation();
   const { t } = useTranslation('translation');
-  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const {
     register,
     handleSubmit,
     clearErrors,
     formState: { errors, isDirty },
+    reset,
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: defaultUserFormValues,
   });
 
-  const onSubmit: SubmitHandler<UserFormValues> = useCallback((data) => {
-    dispatch(setUser(data));
-  }, []);
+  useEffect(() => {
+    if (isLoggedIn) {
+      reset();
+    }
+  }, [isLoggedIn]);
 
   return (
     <Form
@@ -89,7 +93,7 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
         required={t('authorization.required', { value: t('authorization.login') })}
       />
       <Input<UserFormValues>
-        type="text"
+        type="password"
         name="password"
         register={register}
         clearErrors={clearErrors}
@@ -113,4 +117,4 @@ function AuthForm({ keyPrefix }: AuthFormProps) {
   );
 }
 
-export default AuthForm;
+export default memo(AuthForm);

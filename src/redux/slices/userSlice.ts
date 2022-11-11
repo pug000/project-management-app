@@ -1,19 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { User } from 'ts/interfaces';
+import { AuthUser, User } from 'ts/interfaces';
 
 interface UserState {
   user: User | null;
-  token: string | null;
-  userId: string | null;
-  isUserLogin: boolean;
+  authUser: AuthUser | null;
+  isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
   user: null,
-  token: null,
-  userId: null,
-  isUserLogin: false,
+  authUser: null,
+  isLoggedIn: false,
 };
 
 const userSlice = createSlice({
@@ -24,20 +22,16 @@ const userSlice = createSlice({
       state.user = payload;
     },
 
-    setUserId(state, { payload }: PayloadAction<string | null>) {
-      state.userId = payload;
+    setAuthUser(state, { payload }: PayloadAction<AuthUser>) {
+      state.authUser = payload;
     },
 
-    setToken(state, { payload }: PayloadAction<string | null>) {
-      state.token = payload;
-    },
-
-    setUserLogin(state, { payload }: PayloadAction<boolean>) {
-      state.isUserLogin = payload;
+    setLoggedIn(state, { payload }: PayloadAction<boolean>) {
+      state.isLoggedIn = payload;
     },
   },
 });
 
-export const { setUser, setUserId, setToken, setUserLogin } = userSlice.actions;
+export const { setUser, setLoggedIn, setAuthUser } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,3 +1,5 @@
+import { ParsedJwt } from 'ts/interfaces';
+
 const addFetchOptions = (
   url: string,
   method: string,
@@ -8,7 +10,7 @@ const addFetchOptions = (
   params,
 });
 
-const parseJwt = (token: string) => {
+const parseJwt = (token: string): string => {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(
@@ -19,7 +21,9 @@ const parseJwt = (token: string) => {
       .join('')
   );
 
-  return JSON.parse(jsonPayload);
+  const parsedToken: ParsedJwt = JSON.parse(jsonPayload);
+
+  return parsedToken.id;
 };
 
 export { addFetchOptions, parseJwt };

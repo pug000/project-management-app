@@ -3,20 +3,24 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from 'redux/store';
 
 import { baseUrl } from 'utils/constants';
-import { addFetchOptions } from 'utils/functions';
+import { addFetchOptions, parseJwt } from 'utils/functions';
 
 import { Endpoints, Methods } from 'ts/enums';
-import { User } from 'ts/interfaces';
+import { AuthUser, User } from 'ts/interfaces';
+
+interface UserData extends User {
+  _id: string;
+}
 
 const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders(headers, { getState }) {
-      const { token } = (getState() as RootState).user;
+      const { authUser } = (getState() as RootState).user;
 
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+      if (authUser?.token) {
+        headers.set('authorization', `Bearer ${authUser?.token}`);
       }
 
       return headers;
@@ -33,16 +37,20 @@ const userApi = createApi({
           accept: 'application/json',
         },
       }),
-      invalidatesTags: ['User'],
+      transformResponse: ({ _id, ...data }: UserData) => data,
     }),
 
-    signIn: builder.mutation<string, string>({
-      query: () => ({
+    signIn: builder.mutation<AuthUser, User>({
+      query: (body: User) => ({
         ...addFetchOptions(`${Endpoints.signIn}`, Methods.post),
         headers: {
           'Content-type': 'application/json',
-          accept: 'application/json',
         },
+        body,
+      }),
+      transformResponse: ({ token }: Pick<AuthUser, 'token'>) => ({
+        token,
+        _id: parseJwt(token),
       }),
       invalidatesTags: ['User'],
     }),
