@@ -2,12 +2,15 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+import languages from 'localization/languages.json';
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {},
+    resources: languages,
     fallbackLng: 'en',
+    lng: 'en',
     debug: true,
     detection: {
       order: ['localStorage'],
@@ -15,6 +18,7 @@ i18n
     },
     interpolation: {
       escapeValue: false,
+      format: (value, format) => (format === 'lowercase' ? value.toLowerCase() : value),
     },
   });
 

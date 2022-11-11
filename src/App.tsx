@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="*" element={<div>NotFound</div>} />
         </Routes>
       </ErrorBoundary>
-      <div>Footer</div>
+      <Footer />
     </>
   );
 }
