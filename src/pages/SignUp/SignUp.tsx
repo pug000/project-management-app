@@ -12,9 +12,15 @@ import { UserFormValues } from 'ts/interfaces';
 
 function SignUp() {
   const dispatch = useAppDispatch();
-  const [signUp, { originalArgs: userData, isSuccess: isSuccessSignUp }] =
-    useSignUpMutation();
-  const [signIn, { data: authData, isSuccess: isSuccessSignIn }] = useSignInMutation();
+  const [
+    signUp,
+    { originalArgs: userData, isSuccess: isSuccessSignUp, isLoading: isLoadingSignUp },
+  ] = useSignUpMutation();
+  const [
+    signIn,
+    { data: authData, isSuccess: isSuccessSignIn, isLoading: isLoadingSignIn },
+  ] = useSignInMutation();
+  const isLoadingAuth = isLoadingSignUp || isLoadingSignIn;
 
   const onSubmit: SubmitHandler<UserFormValues> = useCallback(async (formValues) => {
     await signUp(formValues);
@@ -39,7 +45,9 @@ function SignUp() {
     }
   }, [authData, userData, isSuccessSignIn]);
 
-  return <AuthForm keyPrefix="signUp" onSubmit={onSubmit} />;
+  return (
+    <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+  );
 }
 
 export default SignUp;

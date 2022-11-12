@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -22,10 +22,12 @@ import Form from 'styles/styles';
 interface AuthFormProps {
   keyPrefix: string;
   onSubmit: SubmitHandler<UserFormValues>;
+  isLoadingAuth: boolean;
 }
 
-function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
+function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useTranslation('translation');
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const {
@@ -39,10 +41,15 @@ function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
     reValidateMode: 'onSubmit',
     defaultValues: defaultUserFormValues,
   });
+  const isFormValid = Object.values(errors).every((error) => !error?.message);
 
   useEffect(() => {
     if (isLoggedIn) {
-      reset();
+      navigate('/board');
+
+      if (isDirty) {
+        reset();
+      }
     }
   }, [isLoggedIn]);
 
@@ -61,6 +68,7 @@ function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
           clearErrors={clearErrors}
           errors={errors.name}
           placeholderText={t('authorization.name')}
+          disabled={isLoadingAuth}
           pattern={{
             value: nameValidation,
             message: t('authorization.namePattern'),
@@ -79,6 +87,7 @@ function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
         clearErrors={clearErrors}
         errors={errors.login}
         placeholderText={t('authorization.login')}
+        disabled={isLoadingAuth}
         pattern={{
           value: loginValidation,
           message: t('authorization.loginPattern'),
@@ -99,6 +108,7 @@ function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
         clearErrors={clearErrors}
         errors={errors.password}
         placeholderText={t('authorization.password')}
+        disabled={isLoadingAuth}
         pattern={{
           value: passwordValidation,
           message: t('authorization.passwordPattern'),
@@ -112,7 +122,11 @@ function AuthForm({ keyPrefix, onSubmit }: AuthFormProps) {
         }}
         required={t('authorization.required', { value: t('authorization.password') })}
       />
-      <Button type="submit" disabled={!isDirty} text={t(`${keyPrefix}.text`)} />
+      <Button
+        type="submit"
+        disabled={!isDirty || isLoadingAuth || !isFormValid}
+        text={t(`${keyPrefix}.text`)}
+      />
     </Form>
   );
 }

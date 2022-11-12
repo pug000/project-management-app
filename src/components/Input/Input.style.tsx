@@ -27,7 +27,8 @@ const StyledInput = styled.input`
   }
 
   &:focus ~ label,
-  &:valid ~ label {
+  &:valid ~ label,
+  &:disabled ~ label {
     transform: translateX(-10px) translateY(-32px);
     font-size: ${({ theme }) => theme.fontSizes.smallText};
     color: ${({ theme }) => theme.colors.text};
