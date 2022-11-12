@@ -1,6 +1,6 @@
 import { FormTextField, UserFormValues, Author } from 'ts/interfaces';
 
-const baseUrl = 'https://project-management.up.railway.app/';
+const baseUrl = 'https://project-management-ka5v.onrender.com/';
 
 const nameValidation = /^(?=[a-zA-Z._]*$)(?!.*[_.]).*/gm;
 
