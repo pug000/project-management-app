@@ -9,6 +9,7 @@ import AppLayout from 'components/AppLayout/AppLayout';
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
+import SignInPage from 'pages/SignInPage/SignInPage';
 
 function App() {
   const user = useAppSelector((state) => state.user.user);
@@ -45,7 +46,7 @@ function App() {
             </ErrorBoundary>
           }
         />
-        <Route path="signin" element={<div>SignIn</div>} />
+        <Route path="signin" element={<SignInPage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="board" element={<div>Board</div>} />
         <Route path="*" element={<div>NotFound</div>} />
