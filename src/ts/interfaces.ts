@@ -13,12 +13,12 @@ interface WidthProps {
 interface HeaderProps {
   $backgroundColor?: string;
 }
-interface HeaderSignLink {
+interface HeaderLinksProps {
   id: number;
   text: string;
   link: string;
-  color: string;
-  backgroundColor: string;
+  color?: string;
+  backgroundColor?: string;
 }
 
 interface Author {
@@ -33,6 +33,6 @@ export type {
   BackgroundColorProps,
   WidthProps,
   HeaderProps,
-  HeaderSignLink,
+  HeaderLinksProps,
   Author,
 };

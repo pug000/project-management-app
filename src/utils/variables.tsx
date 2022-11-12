@@ -1,7 +1,7 @@
 import theme from 'styles/theme';
-import { HeaderSignLink } from '../ts/interfaces';
+import { HeaderLinksProps } from '../ts/interfaces';
 
-const headerSignItems: HeaderSignLink[] = [
+const headerSignItems: HeaderLinksProps[] = [
   {
     id: 1,
     text: 'signIn.text',
@@ -18,4 +18,17 @@ const headerSignItems: HeaderSignLink[] = [
   },
 ];
 
-export default headerSignItems;
+const headerLinkItems: HeaderLinksProps[] = [
+  {
+    id: 1,
+    text: 'home.text',
+    link: '/',
+  },
+  {
+    id: 2,
+    text: 'board.text',
+    link: '/board',
+  },
+];
+
+export { headerSignItems, headerLinkItems };

@@ -28,6 +28,10 @@
         "title": "Board",
         "text": "Board"
       },
+      "home": {
+        "title": "Home",
+        "text": "Home"
+      },
       "other": {
         "or": "or",
         "and": "and"
@@ -69,6 +73,10 @@
       "board": {
         "title": "Доска",
         "text": "Доска"
+      },
+      "home": {
+        "title": "На главную",
+        "text": "На главную"
       },
       "other": {
         "or": "или",

@@ -7,7 +7,7 @@ const HeaderWrapper = styled.header<HeaderProps>`
     $backgroundColor ?? theme.colors.backgroundWhite};
   position: sticky;
   top: 0px;
-  transition: all 0.7s ease;
+  transition: all 0.5s ease;
 `;
 
 const HeaderContainer = styled.div`
@@ -23,11 +23,27 @@ const HeaderContainerElements = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 `;
 
 const HeaderLink = styled(NavLink)`
   text-decoration: none;
+  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.fontSizes.smallText};
 `;
 
-export { HeaderWrapper, HeaderContainer, HeaderContainerElements, HeaderLink };
+const HeaderLinkElement = styled.div`
+  transition: all 0.5s ease;
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+`;
+
+export {
+  HeaderWrapper,
+  HeaderContainer,
+  HeaderContainerElements,
+  HeaderLink,
+  HeaderLinkElement,
+};
