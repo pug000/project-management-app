@@ -49,6 +49,10 @@ interface FormTextField {
   pattern: FormFieldValidation<RegExp>;
 }
 
+interface UserData extends User {
+  _id: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -58,4 +62,5 @@ export type {
   ParsedJwt,
   AuthUser,
   FormTextField,
+  UserData,
 };

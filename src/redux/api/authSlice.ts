@@ -1,11 +1,9 @@
-import { Endpoints, Methods } from 'ts/enums';
-import { AuthUser, User } from 'ts/interfaces';
 import { addFetchOptions, parseJwt } from 'utils/functions';
-import apiSlice from './apiSlice';
 
-interface UserData extends User {
-  _id: string;
-}
+import { Endpoints, Methods } from 'ts/enums';
+import { AuthUser, User, UserData } from 'ts/interfaces';
+
+import apiSlice from './apiSlice';
 
 const authSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -33,7 +31,6 @@ const authSlice = apiSlice.injectEndpoints({
         token,
         _id: parseJwt(token),
       }),
-      invalidatesTags: ['User'],
     }),
   }),
 });
