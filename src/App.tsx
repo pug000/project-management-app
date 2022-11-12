@@ -13,10 +13,10 @@ function App() {
       <ErrorBoundary>
         <Routes>
           <Route index path="/" element={<HomePage />} />
-          <Route path="signin" element={<div>SignIn</div>} />
-          <Route path="signup" element={<div>SignUp</div>} />
-          <Route path="board" element={<div>Board</div>} />
-          <Route path="*" element={<div>NotFound</div>} />
+          <Route path="signin" element={<main>SignIn</main>} />
+          <Route path="signup" element={<main>SignUp</main>} />
+          <Route path="board" element={<main>Board</main>} />
+          <Route path="*" element={<main>NotFound</main>} />
         </Routes>
       </ErrorBoundary>
       <Footer />
