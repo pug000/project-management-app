@@ -10,6 +10,12 @@ interface WidthProps {
   $width?: string;
 }
 
+interface Author {
+  id: number;
+  name: string;
+  githubLink: string;
+  title: string;
+}
 interface UserFormValues {
   name: string;
   login: string;
@@ -57,6 +63,7 @@ export type {
   ColorProps,
   BackgroundColorProps,
   WidthProps,
+  Author,
   UserFormValues,
   User,
   ParsedJwt,

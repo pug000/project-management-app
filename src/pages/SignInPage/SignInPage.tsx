@@ -60,7 +60,9 @@ function SignInPage() {
   }, [isSuccessSignIn]);
 
   return (
-    <AuthForm keyPrefix="signIn" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+    <main>
+      <AuthForm keyPrefix="signIn" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+    </main>
   );
 }
 

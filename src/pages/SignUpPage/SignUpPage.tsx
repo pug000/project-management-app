@@ -46,7 +46,9 @@ function SignUpPage() {
   }, [authData, userData, isSuccessSignIn]);
 
   return (
-    <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+    <main>
+      <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+    </main>
   );
 }
 

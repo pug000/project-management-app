@@ -1,15 +1,15 @@
-import React, { Suspense, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useSignInMutation } from 'redux/api/authSlice';
 import { setAuthUser } from 'redux/slices/userSlice';
 
-import AppLayout from 'components/AppLayout/AppLayout';
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import SignInPage from 'pages/SignInPage/SignInPage';
+import Footer from 'components/Footer/Footer';
 
 function App() {
   const user = useAppSelector((state) => state.user.user);
@@ -34,24 +34,19 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route
-          index
-          element={
-            <ErrorBoundary>
-              <Suspense fallback={<div>Loading...</div>}>
-                <HomePage />
-              </Suspense>
-            </ErrorBoundary>
-          }
-        />
-        <Route path="signin" element={<SignInPage />} />
-        <Route path="signup" element={<SignUpPage />} />
-        <Route path="board" element={<div>Board</div>} />
-        <Route path="*" element={<div>NotFound</div>} />
-      </Route>
-    </Routes>
+    <>
+      <header>Header</header>
+      <ErrorBoundary>
+        <Routes>
+          <Route index path="/" element={<HomePage />} />
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="board" element={<main>Board</main>} />
+          <Route path="*" element={<main>NotFound</main>} />
+        </Routes>
+      </ErrorBoundary>
+      <Footer />
+    </>
   );
 }
 
