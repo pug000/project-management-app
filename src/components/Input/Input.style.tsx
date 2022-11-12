@@ -21,9 +21,11 @@ const StyledInput = styled.input`
   font-family: ${({ theme }) => theme.fonts.text};
   font-weight: 400;
   font-size: ${({ theme }) => theme.fontSizes.text};
+  transition: ${({ theme }) => theme.effects.transition};
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.primaryColor};
+    box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.07);
   }
 
   &:focus ~ label,
@@ -49,7 +51,7 @@ const Label = styled.label`
 
 const InputErrorText = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.smallNoteText};
-  color: ${({ theme }) => theme.colors.pink};
+  color: ${({ theme }) => theme.colors.red};
   display: flex;
   width: 100%;
   justify-content: flex-end;
