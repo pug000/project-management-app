@@ -10,7 +10,7 @@ import AuthForm from 'components/AuthForm/AuthForm';
 
 import { UserFormValues } from 'ts/interfaces';
 
-function SignUp() {
+function SignUpPage() {
   const dispatch = useAppDispatch();
   const [
     signUp,
@@ -50,4 +50,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;

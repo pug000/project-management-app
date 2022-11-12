@@ -1,5 +1,3 @@
-import { FieldValues } from 'react-hook-form';
-
 interface ColorProps {
   $color?: string;
 }
@@ -12,7 +10,7 @@ interface WidthProps {
   $width?: string;
 }
 
-interface UserFormValues extends FieldValues {
+interface UserFormValues {
   name: string;
   login: string;
   password: string;
@@ -36,6 +34,21 @@ interface AuthUser {
   _id: string;
 }
 
+interface FormFieldValidation<T> {
+  value: T;
+  message: string;
+}
+
+interface FormTextField {
+  id: number;
+  type: string;
+  name: string & keyof UserFormValues;
+  placeholderText: string;
+  required: string;
+  minLength: FormFieldValidation<number>;
+  pattern: FormFieldValidation<RegExp>;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -44,4 +57,5 @@ export type {
   User,
   ParsedJwt,
   AuthUser,
+  FormTextField,
 };

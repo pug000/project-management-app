@@ -8,12 +8,7 @@ import { useAppSelector } from 'hooks/useRedux';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
-import {
-  defaultUserFormValues,
-  loginValidation,
-  nameValidation,
-  passwordValidation,
-} from 'utils/constants';
+import { defaultUserFormValues, formTextFields, nameValidation } from 'utils/constants';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -80,48 +75,32 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           required={t('authorization.required', { value: t('authorization.name') })}
         />
       )}
-      <Input<UserFormValues>
-        type="text"
-        name="login"
-        register={register}
-        clearErrors={clearErrors}
-        errors={errors.login}
-        placeholderText={t('authorization.login')}
-        disabled={isLoadingAuth}
-        pattern={{
-          value: loginValidation,
-          message: t('authorization.loginPattern'),
-        }}
-        minLength={{
-          value: 4,
-          message: t('authorization.authMinLength', {
-            value: t('authorization.login'),
-            count: 4,
-          }),
-        }}
-        required={t('authorization.required', { value: t('authorization.login') })}
-      />
-      <Input<UserFormValues>
-        type="password"
-        name="password"
-        register={register}
-        clearErrors={clearErrors}
-        errors={errors.password}
-        placeholderText={t('authorization.password')}
-        disabled={isLoadingAuth}
-        pattern={{
-          value: passwordValidation,
-          message: t('authorization.passwordPattern'),
-        }}
-        minLength={{
-          value: 8,
-          message: t('authorization.authMinLength', {
-            value: t('authorization.password'),
-            count: 8,
-          }),
-        }}
-        required={t('authorization.required', { value: t('authorization.password') })}
-      />
+      {formTextFields.map((textfield) => (
+        <Input<UserFormValues>
+          key={textfield.id}
+          type={textfield.type}
+          name={textfield.name}
+          placeholderText={t(textfield.placeholderText)}
+          required={t(textfield.required, {
+            value: t(textfield.placeholderText),
+          })}
+          pattern={{
+            ...textfield.pattern,
+            message: t(textfield.pattern.message),
+          }}
+          minLength={{
+            ...textfield.minLength,
+            message: t(textfield.minLength.message, {
+              count: textfield.minLength.value,
+              value: t(textfield.placeholderText),
+            }),
+          }}
+          disabled={isLoadingAuth}
+          errors={errors[textfield.name]}
+          register={register}
+          clearErrors={clearErrors}
+        />
+      ))}
       <Button
         type="submit"
         disabled={!isDirty || isLoadingAuth || !isFormValid}

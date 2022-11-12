@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import AppLayout from 'components/AppLayout/AppLayout';
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
-import SignUp from 'pages/SignUp/SignUp';
+import SignUpPage from 'pages/SignUpPage/SignUpPage';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           }
         />
         <Route path="signin" element={<div>SignIn</div>} />
-        <Route path="signup" element={<SignUp />} />
+        <Route path="signup" element={<SignUpPage />} />
         <Route path="board" element={<div>Board</div>} />
         <Route path="*" element={<div>NotFound</div>} />
       </Route>
