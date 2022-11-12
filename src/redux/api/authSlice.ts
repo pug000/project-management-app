@@ -1,32 +1,13 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-import { RootState } from 'redux/store';
-
-import { baseUrl } from 'utils/constants';
-import { addFetchOptions, parseJwt } from 'utils/functions';
-
 import { Endpoints, Methods } from 'ts/enums';
 import { AuthUser, User } from 'ts/interfaces';
+import { addFetchOptions, parseJwt } from 'utils/functions';
+import apiSlice from './apiSlice';
 
 interface UserData extends User {
   _id: string;
 }
 
-const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-    prepareHeaders(headers, { getState }) {
-      const { authUser } = (getState() as RootState).user;
-
-      if (authUser?.token) {
-        headers.set('authorization', `Bearer ${authUser?.token}`);
-      }
-
-      return headers;
-    },
-  }),
-  tagTypes: ['User'],
+const authSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation<User, User>({
       query: (body: User) => ({
@@ -57,5 +38,4 @@ const userApi = createApi({
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation } = userApi;
-export default userApi;
+export const { useSignInMutation, useSignUpMutation } = authSlice;

@@ -4,7 +4,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from 'hooks/useRedux';
 
 import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
-import { useSignInMutation, useSignUpMutation } from 'redux/api/userApi';
+import { useSignInMutation, useSignUpMutation } from 'redux/api/authSlice';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 
