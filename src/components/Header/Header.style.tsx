@@ -7,6 +7,7 @@ const HeaderWrapper = styled.header<HeaderProps>`
     $backgroundColor ?? theme.colors.backgroundWhite};
   position: sticky;
   top: 0px;
+  margin-bottom: 20px;
   transition: ${({ theme }) => theme.effects.transition};
 `;
 
