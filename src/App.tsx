@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { useSignInMutation } from 'redux/api/authSlice';
+import { useSignInMutation } from 'redux/api/authApiSlice';
 import { setAuthUser } from 'redux/slices/userSlice';
 
 import HomePage from 'pages/HomePage/HomePage';

@@ -10,19 +10,20 @@
         "authMinLength": "{{value, lowercase}} should contain more than {{count}} characters",
         "namePattern": "name should contain only letters(eng)",
         "loginPattern": "login should contain only letters(eng) and digits",
-        "passwordPattern": "password should contain only letters(eng), digits and ! @ # ~ &"
+        "passwordPattern": "password should contain only letters(eng), digits and ! @ # ~ &",
+        "error": "Authorization error. Try again later"
       },
       "signUp": {
         "title": "Sign Up",
         "text": "Sign Up",
         "account": "Already have an account? Sign In",
-        "auth": "User already exists"
+        "error": "This login already exists"
       },
       "signIn": {
         "title": "Sign In",
         "text": "Sign In",
         "account": "Don't have an account? Sing Up",
-        "auth": "User not founded"
+        "error": "This login is not found"
       },
       "other": {
         "or": "or",
@@ -48,19 +49,20 @@
         "authMinLength": "{{value, lowercase}} должен состоять как минимум из {{count}} символов",
         "namePattern": "имя может содержать только латинские буквы",
         "loginPattern": "логин может содержать только латинские буквы и цифры",
-        "passwordPattern": "пароль может содержать только латинские буквы, цифры и ! @ # ~ &"
+        "passwordPattern": "пароль может содержать только латинские буквы, цифры и ! @ # ~ &",
+        "error": "Ошибка авторизации. Попробуйте позже"
       },
       "signUp": {
         "title": "Регистрация",
         "text": "Зарегистрироваться",
         "account": "Уже есть учетная запись? Войти",
-        "auth": "Пользователь уже существует"
+        "error": "Пользователь с таким логином уже занят"
       },
       "signIn": {
         "title": "Войти",
         "text": "Войти",
         "account": "Ещё нет учетной записи? Зарегистрироваться",
-        "auth": "Пользователь не найден"
+        "error": "Пользователь с таким логином не найден"
       },
       "other": {
         "or": "или",

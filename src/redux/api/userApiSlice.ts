@@ -5,7 +5,7 @@ import apiSlice from './apiSlice';
 
 type UserDataOmitPassword = Omit<UserData, 'password'>;
 
-const userSlice = apiSlice.injectEndpoints({
+const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUserById: builder.query<UserDataOmitPassword, string>({
       query: (id: string) => addFetchOptions(`${Endpoints.users}${id}`, Methods.get),
@@ -17,4 +17,4 @@ const userSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLazyGetUserByIdQuery, useDeleteUserByIdMutation } = userSlice;
+export const { useLazyGetUserByIdQuery, useDeleteUserByIdMutation } = userApiSlice;

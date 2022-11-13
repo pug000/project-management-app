@@ -5,7 +5,7 @@ import { AuthUser, User, UserData } from 'ts/interfaces';
 
 import apiSlice from './apiSlice';
 
-const authSlice = apiSlice.injectEndpoints({
+const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signUp: builder.mutation<User, User>({
       query: (body: User) => ({
@@ -17,6 +17,13 @@ const authSlice = apiSlice.injectEndpoints({
         },
       }),
       transformResponse: ({ _id, ...data }: UserData) => data,
+      transformErrorResponse: ({ status }): string => {
+        if (status === 409) {
+          return 'signUp.error';
+        }
+
+        return 'authorization.error';
+      },
     }),
 
     signIn: builder.mutation<AuthUser, User>({
@@ -31,8 +38,15 @@ const authSlice = apiSlice.injectEndpoints({
         token,
         _id: parseJwt(token),
       }),
+      transformErrorResponse: ({ status }): string => {
+        if (status === 401) {
+          return 'signIn.error';
+        }
+
+        return 'authorization.error';
+      },
     }),
   }),
 });
 
-export const { useSignInMutation, useSignUpMutation } = authSlice;
+export const { useSignInMutation, useSignUpMutation } = authApiSlice;
