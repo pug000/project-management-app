@@ -17,7 +17,6 @@ function App() {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
   const [signIn, { data: authData, isSuccess: isSuccessSignIn }] = useSignInMutation();
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
   const authUser = useCallback(async () => {
     if (user) {
@@ -47,7 +46,7 @@ function App() {
           <Route
             path="edit"
             element={
-              <ProtectedRoute conditionValue={isLoggedIn}>
+              <ProtectedRoute>
                 <main>Edit User</main>
               </ProtectedRoute>
             }
@@ -55,7 +54,7 @@ function App() {
           <Route
             path="board"
             element={
-              <ProtectedRoute conditionValue={isLoggedIn}>
+              <ProtectedRoute>
                 <main>Board</main>
               </ProtectedRoute>
             }

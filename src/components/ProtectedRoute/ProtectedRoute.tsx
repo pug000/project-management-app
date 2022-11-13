@@ -1,16 +1,18 @@
+import { useAppSelector } from 'hooks/useRedux';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Container, ProtectedTitle } from './ProtectedRoute.style';
 
 interface ProtectedProps {
-  conditionValue: boolean | null;
   children: JSX.Element;
 }
 
-function ProtectedRoute({ conditionValue, children }: ProtectedProps) {
-  if (!conditionValue) {
-    const { t } = useTranslation('translation', { keyPrefix: 'protected' });
+function ProtectedRoute({ children }: ProtectedProps) {
+  const { t } = useTranslation('translation', { keyPrefix: 'protected' });
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+
+  if (!isLoggedIn) {
     return (
       <Container>
         <ProtectedTitle>{t('text')}</ProtectedTitle>
