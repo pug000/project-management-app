@@ -46,6 +46,7 @@ function Header() {
           ))}
         </HeaderContainerElements>
         <HeaderContainerElements>
+          <LangSwitcher />
           {headerSignItems.map(({ id, text, link, color, backgroundColor }) => (
             <HeaderLink to={link} key={id}>
               <Button
@@ -57,7 +58,6 @@ function Header() {
               />
             </HeaderLink>
           ))}
-          <LangSwitcher />
         </HeaderContainerElements>
       </HeaderContainer>
     </HeaderWrapper>
