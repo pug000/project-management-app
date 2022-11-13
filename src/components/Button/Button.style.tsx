@@ -6,6 +6,9 @@ type ButtonProps = ColorProps & BackgroundColorProps & WidthProps;
 const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.text};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
   color: ${({ $color, theme }) => $color ?? theme.colors.textButton};

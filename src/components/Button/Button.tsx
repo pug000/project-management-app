@@ -6,6 +6,8 @@ interface ButtonProps {
   type: 'submit' | 'button' | 'reset';
   text?: string;
   id?: string;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
   disabled?: boolean;
   backgroundColor?: string;
   color?: string;
@@ -16,6 +18,8 @@ interface ButtonProps {
 function Button({
   type,
   text,
+  leftIcon,
+  rightIcon,
   id,
   disabled,
   backgroundColor,
@@ -33,13 +37,17 @@ function Button({
       $width={width}
       onClick={() => callback && callback()}
     >
+      {leftIcon}
       {text}
+      {rightIcon}
     </StyledButton>
   );
 }
 
 Button.defaultProps = {
   text: '',
+  leftIcon: undefined,
+  rightIcon: undefined,
   disabled: false,
   id: undefined,
   callback: undefined,
