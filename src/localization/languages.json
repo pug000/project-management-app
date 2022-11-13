@@ -43,6 +43,9 @@
         "roma": "Roman Troshin",
         "nastya": "Anastasiya Sachko",
         "artem": "Artsiom Kharytonchyk"
+      },
+      "protected": {
+        "text": "To see the content of this page sign up or sign in if you have an account"
       }
     }
   },
@@ -90,6 +93,9 @@
         "roma": "Роман Трошин",
         "nastya": "Анастасия Сачко",
         "artem": "Артём Харитончик"
+      },
+      "protected": {
+        "text": "Вам необходимо зайти под вашей учетной записью или зарегистрироваться"
       }
     }
   }
