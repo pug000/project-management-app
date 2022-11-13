@@ -7,12 +7,12 @@ const HeaderWrapper = styled.header<HeaderProps>`
     $backgroundColor ?? theme.colors.backgroundWhite};
   position: sticky;
   top: 0px;
-  transition: all 0.5s ease;
+  transition: ${({ theme }) => theme.effects.transition};
 `;
 
 const HeaderContainer = styled.div`
   grid-area: subHeader;
-  padding: 10px 0px;
+  padding: 10px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,7 +33,7 @@ const HeaderLink = styled(NavLink)`
 `;
 
 const HeaderLinkElement = styled.div`
-  transition: all 0.5s ease;
+  transition: ${({ theme }) => theme.effects.transition};
 
   &:hover {
     opacity: ${({ theme }) => theme.effects.hoverOpacity};

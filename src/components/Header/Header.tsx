@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import Button from 'components/Button/Button';
-import AppLogo from 'components/AppLogo/AppLogo';
-import { headerSignItems, headerLinkItems } from 'utils/variables';
-import theme from 'styles/theme';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import AppLogo from 'components/AppLogo/AppLogo';
+import Button from 'components/Button/Button';
+
+import { headerSignItems, headerLinkItems } from 'utils/constants';
+
+import theme from 'styles/theme';
+
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -15,14 +19,18 @@ import {
 function Header() {
   const { t } = useTranslation('translation');
   const [sticky, setSticky] = useState(false);
-  function stickyHeader() {
+  const stickyHeader = useCallback(() => {
     if (window.scrollY > 0) {
       setSticky(true);
     } else {
       setSticky(false);
     }
-  }
-  window.addEventListener('scroll', stickyHeader);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', stickyHeader);
+    return () => window.removeEventListener('scroll', stickyHeader);
+  }, []);
 
   return (
     <HeaderWrapper $backgroundColor={sticky ? theme.colors.backgroundBlue : ''}>
@@ -40,7 +48,7 @@ function Header() {
             <HeaderLink to={link} key={id}>
               <Button
                 type="button"
-                width="100px"
+                width="130px"
                 color={color}
                 backgroundColor={backgroundColor}
                 text={t(text)}
