@@ -8,6 +8,8 @@ import { headerSignItems, headerLinkItems } from 'utils/constants';
 
 import theme from 'styles/theme';
 
+import LangSwitcher from './LangSwitcher/LangSwitcher';
+
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -44,6 +46,7 @@ function Header() {
           ))}
         </HeaderContainerElements>
         <HeaderContainerElements>
+          <LangSwitcher />
           {headerSignItems.map(({ id, text, link, color, backgroundColor }) => (
             <HeaderLink to={link} key={id}>
               <Button
