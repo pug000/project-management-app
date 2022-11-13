@@ -12,6 +12,7 @@ declare module 'styled-components' {
       backgroundDarkBlue: string;
       white: string;
       pink: string;
+      red: string;
       blue: string;
       yellow: string;
       grey: string;
@@ -59,6 +60,7 @@ const defaultTheme: DefaultTheme = {
     backgroundDarkBlue: '#006b99',
     white: '#ffffff',
     pink: '#f7cedc',
+    red: '#ff6347',
     blue: '#cceff6',
     yellow: '#faea73',
     grey: '#969FA4',

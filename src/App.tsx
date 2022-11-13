@@ -1,20 +1,47 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useSignInMutation } from 'redux/api/authApiSlice';
+import { setAuthUser } from 'redux/slices/userSlice';
 
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
+import SignUpPage from 'pages/SignUpPage/SignUpPage';
+import SignInPage from 'pages/SignInPage/SignInPage';
 import Footer from 'components/Footer/Footer';
 
 function App() {
+  const user = useAppSelector((state) => state.user.user);
+  const dispatch = useAppDispatch();
+  const [signIn, { data: authData, isSuccess: isSuccessSignIn }] = useSignInMutation();
+
+  const authUser = useCallback(async () => {
+    if (user) {
+      const { name, ...data } = user;
+      await signIn(data);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (authData && isSuccessSignIn) {
+      dispatch(setAuthUser(authData));
+    }
+  }, [authData]);
+
+  useEffect(() => {
+    authUser();
+  }, []);
+
   return (
     <>
       <Header />
       <ErrorBoundary>
         <Routes>
           <Route index path="/" element={<HomePage />} />
-          <Route path="signin" element={<main>SignIn</main>} />
-          <Route path="signup" element={<main>SignUp</main>} />
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
           <Route path="board" element={<main>Board</main>} />
           <Route path="*" element={<main>NotFound</main>} />
         </Routes>

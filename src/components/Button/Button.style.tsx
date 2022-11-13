@@ -10,8 +10,8 @@ const StyledButton = styled.button<ButtonProps>`
   justify-self: center;
   color: ${({ $color, theme }) => $color ?? theme.colors.textButton};
   border: none;
-  padding: 8px 0;
-  width: ${({ $width }) => $width ?? '175px'};
+  padding: 8px;
+  min-width: ${({ $width }) => $width ?? '175px'};
   background-color: ${({ $backgroundColor, theme }) =>
     $backgroundColor ?? theme.colors.primaryColor};
   transition: ${({ theme }) => theme.effects.transition};

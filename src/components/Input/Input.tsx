@@ -19,6 +19,7 @@ interface InputProps<T extends FieldValues> {
   required?: string;
   pattern?: ValidationRule<RegExp>;
   errors?: FieldError;
+  disabled?: boolean;
   register: UseFormRegister<T>;
   clearErrors: UseFormClearErrors<T>;
 }
@@ -31,6 +32,7 @@ function Input<T extends FieldValues>({
   required,
   pattern,
   errors,
+  disabled,
   register,
   clearErrors,
 }: InputProps<T>) {
@@ -41,6 +43,7 @@ function Input<T extends FieldValues>({
           type={type}
           required
           id={name}
+          disabled={disabled}
           {...register(name, {
             required,
             minLength,
@@ -58,6 +61,7 @@ function Input<T extends FieldValues>({
 Input.defaultProps = {
   placeholderText: '',
   errors: undefined,
+  disabled: false,
   minLength: undefined,
   required: undefined,
   pattern: undefined,

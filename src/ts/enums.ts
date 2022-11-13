@@ -1,6 +1,6 @@
 enum Endpoints {
-  signIn = 'auth/signin/',
-  signUp = 'auth/signup/',
+  signIn = 'auth/signin',
+  signUp = 'auth/signup',
   users = 'users/',
   boards = 'boards/',
   boardsSet = 'boardsSet/',
