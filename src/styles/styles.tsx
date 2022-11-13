@@ -1,5 +1,7 @@
+import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { IconsProps } from 'ts/interfaces';
 
 const MainWrapper = styled.main`
   display: flex;
@@ -27,6 +29,13 @@ const FormWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
   padding: 20px;
   border-radius: 10px;
+`;
+
+const FormHeader = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 `;
 
 const Form = styled.form`
@@ -82,12 +91,21 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledPrevIcon = styled(GrPrevious)<IconsProps>`
+  polyline {
+    stroke: ${({ $isDisabled, theme }) =>
+      $isDisabled ? theme.colors.grey : theme.colors.primaryColor};
+  }
+`;
+
 export {
   MainWrapper,
   Title,
   FormWrapper,
+  FormHeader,
   Form,
   FormDescriptionWrapper,
   FormDescriptionText,
   StyledLink,
+  StyledPrevIcon,
 };

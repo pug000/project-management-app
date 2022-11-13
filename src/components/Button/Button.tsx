@@ -9,6 +9,7 @@ interface ButtonProps {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
+  $isBack?: boolean;
   backgroundColor?: string;
   color?: string;
   width?: string;
@@ -22,6 +23,7 @@ function Button({
   rightIcon,
   id,
   disabled,
+  $isBack,
   backgroundColor,
   color,
   width,
@@ -35,6 +37,7 @@ function Button({
       $backgroundColor={backgroundColor}
       $color={color}
       $width={width}
+      $isBack={$isBack}
       onClick={() => callback && callback()}
     >
       {leftIcon}
@@ -49,6 +52,7 @@ Button.defaultProps = {
   leftIcon: undefined,
   rightIcon: undefined,
   disabled: false,
+  $isBack: false,
   id: undefined,
   callback: undefined,
   backgroundColor: undefined,

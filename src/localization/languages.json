@@ -25,12 +25,10 @@
         "account": "Don't have an account? Sing Up",
         "error": "This login is not found"
       },
-      "board": {
-        "title": "Board",
-        "text": "Board"
+      "projects": {
+        "text": "Projects"
       },
       "home": {
-        "title": "Home",
         "text": "Home"
       },
       "other": {
@@ -70,18 +68,16 @@
         "error": "Пользователь с таким логином уже занят"
       },
       "signIn": {
-        "title": "Войти",
+        "title": "Вход",
         "text": "Войти",
         "account": "Ещё нет учетной записи? Зарегистрироваться",
         "error": "Пользователь с таким логином не найден"
       },
-      "board": {
-        "title": "Доска",
-        "text": "Доска"
+      "projects": {
+        "text": "Проекты"
       },
       "home": {
-        "title": "На главную",
-        "text": "На главную"
+        "text": "Главная"
       },
       "other": {
         "or": "или",

@@ -40,7 +40,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/board');
+      navigate('/projects');
 
       if (isDirty) {
         reset();

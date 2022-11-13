@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
@@ -8,6 +9,7 @@ import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
 import { useSignInMutation, useSignUpMutation } from 'redux/api/authApiSlice';
 
 import AuthForm from 'components/AuthForm/AuthForm';
+import Button from 'components/Button/Button';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -18,10 +20,14 @@ import {
   MainWrapper,
   StyledLink,
   Title,
+  FormHeader,
+  StyledPrevIcon,
 } from 'styles/styles';
+import defaultTheme from 'styles/theme';
 
 function SignUpPage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation('translation');
   const [
     signUp,
@@ -59,6 +65,17 @@ function SignUpPage() {
   return (
     <MainWrapper>
       <FormWrapper>
+        <FormHeader>
+          <Button
+            type="button"
+            leftIcon={<StyledPrevIcon $isDisabled={isLoadingAuth} />}
+            width="30px"
+            $isBack
+            backgroundColor={defaultTheme.colors.transparent}
+            disabled={isLoadingAuth}
+            callback={() => navigate(-1)}
+          />
+        </FormHeader>
         <Title>{t('signUp.title')}</Title>
         <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
         <FormDescriptionWrapper>
