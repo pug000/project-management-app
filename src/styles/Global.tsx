@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   #root {
     min-height: 100vh;
     display: grid;
-    grid-template: auto 1fr auto / 1fr minmax(300px, 1024px) 1fr;
+    grid-template: auto 1fr auto / 1fr minmax(300px, 1440px) 1fr;
     grid-template-areas: " header header header "
   											". main ."
   											". footer ."
@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   header {
     grid-area: header;
     display: grid;
-    grid-template: auto / 1fr minmax(300px, 1024px) 1fr;
+    grid-template: auto / 1fr minmax(300px, 1400px) 1fr;
     grid-template-areas: ". subHeader ."
   }
 

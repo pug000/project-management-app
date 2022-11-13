@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
@@ -10,8 +11,18 @@ import AuthForm from 'components/AuthForm/AuthForm';
 
 import { UserFormValues } from 'ts/interfaces';
 
+import {
+  FormDescriptionWrapper,
+  FormDescriptionText,
+  FormWrapper,
+  MainWrapper,
+  StyledLink,
+  Title,
+} from 'styles/styles';
+
 function SignUpPage() {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('translation');
   const [
     signUp,
     { originalArgs: userData, isSuccess: isSuccessSignUp, isLoading: isLoadingSignUp },
@@ -46,9 +57,16 @@ function SignUpPage() {
   }, [authData, userData, isSuccessSignIn]);
 
   return (
-    <main>
-      <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
-    </main>
+    <MainWrapper>
+      <FormWrapper>
+        <Title>{t('signUp.title')}</Title>
+        <AuthForm keyPrefix="signUp" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
+        <FormDescriptionWrapper>
+          <FormDescriptionText>{t('other.or')}</FormDescriptionText>
+        </FormDescriptionWrapper>
+        <StyledLink to="/signin">{t('signUp.account')}</StyledLink>
+      </FormWrapper>
+    </MainWrapper>
   );
 }
 

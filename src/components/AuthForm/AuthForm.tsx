@@ -12,7 +12,7 @@ import { defaultUserFormValues, formTextFields, nameValidation } from 'utils/con
 
 import { UserFormValues } from 'ts/interfaces';
 
-import Form from 'styles/styles';
+import { Form } from 'styles/styles';
 
 interface AuthFormProps {
   keyPrefix: string;

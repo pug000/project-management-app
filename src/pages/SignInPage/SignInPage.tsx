@@ -10,6 +10,7 @@ import { useSignInMutation } from 'redux/api/authApiSlice';
 import AuthForm from 'components/AuthForm/AuthForm';
 
 import { UserFormValues } from 'ts/interfaces';
+import { MainWrapper } from 'styles/styles';
 
 function SignInPage() {
   const dispatch = useAppDispatch();
@@ -63,9 +64,9 @@ function SignInPage() {
   }, [isSuccessSignIn]);
 
   return (
-    <main>
+    <MainWrapper>
       <AuthForm keyPrefix="signIn" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />
-    </main>
+    </MainWrapper>
   );
 }
 
