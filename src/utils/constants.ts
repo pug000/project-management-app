@@ -1,4 +1,5 @@
-import { FormTextField, UserFormValues, Author } from 'ts/interfaces';
+import theme from 'styles/theme';
+import { FormTextField, UserFormValues, HeaderLinksProps, Author } from 'ts/interfaces';
 
 const baseUrl = 'https://project-management-ka5v.onrender.com/';
 
@@ -68,6 +69,36 @@ const authors: Author[] = [
   },
 ];
 
+const headerSignItems: HeaderLinksProps[] = [
+  {
+    id: 1,
+    text: 'signIn.text',
+    link: '/signin',
+    color: theme.colors.primaryColor,
+    backgroundColor: theme.colors.backgroundWhite,
+  },
+  {
+    id: 2,
+    text: 'signUp.text',
+    link: '/signup',
+    color: theme.colors.textButton,
+    backgroundColor: theme.colors.backgroundDarkBlue,
+  },
+];
+
+const headerLinkItems: HeaderLinksProps[] = [
+  {
+    id: 1,
+    text: 'home.text',
+    link: '/',
+  },
+  {
+    id: 2,
+    text: 'board.text',
+    link: '/board',
+  },
+];
+
 export {
   baseUrl,
   authors,
@@ -76,4 +107,6 @@ export {
   loginValidation,
   passwordValidation,
   formTextFields,
+  headerSignItems,
+  headerLinkItems,
 };

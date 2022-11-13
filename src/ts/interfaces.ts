@@ -10,6 +10,17 @@ interface WidthProps {
   $width?: string;
 }
 
+interface HeaderProps {
+  $backgroundColor?: string;
+}
+interface HeaderLinksProps {
+  id: number;
+  text: string;
+  link: string;
+  color?: string;
+  backgroundColor?: string;
+}
+
 interface Author {
   id: number;
   name: string;
@@ -63,6 +74,8 @@ export type {
   ColorProps,
   BackgroundColorProps,
   WidthProps,
+  HeaderProps,
+  HeaderLinksProps,
   Author,
   UserFormValues,
   User,

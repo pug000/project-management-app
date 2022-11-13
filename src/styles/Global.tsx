@@ -21,13 +21,16 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     display: grid;
     grid-template: auto 1fr auto / 1fr minmax(300px, 1024px) 1fr;
-    grid-template-areas: ". header ."
+    grid-template-areas: " header header header "
   											". main ."
   											". footer ."
   }
 
   header {
     grid-area: header;
+    display: grid;
+    grid-template: auto / 1fr minmax(300px, 1024px) 1fr;
+    grid-template-areas: ". subHeader ."
   }
 
   main {

@@ -7,6 +7,7 @@ import { setAuthUser } from 'redux/slices/userSlice';
 
 import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
+import Header from 'components/Header/Header';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import SignInPage from 'pages/SignInPage/SignInPage';
 import Footer from 'components/Footer/Footer';
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <>
-      <header>Header</header>
+      <Header />
       <ErrorBoundary>
         <Routes>
           <Route index path="/" element={<HomePage />} />

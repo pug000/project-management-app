@@ -25,6 +25,14 @@
         "account": "Don't have an account? Sing Up",
         "error": "This login is not found"
       },
+      "board": {
+        "title": "Board",
+        "text": "Board"
+      },
+      "home": {
+        "title": "Home",
+        "text": "Home"
+      },
       "other": {
         "or": "or",
         "and": "and"
@@ -63,6 +71,14 @@
         "text": "Войти",
         "account": "Ещё нет учетной записи? Зарегистрироваться",
         "error": "Пользователь с таким логином не найден"
+      },
+      "board": {
+        "title": "Доска",
+        "text": "Доска"
+      },
+      "home": {
+        "title": "На главную",
+        "text": "На главную"
       },
       "other": {
         "or": "или",
