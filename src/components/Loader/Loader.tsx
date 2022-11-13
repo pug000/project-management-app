@@ -1,9 +1,13 @@
 import React from 'react';
 
-import StyledLoader from './Loader.style';
+import { Background, StyledLoader } from './Loader.style';
 
 function Loader() {
-  return <StyledLoader />;
+  return (
+    <Background>
+      <StyledLoader />
+    </Background>
+  );
 }
 
 export default Loader;
