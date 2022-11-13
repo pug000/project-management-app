@@ -6,7 +6,7 @@ import theme from 'styles/theme';
 
 function Icon() {
   const IconContextProviderValue = useMemo(
-    () => ({ color: theme.colors.primaryColor, size: '1.5em' }),
+    () => ({ color: theme.colors.primaryColor, size: theme.fontSizes.h4 }),
     []
   );
 
