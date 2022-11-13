@@ -19,6 +19,7 @@ declare module 'styled-components' {
       black: string;
       darkBlue: string;
       primaryColor: string;
+      transparent: string;
     };
     fonts: {
       title: string;
@@ -67,6 +68,7 @@ const defaultTheme: DefaultTheme = {
     black: '#1f1f1f',
     darkBlue: '#0070a0',
     primaryColor: '#0070a0',
+    transparent: 'transparent',
   },
   fonts: {
     title: 'Fraunces, serif',

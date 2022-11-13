@@ -52,10 +52,10 @@ function App() {
             }
           />
           <Route
-            path="board"
+            path="projects"
             element={
               <ProtectedRoute>
-                <main>Board</main>
+                <main>Projects</main>
               </ProtectedRoute>
             }
           />

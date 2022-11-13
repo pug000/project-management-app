@@ -12,7 +12,7 @@ import { defaultUserFormValues, formTextFields, nameValidation } from 'utils/con
 
 import { UserFormValues } from 'ts/interfaces';
 
-import Form from 'styles/styles';
+import { Form } from 'styles/styles';
 
 interface AuthFormProps {
   keyPrefix: string;
@@ -40,7 +40,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate('/board');
+      navigate('/projects');
 
       if (isDirty) {
         reset();

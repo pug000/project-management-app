@@ -72,14 +72,14 @@ const authors: Author[] = [
 const headerSignItems: HeaderLinksProps[] = [
   {
     id: 1,
-    text: 'signIn.text',
+    text: 'signIn.title',
     link: '/signin',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.backgroundWhite,
   },
   {
     id: 2,
-    text: 'signUp.text',
+    text: 'signUp.title',
     link: '/signup',
     color: theme.colors.textButton,
     backgroundColor: theme.colors.backgroundDarkBlue,
@@ -94,8 +94,8 @@ const headerLinkItems: HeaderLinksProps[] = [
   },
   {
     id: 2,
-    text: 'board.text',
-    link: '/board',
+    text: 'projects.text',
+    link: '/projects',
   },
 ];
 

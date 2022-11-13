@@ -1,11 +1,36 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { BackgroundColorProps, ColorProps, WidthProps } from 'ts/interfaces';
 
-type ButtonProps = ColorProps & BackgroundColorProps & WidthProps;
+interface IsBackProps {
+  $isBack?: boolean;
+}
+
+type ButtonProps = ColorProps & BackgroundColorProps & WidthProps & IsBackProps;
+
+const buttonAnimationLeft = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-15px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(-15px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
 
 const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.text};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: center;
   justify-self: center;
   color: ${({ $color, theme }) => $color ?? theme.colors.textButton};
@@ -18,6 +43,11 @@ const StyledButton = styled.button<ButtonProps>`
 
   &:hover:enabled {
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
+    animation: ${({ $isBack }) =>
+      $isBack &&
+      css`
+        ${buttonAnimationLeft} 1s linear infinite;
+      `};
   }
 
   &:focus {
@@ -25,7 +55,8 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.grey};
+    background-color: ${({ $isBack, theme }) =>
+      $isBack ? theme.colors.transparent : theme.colors.grey};
     cursor: default;
   }
 

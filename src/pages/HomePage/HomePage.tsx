@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { MainWrapper } from 'styles/styles';
+
 function HomePage() {
   return (
-    <main>
+    <MainWrapper>
       HomePage Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium
       placeat ex, similique impedit, eligendi reprehenderit perferendis deserunt nesciunt,
       quibusdam a blanditiis magnam laudantium iure corrupti tempora quia ipsa fugiat
@@ -76,7 +78,7 @@ function HomePage() {
       ex, similique impedit, eligendi reprehenderit perferendis deserunt nesciunt,
       quibusdam a blanditiis magnam laudantium iure corrupti tempora quia ipsa fugiat
       fuga?
-    </main>
+    </MainWrapper>
   );
 }
 

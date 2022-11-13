@@ -10,9 +10,14 @@ interface WidthProps {
   $width?: string;
 }
 
+interface IconsProps {
+  $isDisabled?: boolean;
+}
+
 interface HeaderProps {
   $backgroundColor?: string;
 }
+
 interface HeaderLinksProps {
   id: number;
   text: string;
@@ -27,6 +32,7 @@ interface Author {
   githubLink: string;
   title: string;
 }
+
 interface UserFormValues {
   name: string;
   login: string;
@@ -74,6 +80,7 @@ export type {
   ColorProps,
   BackgroundColorProps,
   WidthProps,
+  IconsProps,
   HeaderProps,
   HeaderLinksProps,
   Author,
