@@ -8,6 +8,8 @@ import { headerSignItems, headerLinkItems } from 'utils/constants';
 
 import theme from 'styles/theme';
 
+import LangSwitcher from './LangSwitcher/LangSwitcher';
+
 import {
   HeaderWrapper,
   HeaderContainer,
@@ -55,6 +57,7 @@ function Header() {
               />
             </HeaderLink>
           ))}
+          <LangSwitcher />
         </HeaderContainerElements>
       </HeaderContainer>
     </HeaderWrapper>
