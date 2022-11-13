@@ -1,17 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { setAuthUser } from 'redux/slices/userSlice';
 
-import HomePage from 'pages/HomePage/HomePage';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
-import SignUpPage from 'pages/SignUpPage/SignUpPage';
-import SignInPage from 'pages/SignInPage/SignInPage';
 import Footer from 'components/Footer/Footer';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
+import Loader from 'components/Loader/Loader';
+
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
+const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 
 function App() {
   const user = useAppSelector((state) => state.user.user);
@@ -39,28 +41,30 @@ function App() {
     <>
       <Header />
       <ErrorBoundary>
-        <Routes>
-          <Route index path="/" element={<HomePage />} />
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="signup" element={<SignUpPage />} />
-          <Route
-            path="edit"
-            element={
-              <ProtectedRoute>
-                <main>Edit User</main>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="projects"
-            element={
-              <ProtectedRoute>
-                <main>Projects</main>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<main>NotFound</main>} />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route index path="/" element={<HomePage />} />
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="signup" element={<SignUpPage />} />
+            <Route
+              path="edit"
+              element={
+                <ProtectedRoute>
+                  <main>Edit User</main>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="projects"
+              element={
+                <ProtectedRoute>
+                  <main>Projects</main>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<main>NotFound</main>} />
+          </Routes>
+        </Suspense>
       </ErrorBoundary>
       <Footer />
     </>

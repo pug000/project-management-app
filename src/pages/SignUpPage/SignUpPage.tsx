@@ -24,6 +24,7 @@ import {
   StyledPrevIcon,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
+import Loader from 'components/Loader/Loader';
 
 function SignUpPage() {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ function SignUpPage() {
         </FormDescriptionWrapper>
         <StyledLink to="/signin">{t('signUp.account')}</StyledLink>
       </FormWrapper>
+      {isLoadingAuth && <Loader />}
     </MainWrapper>
   );
 }
