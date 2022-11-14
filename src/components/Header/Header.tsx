@@ -35,8 +35,10 @@ function Header() {
     }
   }, []);
 
-  const logOut = () => {
-    dispatch(setLoggedIn(false));
+  const signOut = (id: number) => {
+    if (id === 3) {
+      dispatch(setLoggedIn(false));
+    }
   };
 
   useEffect(() => {
@@ -63,9 +65,7 @@ function Header() {
                 to={link}
                 key={id}
                 onClick={() => {
-                  if (id === 3) {
-                    logOut();
-                  }
+                  signOut(id);
                 }}
                 end
               >
