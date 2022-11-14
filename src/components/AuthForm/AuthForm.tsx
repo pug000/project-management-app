@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'hooks/useRedux';
 
+import { getLoggedIn } from 'redux/selectors/userSelectors';
+
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
@@ -24,7 +26,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const isLoggedIn = useAppSelector(getLoggedIn);
   const {
     register,
     handleSubmit,

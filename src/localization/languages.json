@@ -22,7 +22,7 @@
       "signIn": {
         "title": "Sign In",
         "text": "Sign In",
-        "account": "Don't have an account? Sing Up",
+        "account": "Still don't have an account? Sing Up",
         "error": "This login is not found"
       },
       "projects": {
