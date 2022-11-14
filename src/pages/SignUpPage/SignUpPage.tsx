@@ -23,6 +23,7 @@ import {
   Title,
   FormHeader,
   StyledPrevIcon,
+  LinkWrapper,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 
@@ -82,7 +83,9 @@ function SignUpPage() {
         <FormDescriptionWrapper>
           <FormDescriptionText>{t('other.or')}</FormDescriptionText>
         </FormDescriptionWrapper>
-        <StyledLink to="/signin">{t('signUp.account')}</StyledLink>
+        <LinkWrapper>
+          <StyledLink to="/signin">{t('signUp.account')}</StyledLink>
+        </LinkWrapper>
       </FormWrapper>
       {isLoadingAuth && <Loader />}
     </MainWrapper>

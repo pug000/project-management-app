@@ -19,6 +19,7 @@ import {
   FormDescriptionWrapper,
   FormHeader,
   FormWrapper,
+  LinkWrapper,
   MainWrapper,
   StyledLink,
   StyledPrevIcon,
@@ -98,7 +99,9 @@ function SignInPage() {
         <FormDescriptionWrapper>
           <FormDescriptionText>{t('other.or')}</FormDescriptionText>
         </FormDescriptionWrapper>
-        <StyledLink to="/signup">{t('signIn.account')}</StyledLink>
+        <LinkWrapper>
+          <StyledLink to="/signup">{t('signIn.account')}</StyledLink>
+        </LinkWrapper>
       </FormWrapper>
       {isLoadingAuth && <Loader />}
     </MainWrapper>
