@@ -19,7 +19,8 @@ function LangSwitcher() {
       <CheckboxContainer>
         <InputCheckbox
           type="checkbox"
-          onClick={() => changeLanguage(i18next.language === 'en' ? 'ru' : 'en')}
+          onChange={() => changeLanguage(i18next.language === 'en' ? 'ru' : 'en')}
+          checked={i18next.language === 'ru'}
         />
         <CheckboxSwitcher />
       </CheckboxContainer>
