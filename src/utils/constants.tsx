@@ -107,6 +107,23 @@ const headerSignItems: HeaderLinksProps[] = [
   },
 ];
 
+const headerItemsIfLoggedIn: HeaderLinksProps[] = [
+  {
+    id: 3,
+    text: 'signOut.text',
+    link: '/',
+    color: theme.colors.primaryColor,
+    backgroundColor: theme.colors.transparent,
+  },
+  {
+    id: 4,
+    text: 'edit.text',
+    link: '/edit',
+    color: theme.colors.textButton,
+    backgroundColor: theme.colors.backgroundDarkBlue,
+  },
+];
+
 const headerLinkItems: HeaderLinksProps[] = [
   {
     id: 1,
@@ -212,6 +229,7 @@ export {
   formTextFields,
   headerSignItems,
   headerLinkItems,
+  headerItemsIfLoggedIn,
   mainPageElements,
   mainPageList,
   backButtonAnimation,
