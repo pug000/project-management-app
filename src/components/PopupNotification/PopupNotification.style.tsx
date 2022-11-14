@@ -2,32 +2,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { MdClose } from 'react-icons/md';
 
-import { BackgroundColorProps } from 'ts/interfaces';
+import { BackgroundColorProps, VariantsProps } from 'ts/interfaces';
 
-const notificationAnimate = {
-  initial: {
-    opacity: 0,
-    y: '100vh',
-    scale: 0.3,
-  },
-  animate: {
-    opacity: 1,
-    y: '35vh',
-    scale: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.5,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
-
-const PopupWrapper = styled(motion.div)`
+const PopupWrapper = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit',
+  variants: $variants,
+}))<VariantsProps>`
   position: fixed;
   max-width: 450px;
   width: 100%;
@@ -61,4 +43,4 @@ const ButtonWrapper = styled.div`
 
 const CloseIcon = styled(MdClose)``;
 
-export { PopupWrapper, Popup, ButtonWrapper, PopupText, CloseIcon, notificationAnimate };
+export { PopupWrapper, Popup, ButtonWrapper, PopupText, CloseIcon };

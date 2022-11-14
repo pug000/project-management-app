@@ -3,11 +3,12 @@ import { AnimatePresence } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 
+import { notificationAnimation } from 'utils/constants';
+
 import defaultTheme from 'styles/theme';
 import {
   ButtonWrapper,
   CloseIcon,
-  notificationAnimate,
   Popup,
   PopupText,
   PopupWrapper,
@@ -37,12 +38,7 @@ function PopupNotification({
   return (
     <AnimatePresence>
       {isPopupOpen && (
-        <PopupWrapper
-          variants={notificationAnimate}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
+        <PopupWrapper $variants={notificationAnimation}>
           <Popup $backgroundColor={backgroundColor}>
             <PopupText>{text}</PopupText>
             <ButtonWrapper>
