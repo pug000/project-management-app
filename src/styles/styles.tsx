@@ -75,6 +75,13 @@ const FormDescriptionText = styled.span`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+`;
+
 const StyledLink = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.text};
   color: ${({ theme }) => theme.colors.text};
@@ -106,6 +113,7 @@ export {
   Form,
   FormDescriptionWrapper,
   FormDescriptionText,
+  LinkWrapper,
   StyledLink,
   StyledPrevIcon,
 };
