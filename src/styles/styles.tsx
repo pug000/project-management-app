@@ -11,7 +11,7 @@ const MainWrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.title};
+  font-family: ${({ theme }) => theme.fonts.text};
   font-weight: ${({ theme }) => theme.fontsWeight.bold};
   font-size: ${({ theme }) => theme.fontSizes.h2};
   color: ${({ theme }) => theme.colors.title};

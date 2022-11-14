@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Variants } from 'framer-motion';
+
 import StyledButton from './Button.style';
 
 interface ButtonProps {
@@ -9,7 +11,7 @@ interface ButtonProps {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
-  $isBack?: boolean;
+  animation?: Variants;
   backgroundColor?: string;
   color?: string;
   width?: string;
@@ -23,7 +25,7 @@ function Button({
   rightIcon,
   id,
   disabled,
-  $isBack,
+  animation,
   backgroundColor,
   color,
   width,
@@ -37,7 +39,7 @@ function Button({
       $backgroundColor={backgroundColor}
       $color={color}
       $width={width}
-      $isBack={$isBack}
+      $variants={animation}
       onClick={() => callback && callback()}
     >
       {leftIcon}
@@ -52,7 +54,7 @@ Button.defaultProps = {
   leftIcon: undefined,
   rightIcon: undefined,
   disabled: false,
-  $isBack: false,
+  animation: undefined,
   id: undefined,
   callback: undefined,
   backgroundColor: undefined,
