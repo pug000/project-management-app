@@ -1,31 +1,21 @@
-import styled, { keyframes, css } from 'styled-components';
-import { BackgroundColorProps, ColorProps, WidthProps } from 'ts/interfaces';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-interface IsBackProps {
-  $isBack?: boolean;
-}
+import {
+  BackgroundColorProps,
+  ColorProps,
+  WidthProps,
+  VariantsProps,
+} from 'ts/interfaces';
 
-type ButtonProps = ColorProps & BackgroundColorProps & WidthProps & IsBackProps;
+type ButtonProps = ColorProps & BackgroundColorProps & WidthProps & VariantsProps;
 
-const buttonAnimationLeft = keyframes`
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-15px);
-  }
-  50% {
-    transform: translateX(-10px);
-  }
-  75% {
-    transform: translateX(-15px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-`;
-
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled(motion.button).attrs<ButtonProps>(({ $variants }) => ({
+  initial: 'initial',
+  exit: 'exit',
+  whileHover: 'hover',
+  variants: $variants,
+}))<ButtonProps>`
   cursor: pointer;
   font-size: ${({ theme }) => theme.fontSizes.text};
   display: flex;
@@ -43,11 +33,6 @@ const StyledButton = styled.button<ButtonProps>`
 
   &:hover:enabled {
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
-    animation: ${({ $isBack }) =>
-      $isBack &&
-      css`
-        ${buttonAnimationLeft} 1s linear infinite;
-      `};
   }
 
   &:focus {
@@ -55,8 +40,8 @@ const StyledButton = styled.button<ButtonProps>`
   }
 
   &:disabled {
-    background-color: ${({ $isBack, theme }) =>
-      $isBack ? theme.colors.transparent : theme.colors.grey};
+    background-color: ${({ $variants, theme }) =>
+      $variants ? theme.colors.transparent : theme.colors.grey};
     cursor: default;
   }
 

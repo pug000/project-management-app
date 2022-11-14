@@ -27,6 +27,7 @@ import {
   Title,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
+import { backButtonAnimation } from 'utils/constants';
 
 function SignInPage() {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ function SignInPage() {
             type="button"
             leftIcon={<StyledPrevIcon $isDisabled={isLoadingAuth} />}
             width="30px"
-            $isBack
+            animation={backButtonAnimation}
             backgroundColor={defaultTheme.colors.transparent}
             disabled={isLoadingAuth}
             callback={() => navigate(-1)}

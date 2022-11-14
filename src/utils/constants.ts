@@ -1,3 +1,4 @@
+import { Variants } from 'framer-motion';
 import theme from 'styles/theme';
 import { FormTextField, UserFormValues, HeaderLinksProps, Author } from 'ts/interfaces';
 
@@ -99,6 +100,26 @@ const headerLinkItems: HeaderLinksProps[] = [
   },
 ];
 
+const backButtonAnimation: Variants = {
+  initial: {
+    x: 0,
+  },
+  exit: {
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  hover: {
+    x: -10,
+    transition: {
+      repeat: Infinity,
+      duration: 0.5,
+      repeatType: 'reverse',
+    },
+  },
+};
+
 export {
   baseUrl,
   authors,
@@ -109,4 +130,5 @@ export {
   formTextFields,
   headerSignItems,
   headerLinkItems,
+  backButtonAnimation,
 };
