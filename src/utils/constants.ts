@@ -75,7 +75,7 @@ const headerSignItems: HeaderLinksProps[] = [
     text: 'signIn.title',
     link: '/signin',
     color: theme.colors.primaryColor,
-    backgroundColor: theme.colors.backgroundWhite,
+    backgroundColor: theme.colors.transparent,
   },
   {
     id: 2,

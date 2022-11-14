@@ -6,8 +6,6 @@ import Button from 'components/Button/Button';
 
 import { headerSignItems, headerLinkItems } from 'utils/constants';
 
-import theme from 'styles/theme';
-
 import LangSwitcher from './LangSwitcher/LangSwitcher';
 
 import {
@@ -20,12 +18,12 @@ import {
 
 function Header() {
   const { t } = useTranslation('translation');
-  const [sticky, setSticky] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
   const stickyHeader = useCallback(() => {
     if (window.scrollY > 0) {
-      setSticky(true);
+      setIsSticky(true);
     } else {
-      setSticky(false);
+      setIsSticky(false);
     }
   }, []);
 
@@ -35,12 +33,12 @@ function Header() {
   }, []);
 
   return (
-    <HeaderWrapper $backgroundColor={sticky ? theme.colors.backgroundBlue : ''}>
+    <HeaderWrapper sticky={isSticky}>
       <HeaderContainer>
         <HeaderContainerElements>
           <AppLogo />
           {headerLinkItems.map(({ id, text, link, color }) => (
-            <HeaderLink to={link} key={id}>
+            <HeaderLink to={link} key={id} end>
               <HeaderLinkElement color={color}>{t(text)}</HeaderLinkElement>
             </HeaderLink>
           ))}
@@ -48,7 +46,7 @@ function Header() {
         <HeaderContainerElements>
           <LangSwitcher />
           {headerSignItems.map(({ id, text, link, color, backgroundColor }) => (
-            <HeaderLink to={link} key={id}>
+            <HeaderLink to={link} key={id} end>
               <Button
                 type="button"
                 width="130px"

@@ -14,10 +14,6 @@ interface IconsProps {
   $isDisabled?: boolean;
 }
 
-interface HeaderProps {
-  $backgroundColor?: string;
-}
-
 interface HeaderLinksProps {
   id: number;
   text: string;
@@ -81,7 +77,6 @@ export type {
   BackgroundColorProps,
   WidthProps,
   IconsProps,
-  HeaderProps,
   HeaderLinksProps,
   Author,
   UserFormValues,
