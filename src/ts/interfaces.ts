@@ -1,3 +1,5 @@
+import { Variants } from 'framer-motion';
+
 interface ColorProps {
   $color?: string;
 }
@@ -12,6 +14,9 @@ interface WidthProps {
 
 interface IconsProps {
   $isDisabled?: boolean;
+}
+interface VariantsProps {
+  $variants?: Variants;
 }
 
 interface HeaderLinksProps {
@@ -96,5 +101,6 @@ export type {
   AuthUser,
   FormTextField,
   UserData,
+  VariantsProps,
   MainPageElement,
 };
