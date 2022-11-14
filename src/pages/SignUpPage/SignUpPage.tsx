@@ -26,6 +26,7 @@ import {
   LinkWrapper,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
+import PopupNotification from 'components/PopupNotification/PopupNotification';
 
 function SignUpPage() {
   const dispatch = useAppDispatch();
@@ -33,7 +34,13 @@ function SignUpPage() {
   const { t } = useTranslation('translation');
   const [
     signUp,
-    { originalArgs: userData, isSuccess: isSuccessSignUp, isLoading: isLoadingSignUp },
+    {
+      originalArgs: userData,
+      isSuccess: isSuccessSignUp,
+      isLoading: isLoadingSignUp,
+      isError: isErrorSignUp,
+      error: signUpErrorMessage,
+    },
   ] = useSignUpMutation();
   const [
     signIn,
@@ -88,6 +95,13 @@ function SignUpPage() {
         </LinkWrapper>
       </FormWrapper>
       {isLoadingAuth && <Loader />}
+      {signUpErrorMessage && (
+        <PopupNotification
+          initialPopupState={isErrorSignUp}
+          text={t(`${signUpErrorMessage}`)}
+          backgroundColor={defaultTheme.colors.pink}
+        />
+      )}
     </MainWrapper>
   );
 }

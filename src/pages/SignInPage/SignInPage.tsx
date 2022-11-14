@@ -12,6 +12,7 @@ import { useSignInMutation } from 'redux/api/authApiSlice';
 import AuthForm from 'components/AuthForm/AuthForm';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
+import PopupNotification from 'components/PopupNotification/PopupNotification';
 
 import { UserFormValues } from 'ts/interfaces';
 import {
@@ -38,6 +39,8 @@ function SignInPage() {
       originalArgs: userData,
       isSuccess: isSuccessSignIn,
       isLoading: isLoadingSignIn,
+      isError: isErrorSignIn,
+      error: signInErrorMessage,
     },
   ] = useSignInMutation();
   const [
@@ -104,6 +107,13 @@ function SignInPage() {
         </LinkWrapper>
       </FormWrapper>
       {isLoadingAuth && <Loader />}
+      {signInErrorMessage && (
+        <PopupNotification
+          initialPopupState={isErrorSignIn}
+          text={t(`${signInErrorMessage}`)}
+          backgroundColor={defaultTheme.colors.pink}
+        />
+      )}
     </MainWrapper>
   );
 }
