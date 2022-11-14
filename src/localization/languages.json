@@ -44,6 +44,30 @@
       },
       "protected": {
         "text": "To see the content of this page sign up or sign in if you have an account"
+      },
+      "homePage": {
+        "title1": "All your tasks now automated",
+        "text1": "Project Management App is a simple and convenient way to organize your team. Start working by signing up and creating your first project.",
+        "buttonIfLoggedIn": "To projects",
+        "buttonIfNotLoggedIn": "Sign Up",
+        "blockTitle1": "Projects",
+        "blockText1": "In PMA you can create all your projects and easily manage them.",
+        "blockTitle2": "Columns",
+        "blockText2": "Group of tasks are called columns. To control the progress of tasks implementation move them between columns.",
+        "blockTitle3": "Tasks",
+        "blockText3": "Create tasks and choose one of your team-member who will be responsible for the task.",
+        "subtitle": "Everything's under control",
+        "title2": "PMA will take care of task management",
+        "listItem1": "All in one place",
+        "listItem2": "Control of the progress",
+        "listItem3": "Safe and secure",
+        "team": "Our team",
+        "roma": "Roman Troshin",
+        "nastya": "Anastasiya Sachko",
+        "artem": "Artsiom Kharytonchyk",
+        "romaDescription": "Frontend-developer, team-lead",
+        "nastyaDescription": "Frontend-developer",
+        "artemDescription": "Frontend-developer"
       }
     }
   },
@@ -92,6 +116,30 @@
       },
       "protected": {
         "text": "Вам необходимо зайти под вашей учетной записью или зарегистрироваться"
+      },
+      "homePage": {
+        "title1": "Теперь все задачи автоматизированы",
+        "text1": "Project Management App это простой и удобный способ организовать свою команду. Для начала зарегистрируйтесь и создайте свой первый проект.",
+        "buttonIfLoggedIn": "К проектам",
+        "buttonIfNotLoggedIn": "Регистрация",
+        "blockTitle1": "Проекты",
+        "blockText1": "В PMA вы можете создать все свои проекты и легко ими управлять.",
+        "blockTitle2": "Колонки",
+        "blockText2": "Группы задач - это колонки. Для контроля за ходом выполнения задач перемещайте их между колонками.",
+        "blockTitle3": "Задачи",
+        "blockText3": "Создавайте задачи и выбирайте, кто из команды будет отвечать за задачу.",
+        "subtitle": "Всё под контролем",
+        "title2": "PMA позаботится о ваших задачах",
+        "listItem1": "Всё в одном месте",
+        "listItem2": "Контроль прогресса",
+        "listItem3": "Надёжно и безопасно",
+        "team": "Наша команда",
+        "roma": "Роман Трошин",
+        "nastya": "Анастасия Сачко",
+        "artem": "Артём Харитончик",
+        "romaDescription": "Frontend-разработчик, team-lead",
+        "nastyaDescription": "Frontend-разработчик",
+        "artemDescription": "Frontend-разработчик"
       }
     }
   }
