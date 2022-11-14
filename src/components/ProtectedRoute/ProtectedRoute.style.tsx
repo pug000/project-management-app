@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled.main`
   padding: 20px 15px;
   margin: 0 auto;
-  width: 50vw;
+  width: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,7 +11,7 @@ const Container = styled.main`
 `;
 
 const ProtectedTitle = styled.h3`
-  font-family: ${(props) => props.theme.fonts.title};
+  font-family: ${(props) => props.theme.fonts.text};
   font-size: ${(props) => props.theme.fontSizes.h3};
 `;
 
