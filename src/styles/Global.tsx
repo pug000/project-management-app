@@ -35,8 +35,6 @@ const GlobalStyle = createGlobalStyle`
 
   main {
     grid-area: main;
-    padding-left: 15px;
-    padding-right: 15px;
   }
 
   footer {

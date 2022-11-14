@@ -27,6 +27,9 @@ interface Author {
   name: string;
   githubLink: string;
   title: string;
+  description: string;
+  avatar: string;
+  background: string;
 }
 
 interface UserFormValues {
@@ -72,6 +75,14 @@ interface UserData extends User {
   _id: string;
 }
 
+interface MainPageElement {
+  id: number;
+  title: string;
+  text: string;
+  backgroundColor: string;
+  icon: JSX.Element;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -85,4 +96,5 @@ export type {
   AuthUser,
   FormTextField,
   UserData,
+  MainPageElement,
 };
