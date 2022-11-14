@@ -2,6 +2,8 @@ import React, { lazy, Suspense, useCallback, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+
+import { getUser } from 'redux/selectors/userSelectors';
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { setAuthUser } from 'redux/slices/userSlice';
 
@@ -16,7 +18,7 @@ const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 
 function App() {
-  const user = useAppSelector((state) => state.user.user);
+  const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const [signIn, { data: authData, isSuccess: isSuccessSignIn }] = useSignInMutation();
 

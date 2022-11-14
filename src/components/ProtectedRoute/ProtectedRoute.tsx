@@ -1,6 +1,9 @@
-import { useAppSelector } from 'hooks/useRedux';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useAppSelector } from 'hooks/useRedux';
+
+import { getLoggedIn } from 'redux/selectors/userSelectors';
 
 import { Container, ProtectedTitle } from './ProtectedRoute.style';
 
@@ -10,7 +13,7 @@ interface ProtectedProps {
 
 function ProtectedRoute({ children }: ProtectedProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'protected' });
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const isLoggedIn = useAppSelector(getLoggedIn);
 
   if (!isLoggedIn) {
     return (
