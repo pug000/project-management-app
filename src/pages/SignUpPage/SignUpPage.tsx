@@ -10,6 +10,7 @@ import { useSignInMutation, useSignUpMutation } from 'redux/api/authApiSlice';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
+import Loader from 'components/Loader/Loader';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -24,7 +25,6 @@ import {
   StyledPrevIcon,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import Loader from 'components/Loader/Loader';
 
 function SignUpPage() {
   const dispatch = useAppDispatch();
