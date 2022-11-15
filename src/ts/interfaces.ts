@@ -49,15 +49,9 @@ interface User {
   password: string;
 }
 
-interface ParsedJwt {
-  id: string;
-  login: string;
-  exp: number;
-  iat: number;
-}
-
 interface AuthUser {
   token: string;
+  exp: number;
   _id: string;
 }
 
@@ -97,7 +91,6 @@ export type {
   Author,
   UserFormValues,
   User,
-  ParsedJwt,
   AuthUser,
   FormTextField,
   UserData,
