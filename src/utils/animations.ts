@@ -43,4 +43,21 @@ const notificationAnimation: Variants = {
   },
 };
 
-export { backButtonAnimation, notificationAnimation };
+const loadAnimation: Variants = {
+  initial: {
+    rotate: 0,
+  },
+  animate: {
+    rotate: 359,
+    transition: {
+      duration: 1,
+      repeat: Infinity,
+      ease: 'linear',
+    },
+  },
+  exit: {
+    rotate: 359,
+  },
+};
+
+export { backButtonAnimation, notificationAnimation, loadAnimation };
