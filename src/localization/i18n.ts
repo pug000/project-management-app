@@ -10,7 +10,6 @@ i18n
   .init({
     resources: languages,
     fallbackLng: 'en',
-    lng: 'en',
     debug: true,
     detection: {
       order: ['localStorage'],

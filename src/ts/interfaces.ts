@@ -15,13 +15,8 @@ interface WidthProps {
 interface IconsProps {
   $isDisabled?: boolean;
 }
-
 interface VariantsProps {
   $variants?: Variants;
-}
-
-interface HeaderProps {
-  $backgroundColor?: string;
 }
 
 interface HeaderLinksProps {
@@ -37,6 +32,9 @@ interface Author {
   name: string;
   githubLink: string;
   title: string;
+  description: string;
+  avatar: string;
+  background: string;
 }
 
 interface UserFormValues {
@@ -82,12 +80,19 @@ interface UserData extends User {
   _id: string;
 }
 
+interface MainPageElement {
+  id: number;
+  title: string;
+  text: string;
+  backgroundColor: string;
+  icon: JSX.Element;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
   WidthProps,
   IconsProps,
-  HeaderProps,
   HeaderLinksProps,
   Author,
   UserFormValues,
@@ -97,4 +102,5 @@ export type {
   FormTextField,
   UserData,
   VariantsProps,
+  MainPageElement,
 };

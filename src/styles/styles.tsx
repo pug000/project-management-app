@@ -8,6 +8,8 @@ const MainWrapper = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 
 const Title = styled.h1`

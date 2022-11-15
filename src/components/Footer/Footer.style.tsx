@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
-  margin: 20px 15px;
+  padding: 20px 15px;
 `;
 
 const FooterContainer = styled.div`

@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   header {
     grid-area: header;
     display: grid;
-    grid-template: auto / 1fr minmax(300px, 1400px) 1fr;
+    grid-template: auto / 1fr minmax(300px, 1440px) 1fr;
     grid-template-areas: ". subHeader ."
   }
 
