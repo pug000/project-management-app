@@ -111,7 +111,7 @@ const headerItemsIfLoggedIn: HeaderLinksProps[] = [
   {
     id: 3,
     text: 'signOut.text',
-    link: '/',
+    link: '#',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.transparent,
   },
