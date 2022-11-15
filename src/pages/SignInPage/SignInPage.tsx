@@ -27,7 +27,7 @@ import {
   Title,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import { backButtonAnimation } from 'utils/constants';
+import { backButtonAnimation } from 'utils/animations';
 
 function SignInPage() {
   const navigate = useNavigate();

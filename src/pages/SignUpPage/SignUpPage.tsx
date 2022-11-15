@@ -27,7 +27,7 @@ import {
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 import PopupNotification from 'components/PopupNotification/PopupNotification';
-import { backButtonAnimation } from 'utils/constants';
+import { backButtonAnimation } from 'utils/animations';
 
 function SignUpPage() {
   const dispatch = useAppDispatch();

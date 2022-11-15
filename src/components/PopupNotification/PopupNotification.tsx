@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 
-import { notificationAnimation } from 'utils/constants';
+import { notificationAnimation } from 'utils/animations';
 
 import defaultTheme from 'styles/theme';
 import {
