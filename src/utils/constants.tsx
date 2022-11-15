@@ -1,5 +1,4 @@
 import React from 'react';
-import { Variants } from 'framer-motion';
 import theme from 'styles/theme';
 
 import {
@@ -176,49 +175,6 @@ const mainPageList = [
   },
 ];
 
-const backButtonAnimation: Variants = {
-  initial: {
-    x: 0,
-  },
-  exit: {
-    x: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  hover: {
-    x: -10,
-    transition: {
-      repeat: Infinity,
-      duration: 0.5,
-      repeatType: 'reverse',
-    },
-  },
-};
-
-const notificationAnimation: Variants = {
-  initial: {
-    opacity: 0,
-    y: '100vh',
-    scale: 0.3,
-  },
-  animate: {
-    opacity: 1,
-    y: '35vh',
-    scale: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.5,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
-
 export {
   baseUrl,
   authors,
@@ -232,6 +188,4 @@ export {
   headerItemsIfLoggedIn,
   mainPageElements,
   mainPageList,
-  backButtonAnimation,
-  notificationAnimation,
 };
