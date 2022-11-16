@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 
-import { setLoggedIn } from 'redux/slices/userSlice';
+import { setLoggedOut } from 'redux/slices/userSlice';
 
 import { headerSignItems, headerLinkItems, headerItemsIfLoggedIn } from 'utils/constants';
 
 import AppLogo from 'components/AppLogo/AppLogo';
 import Button from 'components/Button/Button';
+import PopupWarning from 'components/PopupWarning/PopupWarning';
 import LangSwitcher from './LangSwitcher/LangSwitcher';
 
 import {
@@ -24,8 +26,11 @@ function Header() {
   const { t } = useTranslation('translation');
   const isLoggedIn = useAppSelector(getLoggedIn);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [isSticky, setIsSticky] = useState(false);
+  const [isWarningPopupOpen, setIsWarningPopupOpen] = useState(false);
+  const [isSignedOut, setIsSignedOut] = useState(false);
 
   const stickyHeader = useCallback(() => {
     if (window.scrollY > 0) {
@@ -35,11 +40,19 @@ function Header() {
     }
   }, []);
 
-  const signOut = (id: number) => {
+  const openWarningPopup = (id: number) => {
     if (id === 3) {
-      dispatch(setLoggedIn(false));
+      setIsWarningPopupOpen(true);
     }
   };
+
+  useEffect(() => {
+    if (isSignedOut) {
+      dispatch(setLoggedOut());
+      navigate('/');
+      setIsSignedOut(false);
+    }
+  }, [isSignedOut]);
 
   useEffect(() => {
     window.addEventListener('scroll', stickyHeader);
@@ -61,14 +74,7 @@ function Header() {
           <LangSwitcher />
           {(isLoggedIn ? headerItemsIfLoggedIn : headerSignItems).map(
             ({ id, text, link, color, backgroundColor }) => (
-              <HeaderLink
-                to={link}
-                key={id}
-                onClick={() => {
-                  signOut(id);
-                }}
-                end
-              >
+              <HeaderLink to={link} key={id} onClick={() => openWarningPopup(id)} end>
                 <Button
                   type="button"
                   width="130px"
@@ -81,6 +87,13 @@ function Header() {
           )}
         </HeaderContainerElements>
       </HeaderContainer>
+      {isWarningPopupOpen && (
+        <PopupWarning
+          setActive={setIsWarningPopupOpen}
+          text="signOut"
+          actionOnYes={setIsSignedOut}
+        />
+      )}
     </HeaderWrapper>
   );
 }
