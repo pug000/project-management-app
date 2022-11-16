@@ -1,9 +1,13 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 
 import { notificationAnimation, progressBarAnimation } from 'utils/animations';
+
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { getNotificationPopupOpen } from 'redux/selectors/popupSelectors';
+import { setIsNotificationPopupOpen } from 'redux/slices/popupSlice';
 
 import defaultTheme from 'styles/theme';
 import {
@@ -27,19 +31,24 @@ function PopupNotification({
   text,
   backgroundColor,
 }: PopupNotificationProps) {
-  const [isPopupOpen, setPopupOpen] = useState(initialPopupState);
+  const isNotificationPopupOpen = useAppSelector(getNotificationPopupOpen);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isPopupOpen) {
+    dispatch(setIsNotificationPopupOpen(initialPopupState));
+  }, []);
+
+  useEffect(() => {
+    if (isNotificationPopupOpen) {
       setTimeout(() => {
-        setPopupOpen(false);
+        dispatch(setIsNotificationPopupOpen(false));
       }, 3000);
     }
-  }, [isPopupOpen]);
+  }, [isNotificationPopupOpen]);
 
   return (
     <AnimatePresence>
-      {isPopupOpen && (
+      {isNotificationPopupOpen && (
         <PopupWrapper $variants={notificationAnimation}>
           <Popup $backgroundColor={backgroundColor}>
             <PopupText>{text}</PopupText>
@@ -49,7 +58,7 @@ function PopupNotification({
                 leftIcon={<CloseIcon />}
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
-                callback={() => setPopupOpen(false)}
+                callback={() => dispatch(setIsNotificationPopupOpen(false))}
               />
             </ButtonWrapper>
             <ProgressBar>
