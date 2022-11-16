@@ -10,7 +10,7 @@ i18n
   .init({
     resources: languages,
     fallbackLng: 'en',
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
     detection: {
       order: ['localStorage'],
       caches: ['localStorage'],
