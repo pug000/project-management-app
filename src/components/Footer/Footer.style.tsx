@@ -11,6 +11,11 @@ const FooterContainer = styled.div`
   gap: 15px;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 670px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const AuthorsContainer = styled.div``;
@@ -19,9 +24,18 @@ const AuthorsTitle = styled.h3`
   text-align: right;
   font-size: ${({ theme }) => theme.fontSizes.h4};
   margin-bottom: 5px;
+
+  @media all and (max-width: 670px) {
+    text-align: left;
+  }
 `;
 
-const Authors = styled.div``;
+const Authors = styled.div`
+  @media all and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 const Author = styled.a`
   text-decoration: none;
@@ -38,12 +52,29 @@ const Author = styled.a`
   &:hover {
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
   }
-`;
 
-const Copyright = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  @media all and (max-width: 670px) {
+    padding-left: 0;
+    padding-right: 10px;
+
+    &:not(:first-child) {
+      padding-left: 10px;
+    }
+  }
+
+  @media all and (max-width: 500px) {
+    border-right: none;
+    padding-right: 0;
+
+    &:not(:first-child) {
+      padding-left: 0;
+    }
+
+    &:not(:last-child) {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
 `;
 
 const CopyrightText = styled.p`
@@ -57,6 +88,30 @@ const SchoolLogo = styled.a`
   height: 30px;
   background: url(https://rs.school/images/rs_school_js.svg);
   background-size: cover;
+`;
+
+const Copyright = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  @media all and (max-width: 600px) {
+    flex-direction: column;
+    gap: 15px;
+
+    ${SchoolLogo} {
+      width: 160px;
+      height: 60px;
+    }
+  }
+
+  @media all and (max-width: 500px) {
+    ${CopyrightText} {
+      line-height: 20px;
+      max-width: 230px;
+      width: 100%;
+    }
+  }
 `;
 
 export {
