@@ -25,12 +25,12 @@ function PopupNotification({
   text,
   backgroundColor,
 }: PopupNotificationProps) {
-  const [isPopupOpen, setPopup] = useState(initialPopupState);
+  const [isPopupOpen, setPopupOpen] = useState(initialPopupState);
 
   useEffect(() => {
     if (isPopupOpen) {
       setTimeout(() => {
-        setPopup(false);
+        setPopupOpen(false);
       }, 3000);
     }
   }, [isPopupOpen]);
@@ -47,7 +47,7 @@ function PopupNotification({
                 leftIcon={<CloseIcon />}
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
-                callback={() => setPopup(false)}
+                callback={() => setPopupOpen(false)}
               />
             </ButtonWrapper>
           </Popup>
