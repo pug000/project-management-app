@@ -1,4 +1,7 @@
-import { ParsedJwt } from 'ts/interfaces';
+interface ParsedJwt {
+  _id: string;
+  exp: number;
+}
 
 const addFetchOptions = (
   url: string,
@@ -10,7 +13,7 @@ const addFetchOptions = (
   params,
 });
 
-const parseJwt = (token: string): string => {
+const parseJwt = (token: string): ParsedJwt => {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(
@@ -21,9 +24,12 @@ const parseJwt = (token: string): string => {
       .join('')
   );
 
-  const parsedToken: ParsedJwt = JSON.parse(jsonPayload);
+  const parsedToken = JSON.parse(jsonPayload);
 
-  return parsedToken.id;
+  return {
+    _id: parsedToken.id,
+    exp: parsedToken.exp,
+  };
 };
 
 export { addFetchOptions, parseJwt };

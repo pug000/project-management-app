@@ -23,7 +23,7 @@
         "title": "Sign In",
         "text": "Sign In",
         "account": "Still don't have an account? Sing Up",
-        "error": "This login is not found"
+        "error": "Incorrect login or password!"
       },
       "signOut": {
         "text": "Sign Out"
@@ -95,13 +95,13 @@
         "title": "Регистрация",
         "text": "Зарегистрироваться",
         "account": "Уже есть учетная запись? Войти",
-        "error": "Пользователь с таким логином уже занят"
+        "error": "Этот логин уже занят"
       },
       "signIn": {
         "title": "Вход",
         "text": "Войти",
         "account": "Ещё нет учетной записи? Зарегистрироваться",
-        "error": "Пользователь с таким логином не найден"
+        "error": "Неверный логин или пароль!"
       },
       "signOut": {
         "text": "Выход"
