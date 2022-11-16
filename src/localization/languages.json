@@ -74,6 +74,11 @@
         "romaDescription": "Frontend-developer, team-lead",
         "nastyaDescription": "Frontend-developer",
         "artemDescription": "Frontend-developer"
+      },
+      "warningPopup": {
+        "yes": "Yes",
+        "no": "No",
+        "signOut": "Are you sure you want to sign out?"
       }
     }
   },
@@ -152,6 +157,11 @@
         "romaDescription": "Frontend-разработчик, team-lead",
         "nastyaDescription": "Frontend-разработчик",
         "artemDescription": "Frontend-разработчик"
+      },
+      "warningPopup": {
+        "yes": "Да",
+        "no": "Нет",
+        "signOut": "Вы уверены, что хотите выйти?"
       }
     }
   }

@@ -60,4 +60,25 @@ const loadAnimation: Variants = {
   },
 };
 
-export { backButtonAnimation, notificationAnimation, loadAnimation };
+const warningAnimation: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.7,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.7,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
+export { backButtonAnimation, notificationAnimation, loadAnimation, warningAnimation };
