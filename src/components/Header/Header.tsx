@@ -30,7 +30,6 @@ function Header() {
   const navigate = useNavigate();
 
   const [isSticky, setIsSticky] = useState(false);
-  const [isSignedOut, setIsSignedOut] = useState(false);
 
   const stickyHeader = useCallback(() => {
     if (window.scrollY > 0) {
@@ -46,13 +45,10 @@ function Header() {
     }
   };
 
-  useEffect(() => {
-    if (isSignedOut) {
-      dispatch(setLoggedOut());
-      navigate('/');
-      setIsSignedOut(false);
-    }
-  }, [isSignedOut]);
+  const signOut = () => {
+    dispatch(setLoggedOut());
+    navigate('/');
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', stickyHeader);
@@ -87,7 +83,7 @@ function Header() {
           )}
         </HeaderContainerElements>
       </HeaderContainer>
-      <PopupWarning text="signOut" actionOnYes={setIsSignedOut} />
+      <PopupWarning text="signOut" actionOnYes={signOut} />
     </HeaderWrapper>
   );
 }

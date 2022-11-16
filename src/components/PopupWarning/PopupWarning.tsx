@@ -24,7 +24,7 @@ import {
 
 interface PopupWarningProps {
   text: string;
-  actionOnYes: React.Dispatch<React.SetStateAction<boolean>>;
+  actionOnYes: () => void;
 }
 
 function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
@@ -49,7 +49,7 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
                 color={defaultTheme.colors.text}
                 backgroundColor={defaultTheme.colors.backgroundGrey}
                 text={t('yes')}
-                callback={() => actionOnYes(true)}
+                callback={actionOnYes}
               />
               <Button
                 type="button"
