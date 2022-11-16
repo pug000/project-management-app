@@ -22,24 +22,39 @@ const backButtonAnimation: Variants = {
 
 const notificationAnimation: Variants = {
   initial: {
-    opacity: 0,
-    y: '100vh',
+    opacity: 1,
+    y: '0vh',
     scale: 0.3,
   },
   animate: {
     opacity: 1,
-    y: '35vh',
+    y: '10vh',
     scale: 1,
     transition: {
       duration: 0.5,
     },
   },
   exit: {
-    opacity: 0,
+    opacity: 1,
     scale: 0.5,
     transition: {
       duration: 0.5,
     },
+  },
+};
+
+const progressBarAnimation: Variants = {
+  initial: {
+    width: '100%',
+  },
+  animate: {
+    width: '0%',
+    transition: {
+      duration: 3,
+    },
+  },
+  exit: {
+    width: '0%',
   },
 };
 
@@ -81,4 +96,10 @@ const warningAnimation: Variants = {
   },
 };
 
-export { backButtonAnimation, notificationAnimation, loadAnimation, warningAnimation };
+export {
+  backButtonAnimation,
+  notificationAnimation,
+  progressBarAnimation,
+  loadAnimation,
+  warningAnimation,
+};

@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 
-import { notificationAnimation } from 'utils/animations';
+import { notificationAnimation, progressBarAnimation } from 'utils/animations';
 
 import defaultTheme from 'styles/theme';
 import {
@@ -12,6 +12,8 @@ import {
   Popup,
   PopupText,
   PopupWrapper,
+  Progress,
+  ProgressBar,
 } from './PopupNotification.style';
 
 interface PopupNotificationProps {
@@ -50,6 +52,9 @@ function PopupNotification({
                 callback={() => setPopupOpen(false)}
               />
             </ButtonWrapper>
+            <ProgressBar>
+              <Progress $variants={progressBarAnimation} />
+            </ProgressBar>
           </Popup>
         </PopupWrapper>
       )}

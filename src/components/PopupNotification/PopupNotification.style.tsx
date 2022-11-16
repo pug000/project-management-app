@@ -13,6 +13,8 @@ const PopupWrapper = styled(motion.div).attrs<VariantsProps>(({ $variants }) => 
   position: fixed;
   max-width: 450px;
   width: 100%;
+  top: 0;
+  z-index: 8;
 `;
 
 const Popup = styled.div<BackgroundColorProps>`
@@ -43,4 +45,32 @@ const ButtonWrapper = styled.div`
 
 const CloseIcon = styled(MdClose)``;
 
-export { PopupWrapper, Popup, ButtonWrapper, PopupText, CloseIcon };
+const ProgressBar = styled.div`
+  width: 95%;
+  height: 5px;
+  position: absolute;
+  top: 85%;
+  background-color: ${({ theme }) => theme.colors.transparent};
+`;
+
+const Progress = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit',
+  variants: $variants,
+}))<VariantsProps>`
+  background-color: ${({ theme }) => theme.colors.backgroundWhite};
+  height: 5px;
+  opacity: 0.4;
+  border-radius: 0 0 5px 5px;
+`;
+
+export {
+  PopupWrapper,
+  Popup,
+  ButtonWrapper,
+  PopupText,
+  CloseIcon,
+  ProgressBar,
+  Progress,
+};
