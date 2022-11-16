@@ -15,6 +15,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.fontSizes.text};
     color: ${({ theme }) => theme.colors.text};
     background-color: ${({ theme }) => theme.colors.backgroundWhite};
+
+    @media screen and (max-width: 600px) {
+      font-size: ${({ theme }) => theme.fontSizes.smallText};
+    }
   }
 
   #root {

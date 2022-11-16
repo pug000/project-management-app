@@ -2,25 +2,23 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { BackgroundColorProps } from 'ts/interfaces';
 
-const PageSection = styled.section`
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 40px;
-`;
-
 const Title = styled.h2`
   font-family: ${({ theme }) => theme.fonts.title};
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
   font-size: ${({ theme }) => theme.fontSizes.h1};
   color: ${({ theme }) => theme.colors.title};
   margin-bottom: 20px;
-`;
 
-const TextWrapper = styled.div`
-  width: 40%;
+  @media screen and (max-width: 1050px) {
+    width: 90%;
+    text-align: center;
+    align-self: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    font-size: ${({ theme }) => theme.fontSizes.h3};
+  }
 `;
 
 const Text = styled.p`
@@ -34,7 +32,14 @@ const Link = styled(NavLink)`
   display: inline-block;
 `;
 
-const ImageWrapper = styled.div``;
+const ImageWrapper = styled.div`
+  resize: both;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const SubTitle = styled.h5`
   font-weight: ${({ theme }) => theme.fontsWeight.regular};
@@ -45,9 +50,10 @@ const SubTitle = styled.h5`
 
 const MainPageElement = styled.div<BackgroundColorProps>`
   background-color: ${({ $backgroundColor }) => $backgroundColor};
-  width: 25%;
+  max-width: 350px;
+  height: 230px;
+  width: 100%;
   padding: 20px;
-  align-self: stretch;
 
   svg {
     transform: scale(1.5);
@@ -63,11 +69,29 @@ const ElementTitle = styled.h4`
   margin: 20px 0;
 `;
 
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+
+  @media screen and (max-width: 1050px) {
+    width: 100%;
+    align-items: center;
+
+    ${Text} {
+      width: 100%;
+      text-align: center;
+    }
+  }
+`;
+
 const Author = styled.a<BackgroundColorProps>`
   display: flex;
   gap: 30px;
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
-  width: 25%;
+  max-width: 350px;
+  width: 100%;
   padding: 20px;
   align-self: stretch;
   text-decoration: none;
@@ -84,6 +108,7 @@ const Author = styled.a<BackgroundColorProps>`
 
   ${TextWrapper} {
     width: 80%;
+    align-items: flex-start;
   }
 
   ${ImageWrapper} {
@@ -106,8 +131,55 @@ const AuthorDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.smallText};
 `;
 
+const TextSection = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 1050px) {
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+
+const ColumnSection = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+`;
+
+const PageSection = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 1050px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+`;
+
 export {
   PageSection,
+  TextSection,
+  ColumnSection,
   TextWrapper,
   Title,
   Text,
