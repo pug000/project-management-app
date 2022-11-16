@@ -32,13 +32,14 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
   const isWarningPopupOpen = useAppSelector(getWarningPopupOpen);
   const dispatch = useAppDispatch();
 
+  const closePopup = () => {
+    dispatch(setIsWarningPopupOpen(false));
+  };
+
   return (
     <AnimatePresence>
       {isWarningPopupOpen && (
-        <Background
-          $variants={warningAnimation}
-          onClick={() => dispatch(setIsWarningPopupOpen(false))}
-        >
+        <Background $variants={warningAnimation} onClick={closePopup}>
           <Popup>
             <PopupText>{t(text)}</PopupText>
             <PopupButtons>
@@ -56,7 +57,7 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
                 color={defaultTheme.colors.text}
                 backgroundColor={defaultTheme.colors.backgroundGrey}
                 text={t('no')}
-                callback={() => dispatch(setIsWarningPopupOpen(false))}
+                callback={closePopup}
               />
             </PopupButtons>
             <CloseButtonWrapper>
@@ -65,7 +66,7 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
                 leftIcon={<MdClose />}
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
-                callback={() => dispatch(setIsWarningPopupOpen(false))}
+                callback={closePopup}
               />
             </CloseButtonWrapper>
           </Popup>
