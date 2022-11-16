@@ -10,6 +10,10 @@ import Button from 'components/Button/Button';
 
 import { MdClose } from 'react-icons/md';
 
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { getWarningPopupOpen } from 'redux/selectors/popupSelectors';
+import { setIsWarningPopupOpen } from 'redux/slices/popupSlice';
+
 import {
   Background,
   Popup,
@@ -19,49 +23,55 @@ import {
 } from './PopupWarning.style';
 
 interface PopupWarningProps {
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
   text: string;
   actionOnYes: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function PopupWarning({ setActive, text, actionOnYes }: PopupWarningProps) {
+function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'warningPopup' });
+  const isWarningPopupOpen = useAppSelector(getWarningPopupOpen);
+  const dispatch = useAppDispatch();
 
   return (
-    <Background onClick={() => setActive(false)}>
-      <AnimatePresence>
-        <Popup $variants={warningAnimation}>
-          <PopupText>{t(text)}</PopupText>
-          <PopupButtons>
-            <Button
-              type="button"
-              width="60px"
-              color={defaultTheme.colors.text}
-              backgroundColor={defaultTheme.colors.backgroundGrey}
-              text={t('yes')}
-              callback={() => actionOnYes(true)}
-            />
-            <Button
-              type="button"
-              width="60px"
-              color={defaultTheme.colors.text}
-              backgroundColor={defaultTheme.colors.backgroundGrey}
-              text={t('no')}
-              callback={() => setActive(false)}
-            />
-          </PopupButtons>
-          <CloseButtonWrapper>
-            <Button
-              type="button"
-              leftIcon={<MdClose />}
-              width="30px"
-              backgroundColor={defaultTheme.colors.transparent}
-              callback={() => setActive(false)}
-            />
-          </CloseButtonWrapper>
-        </Popup>
-      </AnimatePresence>
-    </Background>
+    <AnimatePresence>
+      {isWarningPopupOpen && (
+        <Background
+          $variants={warningAnimation}
+          onClick={() => dispatch(setIsWarningPopupOpen(false))}
+        >
+          <Popup>
+            <PopupText>{t(text)}</PopupText>
+            <PopupButtons>
+              <Button
+                type="button"
+                width="60px"
+                color={defaultTheme.colors.text}
+                backgroundColor={defaultTheme.colors.backgroundGrey}
+                text={t('yes')}
+                callback={() => actionOnYes(true)}
+              />
+              <Button
+                type="button"
+                width="60px"
+                color={defaultTheme.colors.text}
+                backgroundColor={defaultTheme.colors.backgroundGrey}
+                text={t('no')}
+                callback={() => dispatch(setIsWarningPopupOpen(false))}
+              />
+            </PopupButtons>
+            <CloseButtonWrapper>
+              <Button
+                type="button"
+                leftIcon={<MdClose />}
+                width="30px"
+                backgroundColor={defaultTheme.colors.transparent}
+                callback={() => dispatch(setIsWarningPopupOpen(false))}
+              />
+            </CloseButtonWrapper>
+          </Popup>
+        </Background>
+      )}
+    </AnimatePresence>
   );
 }
 

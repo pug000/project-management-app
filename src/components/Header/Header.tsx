@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 
 import { setLoggedOut } from 'redux/slices/userSlice';
+import { setIsWarningPopupOpen } from 'redux/slices/popupSlice';
 
 import { headerSignItems, headerLinkItems, headerItemsIfLoggedIn } from 'utils/constants';
 
@@ -29,7 +30,6 @@ function Header() {
   const navigate = useNavigate();
 
   const [isSticky, setIsSticky] = useState(false);
-  const [isWarningPopupOpen, setIsWarningPopupOpen] = useState(false);
   const [isSignedOut, setIsSignedOut] = useState(false);
 
   const stickyHeader = useCallback(() => {
@@ -42,7 +42,7 @@ function Header() {
 
   const openWarningPopup = (id: number) => {
     if (id === 3) {
-      setIsWarningPopupOpen(true);
+      dispatch(setIsWarningPopupOpen(true));
     }
   };
 
@@ -87,13 +87,7 @@ function Header() {
           )}
         </HeaderContainerElements>
       </HeaderContainer>
-      {isWarningPopupOpen && (
-        <PopupWarning
-          setActive={setIsWarningPopupOpen}
-          text="signOut"
-          actionOnYes={setIsSignedOut}
-        />
-      )}
+      <PopupWarning text="signOut" actionOnYes={setIsSignedOut} />
     </HeaderWrapper>
   );
 }

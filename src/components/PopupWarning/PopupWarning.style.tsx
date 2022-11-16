@@ -3,7 +3,12 @@ import styled from 'styled-components';
 
 import { VariantsProps } from 'ts/interfaces';
 
-const Background = styled.div`
+const Background = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit',
+  variants: $variants,
+}))<VariantsProps>`
   position: fixed;
   top: 0;
   left: 0;
@@ -18,12 +23,7 @@ const Background = styled.div`
   backdrop-filter: blur(2px);
 `;
 
-const Popup = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
-  initial: 'initial',
-  animate: 'animate',
-  exit: 'exit',
-  variants: $variants,
-}))<VariantsProps>`
+const Popup = styled.div`
   max-width: 500px;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.primaryColor};
