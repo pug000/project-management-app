@@ -28,7 +28,7 @@ const notificationAnimation: Variants = {
   },
   animate: {
     opacity: 1,
-    y: '10vh',
+    y: '3vh',
     scale: 1,
     transition: {
       duration: 0.5,
@@ -78,7 +78,7 @@ const loadAnimation: Variants = {
 const warningAnimation: Variants = {
   initial: {
     opacity: 0,
-    scale: 0.7,
+    scale: 0.8,
   },
   animate: {
     opacity: 1,
@@ -89,7 +89,7 @@ const warningAnimation: Variants = {
   },
   exit: {
     opacity: 0,
-    scale: 0.7,
+    scale: 0.8,
     transition: {
       duration: 0.2,
     },
