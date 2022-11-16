@@ -74,6 +74,11 @@
         "romaDescription": "Frontend-developer, team-lead",
         "nastyaDescription": "Frontend-developer",
         "artemDescription": "Frontend-developer"
+      },
+      "notFound": {
+        "title": "Something went wrong!",
+        "text": "Unfortunately, this page does not exist.",
+        "button": "Return to Home page"
       }
     }
   },
@@ -152,6 +157,11 @@
         "romaDescription": "Frontend-разработчик, team-lead",
         "nastyaDescription": "Frontend-разработчик",
         "artemDescription": "Frontend-разработчик"
+      },
+      "notFound": {
+        "title": "Что-то пошло не так!",
+        "text": "К сожалению, данная страница не существует.",
+        "button": "Вернуться на Главную"
       }
     }
   }
