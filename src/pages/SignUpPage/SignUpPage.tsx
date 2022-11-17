@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { backButtonAnimation } from 'utils/constants';
+import { backButtonAnimation } from 'utils/animations';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
@@ -21,6 +21,7 @@ import {
   LinkWrapper,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
+
 import useSignUpUser from 'hooks/useSignUpUser';
 
 function SignUpPage() {

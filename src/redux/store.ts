@@ -12,9 +12,11 @@ import {
 import storage from 'redux-persist/lib/storage';
 import apiSlice from './api/apiSlice';
 import userSlice from './slices/userSlice';
+import popupSlice from './slices/popupSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
+  popup: popupSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
@@ -22,7 +24,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['apiSlice'],
+  blacklist: ['apiSlice', 'popupSlice'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

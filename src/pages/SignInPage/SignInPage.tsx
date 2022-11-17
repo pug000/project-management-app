@@ -19,7 +19,9 @@ import {
   Title,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import { backButtonAnimation } from 'utils/constants';
+
+import { backButtonAnimation } from 'utils/animations';
+
 import useSignInUser from 'hooks/useSignInUser';
 
 function SignInPage() {

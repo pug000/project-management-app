@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
-import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
+import { setLoggedOut } from 'redux/slices/userSlice';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
@@ -28,9 +28,7 @@ function App() {
       const signOutDate = new Date(authUser.exp * 1000);
 
       if (currentDate >= signOutDate) {
-        dispatch(setUser(null));
-        dispatch(setAuthUser(null));
-        dispatch(setLoggedIn(false));
+        dispatch(setLoggedOut());
         navigate('/');
       }
     }
