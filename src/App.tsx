@@ -1,11 +1,10 @@
 import React, { lazy, Suspense, useCallback, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
-import { getUser } from 'redux/selectors/userSelectors';
-import { useSignInMutation } from 'redux/api/authApiSlice';
-import { setAuthUser } from 'redux/slices/userSlice';
+import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
+import { setLoggedOut } from 'redux/slices/userSlice';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
@@ -19,25 +18,25 @@ const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 function App() {
-  const user = useAppSelector(getUser);
+  const isLoggedIn = useAppSelector(getLoggedIn);
+  const authUser = useAppSelector(getAuthUser);
   const dispatch = useAppDispatch();
-  const [signIn, { data: authData, isSuccess: isSuccessSignIn }] = useSignInMutation();
+  const navigate = useNavigate();
 
-  const authUser = useCallback(async () => {
-    if (user) {
-      const { name, ...data } = user;
-      await signIn(data);
+  const signOutUser = useCallback(async () => {
+    if (isLoggedIn && authUser?.exp) {
+      const currentDate = new Date();
+      const signOutDate = new Date(authUser.exp * 1000);
+
+      if (currentDate >= signOutDate) {
+        dispatch(setLoggedOut());
+        navigate('/');
+      }
     }
   }, []);
 
   useEffect(() => {
-    if (authData && isSuccessSignIn) {
-      dispatch(setAuthUser(authData));
-    }
-  }, [authData]);
-
-  useEffect(() => {
-    authUser();
+    signOutUser();
   }, []);
 
   return (

@@ -1,20 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
-import { useAppDispatch } from 'hooks/useRedux';
-
-import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
-import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { useSignInMutation } from 'redux/api/authApiSlice';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
 import PopupNotification from 'components/PopupNotification/PopupNotification';
 
-import { UserFormValues } from 'ts/interfaces';
 import {
   FormDescriptionText,
   FormDescriptionWrapper,
@@ -27,62 +19,15 @@ import {
   Title,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import { backButtonAnimation } from 'utils/constants';
+
+import { backButtonAnimation } from 'utils/animations';
+
+import useSignInUser from 'hooks/useSignInUser';
 
 function SignInPage() {
+  const { isLoadingAuth, isErrorSignIn, signInErrorMessage, onSubmit } = useSignInUser();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const { t } = useTranslation('translation');
-  const [
-    signIn,
-    {
-      data: authData,
-      originalArgs: userData,
-      isSuccess: isSuccessSignIn,
-      isLoading: isLoadingSignIn,
-      isError: isErrorSignIn,
-      error: signInErrorMessage,
-    },
-  ] = useSignInMutation();
-  const [
-    getUserById,
-    { data: user, isSuccess: isSuccessGetUser, isFetching: isLoadingGetUser },
-  ] = useLazyGetUserByIdQuery();
-  const isLoadingAuth = isLoadingSignIn || isLoadingGetUser;
-
-  const onSubmit: SubmitHandler<UserFormValues> = useCallback(
-    async ({ name, ...formValues }) => {
-      await signIn(formValues);
-    },
-    []
-  );
-
-  const authUser = useCallback(async () => {
-    if (authData && isSuccessSignIn) {
-      dispatch(setAuthUser(authData));
-      await getUserById(authData._id);
-    }
-  }, [isSuccessSignIn]);
-
-  const addUser = useCallback(() => {
-    if (user && userData && isSuccessGetUser) {
-      dispatch(
-        setUser({
-          ...userData,
-          name: user.name,
-        })
-      );
-      dispatch(setLoggedIn(true));
-    }
-  }, [isSuccessGetUser]);
-
-  useEffect(() => {
-    addUser();
-  }, [isSuccessGetUser]);
-
-  useEffect(() => {
-    authUser();
-  }, [isSuccessSignIn]);
 
   return (
     <MainWrapper>

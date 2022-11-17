@@ -1,18 +1,13 @@
-import React, { useCallback, useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from 'hooks/useRedux';
-
-import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
-import { useSignInMutation, useSignUpMutation } from 'redux/api/authApiSlice';
+import { backButtonAnimation } from 'utils/animations';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
-
-import { UserFormValues } from 'ts/interfaces';
+import PopupNotification from 'components/PopupNotification/PopupNotification';
 
 import {
   FormDescriptionWrapper,
@@ -26,51 +21,13 @@ import {
   LinkWrapper,
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import PopupNotification from 'components/PopupNotification/PopupNotification';
-import { backButtonAnimation } from 'utils/constants';
+
+import useSignUpUser from 'hooks/useSignUpUser';
 
 function SignUpPage() {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const [
-    signUp,
-    {
-      originalArgs: userData,
-      isSuccess: isSuccessSignUp,
-      isLoading: isLoadingSignUp,
-      isError: isErrorSignUp,
-      error: signUpErrorMessage,
-    },
-  ] = useSignUpMutation();
-  const [
-    signIn,
-    { data: authData, isSuccess: isSuccessSignIn, isLoading: isLoadingSignIn },
-  ] = useSignInMutation();
-  const isLoadingAuth = isLoadingSignUp || isLoadingSignIn;
-
-  const onSubmit: SubmitHandler<UserFormValues> = useCallback(async (formValues) => {
-    await signUp(formValues);
-  }, []);
-
-  const authUser = useCallback(async () => {
-    if (userData && isSuccessSignUp) {
-      const { name, ...data } = userData;
-      await signIn(data);
-    }
-  }, [isSuccessSignUp]);
-
-  useEffect(() => {
-    authUser();
-  }, [isSuccessSignUp]);
-
-  useEffect(() => {
-    if (authData && userData && isSuccessSignIn) {
-      dispatch(setUser(userData));
-      dispatch(setAuthUser(authData));
-      dispatch(setLoggedIn(true));
-    }
-  }, [authData, userData, isSuccessSignIn]);
+  const { isLoadingAuth, isErrorSignUp, signUpErrorMessage, onSubmit } = useSignUpUser();
 
   return (
     <MainWrapper>

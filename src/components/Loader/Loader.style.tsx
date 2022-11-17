@@ -1,13 +1,7 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-const loadAnimation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-`;
+import { VariantsProps } from 'ts/interfaces';
 
 const Background = styled.div`
   position: fixed;
@@ -21,7 +15,12 @@ const Background = styled.div`
   backdrop-filter: blur(2px);
 `;
 
-const StyledLoader = styled.div`
+const StyledLoader = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
+  initial: 'initial',
+  animate: 'animate',
+  exit: 'exit',
+  variants: $variants,
+}))<VariantsProps>`
   display: block;
   position: absolute;
   top: 45%;
@@ -32,7 +31,6 @@ const StyledLoader = styled.div`
   border: 10px rgba(0, 0, 0, 0.25) solid;
   border-top: 10px ${({ theme }) => theme.colors.primaryColor} solid;
   border-radius: 50%;
-  animation: ${loadAnimation} 1s infinite linear;
   z-index: 5;
 `;
 

@@ -3,6 +3,7 @@ import { addFetchOptions, parseJwt } from 'utils/functions';
 import { Endpoints, Methods } from 'ts/enums';
 import { AuthUser, User, UserData } from 'ts/interfaces';
 
+import { setAuthUser, setUser } from 'redux/slices/userSlice';
 import apiSlice from './apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
@@ -16,6 +17,14 @@ const authApiSlice = apiSlice.injectEndpoints({
           accept: 'application/json',
         },
       }),
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(setUser(arg));
+        } catch (error) {
+          /* empty */
+        }
+      },
       transformResponse: ({ _id, ...data }: UserData) => data,
       transformErrorResponse: ({ status }): string => {
         if (status === 409) {
@@ -34,9 +43,16 @@ const authApiSlice = apiSlice.injectEndpoints({
         },
         body,
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          dispatch(setAuthUser((await queryFulfilled).data));
+        } catch (error) {
+          /* empty */
+        }
+      },
       transformResponse: ({ token }: Pick<AuthUser, 'token'>) => ({
         token,
-        _id: parseJwt(token),
+        ...parseJwt(token),
       }),
       transformErrorResponse: ({ status }): string => {
         if (status === 401) {
