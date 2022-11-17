@@ -74,6 +74,16 @@
         "romaDescription": "Frontend-developer, team-lead",
         "nastyaDescription": "Frontend-developer",
         "artemDescription": "Frontend-developer"
+      },
+      "notFound": {
+        "title": "Something went wrong!",
+        "text": "Unfortunately, this page does not exist.",
+        "button": "Return to Home page"
+      },
+      "warningPopup": {
+        "yes": "Yes",
+        "no": "No",
+        "signOut": "Are you sure you want to sign out?"
       }
     }
   },
@@ -152,6 +162,16 @@
         "romaDescription": "Frontend-разработчик, team-lead",
         "nastyaDescription": "Frontend-разработчик",
         "artemDescription": "Frontend-разработчик"
+      },
+      "notFound": {
+        "title": "Что-то пошло не так!",
+        "text": "К сожалению, данная страница не существует.",
+        "button": "Вернуться на Главную"
+      },
+      "warningPopup": {
+        "yes": "Да",
+        "no": "Нет",
+        "signOut": "Вы уверены, что хотите выйти?"
       }
     }
   }

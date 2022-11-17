@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
-import { setAuthUser, setLoggedIn, setUser } from 'redux/slices/userSlice';
+import { setLoggedOut } from 'redux/slices/userSlice';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
@@ -15,6 +15,7 @@ import Loader from 'components/Loader/Loader';
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -28,9 +29,7 @@ function App() {
       const signOutDate = new Date(authUser.exp * 1000);
 
       if (currentDate >= signOutDate) {
-        dispatch(setUser(null));
-        dispatch(setAuthUser(null));
-        dispatch(setLoggedIn(false));
+        dispatch(setLoggedOut());
         navigate('/');
       }
     }
@@ -65,7 +64,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<main>NotFound</main>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
