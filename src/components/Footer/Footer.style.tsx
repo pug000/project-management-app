@@ -12,7 +12,7 @@ const FooterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (max-width: 670px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -25,13 +25,13 @@ const AuthorsTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.h4};
   margin-bottom: 5px;
 
-  @media all and (max-width: 670px) {
+  @media (max-width: 700px) {
     text-align: left;
   }
 `;
 
 const Authors = styled.div`
-  @media all and (max-width: 500px) {
+  @media (max-width: 530px) {
     display: flex;
     flex-direction: column;
   }
@@ -53,7 +53,7 @@ const Author = styled.a`
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
   }
 
-  @media all and (max-width: 670px) {
+  @media (max-width: 700px) {
     padding-left: 0;
     padding-right: 10px;
 
@@ -62,7 +62,7 @@ const Author = styled.a`
     }
   }
 
-  @media all and (max-width: 500px) {
+  @media (max-width: 530px) {
     border-right: none;
     padding-right: 0;
 
@@ -95,7 +95,7 @@ const Copyright = styled.div`
   justify-content: space-between;
   margin-top: 20px;
 
-  @media all and (max-width: 600px) {
+  @media (max-width: 600px) {
     flex-direction: column;
     gap: 15px;
 
@@ -105,7 +105,7 @@ const Copyright = styled.div`
     }
   }
 
-  @media all and (max-width: 500px) {
+  @media (max-width: 530px) {
     ${CopyrightText} {
       line-height: 20px;
       max-width: 230px;
