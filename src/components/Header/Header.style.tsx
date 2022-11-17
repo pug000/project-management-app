@@ -39,6 +39,10 @@ const HeaderLink = styled(NavLink)`
   &.active {
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const HeaderLinkElement = styled.div`

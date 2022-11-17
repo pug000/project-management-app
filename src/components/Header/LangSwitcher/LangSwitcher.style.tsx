@@ -5,6 +5,7 @@ const LangWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
+  z-index: 10;
 `;
 
 const CheckboxContainer = styled.div`

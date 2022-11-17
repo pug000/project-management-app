@@ -22,6 +22,7 @@ import {
   HeaderLink,
   HeaderLinkElement,
 } from './Header.style';
+import Menu from './Menu/Menu';
 
 function Header() {
   const { t } = useTranslation('translation');
@@ -82,6 +83,7 @@ function Header() {
               </HeaderLink>
             )
           )}
+          <Menu />
         </HeaderContainerElements>
       </HeaderContainer>
       <PopupWarning text="signOut" actionOnYes={signOut} />
