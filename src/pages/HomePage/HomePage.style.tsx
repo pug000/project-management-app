@@ -9,13 +9,13 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.colors.title};
   margin-bottom: 20px;
 
-  @media screen and (max-width: 1050px) {
+  @media (max-width: 1050px) {
     width: 90%;
     text-align: center;
     align-self: center;
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     width: 100%;
     font-size: ${({ theme }) => theme.fontSizes.h3};
   }
@@ -75,7 +75,7 @@ const TextWrapper = styled.div`
   align-items: flex-start;
   width: 40%;
 
-  @media screen and (max-width: 1050px) {
+  @media (max-width: 1050px) {
     width: 100%;
     align-items: center;
 
@@ -140,13 +140,13 @@ const TextSection = styled.section`
   margin-bottom: 40px;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 1050px) {
+  @media (max-width: 1050px) {
     flex-direction: column;
     width: 80%;
     align-items: center;
   }
 
-  @media screen and (max-width: 600px) {
+  @media (max-width: 600px) {
     width: 100%;
   }
 `;
@@ -170,7 +170,7 @@ const PageSection = styled.section`
   margin-bottom: 40px;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 1050px) {
+  @media (max-width: 1050px) {
     flex-direction: column;
     gap: 40px;
   }
