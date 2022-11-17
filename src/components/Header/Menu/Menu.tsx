@@ -1,29 +1,36 @@
-import React, { useRef } from 'react';
-import { useCycle } from 'framer-motion';
+import React, { useCallback, useRef } from 'react';
+import { useCycle, AnimatePresence } from 'framer-motion';
 
 import useDimensions from 'hooks/useDimensions';
 
-import { menuBackgroundAnimation } from 'utils/animations';
-import { BackgroundMenu, MenuButton, StyledMenu } from './Menu.style';
+import { MenuButton, Overlay, StyledMenu } from './Menu.style';
 import MenuIcon from './MenuIcon';
+import MenuNavigation from './MenuNavigation';
 
 function Menu() {
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const [isOpenMenu, toggleOpenMenu] = useCycle(false, true);
   const containerRef = useRef<HTMLAnchorElement | null>(null);
   const { height } = useDimensions(containerRef);
 
+  const toggleMenuOnClick = useCallback(() => {
+    toggleOpenMenu();
+  }, []);
+
   return (
-    <StyledMenu
-      initial={false}
-      animate={isOpen ? 'open' : 'closed'}
-      custom={height}
-      ref={containerRef}
-    >
-      <BackgroundMenu variants={menuBackgroundAnimation} />
-      <MenuButton onClick={() => toggleOpen()}>
-        <MenuIcon />
-      </MenuButton>
-    </StyledMenu>
+    <AnimatePresence>
+      <StyledMenu
+        initial={false}
+        animate={isOpenMenu ? 'open' : 'closed'}
+        custom={height}
+        ref={containerRef}
+      >
+        {isOpenMenu && <Overlay onClick={toggleMenuOnClick} />}
+        <MenuNavigation toggleMenu={toggleMenuOnClick} />
+        <MenuButton onClick={toggleMenuOnClick}>
+          <MenuIcon />
+        </MenuButton>
+      </StyledMenu>
+    </AnimatePresence>
   );
 }
 
