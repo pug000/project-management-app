@@ -103,11 +103,9 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           clearErrors={clearErrors}
         />
       ))}
-      <Button
-        type="submit"
-        disabled={!isDirty || isLoadingAuth || !isFormValid}
-        text={t(`${keyPrefix}.text`)}
-      />
+      <Button type="submit" disabled={!isDirty || isLoadingAuth || !isFormValid}>
+        {t(`${keyPrefix}.text`)}
+      </Button>
     </Form>
   );
 }

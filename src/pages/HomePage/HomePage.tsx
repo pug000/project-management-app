@@ -39,12 +39,9 @@ function HomePage() {
           <Title>{t('title1')}</Title>
           <Text>{t('text1')}</Text>
           <Link to={isLoggedIn ? '/projects' : '/signup'}>
-            <Button
-              type="button"
-              text={
-                isLoggedIn ? `${t('buttonIfLoggedIn')}` : `${t('buttonIfNotLoggedIn')}`
-              }
-            />
+            <Button type="button">
+              {isLoggedIn ? `${t('buttonIfLoggedIn')}` : `${t('buttonIfNotLoggedIn')}`}
+            </Button>
           </Link>
         </TextWrapper>
         <ImageWrapper>

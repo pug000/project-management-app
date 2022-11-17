@@ -76,8 +76,9 @@ function Header() {
                   width="130px"
                   color={color}
                   backgroundColor={backgroundColor}
-                  text={t(text)}
-                />
+                >
+                  {t(text)}
+                </Button>
               </HeaderLink>
             )
           )}

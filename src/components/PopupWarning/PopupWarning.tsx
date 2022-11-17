@@ -48,26 +48,29 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
                 width="60px"
                 color={defaultTheme.colors.text}
                 backgroundColor={defaultTheme.colors.backgroundGrey}
-                text={t('yes')}
                 callback={actionOnYes}
-              />
+              >
+                {t('yes')}
+              </Button>
               <Button
                 type="button"
                 width="60px"
                 color={defaultTheme.colors.text}
                 backgroundColor={defaultTheme.colors.backgroundGrey}
-                text={t('no')}
                 callback={closePopup}
-              />
+              >
+                {t('no')}
+              </Button>
             </PopupButtons>
             <CloseButtonWrapper>
               <Button
                 type="button"
-                leftIcon={<MdClose />}
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
                 callback={closePopup}
-              />
+              >
+                <MdClose />
+              </Button>
             </CloseButtonWrapper>
           </Popup>
         </Background>
