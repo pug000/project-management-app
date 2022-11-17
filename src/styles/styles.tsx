@@ -18,6 +18,11 @@ const Title = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes.h2};
   color: ${({ theme }) => theme.colors.title};
   margin-bottom: 10px;
+  text-align: center;
+
+  @media (max-width: 500px) {
+    font-size: ${({ theme }) => theme.fontSizes.h4};
+  }
 `;
 
 const FormWrapper = styled.div`

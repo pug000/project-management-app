@@ -15,6 +15,7 @@ import Loader from 'components/Loader/Loader';
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 function App() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -63,7 +64,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<main>NotFound</main>} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
