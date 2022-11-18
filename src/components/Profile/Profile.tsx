@@ -7,13 +7,14 @@ import { getUser } from 'redux/selectors/userSelectors';
 
 import Button from 'components/Button/Button';
 
-import { Title } from 'styles/styles';
 import { profileButtonsList } from 'utils/constants';
 import {
   ButtonWrapper,
   ProfileContainer,
+  ProfileMainContent,
   ProfileText,
   ProfileTextWrapper,
+  ProfileTitle,
   ProfileWrapper,
 } from './Profile.style';
 
@@ -23,17 +24,19 @@ function Profile() {
 
   return (
     <ProfileContainer>
-      <Title>{t('profile.title')}</Title>
-      <ProfileWrapper>
-        <ProfileTextWrapper>
-          <ProfileText>{`${t('authorization.name')}:`}</ProfileText>
-          <ProfileText>{user?.name}</ProfileText>
-        </ProfileTextWrapper>
-        <ProfileTextWrapper>
-          <ProfileText>{`${t('authorization.login')}:`}</ProfileText>
-          <ProfileText>{user?.login}</ProfileText>
-        </ProfileTextWrapper>
-      </ProfileWrapper>
+      <ProfileMainContent>
+        <ProfileTitle>{t('profile.title')}</ProfileTitle>
+        <ProfileWrapper>
+          <ProfileTextWrapper>
+            <ProfileText>{`${t('authorization.name')}:`}</ProfileText>
+            <ProfileText>{user?.name}</ProfileText>
+          </ProfileTextWrapper>
+          <ProfileTextWrapper>
+            <ProfileText>{`${t('authorization.login')}:`}</ProfileText>
+            <ProfileText>{user?.login}</ProfileText>
+          </ProfileTextWrapper>
+        </ProfileWrapper>
+      </ProfileMainContent>
       <ButtonWrapper>
         {profileButtonsList.map(({ id, text, width, backgroundColor }) => (
           <Button key={id} type="button" width={width} backgroundColor={backgroundColor}>

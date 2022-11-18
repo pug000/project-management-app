@@ -12,6 +12,10 @@ const ImagesContainer = styled.div`
   flex-direction: column;
   min-width: 500px;
   gap: 10px;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const ImageWrapper = styled.div`

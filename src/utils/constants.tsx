@@ -218,7 +218,7 @@ const profileButtonsList = [
     id: 2,
     text: 'profile.delete',
     width: '180px',
-    backgroundColor: theme.colors.red,
+    backgroundColor: theme.colors.pink,
   },
 ];
 
