@@ -20,7 +20,7 @@ interface VariantsProps {
 }
 
 interface HeaderLinksProps {
-  id: number;
+  id: string;
   text: string;
   link: string;
   color?: string;

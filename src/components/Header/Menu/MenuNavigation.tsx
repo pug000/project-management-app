@@ -31,8 +31,8 @@ function MenuNavigation({ toggleMenu }: MenuNavigationProps) {
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector(getLoggedIn);
 
-  const toggleMenuOnClick = (id: number) => {
-    if (id === 3) {
+  const toggleMenuOnClick = (id: string) => {
+    if (id === 'signOut') {
       dispatch(setWarningPopupOpen(true));
     }
 

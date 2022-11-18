@@ -109,14 +109,14 @@ const authors: Author[] = [
 
 const headerSignItems: HeaderLinksProps[] = [
   {
-    id: 1,
+    id: 'signIn',
     text: 'signIn.title',
     link: '/signin',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.transparent,
   },
   {
-    id: 2,
+    id: 'signUp',
     text: 'signUp.title',
     link: '/signup',
     color: theme.colors.textButton,
@@ -126,14 +126,14 @@ const headerSignItems: HeaderLinksProps[] = [
 
 const headerItemsIfLoggedIn: HeaderLinksProps[] = [
   {
-    id: 3,
+    id: 'signOut',
     text: 'signOut.text',
     link: '#',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.transparent,
   },
   {
-    id: 4,
+    id: 'profile',
     text: 'profile.title',
     link: '/profile',
     color: theme.colors.textButton,
@@ -143,12 +143,12 @@ const headerItemsIfLoggedIn: HeaderLinksProps[] = [
 
 const headerLinkItems: HeaderLinksProps[] = [
   {
-    id: 1,
+    id: 'home',
     text: 'home.text',
     link: '/',
   },
   {
-    id: 2,
+    id: 'projects',
     text: 'projects.text',
     link: '/projects',
   },

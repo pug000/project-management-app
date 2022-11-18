@@ -40,8 +40,8 @@ function Header() {
     }
   }, []);
 
-  const openWarningPopup = useCallback((id: number) => {
-    if (id === 3) {
+  const openWarningPopup = useCallback((id: string) => {
+    if (id === 'signOut') {
       dispatch(setWarningPopupOpen(true));
     }
   }, []);
@@ -71,7 +71,13 @@ function Header() {
           <LangSwitcher />
           {(isLoggedIn ? headerItemsIfLoggedIn : headerSignItems).map(
             ({ id, text, link, color, backgroundColor }) => (
-              <HeaderLink to={link} key={id} onClick={() => openWarningPopup(id)} end>
+              <HeaderLink
+                to={link}
+                key={id}
+                id={id}
+                onClick={() => openWarningPopup(id)}
+                end
+              >
                 <Button
                   type="button"
                   width="130px"
