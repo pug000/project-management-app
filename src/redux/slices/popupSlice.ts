@@ -30,6 +30,7 @@ const popupSlice = createSlice({
   },
 });
 
-export const { setWarningPopupOpen, setNotificationPopupOpen } = popupSlice.actions;
+export const { setWarningPopupOpen, setDeletePopupOpen, setNotificationPopupOpen } =
+  popupSlice.actions;
 
 export default popupSlice.reducer;

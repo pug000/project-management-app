@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getUser } from 'redux/selectors/userSelectors';
+import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
 import Button from 'components/Button/Button';
 
 import { profileButtonsList } from 'utils/constants';
+
 import {
   ButtonWrapper,
   ProfileContainer,
@@ -21,6 +23,13 @@ import {
 function Profile() {
   const { t } = useTranslation('translation');
   const user = useAppSelector(getUser);
+  const dispatch = useAppDispatch();
+
+  const showPopupOnClick = useCallback((id: number) => {
+    if (id === 2) {
+      dispatch(setDeletePopupOpen(true));
+    }
+  }, []);
 
   return (
     <ProfileContainer>
@@ -39,7 +48,13 @@ function Profile() {
       </ProfileMainContent>
       <ButtonWrapper>
         {profileButtonsList.map(({ id, text, width, backgroundColor }) => (
-          <Button key={id} type="button" width={width} backgroundColor={backgroundColor}>
+          <Button
+            key={id}
+            type="button"
+            width={width}
+            backgroundColor={backgroundColor}
+            callback={() => showPopupOnClick(id)}
+          >
             {t(text)}
           </Button>
         ))}

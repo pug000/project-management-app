@@ -86,7 +86,8 @@
       "warningPopup": {
         "yes": "Yes",
         "no": "No",
-        "signOut": "Are you sure you want to sign out?"
+        "signOut": "Are you sure you want to sign out?",
+        "deleteProfile": "Are you sure you want to delete the profile?"
       }
     }
   },
@@ -177,7 +178,8 @@
       "warningPopup": {
         "yes": "Да",
         "no": "Нет",
-        "signOut": "Вы уверены, что хотите выйти?"
+        "signOut": "Вы уверены, что хотите выйти?",
+        "deleteProfile": "Вы уверены, что хотите удалить профиль?"
       }
     }
   }
