@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { backButtonAnimation } from 'utils/animations';
 
+import useSignUpUser from 'hooks/useSignUpUser';
+
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
@@ -22,12 +24,10 @@ import {
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 
-import useSignUpUser from 'hooks/useSignUpUser';
-
 function SignUpPage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const { isLoadingAuth, isErrorSignUp, signUpErrorMessage, onSubmit } = useSignUpUser();
+  const { isLoadingAuth, signUpErrorMessage, onSubmit } = useSignUpUser();
 
   return (
     <MainWrapper>
@@ -56,7 +56,6 @@ function SignUpPage() {
       {isLoadingAuth && <Loader />}
       {signUpErrorMessage && (
         <PopupNotification
-          initialPopupState={isErrorSignUp}
           text={t(`${signUpErrorMessage}`)}
           backgroundColor={defaultTheme.colors.pink}
         />

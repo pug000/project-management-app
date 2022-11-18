@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { setIsWarningPopupOpen } from 'redux/slices/popupSlice';
+import { setWarningPopupOpen } from 'redux/slices/popupSlice';
 
 import {
   menuItemAnimation,
@@ -33,7 +33,7 @@ function MenuNavigation({ toggleMenu }: MenuNavigationProps) {
 
   const toggleMenuOnClick = (id: number) => {
     if (id === 3) {
-      dispatch(setIsWarningPopupOpen(true));
+      dispatch(setWarningPopupOpen(true));
     }
 
     toggleMenu();

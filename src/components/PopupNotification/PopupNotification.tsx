@@ -7,7 +7,7 @@ import { notificationAnimation, progressBarAnimation } from 'utils/animations';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { getNotificationPopupOpen } from 'redux/selectors/popupSelectors';
-import { setIsNotificationPopupOpen } from 'redux/slices/popupSlice';
+import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
 
 import defaultTheme from 'styles/theme';
 import {
@@ -21,27 +21,18 @@ import {
 } from './PopupNotification.style';
 
 interface PopupNotificationProps {
-  initialPopupState: boolean;
   text?: string;
   backgroundColor?: string;
 }
 
-function PopupNotification({
-  initialPopupState,
-  text,
-  backgroundColor,
-}: PopupNotificationProps) {
+function PopupNotification({ text, backgroundColor }: PopupNotificationProps) {
   const isNotificationPopupOpen = useAppSelector(getNotificationPopupOpen);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setIsNotificationPopupOpen(initialPopupState));
-  }, []);
-
-  useEffect(() => {
     if (isNotificationPopupOpen) {
       setTimeout(() => {
-        dispatch(setIsNotificationPopupOpen(false));
+        dispatch(setNotificationPopupOpen(false));
       }, 3000);
     }
   }, [isNotificationPopupOpen]);
@@ -57,7 +48,7 @@ function PopupNotification({
                 type="button"
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
-                callback={() => dispatch(setIsNotificationPopupOpen(false))}
+                callback={() => dispatch(setNotificationPopupOpen(false))}
               >
                 <CloseIcon />
               </Button>

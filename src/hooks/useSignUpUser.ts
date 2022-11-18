@@ -3,6 +3,7 @@ import { SubmitHandler } from 'react-hook-form';
 
 import { useSignInMutation, useSignUpMutation } from 'redux/api/authApiSlice';
 import { getAuthUser, getUser } from 'redux/selectors/userSelectors';
+import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
 import { setLoggedIn } from 'redux/slices/userSlice';
 
 import { UserFormValues } from 'ts/interfaces';
@@ -41,9 +42,14 @@ const useSignUpUser = () => {
     }
   }, [authUser]);
 
+  useEffect(() => {
+    if (isErrorSignUp) {
+      dispatch(setNotificationPopupOpen(true));
+    }
+  }, [isErrorSignUp]);
+
   return {
     isLoadingAuth,
-    isErrorSignUp,
     signUpErrorMessage,
     onSubmit,
   };
