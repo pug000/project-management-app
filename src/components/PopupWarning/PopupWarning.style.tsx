@@ -14,7 +14,7 @@ const Background = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
+  z-index: 15;
   width: 100vw;
   height: 100vh;
   display: flex;

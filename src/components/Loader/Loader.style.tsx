@@ -9,7 +9,7 @@ const Background = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 4;
+  z-index: 15;
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(2px);
@@ -31,7 +31,7 @@ const StyledLoader = styled(motion.div).attrs<VariantsProps>(({ $variants }) => 
   border: 10px rgba(0, 0, 0, 0.25) solid;
   border-top: 10px ${({ theme }) => theme.colors.primaryColor} solid;
   border-radius: 50%;
-  z-index: 5;
+  z-index: 20;
 `;
 
 export { StyledLoader, Background };
