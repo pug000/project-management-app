@@ -16,7 +16,9 @@ function NotFoundPage() {
       <Title>{t('title')}</Title>
       <NotFoundText>{t('text')}</NotFoundText>
       <NotFoundLink to="/">
-        <Button type="button" width="210px" text={t('button')} />
+        <Button type="button" width="210px">
+          {t('button')}
+        </Button>
       </NotFoundLink>
     </MainWrapper>
   );

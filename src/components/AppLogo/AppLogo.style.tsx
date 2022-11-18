@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 const AppLogoWrapper = styled.div`
   width: 160px;
+
+  @media (max-width: 375px) {
+    width: 140px;
+  }
 `;
 
 const AppLogoLink = styled(NavLink)`
@@ -20,12 +24,20 @@ const LogoWrapper = styled.div`
   gap: 10px;
   align-items: center;
   padding-left: 7px;
+
+  @media (max-width: 375px) {
+    padding-left: 0;
+  }
 `;
 
 const AppLogoNote = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.smallNoteText};
   margin-top: 2px;
   color: ${({ theme }) => theme.colors.grey};
+
+  @media (max-width: 375px) {
+    font-size: 11px;
+  }
 `;
 
 export { AppLogoWrapper, AppLogoLink, AppLogoText, LogoWrapper, AppLogoNote };

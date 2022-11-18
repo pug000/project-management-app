@@ -55,11 +55,12 @@ function PopupNotification({
             <ButtonWrapper>
               <Button
                 type="button"
-                leftIcon={<CloseIcon />}
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
                 callback={() => dispatch(setIsNotificationPopupOpen(false))}
-              />
+              >
+                <CloseIcon />
+              </Button>
             </ButtonWrapper>
             <ProgressBar>
               <Progress $variants={progressBarAnimation} />

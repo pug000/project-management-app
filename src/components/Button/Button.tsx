@@ -6,10 +6,8 @@ import StyledButton from './Button.style';
 
 interface ButtonProps {
   type: 'submit' | 'button' | 'reset';
-  text?: string;
+  children?: React.ReactNode;
   id?: string;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
   disabled?: boolean;
   animation?: Variants;
   backgroundColor?: string;
@@ -20,10 +18,8 @@ interface ButtonProps {
 
 function Button({
   type,
-  text,
-  leftIcon,
-  rightIcon,
   id,
+  children,
   disabled,
   animation,
   backgroundColor,
@@ -42,19 +38,15 @@ function Button({
       $variants={animation}
       onClick={() => callback && callback()}
     >
-      {leftIcon}
-      {text}
-      {rightIcon}
+      {children}
     </StyledButton>
   );
 }
 
 Button.defaultProps = {
-  text: '',
-  leftIcon: undefined,
-  rightIcon: undefined,
   disabled: false,
   animation: undefined,
+  children: undefined,
   id: undefined,
   callback: undefined,
   backgroundColor: undefined,

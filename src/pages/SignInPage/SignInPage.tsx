@@ -35,13 +35,14 @@ function SignInPage() {
         <FormHeader>
           <Button
             type="button"
-            leftIcon={<StyledPrevIcon $isDisabled={isLoadingAuth} />}
             width="30px"
             animation={backButtonAnimation}
             backgroundColor={defaultTheme.colors.transparent}
             disabled={isLoadingAuth}
             callback={() => navigate(-1)}
-          />
+          >
+            <StyledPrevIcon $isDisabled={isLoadingAuth} />
+          </Button>
         </FormHeader>
         <Title>{t('signIn.title')}</Title>
         <AuthForm keyPrefix="signIn" onSubmit={onSubmit} isLoadingAuth={isLoadingAuth} />

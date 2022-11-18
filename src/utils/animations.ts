@@ -1,5 +1,75 @@
 import { Variants } from 'framer-motion';
 
+const burgerMenuAnimation = {
+  firstLine: {
+    variants: {
+      closed: { d: 'M 2 2.5 L 20 2.5' },
+      open: { d: 'M 3 16.5 L 17 2.5' },
+    },
+  },
+  secondLine: {
+    d: 'M 2 9.423 L 20 9.423',
+    variants: {
+      closed: { opacity: 1 },
+      open: { opacity: 0 },
+    },
+    transition: {
+      duration: 0.1,
+    },
+  },
+  thirdLine: {
+    variants: {
+      closed: { d: 'M 2 16.346 L 20 16.346' },
+      open: { d: 'M 3 2.5 L 17 16.346' },
+    },
+  },
+};
+
+const menuWrapperAnimation = {
+  open: (height = 1000) => ({
+    clipPath: `circle(${height * 2 + 200}px at 279.5px 41px)`,
+    transition: {
+      type: 'spring',
+      stiffness: 20,
+      restDelta: 2,
+    },
+  }),
+  closed: {
+    clipPath: 'circle(25px at 279.5px 41px)',
+    transition: {
+      type: 'spring',
+      stiffness: 400,
+      damping: 40,
+    },
+  },
+};
+
+const menuListAnimation = {
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const menuItemAnimation = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: -50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+};
+
 const backButtonAnimation: Variants = {
   initial: {
     x: 0,
@@ -97,6 +167,10 @@ const warningAnimation: Variants = {
 };
 
 export {
+  menuWrapperAnimation,
+  menuListAnimation,
+  menuItemAnimation,
+  burgerMenuAnimation,
   backButtonAnimation,
   notificationAnimation,
   progressBarAnimation,

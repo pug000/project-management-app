@@ -13,7 +13,8 @@ import BoardSvg from './SvgElements/BoardSvg';
 import ComputerSvg from './SvgElements/ComputerSvg';
 
 import {
-  PageSection,
+  TextSection,
+  ColumnSection,
   TextWrapper,
   Title,
   Text,
@@ -33,25 +34,22 @@ function HomePage() {
 
   return (
     <MainWrapper>
-      <PageSection>
+      <TextSection>
         <TextWrapper>
           <Title>{t('title1')}</Title>
           <Text>{t('text1')}</Text>
           <Link to={isLoggedIn ? '/projects' : '/signup'}>
-            <Button
-              type="button"
-              text={
-                isLoggedIn ? `${t('buttonIfLoggedIn')}` : `${t('buttonIfNotLoggedIn')}`
-              }
-            />
+            <Button type="button">
+              {isLoggedIn ? `${t('buttonIfLoggedIn')}` : `${t('buttonIfNotLoggedIn')}`}
+            </Button>
           </Link>
         </TextWrapper>
         <ImageWrapper>
           <BoardSvg />
         </ImageWrapper>
-      </PageSection>
+      </TextSection>
       <SubTitle>{t('subtitle')}</SubTitle>
-      <PageSection>
+      <ColumnSection>
         {mainPageElements.map((el) => (
           <MainPageElement key={el.id} $backgroundColor={el.backgroundColor}>
             {el.icon}
@@ -59,8 +57,8 @@ function HomePage() {
             <p>{t(el.text)}</p>
           </MainPageElement>
         ))}
-      </PageSection>
-      <PageSection>
+      </ColumnSection>
+      <TextSection>
         <ImageWrapper>
           <ComputerSvg />
         </ImageWrapper>
@@ -70,9 +68,9 @@ function HomePage() {
             <p key={item.id}>✔️ {t(item.text)}</p>
           ))}
         </TextWrapper>
-      </PageSection>
+      </TextSection>
       <SubTitle>{t('team')}</SubTitle>
-      <PageSection>
+      <ColumnSection>
         {authors.map((author) => (
           <Author
             key={author.id}
@@ -90,7 +88,7 @@ function HomePage() {
             </ImageWrapper>
           </Author>
         ))}
-      </PageSection>
+      </ColumnSection>
     </MainWrapper>
   );
 }
