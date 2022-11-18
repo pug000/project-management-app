@@ -77,7 +77,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           required={t('authorization.required', { value: t('authorization.name') })}
         />
       )}
-      {formTextFields.map((textfield) => (
+      {formTextFields.slice(1).map((textfield) => (
         <Input<UserFormValues>
           key={textfield.id}
           type={textfield.type}

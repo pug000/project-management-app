@@ -11,6 +11,7 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Loader from 'components/Loader/Loader';
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
@@ -48,14 +49,7 @@ function App() {
             <Route index path="/" element={<HomePage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />
-            <Route
-              path="edit"
-              element={
-                <ProtectedRoute>
-                  <main>Edit User</main>
-                </ProtectedRoute>
-              }
-            />
+            <Route path="profile" element={<ProfilePage />} />
             <Route
               path="projects"
               element={

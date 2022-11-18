@@ -28,8 +28,11 @@
       "signOut": {
         "text": "Sign Out"
       },
-      "edit": {
-        "text": "My profile"
+      "profile": {
+        "title": "My profile",
+        "save": "Save profile",
+        "edit": "Edit profile",
+        "delete": "Delete profile"
       },
       "projects": {
         "text": "Projects"
@@ -116,8 +119,11 @@
       "signOut": {
         "text": "Выход"
       },
-      "edit": {
-        "text": "Мой профиль"
+      "profile": {
+        "title": "Мой профиль",
+        "save": "Сохранить профиль",
+        "edit": "Изменить профиль",
+        "delete": "Удалить профиль"
       },
       "projects": {
         "text": "Проекты"
