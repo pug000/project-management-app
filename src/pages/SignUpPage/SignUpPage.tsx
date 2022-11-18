@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -64,4 +64,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default memo(SignUpPage);

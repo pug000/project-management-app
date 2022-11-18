@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useAppSelector } from 'hooks/useRedux';
 import { useTranslation } from 'react-i18next';
 
@@ -93,4 +93,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default memo(HomePage);

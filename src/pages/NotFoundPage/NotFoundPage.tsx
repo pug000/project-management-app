@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'components/Button/Button';
@@ -24,4 +24,4 @@ function NotFoundPage() {
   );
 }
 
-export default NotFoundPage;
+export default memo(NotFoundPage);
