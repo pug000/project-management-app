@@ -22,7 +22,9 @@ const authApiSlice = apiSlice.injectEndpoints({
           await queryFulfilled;
           dispatch(setUser(arg));
         } catch (error) {
-          /* empty */
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       transformResponse: ({ _id, ...data }: UserData) => data,
@@ -47,7 +49,9 @@ const authApiSlice = apiSlice.injectEndpoints({
         try {
           dispatch(setAuthUser((await queryFulfilled).data));
         } catch (error) {
-          /* empty */
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       transformResponse: ({ token }: Pick<AuthUser, 'token'>) => ({
