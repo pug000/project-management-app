@@ -208,6 +208,20 @@ const profileIconsList = [
   },
 ];
 
+const profileButtonsList = [
+  {
+    id: 1,
+    text: 'profile.edit',
+    width: '180px',
+  },
+  {
+    id: 2,
+    text: 'profile.delete',
+    width: '180px',
+    backgroundColor: theme.colors.red,
+  },
+];
+
 export {
   baseUrl,
   authors,
@@ -222,4 +236,5 @@ export {
   mainPageElements,
   mainPageList,
   profileIconsList,
+  profileButtonsList,
 };

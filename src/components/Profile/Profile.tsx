@@ -8,7 +8,7 @@ import { getUser } from 'redux/selectors/userSelectors';
 import Button from 'components/Button/Button';
 
 import { Title } from 'styles/styles';
-import defaultTheme from 'styles/theme';
+import { profileButtonsList } from 'utils/constants';
 import {
   ButtonWrapper,
   ProfileContainer,
@@ -35,12 +35,11 @@ function Profile() {
         </ProfileTextWrapper>
       </ProfileWrapper>
       <ButtonWrapper>
-        <Button type="button" width="180px">
-          {t('profile.edit')}
-        </Button>
-        <Button type="button" width="180px" backgroundColor={defaultTheme.colors.red}>
-          {t('profile.delete')}
-        </Button>
+        {profileButtonsList.map(({ id, text, width, backgroundColor }) => (
+          <Button key={id} type="button" width={width} backgroundColor={backgroundColor}>
+            {t(text)}
+          </Button>
+        ))}
       </ButtonWrapper>
     </ProfileContainer>
   );
