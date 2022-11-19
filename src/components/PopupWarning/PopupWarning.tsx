@@ -19,6 +19,7 @@ import {
   PopupText,
   PopupButtons,
   CloseButtonWrapper,
+  PopupWrapper,
 } from './PopupWarning.style';
 
 interface PopupWarningProps {
@@ -44,7 +45,8 @@ function PopupWarning({
   return (
     <AnimatePresence>
       {isPopupShown && (
-        <Background $variants={warningAnimation} onClick={closePopup}>
+        <PopupWrapper $variants={warningAnimation}>
+          <Background onClick={closePopup} />
           <Popup>
             <PopupText>{t(text)}</PopupText>
             <PopupButtons>
@@ -78,7 +80,7 @@ function PopupWarning({
               </Button>
             </CloseButtonWrapper>
           </Popup>
-        </Background>
+        </PopupWrapper>
       )}
     </AnimatePresence>
   );

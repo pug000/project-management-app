@@ -48,6 +48,7 @@ function Header() {
 
   const signOut = useCallback(() => {
     dispatch(setLoggedOut());
+    dispatch(setWarningPopupOpen(false));
     navigate('/');
   }, []);
 

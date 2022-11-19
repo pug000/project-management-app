@@ -61,7 +61,7 @@ const PasswordButton = styled.button.attrs({
   svg {
     width: 100%;
     height: 100%;
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.grey};
   }
 `;
 

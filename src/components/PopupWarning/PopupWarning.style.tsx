@@ -3,23 +3,30 @@ import styled from 'styled-components';
 
 import { VariantsProps } from 'ts/interfaces';
 
-const Background = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
+const PopupWrapper = styled(motion.div).attrs<VariantsProps>(({ $variants }) => ({
   initial: 'initial',
   animate: 'animate',
   exit: 'exit',
   variants: $variants,
 }))<VariantsProps>`
   position: fixed;
+  display: flex;
+  z-index: 15;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Background = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 15;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   backdrop-filter: blur(2px);
 `;
 
@@ -38,6 +45,7 @@ const Popup = styled.div`
   justify-content: center;
   text-align: center;
   position: relative;
+  z-index: 20;
 `;
 
 const PopupText = styled.p`
@@ -58,4 +66,4 @@ const CloseButtonWrapper = styled.div`
   right: 0;
 `;
 
-export { Background, Popup, PopupText, PopupButtons, CloseButtonWrapper };
+export { PopupWrapper, Background, Popup, PopupText, PopupButtons, CloseButtonWrapper };
