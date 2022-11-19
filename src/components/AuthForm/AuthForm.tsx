@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -30,23 +30,13 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty },
-    reset,
+    formState: { errors },
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: user ?? defaultUserFormValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
-
-  useEffect(
-    () => () => {
-      if (isDirty) {
-        reset();
-      }
-    },
-    []
-  );
 
   return (
     <Form
@@ -55,7 +45,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
       autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {location.pathname === '/signup' && (
+      {location.pathname !== '/signin' && (
         <Input<UserFormValues>
           type="text"
           name="name"
@@ -101,7 +91,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           clearErrors={clearErrors}
         />
       ))}
-      <Button type="submit" disabled={!isDirty || isLoadingAuth || !isFormValid}>
+      <Button type="submit" disabled={isLoadingAuth || !isFormValid}>
         {t(`${keyPrefix}.text`)}
       </Button>
     </Form>

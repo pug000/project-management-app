@@ -30,9 +30,11 @@
       },
       "profile": {
         "title": "My profile",
-        "save": "Save profile",
+        "text": "Save",
         "edit": "Edit profile",
-        "delete": "Delete profile"
+        "delete": "Delete profile",
+        "successful": "Profile has been changed",
+        "back": "Leave without changes"
       },
       "projects": {
         "text": "Projects"
@@ -122,9 +124,11 @@
       },
       "profile": {
         "title": "Мой профиль",
-        "save": "Сохранить профиль",
+        "text": "Сохранить",
         "edit": "Изменить профиль",
-        "delete": "Удалить профиль"
+        "delete": "Удалить профиль",
+        "successful": "Профиль был изменен",
+        "back": "Оставить без изменений"
       },
       "projects": {
         "text": "Проекты"

@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -24,10 +25,13 @@ function Profile() {
   const { t } = useTranslation('translation');
   const user = useAppSelector(getUser);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const showPopupOnClick = useCallback((id: number) => {
+  const showPopupOrEditPageOnClick = useCallback((id: number) => {
     if (id === 2) {
       dispatch(setDeletePopupOpen(true));
+    } else {
+      navigate('/profile/edit');
     }
   }, []);
 
@@ -53,7 +57,7 @@ function Profile() {
             type="button"
             width={width}
             backgroundColor={backgroundColor}
-            callback={() => showPopupOnClick(id)}
+            callback={() => showPopupOrEditPageOnClick(id)}
           >
             {t(text)}
           </Button>

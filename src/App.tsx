@@ -17,6 +17,7 @@ const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
+const EditProfilePage = lazy(() => import('pages/EditProfilePage/EditProfilePage'));
 
 function App() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -50,6 +51,7 @@ function App() {
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/edit" element={<EditProfilePage />} />
             <Route
               path="projects"
               element={
