@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { useGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { getAuthUser } from 'redux/selectors/userSelectors';
+import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
 import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
 import { setLoggedIn, setUser } from 'redux/slices/userSlice';
 
@@ -13,7 +14,9 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
+  const isLoggedIn = useAppSelector(getLoggedIn);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [
     signIn,
     {
@@ -54,6 +57,12 @@ const useSignInUser = () => {
       dispatch(setNotificationPopupOpen(true));
     }
   }, [isErrorSignIn]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/projects');
+    }
+  }, [isLoggedIn]);
 
   return {
     isLoadingAuth,

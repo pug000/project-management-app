@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'hooks/useRedux';
 
-import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { getUser } from 'redux/selectors/userSelectors';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
@@ -24,9 +24,8 @@ interface AuthFormProps {
 
 function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const location = useLocation();
-  const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const isLoggedIn = useAppSelector(getLoggedIn);
+  const user = useAppSelector(getUser);
   const {
     register,
     handleSubmit,
@@ -36,19 +35,18 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: defaultUserFormValues,
+    defaultValues: user ?? defaultUserFormValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/projects');
-
+  useEffect(
+    () => () => {
       if (isDirty) {
         reset();
       }
-    }
-  }, [isLoggedIn]);
+    },
+    []
+  );
 
   return (
     <Form
