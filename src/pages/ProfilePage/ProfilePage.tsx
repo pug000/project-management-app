@@ -1,14 +1,11 @@
-import React, { memo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { memo } from 'react';
 
-import { useAppSelector } from 'hooks/useRedux';
-
-import { getDeletePopupOpen } from 'redux/selectors/popupSelectors';
-import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+import useDeleteUser from 'hooks/useDeleteUser';
 
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Profile from 'components/Profile/Profile';
+import Loader from 'components/Loader/Loader';
 
 import { MainWrapper } from 'styles/styles';
 
@@ -17,12 +14,12 @@ import { profileIconsList } from 'utils/constants';
 import { ImagesContainer, ImageWrapper, ProfileSection } from './ProfilePage.style';
 
 function ProfilePage() {
-  const isDeletePopupOpen = useAppSelector(getDeletePopupOpen);
-  const navigate = useNavigate();
-
-  const deleteUserProfile = useCallback(() => {
-    navigate('/');
-  }, []);
+  const {
+    isLoadingDeleteUser,
+    isDeletePopupOpen,
+    deleteUserProfile,
+    setDeletePopupOpen,
+  } = useDeleteUser();
 
   return (
     <ProtectedRoute>
@@ -35,6 +32,7 @@ function ProfilePage() {
             ))}
           </ImagesContainer>
         </ProfileSection>
+        {isLoadingDeleteUser && <Loader />}
         <PopupWarning
           isPopupShown={isDeletePopupOpen}
           setPopupShown={setDeletePopupOpen}
