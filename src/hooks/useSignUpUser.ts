@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const useSignUpUser = () => {
   const user = useAppSelector(getUser);
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
+  const [isLoadingAuth, setLoadingAuth] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
@@ -22,7 +23,6 @@ const useSignUpUser = () => {
     { isLoading: isLoadingSignUp, isError: isErrorSignUp, error: signUpErrorMessage },
   ] = useSignUpMutation();
   const [signIn, { isLoading: isLoadingSignIn }] = useSignInMutation();
-  const isLoadingAuth = isLoadingSignUp || isLoadingSignIn;
 
   const onSubmit: SubmitHandler<UserFormValues> = useCallback(async (formValues) => {
     await signUp(formValues);
@@ -56,6 +56,16 @@ const useSignUpUser = () => {
       navigate('/projects');
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoadingSignIn || isLoadingSignUp) {
+      setLoadingAuth(true);
+    }
+
+    if (isErrorSignUp) {
+      setLoadingAuth(false);
+    }
+  }, [isLoadingSignIn, isLoadingSignUp, isErrorSignUp]);
 
   return {
     isLoadingAuth,

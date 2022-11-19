@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
+  const [isLoadingAuth, setLoadingAuth] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
@@ -31,7 +32,6 @@ const useSignInUser = () => {
     isSuccess: isSuccessGetUser,
     isFetching: isLoadingGetUser,
   } = useGetUserByIdQuery(authUser?._id ?? '', { skip: !authUser?._id });
-  const isLoadingAuth = isLoadingSignIn || isLoadingGetUser;
 
   const onSubmit: SubmitHandler<UserFormValues> = useCallback(
     async ({ name, ...formValues }) => {
@@ -63,6 +63,16 @@ const useSignInUser = () => {
       navigate('/projects');
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoadingSignIn || isLoadingGetUser) {
+      setLoadingAuth(true);
+    }
+
+    if (isErrorSignIn) {
+      setLoadingAuth(false);
+    }
+  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn]);
 
   return {
     isLoadingAuth,
