@@ -9,6 +9,8 @@ const Wrapper = styled.div`
 
 const InputWrapper = styled.div`
   position: relative;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledInput = styled.input`
@@ -37,6 +39,32 @@ const StyledInput = styled.input`
   }
 `;
 
+const PasswordButton = styled.button.attrs({
+  type: 'button',
+})`
+  position: absolute;
+  border: none;
+  outline: none;
+  background-color: ${({ theme }) => theme.colors.transparent};
+  width: 30px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    color: ${({ theme }) => theme.colors.text};
+  }
+`;
+
 const Label = styled.label`
   position: absolute;
   top: 1px;
@@ -59,4 +87,4 @@ const InputErrorText = styled.span`
   min-height: 16px;
 `;
 
-export { Wrapper, InputWrapper, StyledInput, Label, InputErrorText };
+export { Wrapper, InputWrapper, StyledInput, PasswordButton, Label, InputErrorText };
