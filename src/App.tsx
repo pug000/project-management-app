@@ -11,12 +11,12 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Loader from 'components/Loader/Loader';
-import ProfilePage from 'pages/ProfilePage/ProfilePage';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
 
 function App() {
   const isLoggedIn = useAppSelector(getLoggedIn);

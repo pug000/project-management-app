@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -63,4 +63,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default memo(Profile);
