@@ -22,7 +22,6 @@ const Overlay = styled(motion.div)`
   right: 0;
   bottom: 0;
   backdrop-filter: blur(2px);
-  cursor: pointer;
 `;
 
 const MenuWrapper = styled(motion.div)`
