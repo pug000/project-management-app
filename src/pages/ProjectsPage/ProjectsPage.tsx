@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { useGetAllProjectsQuery } from 'redux/api/projectsApi';
+import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
 
 import defaultTheme from 'styles/theme';
 
@@ -14,7 +14,7 @@ import { MainWrapper } from 'styles/styles';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
-  const { data, isLoading } = useGetAllProjectsQuery();
+  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery();
 
   return (
     <ProtectedRoute>
@@ -31,8 +31,8 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {isLoading && <Loader />}
-          {data?.length ? <p>Project cards</p> : <EmptyProjectsContainer />}
+          {isProjectsListLoading && <Loader />}
+          {projects?.length ? <p>Project cards</p> : <EmptyProjectsContainer />}
         </ProjectsContainer>
       </MainWrapper>
     </ProtectedRoute>
