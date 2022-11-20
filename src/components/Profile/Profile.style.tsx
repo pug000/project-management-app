@@ -27,7 +27,7 @@ const ProfileMainContent = styled.div`
 
 const ProfileTitle = styled.h1`
   font-family: ${({ theme }) => theme.fonts.title};
-  font-weight: ${({ theme }) => theme.fontsWeight.bold};
+  font-weight: ${({ theme }) => theme.fontsWeight.medium};
   font-size: ${({ theme }) => theme.fontSizes.h2};
   color: ${({ theme }) => theme.colors.title};
   align-self: center;
