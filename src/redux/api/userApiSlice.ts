@@ -38,13 +38,8 @@ const userApiSlice = apiSlice.injectEndpoints({
           }
         }
       },
-      transformErrorResponse: ({ status }): string => {
-        if (status === 409) {
-          return 'signUp.error';
-        }
-
-        return 'authorization.error';
-      },
+      transformErrorResponse: ({ status }): string =>
+        status === 409 ? 'signUp.error' : 'authorization.error',
     }),
   }),
 });
