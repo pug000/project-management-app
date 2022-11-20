@@ -69,10 +69,10 @@ const useSignInUser = () => {
       setLoadingAuth(true);
     }
 
-    if (isErrorSignIn) {
+    if (isErrorSignIn || isSuccessGetUser) {
       setLoadingAuth(false);
     }
-  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn]);
+  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn, isSuccessGetUser]);
 
   return {
     isLoadingAuth,

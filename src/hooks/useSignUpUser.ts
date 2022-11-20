@@ -22,7 +22,8 @@ const useSignUpUser = () => {
     signUp,
     { isLoading: isLoadingSignUp, isError: isErrorSignUp, error: signUpErrorMessage },
   ] = useSignUpMutation();
-  const [signIn, { isLoading: isLoadingSignIn }] = useSignInMutation();
+  const [signIn, { isLoading: isLoadingSignIn, isSuccess: isSuccessSignIn }] =
+    useSignInMutation();
 
   const onSubmit: SubmitHandler<UserFormValues> = useCallback(async (formValues) => {
     await signUp(formValues);
@@ -62,10 +63,10 @@ const useSignUpUser = () => {
       setLoadingAuth(true);
     }
 
-    if (isErrorSignUp) {
+    if (isErrorSignUp || isSuccessSignIn) {
       setLoadingAuth(false);
     }
-  }, [isLoadingSignIn, isLoadingSignUp, isErrorSignUp]);
+  }, [isLoadingSignIn, isLoadingSignUp, isErrorSignUp, isSuccessSignIn]);
 
   return {
     isLoadingAuth,
