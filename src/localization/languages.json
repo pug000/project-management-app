@@ -84,6 +84,12 @@
         "yes": "Yes",
         "no": "No",
         "signOut": "Are you sure you want to sign out?"
+      },
+      "projectsPage": {
+        "title": "Projects",
+        "newProjectButton": "New project",
+        "emptyContainerText": "It seems you don't have projects yet.",
+        "emptyContainerButton": "Click here to create a new project"
       }
     }
   },
@@ -172,6 +178,12 @@
         "yes": "Да",
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?"
+      },
+      "projectsPage": {
+        "title": "Проекты",
+        "newProjectButton": "Новый проект",
+        "emptyContainerText": "Похоже, у вас еще нет проектов.",
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект"
       }
     }
   }
