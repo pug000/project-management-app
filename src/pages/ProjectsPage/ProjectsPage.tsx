@@ -7,6 +7,7 @@ import defaultTheme from 'styles/theme';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
+import EmptyProjectsContainer from 'components/EmptyProjectsContainer/EmptyProjectsContainer';
 
 import { MainWrapper } from 'styles/styles';
 
@@ -31,7 +32,7 @@ function ProjectsPage() {
         </ProjectsControls>
         <ProjectsContainer>
           {isLoading && <Loader />}
-          {data?.length ? <p>Project cards</p> : <p>EmptyProjectContainer</p>}
+          {data?.length ? <p>Project cards</p> : <EmptyProjectsContainer />}
         </ProjectsContainer>
       </MainWrapper>
     </ProtectedRoute>

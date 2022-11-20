@@ -17,7 +17,7 @@ const ProjectsTitle = styled.h1`
 
 const ProjectsContainer = styled.section`
   display: flex;
-  align-items: center;
+  justify-content: center;
   padding: 20px;
   width: 100%;
   height: 100%;
