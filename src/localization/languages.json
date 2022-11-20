@@ -88,7 +88,7 @@
       "projectsPage": {
         "title": "Projects",
         "newProjectButton": "New project",
-        "emptyContainerText": "It seems you don't have projects yet.",
+        "emptyContainerText": "It seems you don't have any projects yet.",
         "emptyContainerButton": "Click here to create a new project"
       }
     }
