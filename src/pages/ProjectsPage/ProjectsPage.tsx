@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { memo } from 'react';
+
+import { useGetAllProjectsQuery } from 'redux/api/projectsApi';
 
 import defaultTheme from 'styles/theme';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
+import Loader from 'components/Loader/Loader';
 
 import { MainWrapper } from 'styles/styles';
 
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
+  const { data, isLoading } = useGetAllProjectsQuery();
+
   return (
     <ProtectedRoute>
       <MainWrapper>
@@ -24,10 +29,13 @@ function ProjectsPage() {
             New project
           </Button>
         </ProjectsControls>
-        <ProjectsContainer />
+        <ProjectsContainer>
+          {isLoading && <Loader />}
+          {data?.length ? <p>Project cards</p> : <p>EmptyProjectContainer</p>}
+        </ProjectsContainer>
       </MainWrapper>
     </ProtectedRoute>
   );
 }
 
-export default ProjectsPage;
+export default memo(ProjectsPage);

@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import apiSlice from './api/apiSlice';
+import { projectsApi } from './api/projectsApi';
 import userSlice from './slices/userSlice';
 import popupSlice from './slices/popupSlice';
 
@@ -18,13 +19,14 @@ const rootReducer = combineReducers({
   user: userSlice,
   popup: popupSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
+  [projectsApi.reducerPath]: projectsApi.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['apiSlice', 'popupSlice'],
+  blacklist: ['apiSlice', 'popupSlice', 'projectsApi'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -36,7 +38,9 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(apiSlice.middleware),
+    })
+      .concat(apiSlice.middleware)
+      .concat(projectsApi.middleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
