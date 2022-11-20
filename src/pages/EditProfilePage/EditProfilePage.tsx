@@ -2,6 +2,8 @@ import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
+import useEditUser from 'hooks/useEditUser';
+
 import { backButtonAnimation } from 'utils/animations';
 
 import Button from 'components/Button/Button';
@@ -26,6 +28,7 @@ import {
 function EditProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
+  const { isLoadingEditUser, editUserErrorMessage, onSubmit } = useEditUser();
 
   return (
     <ProtectedRoute>
@@ -44,7 +47,11 @@ function EditProfilePage() {
             </Button>
           </FormHeader>
           <Title>{t('profile.edit')}</Title>
-          <AuthForm keyPrefix="profile" onSubmit={() => {}} isLoadingAuth={false} />
+          <AuthForm
+            keyPrefix="profile"
+            onSubmit={onSubmit}
+            isLoadingAuth={isLoadingEditUser}
+          />
           <FormDescriptionWrapper>
             <FormDescriptionText>{t('other.or')}</FormDescriptionText>
           </FormDescriptionWrapper>
@@ -52,10 +59,10 @@ function EditProfilePage() {
             <StyledLink to="/profile">{t('profile.back')}</StyledLink>
           </LinkWrapper>
         </FormWrapper>
-        {false && <Loader />}
-        {false && (
+        {isLoadingEditUser && <Loader />}
+        {editUserErrorMessage && (
           <PopupNotification
-            text={t('profile.successful')}
+            text={t(`${editUserErrorMessage}`)}
             backgroundColor={defaultTheme.colors.pink}
           />
         )}
