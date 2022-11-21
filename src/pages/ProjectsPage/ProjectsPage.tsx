@@ -1,21 +1,32 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
+import { useAppSelector } from 'hooks/useRedux';
+import useDeleteProject from 'hooks/useDeleteProject';
 
-import defaultTheme from 'styles/theme';
+import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
+import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
 import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer';
+import ProjectCards from 'components/ProjectCards/ProjectCards';
 
+import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
 
+import PopupWarning from 'components/PopupWarning/PopupWarning';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
-  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery();
+  const isLoggedIn = useAppSelector(getLoggedIn);
+  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery(
+    undefined,
+    { skip: !isLoggedIn }
+  );
+  const { isDeletePopupOpen, isLoadingDeleteProject, deleteProject } = useDeleteProject();
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
 
   return (
@@ -33,9 +44,9 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {isProjectsListLoading && <Loader />}
+          {(isProjectsListLoading || isLoadingDeleteProject) && <Loader />}
           {projects?.length ? (
-            <p>Project cards</p>
+            <ProjectCards projects={projects} />
           ) : (
             <NoResultsContainer
               text="projectsPage.emptyContainerText"
@@ -43,6 +54,12 @@ function ProjectsPage() {
             />
           )}
         </ProjectsContainer>
+        <PopupWarning
+          isPopupShown={isDeletePopupOpen}
+          setPopupShown={setDeletePopupOpen}
+          actionOnYes={deleteProject}
+          text="deleteProject"
+        />
       </MainWrapper>
     </ProtectedRoute>
   );

@@ -11,6 +11,8 @@ import {
 
 import { GrProjects, GrTask } from 'react-icons/gr';
 import { GoProject } from 'react-icons/go';
+import { MdOutlineDelete } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
 import BlueSvg from 'pages/ProfilePage/SvgElements/BlueSvg';
 import PinkSvg from 'pages/ProfilePage/SvgElements/PinkSvg';
 import YellowSvg from 'pages/ProfilePage/SvgElements/YellowSvg';
@@ -222,6 +224,17 @@ const profileButtonsList = [
   },
 ];
 
+const projectIconsList = [
+  {
+    id: 1,
+    icon: <BiEdit color={theme.colors.grey} />,
+  },
+  {
+    id: 2,
+    icon: <MdOutlineDelete color={theme.colors.pink} />,
+  },
+];
+
 export {
   baseUrl,
   authors,
@@ -237,4 +250,5 @@ export {
   mainPageList,
   profileIconsList,
   profileButtonsList,
+  projectIconsList,
 };
