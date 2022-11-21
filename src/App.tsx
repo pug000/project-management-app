@@ -15,6 +15,7 @@ import Loader from 'components/Loader/Loader';
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
+const ProjectsPage = lazy(() => import('pages/ProjectsPage/ProjectsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 
 function App() {
@@ -56,14 +57,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="projects"
-              element={
-                <ProtectedRoute>
-                  <main>Projects</main>
-                </ProtectedRoute>
-              }
-            />
+            <Route path="projects" element={<ProjectsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
