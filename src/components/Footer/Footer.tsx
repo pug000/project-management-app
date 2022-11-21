@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import AppLogo from 'components/AppLogo/AppLogo';
@@ -47,4 +47,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);
