@@ -12,10 +12,15 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
           ...data,
           ...JSON.parse(title),
         })),
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
+          : ['Project'],
     }),
     deleteProjectById: builder.mutation<ProjectData, string>({
       query: (_id: string) =>
         addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
+      invalidatesTags: (_result, _error, id) => [{ type: 'Project', id }],
     }),
   }),
 });
