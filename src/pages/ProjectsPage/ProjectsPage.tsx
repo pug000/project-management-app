@@ -1,7 +1,10 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useAppSelector } from 'hooks/useRedux';
+
 import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
+import { getLoggedIn } from 'redux/selectors/userSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -14,7 +17,11 @@ import { MainWrapper } from 'styles/styles';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
-  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery();
+  const isLoggedIn = useAppSelector(getLoggedIn);
+  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery(
+    undefined,
+    { skip: !isLoggedIn }
+  );
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
 
   return (
