@@ -2,9 +2,11 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'hooks/useRedux';
+import useDeleteProject from 'hooks/useDeleteProject';
 
 import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -14,6 +16,8 @@ import ProjectCards from 'components/ProjectCards/ProjectCards';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
+
+import PopupWarning from 'components/PopupWarning/PopupWarning';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
@@ -22,6 +26,7 @@ function ProjectsPage() {
     undefined,
     { skip: !isLoggedIn }
   );
+  const { isDeletePopupOpen, isLoadingDeleteProject, deleteProject } = useDeleteProject();
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
 
   return (
@@ -39,7 +44,8 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {isProjectsListLoading && <Loader />}
+          <ProjectCards projects={[]} />
+          {(isProjectsListLoading || isLoadingDeleteProject) && <Loader />}
           {projects?.length ? (
             <ProjectCards projects={projects} />
           ) : (
@@ -49,6 +55,12 @@ function ProjectsPage() {
             />
           )}
         </ProjectsContainer>
+        <PopupWarning
+          isPopupShown={isDeletePopupOpen}
+          setPopupShown={setDeletePopupOpen}
+          actionOnYes={deleteProject}
+          text="deleteProject"
+        />
       </MainWrapper>
     </ProtectedRoute>
   );

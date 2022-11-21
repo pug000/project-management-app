@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { memo, useCallback } from 'react';
 
+import { useAppDispatch } from 'hooks/useRedux';
+
+import { setSelectedProject } from 'redux/slices/projectSlice';
+import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+
 import { projectIconsList } from 'utils/constants';
 
 import { Project } from 'ts/interfaces';
@@ -23,6 +28,8 @@ interface ProjectCardsProps {
 }
 
 function ProjectCards({ projects }: ProjectCardsProps) {
+  const dispatch = useAppDispatch();
+
   const editOrDeleteProjectOnClick = useCallback(
     (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -30,6 +37,11 @@ function ProjectCards({ projects }: ProjectCardsProps) {
       project: Project
     ) => {
       event.preventDefault();
+      dispatch(setSelectedProject(project));
+
+      if (id === 2) {
+        dispatch(setDeletePopupOpen(true));
+      }
     },
     []
   );
