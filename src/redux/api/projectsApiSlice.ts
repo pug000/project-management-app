@@ -13,7 +13,11 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
           ...JSON.parse(title),
         })),
     }),
+    deleteProjectById: builder.mutation<ProjectData, string>({
+      query: (_id: string) =>
+        addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
+    }),
   }),
 });
 
-export const { useGetAllProjectsQuery } = projectsApiSlice;
+export const { useGetAllProjectsQuery, useDeleteProjectByIdMutation } = projectsApiSlice;
