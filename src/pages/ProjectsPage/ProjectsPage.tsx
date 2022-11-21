@@ -44,7 +44,6 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          <ProjectCards projects={[]} />
           {(isProjectsListLoading || isLoadingDeleteProject) && <Loader />}
           {projects?.length ? (
             <ProjectCards projects={projects} />
