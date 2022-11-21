@@ -28,8 +28,13 @@
       "signOut": {
         "text": "Sign Out"
       },
-      "edit": {
-        "text": "My profile"
+      "profile": {
+        "title": "My profile",
+        "text": "Save",
+        "edit": "Edit profile",
+        "delete": "Delete profile",
+        "successful": "Profile has been changed",
+        "back": "Leave without changes"
       },
       "projects": {
         "text": "Projects"
@@ -83,7 +88,8 @@
       "warningPopup": {
         "yes": "Yes",
         "no": "No",
-        "signOut": "Are you sure you want to sign out?"
+        "signOut": "Are you sure you want to sign out?",
+        "deleteProfile": "Are you sure you want to delete the profile?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -122,8 +128,13 @@
       "signOut": {
         "text": "Выход"
       },
-      "edit": {
-        "text": "Мой профиль"
+      "profile": {
+        "title": "Мой профиль",
+        "text": "Сохранить",
+        "edit": "Изменить профиль",
+        "delete": "Удалить профиль",
+        "successful": "Профиль был изменен",
+        "back": "Оставить без изменений"
       },
       "projects": {
         "text": "Проекты"
@@ -177,7 +188,8 @@
       "warningPopup": {
         "yes": "Да",
         "no": "Нет",
-        "signOut": "Вы уверены, что хотите выйти?"
+        "signOut": "Вы уверены, что хотите выйти?",
+        "deleteProfile": "Вы уверены, что хотите удалить профиль?"
       },
       "projectsPage": {
         "title": "Проекты",

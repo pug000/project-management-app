@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { backButtonAnimation } from 'utils/animations';
+
+import useSignUpUser from 'hooks/useSignUpUser';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
@@ -22,12 +24,10 @@ import {
 } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 
-import useSignUpUser from 'hooks/useSignUpUser';
-
 function SignUpPage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const { isLoadingAuth, isErrorSignUp, signUpErrorMessage, onSubmit } = useSignUpUser();
+  const { isLoadingAuth, signUpErrorMessage, onSubmit } = useSignUpUser();
 
   return (
     <MainWrapper>
@@ -56,7 +56,6 @@ function SignUpPage() {
       {isLoadingAuth && <Loader />}
       {signUpErrorMessage && (
         <PopupNotification
-          initialPopupState={isErrorSignUp}
           text={t(`${signUpErrorMessage}`)}
           backgroundColor={defaultTheme.colors.pink}
         />
@@ -65,4 +64,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default memo(SignUpPage);

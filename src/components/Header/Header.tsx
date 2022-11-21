@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
-
 import { setLoggedOut } from 'redux/slices/userSlice';
-import { setIsWarningPopupOpen } from 'redux/slices/popupSlice';
+import { setWarningPopupOpen } from 'redux/slices/popupSlice';
+import { getWarningPopupOpen } from 'redux/selectors/popupSelectors';
 
 import { headerSignItems, headerLinkItems, headerItemsIfLoggedIn } from 'utils/constants';
 
@@ -14,6 +14,7 @@ import AppLogo from 'components/AppLogo/AppLogo';
 import Button from 'components/Button/Button';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import LangSwitcher from './LangSwitcher/LangSwitcher';
+import Menu from './Menu/Menu';
 
 import {
   HeaderWrapper,
@@ -22,34 +23,34 @@ import {
   HeaderLink,
   HeaderLinkElement,
 } from './Header.style';
-import Menu from './Menu/Menu';
 
 function Header() {
   const { t } = useTranslation('translation');
   const isLoggedIn = useAppSelector(getLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const [isSticky, setIsSticky] = useState(false);
+  const isWarningPopupOpen = useAppSelector(getWarningPopupOpen);
+  const [isSticky, setSticky] = useState(false);
 
   const stickyHeader = useCallback(() => {
     if (window.scrollY > 0) {
-      setIsSticky(true);
+      setSticky(true);
     } else {
-      setIsSticky(false);
+      setSticky(false);
     }
   }, []);
 
-  const openWarningPopup = (id: number) => {
-    if (id === 3) {
-      dispatch(setIsWarningPopupOpen(true));
+  const openWarningPopup = useCallback((id: string) => {
+    if (id === 'signOut') {
+      dispatch(setWarningPopupOpen(true));
     }
-  };
+  }, []);
 
-  const signOut = () => {
+  const signOut = useCallback(() => {
     dispatch(setLoggedOut());
+    dispatch(setWarningPopupOpen(false));
     navigate('/');
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', stickyHeader);
@@ -71,7 +72,13 @@ function Header() {
           <LangSwitcher />
           {(isLoggedIn ? headerItemsIfLoggedIn : headerSignItems).map(
             ({ id, text, link, color, backgroundColor }) => (
-              <HeaderLink to={link} key={id} onClick={() => openWarningPopup(id)} end>
+              <HeaderLink
+                to={link}
+                key={id}
+                id={id}
+                onClick={() => openWarningPopup(id)}
+                end
+              >
                 <Button
                   type="button"
                   width="130px"
@@ -86,7 +93,12 @@ function Header() {
           <Menu />
         </HeaderContainerElements>
       </HeaderContainer>
-      <PopupWarning text="signOut" actionOnYes={signOut} />
+      <PopupWarning
+        text="signOut"
+        actionOnYes={signOut}
+        isPopupShown={isWarningPopupOpen}
+        setPopupShown={setWarningPopupOpen}
+      />
     </HeaderWrapper>
   );
 }

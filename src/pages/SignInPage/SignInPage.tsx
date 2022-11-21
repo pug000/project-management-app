@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -25,7 +25,7 @@ import { backButtonAnimation } from 'utils/animations';
 import useSignInUser from 'hooks/useSignInUser';
 
 function SignInPage() {
-  const { isLoadingAuth, isErrorSignIn, signInErrorMessage, onSubmit } = useSignInUser();
+  const { isLoadingAuth, signInErrorMessage, onSubmit } = useSignInUser();
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
 
@@ -56,7 +56,6 @@ function SignInPage() {
       {isLoadingAuth && <Loader />}
       {signInErrorMessage && (
         <PopupNotification
-          initialPopupState={isErrorSignIn}
           text={t(`${signInErrorMessage}`)}
           backgroundColor={defaultTheme.colors.pink}
         />
@@ -65,4 +64,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default memo(SignInPage);

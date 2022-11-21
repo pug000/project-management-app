@@ -22,17 +22,14 @@ const authApiSlice = apiSlice.injectEndpoints({
           await queryFulfilled;
           dispatch(setUser(arg));
         } catch (error) {
-          /* empty */
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       transformResponse: ({ _id, ...data }: UserData) => data,
-      transformErrorResponse: ({ status }): string => {
-        if (status === 409) {
-          return 'signUp.error';
-        }
-
-        return 'authorization.error';
-      },
+      transformErrorResponse: ({ status }): string =>
+        status === 409 ? 'signUp.error' : 'authorization.error',
     }),
 
     signIn: builder.mutation<AuthUser, User>({
@@ -47,20 +44,17 @@ const authApiSlice = apiSlice.injectEndpoints({
         try {
           dispatch(setAuthUser((await queryFulfilled).data));
         } catch (error) {
-          /* empty */
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       transformResponse: ({ token }: Pick<AuthUser, 'token'>) => ({
         token,
         ...parseJwt(token),
       }),
-      transformErrorResponse: ({ status }): string => {
-        if (status === 401) {
-          return 'signIn.error';
-        }
-
-        return 'authorization.error';
-      },
+      transformErrorResponse: ({ status }): string =>
+        status === 401 ? 'signIn.error' : 'authorization.error',
     }),
   }),
 });

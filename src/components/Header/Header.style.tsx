@@ -40,6 +40,10 @@ const HeaderLink = styled(NavLink)`
     opacity: ${({ theme }) => theme.effects.hoverOpacity};
   }
 
+  &#signOut.active {
+    opacity: 1;
+  }
+
   @media (max-width: 768px) {
     display: none;
   }
