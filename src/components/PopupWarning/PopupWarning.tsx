@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
+
+import { useAppDispatch } from 'hooks/useRedux';
 
 import { warningAnimation } from 'utils/animations';
 
@@ -10,36 +13,40 @@ import Button from 'components/Button/Button';
 
 import { MdClose } from 'react-icons/md';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { getWarningPopupOpen } from 'redux/selectors/popupSelectors';
-import { setIsWarningPopupOpen } from 'redux/slices/popupSlice';
-
 import {
   Background,
   Popup,
   PopupText,
   PopupButtons,
   CloseButtonWrapper,
+  PopupWrapper,
 } from './PopupWarning.style';
 
 interface PopupWarningProps {
   text: string;
+  isPopupShown: boolean;
+  setPopupShown: ActionCreatorWithPayload<boolean>;
   actionOnYes: () => void;
 }
 
-function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
+function PopupWarning({
+  text,
+  isPopupShown,
+  setPopupShown,
+  actionOnYes,
+}: PopupWarningProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'warningPopup' });
-  const isWarningPopupOpen = useAppSelector(getWarningPopupOpen);
   const dispatch = useAppDispatch();
 
-  const closePopup = () => {
-    dispatch(setIsWarningPopupOpen(false));
-  };
+  const closePopup = useCallback(() => {
+    dispatch(setPopupShown(false));
+  }, []);
 
   return (
     <AnimatePresence>
-      {isWarningPopupOpen && (
-        <Background $variants={warningAnimation} onClick={closePopup}>
+      {isPopupShown && (
+        <PopupWrapper $variants={warningAnimation}>
+          <Background onClick={closePopup} />
           <Popup>
             <PopupText>{t(text)}</PopupText>
             <PopupButtons>
@@ -73,7 +80,7 @@ function PopupWarning({ text, actionOnYes }: PopupWarningProps) {
               </Button>
             </CloseButtonWrapper>
           </Popup>
-        </Background>
+        </PopupWrapper>
       )}
     </AnimatePresence>
   );

@@ -1,9 +1,11 @@
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { useGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { getAuthUser } from 'redux/selectors/userSelectors';
+import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
+import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
 import { setLoggedIn, setUser } from 'redux/slices/userSlice';
 
 import { UserFormValues } from 'ts/interfaces';
@@ -12,7 +14,10 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
+  const isLoggedIn = useAppSelector(getLoggedIn);
+  const [isLoadingAuth, setLoadingAuth] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [
     signIn,
     {
@@ -27,7 +32,6 @@ const useSignInUser = () => {
     isSuccess: isSuccessGetUser,
     isFetching: isLoadingGetUser,
   } = useGetUserByIdQuery(authUser?._id ?? '', { skip: !authUser?._id });
-  const isLoadingAuth = isLoadingSignIn || isLoadingGetUser;
 
   const onSubmit: SubmitHandler<UserFormValues> = useCallback(
     async ({ name, ...formValues }) => {
@@ -48,9 +52,30 @@ const useSignInUser = () => {
     }
   }, [isSuccessGetUser]);
 
+  useEffect(() => {
+    if (isErrorSignIn) {
+      dispatch(setNotificationPopupOpen(true));
+    }
+  }, [isErrorSignIn]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/projects');
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoadingSignIn || isLoadingGetUser) {
+      setLoadingAuth(true);
+    }
+
+    if (isErrorSignIn || isSuccessGetUser) {
+      setLoadingAuth(false);
+    }
+  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn, isSuccessGetUser]);
+
   return {
     isLoadingAuth,
-    isErrorSignIn,
     signInErrorMessage,
     onSubmit,
   };

@@ -11,6 +11,9 @@ import {
 
 import { GrProjects, GrTask } from 'react-icons/gr';
 import { GoProject } from 'react-icons/go';
+import BlueSvg from 'pages/ProfilePage/SvgElements/BlueSvg';
+import PinkSvg from 'pages/ProfilePage/SvgElements/PinkSvg';
+import YellowSvg from 'pages/ProfilePage/SvgElements/YellowSvg';
 
 const baseUrl = 'https://project-management-ka5v.onrender.com/';
 
@@ -29,6 +32,21 @@ const defaultUserFormValues: UserFormValues = {
 const formTextFields: FormTextField[] = [
   {
     id: 1,
+    name: 'name',
+    type: 'text',
+    placeholderText: 'authorization.name',
+    pattern: {
+      value: nameValidation,
+      message: 'authorization.namePattern',
+    },
+    minLength: {
+      value: 3,
+      message: 'authorization.nameMinLength',
+    },
+    required: 'authorization.required',
+  },
+  {
+    id: 2,
     name: 'login',
     type: 'text',
     placeholderText: 'authorization.login',
@@ -43,7 +61,7 @@ const formTextFields: FormTextField[] = [
     required: 'authorization.required',
   },
   {
-    id: 2,
+    id: 3,
     name: 'password',
     type: 'password',
     placeholderText: 'authorization.password',
@@ -91,14 +109,14 @@ const authors: Author[] = [
 
 const headerSignItems: HeaderLinksProps[] = [
   {
-    id: 1,
+    id: 'signIn',
     text: 'signIn.title',
     link: '/signin',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.transparent,
   },
   {
-    id: 2,
+    id: 'signUp',
     text: 'signUp.title',
     link: '/signup',
     color: theme.colors.textButton,
@@ -108,16 +126,16 @@ const headerSignItems: HeaderLinksProps[] = [
 
 const headerItemsIfLoggedIn: HeaderLinksProps[] = [
   {
-    id: 3,
+    id: 'signOut',
     text: 'signOut.text',
     link: '#',
     color: theme.colors.primaryColor,
     backgroundColor: theme.colors.transparent,
   },
   {
-    id: 4,
-    text: 'edit.text',
-    link: '/edit',
+    id: 'profile',
+    text: 'profile.title',
+    link: '/profile',
     color: theme.colors.textButton,
     backgroundColor: theme.colors.backgroundDarkBlue,
   },
@@ -125,12 +143,12 @@ const headerItemsIfLoggedIn: HeaderLinksProps[] = [
 
 const headerLinkItems: HeaderLinksProps[] = [
   {
-    id: 1,
+    id: 'home',
     text: 'home.text',
     link: '/',
   },
   {
-    id: 2,
+    id: 'projects',
     text: 'projects.text',
     link: '/projects',
   },
@@ -175,6 +193,35 @@ const mainPageList = [
   },
 ];
 
+const profileIconsList = [
+  {
+    id: 1,
+    icon: <BlueSvg />,
+  },
+  {
+    id: 2,
+    icon: <YellowSvg />,
+  },
+  {
+    id: 3,
+    icon: <PinkSvg />,
+  },
+];
+
+const profileButtonsList = [
+  {
+    id: 1,
+    text: 'profile.edit',
+    width: '180px',
+  },
+  {
+    id: 2,
+    text: 'profile.delete',
+    width: '180px',
+    backgroundColor: theme.colors.pink,
+  },
+];
+
 export {
   baseUrl,
   authors,
@@ -188,4 +235,6 @@ export {
   headerItemsIfLoggedIn,
   mainPageElements,
   mainPageList,
+  profileIconsList,
+  profileButtonsList,
 };

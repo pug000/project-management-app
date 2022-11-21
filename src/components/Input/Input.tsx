@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   FieldError,
@@ -9,7 +9,16 @@ import {
   ValidationRule,
 } from 'react-hook-form';
 
-import { InputWrapper, Label, StyledInput, InputErrorText, Wrapper } from './Input.style';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+
+import {
+  InputWrapper,
+  Label,
+  StyledInput,
+  InputErrorText,
+  Wrapper,
+  PasswordButton,
+} from './Input.style';
 
 interface InputProps<T extends FieldValues> {
   type: string;
@@ -36,11 +45,33 @@ function Input<T extends FieldValues>({
   register,
   clearErrors,
 }: InputProps<T>) {
+  const [isPasswordShown, setPasswordShown] = useState(false);
+
+  const renderPasswordButton = () => {
+    if (name !== 'password') {
+      return null;
+    }
+
+    return (
+      <PasswordButton onClick={() => setPasswordShown((prev) => !prev)}>
+        {isPasswordShown ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+      </PasswordButton>
+    );
+  };
+
+  const togglePasswordInputType = () => {
+    if (name !== 'password') {
+      return type;
+    }
+
+    return isPasswordShown ? 'text' : 'password';
+  };
+
   return (
     <Wrapper>
       <InputWrapper>
         <StyledInput
-          type={type}
+          type={togglePasswordInputType()}
           required
           id={name}
           disabled={disabled}
@@ -52,6 +83,7 @@ function Input<T extends FieldValues>({
           })}
         />
         <Label>{placeholderText}</Label>
+        {renderPasswordButton()}
       </InputWrapper>
       <InputErrorText>{errors?.message}</InputErrorText>
     </Wrapper>

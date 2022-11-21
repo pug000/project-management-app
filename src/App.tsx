@@ -9,7 +9,6 @@ import { setLoggedOut } from 'redux/slices/userSlice';
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
-import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Loader from 'components/Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
@@ -17,6 +16,8 @@ const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const ProjectsPage = lazy(() => import('pages/ProjectsPage/ProjectsPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
+const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
+const EditProfilePage = lazy(() => import('pages/EditProfilePage/EditProfilePage'));
 
 function App() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -49,14 +50,8 @@ function App() {
             <Route index path="/" element={<HomePage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />
-            <Route
-              path="edit"
-              element={
-                <ProtectedRoute>
-                  <main>Edit User</main>
-                </ProtectedRoute>
-              }
-            />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="profile/edit" element={<EditProfilePage />} />
             <Route path="projects" element={<ProjectsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

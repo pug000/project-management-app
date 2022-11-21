@@ -1,11 +1,11 @@
-import React, { memo, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { memo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from 'hooks/useRedux';
 
-import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { getUser } from 'redux/selectors/userSelectors';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
@@ -24,31 +24,19 @@ interface AuthFormProps {
 
 function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const location = useLocation();
-  const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const isLoggedIn = useAppSelector(getLoggedIn);
+  const user = useAppSelector(getUser);
   const {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors, isDirty },
-    reset,
+    formState: { errors },
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: defaultUserFormValues,
+    defaultValues: user ?? defaultUserFormValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/projects');
-
-      if (isDirty) {
-        reset();
-      }
-    }
-  }, [isLoggedIn]);
 
   return (
     <Form
@@ -57,7 +45,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
       autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {location.pathname === '/signup' && (
+      {location.pathname !== '/signin' && (
         <Input<UserFormValues>
           type="text"
           name="name"
@@ -77,7 +65,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           required={t('authorization.required', { value: t('authorization.name') })}
         />
       )}
-      {formTextFields.map((textfield) => (
+      {formTextFields.slice(1).map((textfield) => (
         <Input<UserFormValues>
           key={textfield.id}
           type={textfield.type}
@@ -103,7 +91,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
           clearErrors={clearErrors}
         />
       ))}
-      <Button type="submit" disabled={!isDirty || isLoadingAuth || !isFormValid}>
+      <Button type="submit" disabled={isLoadingAuth || !isFormValid}>
         {t(`${keyPrefix}.text`)}
       </Button>
     </Form>
