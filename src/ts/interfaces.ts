@@ -89,6 +89,10 @@ interface ProjectData {
   users: string[];
 }
 
+interface Project extends Pick<ProjectData, '_id' | 'title'> {
+  description: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -104,4 +108,5 @@ export type {
   VariantsProps,
   MainPageElement,
   ProjectData,
+  Project,
 };

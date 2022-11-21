@@ -89,7 +89,8 @@
         "yes": "Yes",
         "no": "No",
         "signOut": "Are you sure you want to sign out?",
-        "deleteProfile": "Are you sure you want to delete the profile?"
+        "deleteProfile": "Are you sure you want to delete the profile?",
+        "deleteProject": "Are you sure you want to delete the project?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -189,7 +190,8 @@
         "yes": "Да",
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?",
-        "deleteProfile": "Вы уверены, что хотите удалить профиль?"
+        "deleteProfile": "Вы уверены, что хотите удалить профиль?",
+        "deleteProject": "Вы уверены, что хотите удалить проект?"
       },
       "projectsPage": {
         "title": "Проекты",
