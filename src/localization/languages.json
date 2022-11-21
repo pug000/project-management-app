@@ -90,6 +90,12 @@
         "no": "No",
         "signOut": "Are you sure you want to sign out?",
         "deleteProfile": "Are you sure you want to delete the profile?"
+      },
+      "projectsPage": {
+        "title": "Projects",
+        "newProjectButton": "New project",
+        "emptyContainerText": "It seems you don't have any projects yet.",
+        "emptyContainerButton": "Click here to create a new project"
       }
     }
   },
@@ -184,6 +190,12 @@
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?",
         "deleteProfile": "Вы уверены, что хотите удалить профиль?"
+      },
+      "projectsPage": {
+        "title": "Проекты",
+        "newProjectButton": "Новый проект",
+        "emptyContainerText": "Похоже, у вас еще нет проектов.",
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект"
       }
     }
   }

@@ -82,6 +82,13 @@ interface MainPageElement {
   icon: JSX.Element;
 }
 
+interface ProjectData {
+  _id: string;
+  title: string;
+  owner: string;
+  users: string[];
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -96,4 +103,5 @@ export type {
   UserData,
   VariantsProps,
   MainPageElement,
+  ProjectData,
 };
