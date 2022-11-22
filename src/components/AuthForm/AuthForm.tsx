@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,19 +24,26 @@ interface AuthFormProps {
 
 function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const location = useLocation();
-  const { t } = useTranslation('translation');
+  const { t, i18n } = useTranslation('translation');
   const user = useAppSelector(getUser);
   const {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isSubmitted },
+    trigger,
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: user ?? defaultUserFormValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
+
+  useEffect(() => {
+    if (isSubmitted) {
+      trigger(['name', 'login', 'password']);
+    }
+  }, [i18n.language, isSubmitted]);
 
   return (
     <Form
