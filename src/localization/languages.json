@@ -37,7 +37,13 @@
         "back": "Leave without changes"
       },
       "projects": {
-        "text": "Projects"
+        "text": "Projects",
+        "title": "Title",
+        "description": "Description",
+        "descriptionPlaceholder": "Project description",
+        "save": "Save",
+        "cancel": "Cancel",
+        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
       },
       "home": {
         "text": "Home"
@@ -89,7 +95,8 @@
         "yes": "Yes",
         "no": "No",
         "signOut": "Are you sure you want to sign out?",
-        "deleteProfile": "Are you sure you want to delete the profile?"
+        "deleteProfile": "Are you sure you want to delete the profile?",
+        "deleteProject": "Are you sure you want to delete the project?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -137,7 +144,13 @@
         "back": "Оставить без изменений"
       },
       "projects": {
-        "text": "Проекты"
+        "text": "Проекты",
+        "title": "Название",
+        "description": "Описание",
+        "descriptionPlaceholder": "Описание проекта",
+        "save": "Сохранить",
+        "cancel": "Отменить",
+        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
       },
       "home": {
         "text": "Главная"
@@ -189,7 +202,8 @@
         "yes": "Да",
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?",
-        "deleteProfile": "Вы уверены, что хотите удалить профиль?"
+        "deleteProfile": "Вы уверены, что хотите удалить профиль?",
+        "deleteProject": "Вы уверены, что хотите удалить проект?"
       },
       "projectsPage": {
         "title": "Проекты",

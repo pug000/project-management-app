@@ -53,6 +53,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<EditProfilePage />} />
             <Route path="projects" element={<ProjectsPage />} />
+            <Route path="projects/:id" element={<main>Project Page</main>} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
