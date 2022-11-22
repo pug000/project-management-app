@@ -18,6 +18,7 @@ import PopupWarning from 'components/PopupWarning/PopupWarning';
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
+import Task from 'components/Task/Task';
 
 function ProjectsPage() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -47,10 +48,11 @@ function ProjectsPage() {
           {projects?.length ? (
             <ProjectCards projects={projects} />
           ) : (
-            <NoResultsContainer
-              text="projectsPage.emptyContainerText"
-              buttonText="projectsPage.emptyContainerButton"
-            />
+            // <NoResultsContainer
+            //   text="projectsPage.emptyContainerText"
+            //   buttonText="projectsPage.emptyContainerButton"
+            // />
+            <Task title="asd" />
           )}
         </ProjectsContainer>
         <PopupWarning
