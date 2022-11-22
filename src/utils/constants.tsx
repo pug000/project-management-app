@@ -79,6 +79,12 @@ const formTextFields: FormTextField[] = [
   },
 ];
 
+const projectDescriptionValidation = {
+  count: 80,
+  message: 'projects.maxLength',
+  value: 'projects.description',
+};
+
 const authors: Author[] = [
   {
     id: 1,
@@ -251,4 +257,5 @@ export {
   profileIconsList,
   profileButtonsList,
   projectIconsList,
+  projectDescriptionValidation,
 };

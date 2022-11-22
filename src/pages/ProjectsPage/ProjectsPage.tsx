@@ -13,11 +13,10 @@ import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
 import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer';
 import ProjectCards from 'components/ProjectCards/ProjectCards';
+import PopupWarning from 'components/PopupWarning/PopupWarning';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
-
-import PopupWarning from 'components/PopupWarning/PopupWarning';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
