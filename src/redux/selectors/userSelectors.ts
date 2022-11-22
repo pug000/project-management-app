@@ -1,9 +1,12 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'redux/store';
 
-const getUser = (state: RootState) => state.user.user;
+const getBaseUserState = (state: RootState) => state.user;
 
-const getAuthUser = (state: RootState) => state.user.authUser;
+const getUser = createSelector(getBaseUserState, (state) => state.user);
 
-const getLoggedIn = (state: RootState) => state.user.isLoggedIn;
+const getAuthUser = createSelector(getBaseUserState, (state) => state.authUser);
+
+const getLoggedIn = createSelector(getBaseUserState, (state) => state.isLoggedIn);
 
 export { getUser, getAuthUser, getLoggedIn };

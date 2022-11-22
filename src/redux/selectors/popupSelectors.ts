@@ -1,10 +1,21 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'redux/store';
 
-const getWarningPopupOpen = (state: RootState) => state.popup.isWarningPopupOpen;
+const getBasePopupState = (state: RootState) => state.popup;
 
-const getDeletePopupOpen = (state: RootState) => state.popup.isDeletePopupOpen;
+const getWarningPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isWarningPopupOpen
+);
 
-const getNotificationPopupOpen = (state: RootState) =>
-  state.popup.isNotificationPopupOpen;
+const getDeletePopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isDeletePopupOpen
+);
+
+const getNotificationPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isNotificationPopupOpen
+);
 
 export { getWarningPopupOpen, getDeletePopupOpen, getNotificationPopupOpen };
