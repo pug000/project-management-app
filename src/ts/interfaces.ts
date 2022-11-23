@@ -93,6 +93,11 @@ interface Project extends Pick<ProjectData, '_id' | 'title'> {
   description: string;
 }
 
+interface ProjectFormValues {
+  title: string;
+  description: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -109,4 +114,5 @@ export type {
   MainPageElement,
   ProjectData,
   Project,
+  ProjectFormValues,
 };
