@@ -27,6 +27,7 @@ const useDeleteProject = () => {
     isLoadingDeleteProject,
     isDeletePopupOpen,
     deleteProject,
+    selectedProject,
   };
 };
 

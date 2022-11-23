@@ -1,39 +1,36 @@
 import React, { memo, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-
-import { useAppSelector } from 'hooks/useRedux';
-
-import getSelectedProject from 'redux/selectors/projectSelectors';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 import Textarea from 'components/Textarea/Textarea';
 
-import { defaultProjectFormValues } from 'utils/constants';
+import { defaultFormItemValues } from 'utils/constants';
 
-import { ProjectFormValues } from 'ts/interfaces';
+import { Project, EditFormValues } from 'ts/interfaces';
 
 import { Form } from 'styles/styles';
 
 interface EditFormProps {
   keyPrefix: string;
-  onSubmit: () => void;
+  onSubmit: SubmitHandler<EditFormValues>;
+  selectedItem: Project | null;
 }
 
-function EditForm({ keyPrefix, onSubmit }: EditFormProps) {
+function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
   const { t, i18n } = useTranslation('translation', { keyPrefix });
-  const project = useAppSelector(getSelectedProject);
+
   const {
     register,
     handleSubmit,
     clearErrors,
     formState: { errors, isSubmitted },
     trigger,
-  } = useForm<ProjectFormValues>({
+  } = useForm<EditFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: project ?? defaultProjectFormValues,
+    defaultValues: selectedItem ?? defaultFormItemValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
 
@@ -50,7 +47,7 @@ function EditForm({ keyPrefix, onSubmit }: EditFormProps) {
       autoComplete="off"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Input<ProjectFormValues>
+      <Input
         type="text"
         name="title"
         register={register}
@@ -67,7 +64,7 @@ function EditForm({ keyPrefix, onSubmit }: EditFormProps) {
         }}
         required={t('required')}
       />
-      <Textarea<ProjectFormValues>
+      <Textarea
         name="description"
         register={register}
         clearErrors={clearErrors}

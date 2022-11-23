@@ -2,10 +2,13 @@ import React, { useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import { useTranslation } from 'react-i18next';
+import { SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
 import { popupAnimation } from 'utils/animations';
+
+import { EditFormValues, Project } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 
@@ -26,7 +29,8 @@ interface PopupWithFormProps {
   isPopupShown: boolean;
   setPopupShown: ActionCreatorWithPayload<boolean>;
   keyPrefix: string;
-  onSubmit: () => void;
+  onSubmit: SubmitHandler<EditFormValues>;
+  selectedItem: Project | null;
 }
 
 function PopupWithForm({
@@ -34,6 +38,7 @@ function PopupWithForm({
   setPopupShown,
   keyPrefix,
   onSubmit,
+  selectedItem,
 }: PopupWithFormProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
@@ -49,7 +54,11 @@ function PopupWithForm({
           <Background onClick={closePopup} />
           <Popup>
             <PopupTitle>{t('formTitle')}</PopupTitle>
-            <EditForm keyPrefix={keyPrefix} onSubmit={onSubmit} />
+            <EditForm
+              keyPrefix={keyPrefix}
+              onSubmit={onSubmit}
+              selectedItem={selectedItem}
+            />
             <CloseButtonWrapper>
               <Button
                 type="button"
