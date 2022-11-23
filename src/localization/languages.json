@@ -103,6 +103,12 @@
         "newProjectButton": "New project",
         "emptyContainerText": "It seems you don't have any projects yet.",
         "emptyContainerButton": "Click here to create a new project"
+      },
+      "newProject": {
+        "formTitle": "Create new project",
+        "title": "Project title",
+        "description": "Project description",
+        "button": "Ok"
       }
     }
   },
@@ -210,6 +216,12 @@
         "newProjectButton": "Новый проект",
         "emptyContainerText": "Похоже, у вас еще нет проектов.",
         "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект"
+      },
+      "newProject": {
+        "formTitle": "Создайте новый проект",
+        "title": "Название проекта",
+        "description": "Описание проекта",
+        "button": "Ok"
       }
     }
   }
