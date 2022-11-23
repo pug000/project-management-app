@@ -3,6 +3,8 @@ import { Project, ProjectData } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
 import apiSlice from './apiSlice';
 
+type OmitProjectData = Omit<ProjectData, '_id'>;
+
 export const projectsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllProjects: builder.query<Project[], void>({
@@ -17,12 +19,23 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
           : ['Project'],
     }),
+    createProject: builder.mutation<ProjectData, OmitProjectData>({
+      query: (body: OmitProjectData) => ({
+        ...addFetchOptions(`${Endpoints.boards}`, Methods.post),
+        body,
+      }),
+      invalidatesTags: ['Project'],
+    }),
     deleteProjectById: builder.mutation<ProjectData, string>({
       query: (_id: string) =>
         addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
-      invalidatesTags: (_result, _error, id) => [{ type: 'Project', id }],
+      invalidatesTags: ['Project'],
     }),
   }),
 });
 
-export const { useGetAllProjectsQuery, useDeleteProjectByIdMutation } = projectsApiSlice;
+export const {
+  useGetAllProjectsQuery,
+  useCreateProjectMutation,
+  useDeleteProjectByIdMutation,
+} = projectsApiSlice;
