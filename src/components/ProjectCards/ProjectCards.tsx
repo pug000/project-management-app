@@ -5,11 +5,13 @@ import { useAppDispatch } from 'hooks/useRedux';
 import { setSelectedProject } from 'redux/slices/projectSlice';
 import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
-import { projectIconsList } from 'utils/constants';
-
 import { Project } from 'ts/interfaces';
 
+import { MdOutlineDelete } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
+
 import { StyledLink } from 'styles/styles';
+import defaultTheme from 'styles/theme';
 import {
   Card,
   CardButton,
@@ -29,18 +31,11 @@ interface ProjectCardsProps {
 function ProjectCards({ projects }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
 
-  const editOrDeleteProjectOnClick = useCallback(
-    (
-      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-      id: number,
-      project: Project
-    ) => {
+  const deleteProjectOnClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
       event.preventDefault();
       dispatch(setSelectedProject(project));
-
-      if (id === 2) {
-        dispatch(setDeletePopupOpen(true));
-      }
+      dispatch(setDeletePopupOpen(true));
     },
     []
   );
@@ -53,14 +48,16 @@ function ProjectCards({ projects }: ProjectCardsProps) {
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
               <CardButtonWrapper>
-                {projectIconsList.map(({ id, icon }) => (
-                  <CardButton
-                    key={id}
-                    onClick={(event) => editOrDeleteProjectOnClick(event, id, project)}
-                  >
-                    <IconWrapper>{icon}</IconWrapper>
-                  </CardButton>
-                ))}
+                <CardButton>
+                  <IconWrapper>
+                    <BiEdit color={defaultTheme.colors.grey} />
+                  </IconWrapper>
+                </CardButton>
+                <CardButton onClick={(event) => deleteProjectOnClick(event, project)}>
+                  <IconWrapper>
+                    <MdOutlineDelete color={defaultTheme.colors.pink} />
+                  </IconWrapper>
+                </CardButton>
               </CardButtonWrapper>
             </CardHeader>
             <CardDescriptionWrapper>
