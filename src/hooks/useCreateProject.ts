@@ -27,7 +27,7 @@ const useCreateProject = () => {
         users: [],
       });
     },
-    []
+    [isCreationPopupOpen]
   );
 
   useEffect(() => {
