@@ -1,16 +1,12 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
+import useCreateProject from 'hooks/useCreateProject';
 
-import {
-  useCreateProjectMutation,
-  useGetAllProjectsQuery,
-} from 'redux/api/projectsApiSlice';
-import { getLoggedIn, getUser } from 'redux/selectors/userSelectors';
-import { getCreationPopupOpen } from 'redux/selectors/popupSelectors';
+import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
+import { getLoggedIn } from 'redux/selectors/userSelectors';
 import { setDeletePopupOpen, setCreationPopupOpen } from 'redux/slices/popupSlice';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
@@ -20,8 +16,6 @@ import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer
 import ProjectCards from 'components/ProjectCards/ProjectCards';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
-
-import { EditFormValues } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
@@ -37,26 +31,7 @@ function ProjectsPage() {
     useDeleteProject();
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
   const dispatch = useAppDispatch();
-  const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
-  const [createProject, data] = useCreateProjectMutation();
-  const user = useAppSelector(getUser);
-
-  const onSubmit: SubmitHandler<EditFormValues> = useCallback(
-    async ({ color, ...formValues }) => {
-      await createProject({
-        title: JSON.stringify({ ...formValues }),
-        owner: user?.name ?? '',
-        users: [],
-      });
-    },
-    []
-  );
-
-  useEffect(() => {
-    if (data.isSuccess) {
-      dispatch(setCreationPopupOpen(false));
-    }
-  }, [data.isSuccess]);
+  const { isCreationPopupOpen, onSubmit } = useCreateProject();
 
   return (
     <ProtectedRoute>
