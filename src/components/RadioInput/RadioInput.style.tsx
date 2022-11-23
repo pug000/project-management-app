@@ -38,6 +38,7 @@ const RadioInputSpan = styled.span<BackgroundColorProps>`
     height: 60%;
     background-color: ${({ theme }) => theme.colors.backgroundWhite};
     border-radius: 50%;
+    transition: ${({ theme }) => theme.effects.transition};
     opacity: 0;
   }
 `;
