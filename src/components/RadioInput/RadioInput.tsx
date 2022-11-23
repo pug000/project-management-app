@@ -35,7 +35,7 @@ function RadioInput<T extends FieldValues>({
       <Label>{text}</Label>
       <RadioInputWrapper>
         {radioInputs.map(({ id, value, checked }) => (
-          <RadioInputLabel key={id} htmlFor={id}>
+          <RadioInputLabel key={id} htmlFor={id} $backgroundColor={value}>
             <StyledRadioInput
               type="radio"
               value={value}
@@ -45,7 +45,7 @@ function RadioInput<T extends FieldValues>({
                 required,
               })}
             />
-            <RadioInputSpan $backgroundColor={value} />
+            <RadioInputSpan>&#10004;</RadioInputSpan>
           </RadioInputLabel>
         ))}
       </RadioInputWrapper>

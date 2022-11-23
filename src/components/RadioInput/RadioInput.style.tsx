@@ -16,12 +16,20 @@ const Label = styled.label`
 const RadioInputWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-self: center;
   gap: 10px;
 `;
 
-const RadioInputSpan = styled.span<BackgroundColorProps>`
+const RadioInputSpan = styled.span`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${({ theme }) => theme.fontSizes.h4};
+  transition: ${({ theme }) => theme.effects.transition};
+  opacity: 0;
+`;
+
+const RadioInputLabel = styled.label<BackgroundColorProps>`
+  cursor: pointer;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -30,27 +38,17 @@ const RadioInputSpan = styled.span<BackgroundColorProps>`
   justify-content: center;
   background-color: ${({ $backgroundColor, theme }) =>
     $backgroundColor ?? theme.colors.primaryColor};
+  transition: ${({ theme }) => theme.effects.transition};
 
-  &:before {
-    content: '';
-    display: inline-block;
-    width: 60%;
-    height: 60%;
-    background-color: ${({ theme }) => theme.colors.backgroundWhite};
-    border-radius: 50%;
-    transition: ${({ theme }) => theme.effects.transition};
-    opacity: 0;
+  &:hover {
+    box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.07);
   }
-`;
-
-const RadioInputLabel = styled.label`
-  cursor: pointer;
 `;
 
 const StyledRadioInput = styled.input`
   display: none;
 
-  &:checked + ${RadioInputSpan}:before {
+  &:checked + ${RadioInputSpan} {
     opacity: 1;
   }
 `;
