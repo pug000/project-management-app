@@ -4,12 +4,14 @@ interface PopupState {
   isWarningPopupOpen: boolean;
   isDeletePopupOpen: boolean;
   isNotificationPopupOpen: boolean;
+  isCreationPopupOpen: boolean;
 }
 
 const initialState: PopupState = {
   isWarningPopupOpen: false,
   isDeletePopupOpen: false,
   isNotificationPopupOpen: false,
+  isCreationPopupOpen: false,
 };
 
 const popupSlice = createSlice({
@@ -27,10 +29,18 @@ const popupSlice = createSlice({
     setNotificationPopupOpen(state, { payload }: PayloadAction<boolean>) {
       state.isNotificationPopupOpen = payload;
     },
+
+    setCreationPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isCreationPopupOpen = payload;
+    },
   },
 });
 
-export const { setWarningPopupOpen, setDeletePopupOpen, setNotificationPopupOpen } =
-  popupSlice.actions;
+export const {
+  setWarningPopupOpen,
+  setDeletePopupOpen,
+  setNotificationPopupOpen,
+  setCreationPopupOpen,
+} = popupSlice.actions;
 
 export default popupSlice.reducer;

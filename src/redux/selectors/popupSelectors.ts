@@ -18,4 +18,14 @@ const getNotificationPopupOpen = createSelector(
   (state) => state.isNotificationPopupOpen
 );
 
-export { getWarningPopupOpen, getDeletePopupOpen, getNotificationPopupOpen };
+const getCreationPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isCreationPopupOpen
+);
+
+export {
+  getWarningPopupOpen,
+  getDeletePopupOpen,
+  getNotificationPopupOpen,
+  getCreationPopupOpen,
+};

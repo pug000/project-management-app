@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AnimatePresence } from 'framer-motion';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 
@@ -16,26 +15,16 @@ import { MdClose } from 'react-icons/md';
 import {
   Background,
   Popup,
-  PopupText,
-  PopupButtons,
   CloseButtonWrapper,
   PopupWrapper,
-} from './PopupWarning.style';
+} from './PopupWithForm.style';
 
-interface PopupWarningProps {
-  text: string;
+interface PopupWithFormProps {
   isPopupShown: boolean;
   setPopupShown: ActionCreatorWithPayload<boolean>;
-  actionOnYes: () => void;
 }
 
-function PopupWarning({
-  text,
-  isPopupShown,
-  setPopupShown,
-  actionOnYes,
-}: PopupWarningProps) {
-  const { t } = useTranslation('translation', { keyPrefix: 'warningPopup' });
+function PopupWithForm({ isPopupShown, setPopupShown }: PopupWithFormProps) {
   const dispatch = useAppDispatch();
 
   const closePopup = useCallback(() => {
@@ -48,27 +37,6 @@ function PopupWarning({
         <PopupWrapper $variants={popupAnimation}>
           <Background onClick={closePopup} />
           <Popup>
-            <PopupText>{t(text)}</PopupText>
-            <PopupButtons>
-              <Button
-                type="button"
-                width="60px"
-                color={defaultTheme.colors.text}
-                backgroundColor={defaultTheme.colors.backgroundGrey}
-                callback={actionOnYes}
-              >
-                {t('yes')}
-              </Button>
-              <Button
-                type="button"
-                width="60px"
-                color={defaultTheme.colors.text}
-                backgroundColor={defaultTheme.colors.backgroundGrey}
-                callback={closePopup}
-              >
-                {t('no')}
-              </Button>
-            </PopupButtons>
             <CloseButtonWrapper>
               <Button
                 type="button"
@@ -86,4 +54,4 @@ function PopupWarning({
   );
 }
 
-export default PopupWarning;
+export default PopupWithForm;
