@@ -7,7 +7,7 @@ import {
   HeaderLinksProps,
   Author,
   MainPageElement,
-  ProjectFormValues,
+  EditFormValues,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -242,9 +242,10 @@ const projectIconsList = [
   },
 ];
 
-const defaultProjectFormValues: ProjectFormValues = {
+const defaultFormItemValues: EditFormValues = {
   title: '',
   description: '',
+  color: '',
 };
 
 export {
@@ -264,5 +265,5 @@ export {
   profileButtonsList,
   projectIconsList,
   projectDescriptionValidation,
-  defaultProjectFormValues,
+  defaultFormItemValues,
 };
