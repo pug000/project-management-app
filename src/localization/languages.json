@@ -108,7 +108,11 @@
         "formTitle": "Create new project",
         "title": "Project title",
         "description": "Project description",
-        "button": "Ok"
+        "button": "Ok",
+        "titleMinLength": "project title should contain more than 3 characters",
+        "titleMaxLength": "project title can't be longer than 20 characters",
+        "required": "this field can't be empty",
+        "descriptionMaxLength": "project description can't be longer than 80 characters"
       }
     }
   },
@@ -221,7 +225,11 @@
         "formTitle": "Создайте новый проект",
         "title": "Название проекта",
         "description": "Описание проекта",
-        "button": "Ok"
+        "button": "Ok",
+        "titleMinLength": "название проекта не может быть короче 3 символов",
+        "titleMaxLength": "название проекта не может быть длиннее 20 символов",
+        "required": "это поле не может быть пустым",
+        "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
       }
     }
   }

@@ -68,6 +68,8 @@ function ProjectsPage() {
         <PopupWithForm
           isPopupShown={isCreationPopupOpen}
           setPopupShown={setCreationPopupOpen}
+          keyPrefix="newProject"
+          onSubmit={() => {}}
         />
       </MainWrapper>
     </ProtectedRoute>

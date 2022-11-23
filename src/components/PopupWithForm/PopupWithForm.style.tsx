@@ -33,7 +33,7 @@ const Background = styled.div`
 const Popup = styled.div`
   max-width: 500px;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.primaryColor};
+  background-color: ${({ theme }) => theme.colors.backgroundBlue};
   padding: 25px;
   margin: -10% 10px 0;
   border-radius: 7px;
@@ -48,10 +48,23 @@ const Popup = styled.div`
   z-index: 20;
 `;
 
+const PopupTitle = styled.h3`
+  font-family: ${({ theme }) => theme.fonts.title};
+  font-weight: ${({ theme }) => theme.fontsWeight.medium};
+  font-size: ${({ theme }) => theme.fontSizes.h4};
+  color: ${({ theme }) => theme.colors.title};
+  align-self: flex-start;
+  padding: 10px 20px;
+`;
+
 const CloseButtonWrapper = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+
+  svg {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
 `;
 
-export { PopupWrapper, Background, Popup, CloseButtonWrapper };
+export { PopupWrapper, Background, Popup, PopupTitle, CloseButtonWrapper };
