@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'components/Button/Button';
 import theme from 'styles/theme';
-import { RiCloseFill } from 'react-icons/ri';
+import { AiFillDelete } from 'react-icons/ai';
 import {
   ColumnWrapper,
   ColumnHeader,
@@ -28,7 +28,7 @@ function Column({ title, children }: ColumnProps) {
             color={theme.colors.darkBlue}
             callback={() => console.log('delete column')}
           >
-            <RiCloseFill />
+            <AiFillDelete />
           </Button>
         </ColumnHeaderButton>
       </ColumnHeader>

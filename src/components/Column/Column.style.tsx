@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
+const ColumnHeaderButton = styled.div`
+  transition: ${({ theme }) => theme.effects.transition};
+  opacity: 0;
+`;
+
 const ColumnWrapper = styled.div`
-  min-width: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -9,10 +14,9 @@ const ColumnWrapper = styled.div`
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   cursor: pointer;
-`;
-
-const ColumnHeaderButton = styled.div`
-  opacity: ${({ theme }) => theme.effects.activeOpacity};
+  &:hover ${ColumnHeaderButton} {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
+  }
 `;
 
 const ColumnHeader = styled.div`
@@ -21,7 +25,7 @@ const ColumnHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: ${({ theme }) => theme.effects.transition};
+  padding: 10px;
 `;
 
 const ColumnTitle = styled.h3`

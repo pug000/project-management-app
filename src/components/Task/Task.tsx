@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'components/Button/Button';
 import theme from 'styles/theme';
-import { RiCloseFill } from 'react-icons/ri';
+import { AiFillDelete } from 'react-icons/ai';
 import {
   TaskWrapper,
   TaskHeader,
@@ -10,14 +10,21 @@ import {
   TaskContainer,
 } from './Task.style';
 
-interface ColumnProps {
+interface TaskProps {
   title: string;
-  children?: React.ReactNode;
+  text?: string;
+  backgroundColor?: string;
 }
 
-function Task({ title, children }: ColumnProps) {
+function Task({ title, text, backgroundColor }: TaskProps) {
+  const [task, setTask] = useState(text);
+  const textareaChangedHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const updatedTextarea = event.target.value;
+    setTask(updatedTextarea);
+  };
+
   return (
-    <TaskWrapper>
+    <TaskWrapper $backgroundColor={backgroundColor}>
       <TaskHeader>
         <TaskTitle>{title}</TaskTitle>
         <TaskHeaderButton>
@@ -28,17 +35,18 @@ function Task({ title, children }: ColumnProps) {
             color={theme.colors.darkBlue}
             callback={() => console.log('delete task')}
           >
-            <RiCloseFill />
+            <AiFillDelete />
           </Button>
         </TaskHeaderButton>
       </TaskHeader>
-      <TaskContainer>{children}</TaskContainer>
+      <TaskContainer value={task} onChange={(event) => textareaChangedHandler(event)} />
     </TaskWrapper>
   );
 }
 
 Task.defaultProps = {
-  children: undefined,
+  text: undefined,
+  backgroundColor: theme.colors.pink,
 };
 
 export default Task;
