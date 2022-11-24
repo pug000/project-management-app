@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -7,7 +7,12 @@ import useCreateProject from 'hooks/useCreateProject';
 
 import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { setDeletePopupOpen, setCreationPopupOpen } from 'redux/slices/popupSlice';
+import {
+  setDeletePopupOpen,
+  setCreationPopupOpen,
+  setSuccessPopupOpen,
+} from 'redux/slices/popupSlice';
+import { getSuccessPopupOpen } from 'redux/selectors/popupSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -16,6 +21,7 @@ import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer
 import ProjectCards from 'components/ProjectCards/ProjectCards';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
+import PopupNotification from 'components/PopupNotification/PopupNotification';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
@@ -23,6 +29,7 @@ import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPa
 
 function ProjectsPage() {
   const isLoggedIn = useAppSelector(getLoggedIn);
+  const isSuccessPopupOpen = useAppSelector(getSuccessPopupOpen);
   const { data: projects, isFetching: isProjectsListLoading } = useGetAllProjectsQuery(
     undefined,
     { skip: !isLoggedIn }
@@ -31,7 +38,14 @@ function ProjectsPage() {
     useDeleteProject();
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
   const dispatch = useAppDispatch();
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateProject();
+  const { isSuccessCreateProject, isCreationPopupOpen, isCreationLoading, onSubmit } =
+    useCreateProject();
+
+  useEffect(() => {
+    if (isSuccessCreateProject && !isCreationPopupOpen) {
+      dispatch(setSuccessPopupOpen(true));
+    }
+  }, [isSuccessCreateProject, isCreationPopupOpen]);
 
   return (
     <ProtectedRoute>
@@ -74,6 +88,12 @@ function ProjectsPage() {
           keyPrefix="newProject"
           selectedItem={selectedProject}
           onSubmit={onSubmit}
+        />
+        <PopupNotification
+          isPopupShown={isSuccessPopupOpen}
+          setPopupShown={setSuccessPopupOpen}
+          text={t('successful')}
+          backgroundColor={defaultTheme.colors.primaryColor}
         />
       </MainWrapper>
     </ProtectedRoute>

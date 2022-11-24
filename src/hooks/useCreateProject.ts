@@ -11,7 +11,10 @@ import { useAppSelector } from './useRedux';
 
 const useCreateProject = () => {
   const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
-  const [createProject, { isLoading: isCreationLoading }] = useCreateProjectMutation();
+  const [
+    createProject,
+    { isLoading: isCreationLoading, isSuccess: isSuccessCreateProject },
+  ] = useCreateProjectMutation();
   const user = useAppSelector(getUser);
 
   const onSubmit: SubmitHandler<EditFormValues> = useCallback(
@@ -26,6 +29,7 @@ const useCreateProject = () => {
   );
 
   return {
+    isSuccessCreateProject,
     isCreationPopupOpen,
     isCreationLoading,
     onSubmit,
