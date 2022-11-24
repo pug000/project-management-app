@@ -43,8 +43,7 @@
         "descriptionPlaceholder": "Project description",
         "save": "Save",
         "cancel": "Cancel",
-        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters",
-        "successful": "Project successfully created"
+        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
       },
       "home": {
         "text": "Home"
@@ -103,7 +102,8 @@
         "title": "Projects",
         "newProjectButton": "New project",
         "emptyContainerText": "It seems you don't have any projects yet.",
-        "emptyContainerButton": "Click here to create a new project"
+        "emptyContainerButton": "Click here to create a new project",
+        "successful": "Project successfully created"
       },
       "newProject": {
         "formTitle": "Create new project",
@@ -161,8 +161,7 @@
         "descriptionPlaceholder": "Описание проекта",
         "save": "Сохранить",
         "cancel": "Отменить",
-        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов.",
-        "successful": "Проект успешно создан"
+        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
       },
       "home": {
         "text": "Главная"
@@ -221,7 +220,8 @@
         "title": "Проекты",
         "newProjectButton": "Новый проект",
         "emptyContainerText": "Похоже, у вас еще нет проектов.",
-        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект"
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект",
+        "successful": "Проект успешно создан"
       },
       "newProject": {
         "formTitle": "Создайте новый проект",
