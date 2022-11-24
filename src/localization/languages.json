@@ -43,7 +43,8 @@
         "descriptionPlaceholder": "Project description",
         "save": "Save",
         "cancel": "Cancel",
-        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
+        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters",
+        "successful": "Project successfully created"
       },
       "home": {
         "text": "Home"
@@ -160,7 +161,8 @@
         "descriptionPlaceholder": "Описание проекта",
         "save": "Сохранить",
         "cancel": "Отменить",
-        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
+        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов.",
+        "successful": "Проект успешно создан"
       },
       "home": {
         "text": "Главная"
