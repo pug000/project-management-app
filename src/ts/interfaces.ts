@@ -99,6 +99,17 @@ interface Project extends Pick<ProjectData, '_id' | 'title'> {
   description: string;
 }
 
+interface ColumnData {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+}
+
+interface ColumnElement extends Pick<ColumnData, '_id' | 'title'> {
+  description: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -116,4 +127,6 @@ export type {
   MainPageElement,
   ProjectData,
   Project,
+  ColumnData,
+  ColumnElement,
 };

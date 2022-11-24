@@ -1,47 +1,74 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
+
+import { useAppDispatch } from 'hooks/useRedux';
+
+import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { setSelectedColumn } from 'redux/slices/columnSlice';
+
+import { projectIconsList } from 'utils/constants';
+
 import Button from 'components/Button/Button';
+import Task from 'components/Task/Task';
 import theme from 'styles/theme';
-import { AiFillDelete } from 'react-icons/ai';
+import { ColumnData } from 'ts/interfaces';
+
 import {
   ColumnWrapper,
   ColumnHeader,
   ColumnHeaderButton,
   ColumnTitle,
   ColumnTaskContainer,
+  IconWrapper,
 } from './Column.style';
 
 interface ColumnProps {
-  title: string;
-  children?: React.ReactNode;
+  columns: ColumnData[];
 }
 
-function Column({ title, children }: ColumnProps) {
+function Column({ columns }: ColumnProps) {
+  const dispatch = useAppDispatch();
+
+  const editOrDeleteColumnOnClick = useCallback(
+    (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+      id: number,
+      column: ColumnData
+    ) => {
+      event.preventDefault();
+      dispatch(setSelectedColumn(column));
+
+      if (id === 2) {
+        dispatch(setDeletePopupOpen(true));
+      }
+    },
+    []
+  );
+
   return (
     <ColumnWrapper>
-      <ColumnHeader>
-        <ColumnTitle>{title}</ColumnTitle>
-        <ColumnHeaderButton>
-          <Button
-            type="button"
-            width={theme.fontSizes.text}
-            backgroundColor={theme.colors.transparent}
-            color={theme.colors.darkBlue}
-            callback={() => console.log('delete column')}
-          >
-            <AiFillDelete />
+      {columns.map((column) => (
+        <>
+          <ColumnHeader>
+            <ColumnTitle>{column.title}</ColumnTitle>
+            {projectIconsList.map(({ id, icon }) => (
+              <ColumnHeaderButton
+                key={id}
+                onClick={(event) => editOrDeleteColumnOnClick(event, id, column)}
+              >
+                <IconWrapper>{icon}</IconWrapper>
+              </ColumnHeaderButton>
+            ))}
+          </ColumnHeader>
+          <Button type="button" callback={() => console.log('add task')}>
+            Add task
           </Button>
-        </ColumnHeaderButton>
-      </ColumnHeader>
-      <Button type="button" callback={() => console.log('add task')}>
-        Add task
-      </Button>
-      <ColumnTaskContainer>{children}</ColumnTaskContainer>
+          <ColumnTaskContainer>
+            <Task title="hello" />
+          </ColumnTaskContainer>
+        </>
+      ))}
     </ColumnWrapper>
   );
 }
 
-Column.defaultProps = {
-  children: undefined,
-};
-
-export default Column;
+export default memo(Column);

@@ -1,8 +1,25 @@
 import styled from 'styled-components';
 
-const ColumnHeaderButton = styled.div`
+const ColumnHeaderButton = styled.button.attrs({
+  type: 'button',
+})`
+  border: none;
+  outline: none;
+  background-color: ${({ theme }) => theme.colors.transparent};
+  cursor: pointer;
   transition: ${({ theme }) => theme.effects.transition};
-  opacity: 0;
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
+  }
 `;
 
 const ColumnWrapper = styled.div`
@@ -44,10 +61,21 @@ const ColumnTaskContainer = styled.div`
   gap: 10px;
 `;
 
+const IconWrapper = styled.div`
+  width: 25px;
+  height: 25px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export {
   ColumnWrapper,
   ColumnHeader,
   ColumnHeaderButton,
   ColumnTitle,
   ColumnTaskContainer,
+  IconWrapper,
 };

@@ -14,11 +14,13 @@ import apiSlice from './api/apiSlice';
 import userSlice from './slices/userSlice';
 import popupSlice from './slices/popupSlice';
 import projectSlice from './slices/projectSlice';
+import columnSlice from './slices/columnSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
   popup: popupSlice,
   project: projectSlice,
+  column: columnSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
@@ -26,7 +28,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['apiSlice', 'popupSlice', 'projectSlice'],
+  blacklist: ['apiSlice', 'popupSlice', 'projectSlice', 'columnSlice'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
