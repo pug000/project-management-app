@@ -29,6 +29,7 @@ interface PopupWithFormProps {
   isPopupShown: boolean;
   setPopupShown: ActionCreatorWithPayload<boolean>;
   keyPrefix: string;
+  formTitleText: string;
   onSubmit: SubmitHandler<EditFormValues>;
   selectedItem: Project | null;
 }
@@ -37,6 +38,7 @@ function PopupWithForm({
   isPopupShown,
   setPopupShown,
   keyPrefix,
+  formTitleText,
   onSubmit,
   selectedItem,
 }: PopupWithFormProps) {
@@ -53,7 +55,7 @@ function PopupWithForm({
         <PopupWrapper $variants={popupAnimation}>
           <Background onClick={closePopup} />
           <Popup>
-            <PopupTitle>{t('formTitle')}</PopupTitle>
+            <PopupTitle>{t(`${formTitleText}`)}</PopupTitle>
             <EditForm
               keyPrefix={keyPrefix}
               onSubmit={onSubmit}

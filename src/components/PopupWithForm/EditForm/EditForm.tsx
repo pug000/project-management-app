@@ -19,7 +19,7 @@ interface EditFormProps {
 }
 
 function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
-  const { t, i18n } = useTranslation('translation', { keyPrefix });
+  const { t, i18n } = useTranslation('translation');
 
   const {
     register,
@@ -53,30 +53,30 @@ function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
         register={register}
         clearErrors={clearErrors}
         errors={errors.title}
-        placeholderText={t('title')}
+        placeholderText={t(`${keyPrefix}.title`)}
         minLength={{
           value: 3,
-          message: t('titleMinLength'),
+          message: t('editForm.titleMinLength'),
         }}
         maxLength={{
-          value: 30,
-          message: t('titleMaxLength'),
+          value: 50,
+          message: t('titleMaxLength.titleMaxLength'),
         }}
-        required={t('required')}
+        required={t('required.required')}
       />
       <Textarea
         name="description"
         register={register}
         clearErrors={clearErrors}
         errors={errors.description}
-        placeholderText={t('description')}
+        placeholderText={t(`${keyPrefix}.description`)}
         maxLength={{
           value: 80,
-          message: t('descriptionMaxLength'),
+          message: t(`${keyPrefix}.descriptionMaxLength`),
         }}
       />
       <Button type="submit" disabled={!isFormValid}>
-        {t('button')}
+        {t('editForm.button')}
       </Button>
     </Form>
   );

@@ -106,24 +106,17 @@
         "emptyContainerButton": "Click here to create a new project",
         "successful": "Project successfully created"
       },
-      "newProject": {
-        "formTitle": "Create new project",
-        "title": "Project title",
-        "description": "Project description",
+      "editForm": {
         "button": "Ok",
-        "titleMinLength": "project title should contain more than 3 characters",
-        "titleMaxLength": "project title can't be longer than 20 characters",
-        "required": "this field can't be empty",
-        "descriptionMaxLength": "project description can't be longer than 80 characters"
+        "titleMinLength": "title should contain more than 3 characters",
+        "titleMaxLength": "title can't be longer than 50 characters",
+        "required": "this field can't be empty"
       },
-      "editProject": {
-        "formTitle": "Edit your project",
+      "editProjectForm": {
+        "newProjectTitle": "Create new project",
+        "editTitle": "Edit your project",
         "title": "Project title",
         "description": "Project description",
-        "button": "Ok",
-        "titleMinLength": "project title should contain more than 3 characters",
-        "titleMaxLength": "project title can't be longer than 20 characters",
-        "required": "this field can't be empty",
         "descriptionMaxLength": "project description can't be longer than 80 characters"
       }
     }
@@ -235,24 +228,17 @@
         "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект",
         "successful": "Проект успешно создан"
       },
-      "newProject": {
-        "formTitle": "Создать новый проект",
-        "title": "Название проекта",
-        "description": "Описание проекта",
+      "editForm": {
         "button": "Ok",
-        "titleMinLength": "название проекта не может быть короче 3 символов",
-        "titleMaxLength": "название проекта не может быть длиннее 20 символов",
-        "required": "это поле не может быть пустым",
-        "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
+        "titleMinLength": "название не может быть короче 3 символов",
+        "titleMaxLength": "название не может быть длиннее 50 символов",
+        "required": "это поле не может быть пустым"
       },
-      "editProject": {
-        "formTitle": "Изменить проект",
+      "editProjectForm": {
+        "newProjectTitle": "Создать новый проект",
+        "editTitle": "Изменить проект",
         "title": "Название проекта",
         "description": "Описание проекта",
-        "button": "Ok",
-        "titleMinLength": "название проекта не может быть короче 3 символов",
-        "titleMaxLength": "название проекта не может быть длиннее 20 символов",
-        "required": "это поле не может быть пустым",
         "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
       }
     }

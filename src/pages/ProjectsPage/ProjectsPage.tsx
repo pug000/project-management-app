@@ -94,14 +94,16 @@ function ProjectsPage() {
         <PopupWithForm
           isPopupShown={isCreationPopupOpen}
           setPopupShown={setCreationPopupOpen}
-          keyPrefix="newProject"
+          keyPrefix="editProjectForm"
+          formTitleText="newProjectTitle"
           selectedItem={selectedProject}
           onSubmit={onSubmit}
         />
         <PopupWithForm
           isPopupShown={isEditPopupOpen}
           setPopupShown={setEditPopupOpen}
-          keyPrefix="editProject"
+          keyPrefix="editProjectForm"
+          formTitleText="editTitle"
           selectedItem={selectedProject}
           onSubmit={editOnSubmit}
         />
