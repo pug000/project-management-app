@@ -30,7 +30,7 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors, isSubmitted },
+    formState: { errors },
     trigger,
   } = useForm<UserFormValues>({
     mode: 'onSubmit',
@@ -40,10 +40,10 @@ function AuthForm({ keyPrefix, isLoadingAuth, onSubmit }: AuthFormProps) {
   const isFormValid = Object.values(errors).every((error) => !error?.message);
 
   useEffect(() => {
-    if (isSubmitted) {
-      trigger(['name', 'login', 'password']);
+    if (errors) {
+      trigger([...(Object.keys(errors) as (keyof UserFormValues)[])]);
     }
-  }, [i18n.language, isSubmitted]);
+  }, [i18n.language, errors]);
 
   return (
     <Form
