@@ -1,5 +1,4 @@
 import { setCreationPopupOpen, setEditPopupOpen } from 'redux/slices/popupSlice';
-import { setSelectedProject } from 'redux/slices/projectSlice';
 import { Endpoints, Methods } from 'ts/enums';
 import { Project, ProjectData } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
@@ -21,7 +20,6 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
           await queryFulfilled;
           dispatch(setCreationPopupOpen(false));
           dispatch(setEditPopupOpen(false));
-          dispatch(setSelectedProject(null));
         } catch (error) {
           throw new Error(`${error}`);
         }

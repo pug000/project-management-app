@@ -32,6 +32,7 @@ interface PopupWithFormProps {
   formTitleText: string;
   onSubmit: SubmitHandler<EditFormValues>;
   selectedItem: Project | null;
+  setSelectedItem: ActionCreatorWithPayload<Project | null>;
 }
 
 function PopupWithForm({
@@ -41,12 +42,16 @@ function PopupWithForm({
   formTitleText,
   onSubmit,
   selectedItem,
+  setSelectedItem,
 }: PopupWithFormProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
 
   const closePopup = useCallback(() => {
     dispatch(setPopupShown(false));
+    if (selectedItem) {
+      dispatch(setSelectedItem(null));
+    }
   }, []);
 
   return (
