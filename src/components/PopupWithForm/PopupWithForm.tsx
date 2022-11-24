@@ -8,7 +8,7 @@ import { useAppDispatch } from 'hooks/useRedux';
 
 import { popupAnimation } from 'utils/animations';
 
-import { EditFormValues, Project } from 'ts/interfaces';
+import { EditFormValues } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 
@@ -25,17 +25,17 @@ import {
   PopupWrapper,
 } from './PopupWithForm.style';
 
-interface PopupWithFormProps {
+interface PopupWithFormProps<T> {
   isPopupShown: boolean;
   setPopupShown: ActionCreatorWithPayload<boolean>;
   keyPrefix: string;
   formTitleText: string;
   onSubmit: SubmitHandler<EditFormValues>;
-  selectedItem: Project | null;
-  setSelectedItem: ActionCreatorWithPayload<Project | null>;
+  selectedItem?: T | null;
+  setSelectedItem?: ActionCreatorWithPayload<T | null>;
 }
 
-function PopupWithForm({
+function PopupWithForm<T>({
   isPopupShown,
   setPopupShown,
   keyPrefix,
@@ -43,13 +43,13 @@ function PopupWithForm({
   onSubmit,
   selectedItem,
   setSelectedItem,
-}: PopupWithFormProps) {
+}: PopupWithFormProps<T>) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
 
   const closePopup = useCallback(() => {
     dispatch(setPopupShown(false));
-    if (selectedItem) {
+    if (selectedItem && setSelectedItem) {
       dispatch(setSelectedItem(null));
     }
   }, []);
@@ -82,5 +82,10 @@ function PopupWithForm({
     </AnimatePresence>
   );
 }
+
+PopupWithForm.defaultProps = {
+  selectedItem: null,
+  setSelectedItem: undefined,
+};
 
 export default PopupWithForm;

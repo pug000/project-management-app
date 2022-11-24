@@ -8,17 +8,17 @@ import Textarea from 'components/Textarea/Textarea';
 
 import { defaultFormItemValues } from 'utils/constants';
 
-import { Project, EditFormValues } from 'ts/interfaces';
+import { EditFormValues } from 'ts/interfaces';
 
 import { Form } from 'styles/styles';
 
-interface EditFormProps {
+interface EditFormProps<T> {
   keyPrefix: string;
   onSubmit: SubmitHandler<EditFormValues>;
-  selectedItem: Project | null;
+  selectedItem?: T | null;
 }
 
-function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
+function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
   const { t, i18n } = useTranslation('translation');
 
   const {
@@ -81,5 +81,9 @@ function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
     </Form>
   );
 }
+
+EditForm.defaultProps = {
+  selectedItem: null,
+};
 
 export default memo(EditForm);

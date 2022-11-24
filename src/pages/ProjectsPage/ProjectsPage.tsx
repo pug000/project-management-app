@@ -86,9 +86,7 @@ function ProjectsPage() {
           setPopupShown={setCreationPopupOpen}
           keyPrefix="editProjectForm"
           formTitleText="newProjectTitle"
-          selectedItem={null}
           onSubmit={onSubmit}
-          setSelectedItem={setSelectedProject}
         />
         <PopupWithForm
           isPopupShown={isEditPopupOpen}
