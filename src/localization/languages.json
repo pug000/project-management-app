@@ -41,6 +41,7 @@
         "title": "Title",
         "description": "Description",
         "descriptionPlaceholder": "Project description",
+        "color": "Color",
         "save": "Save",
         "cancel": "Cancel",
         "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
@@ -148,6 +149,7 @@
         "title": "Название",
         "description": "Описание",
         "descriptionPlaceholder": "Описание проекта",
+        "color": "Цвет",
         "save": "Сохранить",
         "cancel": "Отменить",
         "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
