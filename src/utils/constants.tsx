@@ -8,6 +8,7 @@ import {
   Author,
   MainPageElement,
   EditFormValues,
+  RadioInputItem,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -29,6 +30,29 @@ const defaultUserFormValues: UserFormValues = {
   login: '',
   password: '',
 };
+
+const radioInputList: RadioInputItem[] = [
+  {
+    id: 'primary',
+    value: theme.colors.primaryColor,
+    checked: true,
+  },
+  {
+    id: 'yellow',
+    value: theme.colors.yellow,
+    checked: false,
+  },
+  {
+    id: 'pink',
+    value: theme.colors.pink,
+    checked: false,
+  },
+  {
+    id: 'blue',
+    value: theme.colors.blue,
+    checked: false,
+  },
+];
 
 const formTextFields: FormTextField[] = [
   {
@@ -242,6 +266,7 @@ export {
   nameValidation,
   loginValidation,
   passwordValidation,
+  radioInputList,
   formTextFields,
   headerSignItems,
   headerLinkItems,
