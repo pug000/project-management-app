@@ -60,9 +60,9 @@ function EditForm({ keyPrefix, onSubmit, selectedItem }: EditFormProps) {
         }}
         maxLength={{
           value: 50,
-          message: t('titleMaxLength.titleMaxLength'),
+          message: t('editForm.titleMaxLength'),
         }}
-        required={t('required.required')}
+        required={t('editForm.required')}
       />
       <Textarea
         name="description"
