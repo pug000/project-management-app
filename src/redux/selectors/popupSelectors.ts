@@ -28,10 +28,16 @@ const getCreationPopupOpen = createSelector(
   (state) => state.isCreationPopupOpen
 );
 
+const getEditPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isEditPopupOpen
+);
+
 export {
   getWarningPopupOpen,
   getDeletePopupOpen,
   getErrorPopupOpen,
   getSuccessPopupOpen,
   getCreationPopupOpen,
+  getEditPopupOpen,
 };

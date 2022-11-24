@@ -6,6 +6,7 @@ interface PopupState {
   isSuccessPopupOpen: boolean;
   isErrorPopupOpen: boolean;
   isCreationPopupOpen: boolean;
+  isEditPopupOpen: boolean;
 }
 
 const initialState: PopupState = {
@@ -14,6 +15,7 @@ const initialState: PopupState = {
   isSuccessPopupOpen: false,
   isErrorPopupOpen: false,
   isCreationPopupOpen: false,
+  isEditPopupOpen: false,
 };
 
 const popupSlice = createSlice({
@@ -39,6 +41,10 @@ const popupSlice = createSlice({
     setCreationPopupOpen(state, { payload }: PayloadAction<boolean>) {
       state.isCreationPopupOpen = payload;
     },
+
+    setEditPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isEditPopupOpen = payload;
+    },
   },
 });
 
@@ -48,6 +54,7 @@ export const {
   setSuccessPopupOpen,
   setErrorPopupOpen,
   setCreationPopupOpen,
+  setEditPopupOpen,
 } = popupSlice.actions;
 
 export default popupSlice.reducer;

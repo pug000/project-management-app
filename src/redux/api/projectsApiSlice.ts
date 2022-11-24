@@ -1,4 +1,5 @@
-import { setCreationPopupOpen } from 'redux/slices/popupSlice';
+import { setCreationPopupOpen, setEditPopupOpen } from 'redux/slices/popupSlice';
+import { setSelectedProject } from 'redux/slices/projectSlice';
 import { Endpoints, Methods } from 'ts/enums';
 import { Project, ProjectData } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
@@ -19,6 +20,8 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
         try {
           await queryFulfilled;
           dispatch(setCreationPopupOpen(false));
+          dispatch(setEditPopupOpen(false));
+          dispatch(setSelectedProject(null));
         } catch (error) {
           throw new Error(`${error}`);
         }
@@ -35,6 +38,13 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Project'],
     }),
+    updateProject: builder.mutation<ProjectData, ProjectData>({
+      query: ({ _id, ...body }: ProjectData) => ({
+        ...addFetchOptions(`${Endpoints.boards}${_id}`, Methods.put),
+        body,
+      }),
+      invalidatesTags: ['Project'],
+    }),
     deleteProjectById: builder.mutation<ProjectData, string>({
       query: (_id: string) =>
         addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
@@ -46,5 +56,6 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetAllProjectsQuery,
   useCreateProjectMutation,
+  useUpdateProjectMutation,
   useDeleteProjectByIdMutation,
 } = projectsApiSlice;

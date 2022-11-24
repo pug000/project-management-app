@@ -1,18 +1,22 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useCreateProject from 'hooks/useCreateProject';
 
-import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
+import {
+  useGetAllProjectsQuery,
+  useUpdateProjectMutation,
+} from 'redux/api/projectsApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 import {
   setDeletePopupOpen,
   setCreationPopupOpen,
   setSuccessPopupOpen,
+  setEditPopupOpen,
 } from 'redux/slices/popupSlice';
-import { getSuccessPopupOpen } from 'redux/selectors/popupSelectors';
+import { getEditPopupOpen, getSuccessPopupOpen } from 'redux/selectors/popupSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -25,6 +29,8 @@ import PopupNotification from 'components/PopupNotification/PopupNotification';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
+import { SubmitHandler } from 'react-hook-form';
+import { EditFormValues } from 'ts/interfaces';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
@@ -47,6 +53,22 @@ function ProjectsPage() {
     }
   }, [isSuccessCreateProject, isCreationPopupOpen]);
 
+  const isEditPopupOpen = useAppSelector(getEditPopupOpen);
+  const [editProject, { isLoading: isLoadingEditProject }] = useUpdateProjectMutation();
+
+  const editOnSubmit: SubmitHandler<EditFormValues> = useCallback(
+    async ({ color, ...formValues }) => {
+      if (selectedProject) {
+        const { description, ...projectData } = selectedProject;
+        await editProject({
+          ...projectData,
+          title: JSON.stringify({ ...formValues }),
+        });
+      }
+    },
+    [isEditPopupOpen]
+  );
+
   return (
     <ProtectedRoute>
       <MainWrapper>
@@ -63,11 +85,12 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {(isProjectsListLoading || isLoadingDeleteProject || isCreationLoading) && (
-            <Loader />
-          )}
+          {(isProjectsListLoading ||
+            isLoadingDeleteProject ||
+            isCreationLoading ||
+            isLoadingEditProject) && <Loader />}
           {projects?.length ? (
-            <ProjectCards projects={projects} />
+            <ProjectCards projects={projects} setEditPopupOpen={setEditPopupOpen} />
           ) : (
             <NoResultsContainer
               text="projectsPage.emptyContainerText"
@@ -88,6 +111,13 @@ function ProjectsPage() {
           keyPrefix="newProject"
           selectedItem={selectedProject}
           onSubmit={onSubmit}
+        />
+        <PopupWithForm
+          isPopupShown={isEditPopupOpen}
+          setPopupShown={setEditPopupOpen}
+          keyPrefix="editProject"
+          selectedItem={selectedProject}
+          onSubmit={editOnSubmit}
         />
         <PopupNotification
           isPopupShown={isSuccessPopupOpen}

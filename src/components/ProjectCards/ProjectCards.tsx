@@ -12,6 +12,7 @@ import { BiEdit } from 'react-icons/bi';
 
 import { StyledLink } from 'styles/styles';
 import defaultTheme from 'styles/theme';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import {
   Card,
   CardButton,
@@ -26,9 +27,10 @@ import {
 
 interface ProjectCardsProps {
   projects: Project[];
+  setEditPopupOpen: ActionCreatorWithPayload<boolean, 'popup/setEditPopupOpen'>;
 }
 
-function ProjectCards({ projects }: ProjectCardsProps) {
+function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
 
   const deleteProjectOnClick = useCallback(
@@ -36,6 +38,15 @@ function ProjectCards({ projects }: ProjectCardsProps) {
       event.preventDefault();
       dispatch(setSelectedProject(project));
       dispatch(setDeletePopupOpen(true));
+    },
+    []
+  );
+
+  const editProjectOnClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
+      event.preventDefault();
+      dispatch(setSelectedProject(project));
+      dispatch(setEditPopupOpen(true));
     },
     []
   );
@@ -48,7 +59,7 @@ function ProjectCards({ projects }: ProjectCardsProps) {
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
               <CardButtonWrapper>
-                <CardButton>
+                <CardButton onClick={(event) => editProjectOnClick(event, project)}>
                   <IconWrapper>
                     <BiEdit color={defaultTheme.colors.grey} />
                   </IconWrapper>
