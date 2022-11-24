@@ -70,6 +70,12 @@ interface FormTextField {
   pattern: FormFieldValidation<RegExp>;
 }
 
+interface RadioInputItem {
+  id: string;
+  value: string;
+  checked: boolean;
+}
+
 interface UserData extends User {
   _id: string;
 }
@@ -104,6 +110,7 @@ export type {
   User,
   AuthUser,
   FormTextField,
+  RadioInputItem,
   UserData,
   VariantsProps,
   MainPageElement,
