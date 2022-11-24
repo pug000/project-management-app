@@ -70,6 +70,12 @@ interface FormTextField {
   pattern: FormFieldValidation<RegExp>;
 }
 
+interface RadioInputItem {
+  id: string;
+  value: string;
+  checked: boolean;
+}
+
 interface UserData extends User {
   _id: string;
 }
@@ -93,6 +99,17 @@ interface Project extends Pick<ProjectData, '_id' | 'title'> {
   description: string;
 }
 
+interface ColumnData {
+  _id: string;
+  title: string;
+  order: number;
+  boardId: string;
+}
+
+interface ColumnElement extends Pick<ColumnData, '_id' | 'title'> {
+  description: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -104,9 +121,12 @@ export type {
   User,
   AuthUser,
   FormTextField,
+  RadioInputItem,
   UserData,
   VariantsProps,
   MainPageElement,
   ProjectData,
   Project,
+  ColumnData,
+  ColumnElement,
 };

@@ -1,7 +1,29 @@
 import styled from 'styled-components';
 
+const ColumnHeaderButton = styled.button.attrs({
+  type: 'button',
+})`
+  border: none;
+  outline: none;
+  background-color: ${({ theme }) => theme.colors.transparent};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
+  }
+`;
+
 const ColumnWrapper = styled.div`
-  min-width: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -9,10 +31,9 @@ const ColumnWrapper = styled.div`
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   cursor: pointer;
-`;
-
-const ColumnHeaderButton = styled.div`
-  opacity: ${({ theme }) => theme.effects.activeOpacity};
+  &:hover ${ColumnHeaderButton} {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
+  }
 `;
 
 const ColumnHeader = styled.div`
@@ -21,7 +42,7 @@ const ColumnHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: ${({ theme }) => theme.effects.transition};
+  padding: 10px;
 `;
 
 const ColumnTitle = styled.h3`
@@ -40,10 +61,21 @@ const ColumnTaskContainer = styled.div`
   gap: 10px;
 `;
 
+const IconWrapper = styled.div`
+  width: 25px;
+  height: 25px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
 export {
   ColumnWrapper,
   ColumnHeader,
   ColumnHeaderButton,
   ColumnTitle,
   ColumnTaskContainer,
+  IconWrapper,
 };

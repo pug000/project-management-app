@@ -4,10 +4,14 @@ import { useAppDispatch } from 'hooks/useRedux';
 
 import { setSelectedProject } from 'redux/slices/projectSlice';
 import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 
 import { projectIconsList } from 'utils/constants';
 
 import { Project } from 'ts/interfaces';
+
+import Column from 'components/Column/Column';
+import Loader from 'components/Loader/Loader';
 
 import { StyledLink } from 'styles/styles';
 import {
@@ -28,6 +32,8 @@ interface ProjectCardsProps {
 
 function ProjectCards({ projects }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
+  const { data: columns, isLoading: isColumnListLoading } =
+    useGetAllColumnsQuery(undefined);
 
   const editOrDeleteProjectOnClick = useCallback(
     (
@@ -66,6 +72,8 @@ function ProjectCards({ projects }: ProjectCardsProps) {
             <CardDescriptionWrapper>
               <CardDescription>{project.description}</CardDescription>
             </CardDescriptionWrapper>
+            {/* {isColumnListLoading && <Loader />}
+            {columns?.length && <Column columns={columns} />} */}
           </Card>
         </StyledLink>
       ))}
