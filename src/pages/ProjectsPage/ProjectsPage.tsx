@@ -18,80 +18,6 @@ import PopupWarning from 'components/PopupWarning/PopupWarning';
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
-import Task from 'components/Task/Task';
-import Column from 'components/Column/Column';
-
-interface ColumnItemsProps {
-  id: string;
-  title: string;
-  object: TaskItemsProps[];
-}
-
-const ColumnItems: ColumnItemsProps[] = [
-  {
-    id: '1',
-    title: 'column title 1',
-    object: [
-      {
-        id_task: '1',
-        titleTask: 'task  title',
-        text: 'fist',
-        backgroundColor: 'red',
-      },
-      {
-        id_task: '2',
-        titleTask: 'task title',
-        text: 'second',
-        backgroundColor: 'yellow',
-      },
-    ],
-  },
-  {
-    id: '2',
-    title: 'column title 2',
-    object: [
-      {
-        id_task: '3',
-        titleTask: 'task  title 3',
-        text: 'fist asdasd asdasd /n asdasdasd',
-        backgroundColor: 'green',
-      },
-      {
-        id_task: '4',
-        titleTask: 'task title 4',
-        text: 'second',
-        backgroundColor: 'purple',
-      },
-      {
-        id_task: '5',
-        titleTask: 'task title 5',
-        text: 'second',
-        backgroundColor: 'grey',
-      },
-    ],
-  },
-];
-interface TaskItemsProps {
-  id_task: string;
-  titleTask: string;
-  text: string;
-  backgroundColor: string;
-}
-
-// const TaskItems: TaskItemsProps[] = [
-//   {
-//     id_task: '1',
-//     titleTask: 'task  title',
-//     text: 'fist',
-//     backgroundColor: 'red',
-//   },
-//   {
-//     id_task: '2',
-//     titleTask: 'task title',
-//     text: 'second',
-//     backgroundColor: 'yellow',
-//   },
-// ];
 
 function ProjectsPage() {
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -121,25 +47,10 @@ function ProjectsPage() {
           {projects?.length ? (
             <ProjectCards projects={projects} />
           ) : (
-            // <NoResultsContainer
-            //   text="projectsPage.emptyContainerText"
-            //   buttonText="projectsPage.emptyContainerButton"
-            // />
-
-            <>
-              {ColumnItems.map(({ id, title, object }) => (
-                <Column key={id} title={title}>
-                  {object.map(({ id_task, titleTask, text, backgroundColor }) => (
-                    <Task
-                      key={id_task}
-                      title={titleTask}
-                      text={text}
-                      backgroundColor={backgroundColor}
-                    />
-                  ))}
-                </Column>
-              ))}
-            </>
+            <NoResultsContainer
+              text="projectsPage.emptyContainerText"
+              buttonText="projectsPage.emptyContainerButton"
+            />
           )}
         </ProjectsContainer>
         <PopupWarning

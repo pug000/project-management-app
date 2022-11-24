@@ -32,7 +32,6 @@ function Column({ title, children }: ColumnProps) {
           </Button>
         </ColumnHeaderButton>
       </ColumnHeader>
-
       <Button type="button" callback={() => console.log('add task')}>
         Add task
       </Button>
