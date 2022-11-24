@@ -23,7 +23,7 @@ import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPa
 
 function ProjectsPage() {
   const isLoggedIn = useAppSelector(getLoggedIn);
-  const { data: projects, isLoading: isProjectsListLoading } = useGetAllProjectsQuery(
+  const { data: projects, isFetching: isProjectsListLoading } = useGetAllProjectsQuery(
     undefined,
     { skip: !isLoggedIn }
   );
@@ -31,7 +31,7 @@ function ProjectsPage() {
     useDeleteProject();
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
   const dispatch = useAppDispatch();
-  const { isCreationPopupOpen, onSubmit } = useCreateProject();
+  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateProject();
 
   return (
     <ProtectedRoute>
@@ -49,7 +49,9 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {(isProjectsListLoading || isLoadingDeleteProject) && <Loader />}
+          {(isProjectsListLoading || isLoadingDeleteProject || isCreationLoading) && (
+            <Loader />
+          )}
           {projects?.length ? (
             <ProjectCards projects={projects} />
           ) : (

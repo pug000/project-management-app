@@ -1,3 +1,4 @@
+import { setCreationPopupOpen } from 'redux/slices/popupSlice';
 import { Endpoints, Methods } from 'ts/enums';
 import { Project, ProjectData } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
@@ -14,6 +15,14 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
           ...data,
           ...JSON.parse(title),
         })),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(setCreationPopupOpen(false));
+        } catch (error) {
+          throw new Error(`${error}`);
+        }
+      },
       providesTags: (result) =>
         result
           ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
