@@ -35,6 +35,7 @@ const projectsApiSlice = apiSlice.injectEndpoints({
         ...project,
         ...JSON.parse(title),
       }),
+      providesTags: ['Project'],
     }),
     createProject: builder.mutation<ProjectData, OmitProjectData>({
       query: (body: OmitProjectData) => ({
