@@ -98,8 +98,6 @@ interface ProjectData {
 interface Project extends ProjectData {
   description: string;
 }
-
-<<<<<<< HEAD
 interface ColumnData {
   _id: string;
   title: string;
@@ -109,12 +107,11 @@ interface ColumnData {
 
 interface ColumnElement extends Pick<ColumnData, '_id' | 'title'> {
   description: string;
-=======
+}
 interface EditFormValues {
   title: string;
   description: string;
   color: string;
->>>>>>> c418d9d847a688669072d2633898b7c2c12b6f85
 }
 
 export type {
@@ -134,10 +131,7 @@ export type {
   MainPageElement,
   ProjectData,
   Project,
-<<<<<<< HEAD
   ColumnData,
   ColumnElement,
-=======
   EditFormValues,
->>>>>>> c418d9d847a688669072d2633898b7c2c12b6f85
 };

@@ -4,17 +4,11 @@ import { useAppDispatch } from 'hooks/useRedux';
 
 import { setSelectedProject } from 'redux/slices/projectSlice';
 import { setDeletePopupOpen } from 'redux/slices/popupSlice';
-import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 
 import { Project } from 'ts/interfaces';
 
-<<<<<<< HEAD
-import Column from 'components/Column/Column';
-import Loader from 'components/Loader/Loader';
-=======
 import { MdOutlineDelete } from 'react-icons/md';
 import { BiEdit } from 'react-icons/bi';
->>>>>>> c418d9d847a688669072d2633898b7c2c12b6f85
 
 import { StyledLink } from 'styles/styles';
 import defaultTheme from 'styles/theme';
@@ -38,8 +32,6 @@ interface ProjectCardsProps {
 
 function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
-  const { data: columns, isLoading: isColumnListLoading } =
-    useGetAllColumnsQuery(undefined);
 
   const deleteProjectOnClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
@@ -82,8 +74,6 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
             <CardDescriptionWrapper>
               <CardDescription>{project.description}</CardDescription>
             </CardDescriptionWrapper>
-            {/* {isColumnListLoading && <Loader />}
-            {columns?.length && <Column columns={columns} />} */}
           </Card>
         </StyledLink>
       ))}

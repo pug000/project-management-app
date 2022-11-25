@@ -10,6 +10,7 @@ import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Loader from 'components/Loader/Loader';
+import ColumnContainer from 'components/ColumnContainer/ColumnContainer';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
@@ -53,7 +54,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<EditProfilePage />} />
             <Route path="projects" element={<ProjectsPage />} />
-            <Route path="projects/:id" element={<main>Project Page</main>} />
+            <Route path="projects/:id" element={<ColumnContainer />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
