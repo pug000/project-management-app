@@ -15,6 +15,7 @@ const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
 const SignInPage = lazy(() => import('pages/SignInPage/SignInPage'));
 const ProjectsPage = lazy(() => import('pages/ProjectsPage/ProjectsPage'));
+const ProjectPage = lazy(() => import('pages/ProjectPage/ProjectPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage/NotFoundPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
 const EditProfilePage = lazy(() => import('pages/EditProfilePage/EditProfilePage'));
@@ -25,7 +26,7 @@ function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const signOutUser = useCallback(async () => {
+  const signOutUser = useCallback(() => {
     if (isLoggedIn && authUser?.exp) {
       const currentDate = new Date();
       const signOutDate = new Date(authUser.exp * 1000);
@@ -53,7 +54,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<EditProfilePage />} />
             <Route path="projects" element={<ProjectsPage />} />
-            <Route path="projects/:id" element={<main>Project Page</main>} />
+            <Route path="projects/:id" element={<ProjectPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
