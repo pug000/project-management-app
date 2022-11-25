@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useDeleteProjectByIdMutation } from 'redux/api/projectsApiSlice';
 import { getDeletePopupOpen } from 'redux/selectors/popupSelectors';
@@ -9,8 +10,10 @@ import { Project } from 'ts/interfaces';
 
 import { useAppSelector, useAppDispatch } from './useRedux';
 
-const useDeleteProject = (selectedProject: Project | null) => {
+const useDeleteProject = (selectedProject: Project | null | undefined) => {
   const isDeletePopupOpen = useAppSelector(getDeletePopupOpen);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
   const [deleteProjectById, { isLoading: isLoadingDeleteProject }] =
@@ -21,6 +24,10 @@ const useDeleteProject = (selectedProject: Project | null) => {
       dispatch(setDeletePopupOpen(false));
       dispatch(setSelectedProject(null));
       await deleteProjectById(selectedProject._id);
+
+      if (pathname === `/projects/${selectedProject?._id}`) {
+        navigate('/projects');
+      }
     }
   }, [selectedProject]);
 
@@ -28,6 +35,7 @@ const useDeleteProject = (selectedProject: Project | null) => {
     isLoadingDeleteProject,
     isDeletePopupOpen,
     deleteProject,
+    navigate,
   };
 };
 
