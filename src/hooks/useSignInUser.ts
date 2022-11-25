@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { useGetUserByIdQuery } from 'redux/api/userApiSlice';
+import { getErrorPopupOpen } from 'redux/selectors/popupSelectors';
 import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
-import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
+import { setErrorPopupOpen } from 'redux/slices/popupSlice';
 import { setLoggedIn, setUser } from 'redux/slices/userSlice';
 
 import { UserFormValues } from 'ts/interfaces';
@@ -15,6 +16,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
+  const isErrorPopupOpen = useAppSelector(getErrorPopupOpen);
   const [isLoadingAuth, setLoadingAuth] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const useSignInUser = () => {
 
   useEffect(() => {
     if (isErrorSignIn) {
-      dispatch(setNotificationPopupOpen(true));
+      dispatch(setErrorPopupOpen(true));
     }
   }, [isErrorSignIn]);
 
@@ -75,6 +77,7 @@ const useSignInUser = () => {
   }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn, isSuccessGetUser]);
 
   return {
+    isErrorPopupOpen,
     isLoadingAuth,
     signInErrorMessage,
     onSubmit,

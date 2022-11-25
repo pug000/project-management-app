@@ -2,15 +2,16 @@ import { useCallback } from 'react';
 
 import { useDeleteProjectByIdMutation } from 'redux/api/projectsApiSlice';
 import { getDeletePopupOpen } from 'redux/selectors/popupSelectors';
-import getSelectedProject from 'redux/selectors/projectSelectors';
 import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 import { setSelectedProject } from 'redux/slices/projectSlice';
 
+import { Project } from 'ts/interfaces';
+
 import { useAppSelector, useAppDispatch } from './useRedux';
 
-const useDeleteProject = () => {
+const useDeleteProject = (selectedProject: Project | null) => {
   const isDeletePopupOpen = useAppSelector(getDeletePopupOpen);
-  const selectedProject = useAppSelector(getSelectedProject);
+
   const dispatch = useAppDispatch();
   const [deleteProjectById, { isLoading: isLoadingDeleteProject }] =
     useDeleteProjectByIdMutation();

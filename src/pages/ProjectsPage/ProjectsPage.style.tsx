@@ -23,41 +23,6 @@ const ProjectsTitle = styled.h1`
   }
 `;
 
-// const ProjectsContainer = styled.section`
-//   padding: 20px;
-//   width: 100%;
-//   height: 100%;
-//   gap: 25px;
-//   background-color: ${({ theme }) => theme.colors.backgroundGrey};
-//   border-radius: 10px;
-//   display: grid;
-//   grid-template-columns: repeat(auto-fit, 300px);
-//   justify-content: flex-start;
-//   align-items: flex-start;
-//   align-content: flex-start;
-//   justify-items: center;
-
-//   ${StyledLink} {
-//     max-width: 300px;
-//     width: 100%;
-
-//     &:hover {
-//       opacity: 1;
-//     }
-//   }
-// `;
-
-// const NoResultsSection = styled.section`
-//   display: flex;
-//   justify-content: center;
-//   padding: 20px;
-//   width: 100%;
-//   height: 100%;
-//   gap: 25px;
-//   background-color: ${({ theme }) => theme.colors.backgroundGrey};
-//   border-radius: 10px;
-// `;
-
 const ProjectsContainer = styled.section`
   display: flex;
   justify-content: center;

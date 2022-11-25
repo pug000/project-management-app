@@ -24,11 +24,13 @@ import {
   StyledPrevIcon,
   Title,
 } from 'styles/styles';
+import { setErrorPopupOpen } from 'redux/slices/popupSlice';
 
 function EditProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const { isLoadingEditUser, editUserErrorMessage, onSubmit } = useEditUser();
+  const { isErrorPopupOpen, isLoadingEditUser, editUserErrorMessage, onSubmit } =
+    useEditUser();
 
   return (
     <ProtectedRoute>
@@ -62,6 +64,8 @@ function EditProfilePage() {
         {isLoadingEditUser && <Loader />}
         {editUserErrorMessage && (
           <PopupNotification
+            isPopupShown={isErrorPopupOpen}
+            setPopupShown={setErrorPopupOpen}
             text={t(`${editUserErrorMessage}`)}
             backgroundColor={defaultTheme.colors.pink}
           />
