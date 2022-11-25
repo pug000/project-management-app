@@ -13,9 +13,31 @@ const getDeletePopupOpen = createSelector(
   (state) => state.isDeletePopupOpen
 );
 
-const getNotificationPopupOpen = createSelector(
+const getErrorPopupOpen = createSelector(
   getBasePopupState,
-  (state) => state.isNotificationPopupOpen
+  (state) => state.isErrorPopupOpen
 );
 
-export { getWarningPopupOpen, getDeletePopupOpen, getNotificationPopupOpen };
+const getSuccessPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isSuccessPopupOpen
+);
+
+const getCreationPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isCreationPopupOpen
+);
+
+const getEditPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isEditPopupOpen
+);
+
+export {
+  getWarningPopupOpen,
+  getDeletePopupOpen,
+  getErrorPopupOpen,
+  getSuccessPopupOpen,
+  getCreationPopupOpen,
+  getEditPopupOpen,
+};

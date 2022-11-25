@@ -9,11 +9,11 @@ const CardsWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
   border-radius: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fill, 300px);
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
-  justify-items: center;
+  justify-content: space-around;
 
   ${StyledLink} {
     max-width: 300px;

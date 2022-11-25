@@ -95,8 +95,14 @@ interface ProjectData {
   users: string[];
 }
 
-interface Project extends Pick<ProjectData, '_id' | 'title'> {
+interface Project extends ProjectData {
   description: string;
+}
+
+interface EditFormValues {
+  title: string;
+  description: string;
+  color: string;
 }
 
 export type {
@@ -116,4 +122,5 @@ export type {
   MainPageElement,
   ProjectData,
   Project,
+  EditFormValues,
 };
