@@ -6,6 +6,8 @@ import { backButtonAnimation } from 'utils/animations';
 
 import useSignUpUser from 'hooks/useSignUpUser';
 
+import { setErrorPopupOpen } from 'redux/slices/popupSlice';
+
 import AuthForm from 'components/AuthForm/AuthForm';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
@@ -27,7 +29,8 @@ import defaultTheme from 'styles/theme';
 function SignUpPage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const { isLoadingAuth, signUpErrorMessage, onSubmit } = useSignUpUser();
+  const { isErrorPopupOpen, isLoadingAuth, signUpErrorMessage, onSubmit } =
+    useSignUpUser();
 
   return (
     <MainWrapper>
@@ -56,6 +59,8 @@ function SignUpPage() {
       {isLoadingAuth && <Loader />}
       {signUpErrorMessage && (
         <PopupNotification
+          isPopupShown={isErrorPopupOpen}
+          setPopupShown={setErrorPopupOpen}
           text={t(`${signUpErrorMessage}`)}
           backgroundColor={defaultTheme.colors.pink}
         />

@@ -1,4 +1,3 @@
-import projectSlice from 'redux/slices/projectSlice';
 import { Endpoints, Methods } from 'ts/enums';
 import { ColumnData } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';

@@ -28,7 +28,11 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
+<<<<<<< HEAD
   blacklist: ['apiSlice', 'popupSlice', 'projectSlice', 'columnSlice'],
+=======
+  blacklist: ['apiSlice', 'popup', 'project'],
+>>>>>>> c418d9d847a688669072d2633898b7c2c12b6f85
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -3,13 +3,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface PopupState {
   isWarningPopupOpen: boolean;
   isDeletePopupOpen: boolean;
-  isNotificationPopupOpen: boolean;
+  isSuccessPopupOpen: boolean;
+  isErrorPopupOpen: boolean;
+  isCreationPopupOpen: boolean;
+  isEditPopupOpen: boolean;
 }
 
 const initialState: PopupState = {
   isWarningPopupOpen: false,
   isDeletePopupOpen: false,
-  isNotificationPopupOpen: false,
+  isSuccessPopupOpen: false,
+  isErrorPopupOpen: false,
+  isCreationPopupOpen: false,
+  isEditPopupOpen: false,
 };
 
 const popupSlice = createSlice({
@@ -24,13 +30,31 @@ const popupSlice = createSlice({
       state.isDeletePopupOpen = payload;
     },
 
-    setNotificationPopupOpen(state, { payload }: PayloadAction<boolean>) {
-      state.isNotificationPopupOpen = payload;
+    setSuccessPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isSuccessPopupOpen = payload;
+    },
+
+    setErrorPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isErrorPopupOpen = payload;
+    },
+
+    setCreationPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isCreationPopupOpen = payload;
+    },
+
+    setEditPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isEditPopupOpen = payload;
     },
   },
 });
 
-export const { setWarningPopupOpen, setDeletePopupOpen, setNotificationPopupOpen } =
-  popupSlice.actions;
+export const {
+  setWarningPopupOpen,
+  setDeletePopupOpen,
+  setSuccessPopupOpen,
+  setErrorPopupOpen,
+  setCreationPopupOpen,
+  setEditPopupOpen,
+} = popupSlice.actions;
 
 export default popupSlice.reducer;

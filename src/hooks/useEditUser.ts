@@ -3,8 +3,9 @@ import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useEditUserByIdMutation } from 'redux/api/userApiSlice';
+import { getErrorPopupOpen } from 'redux/selectors/popupSelectors';
 import { getAuthUser } from 'redux/selectors/userSelectors';
-import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
+import { setErrorPopupOpen } from 'redux/slices/popupSlice';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -13,6 +14,7 @@ import { useAppSelector, useAppDispatch } from './useRedux';
 const useEditUser = () => {
   const navigate = useNavigate();
   const authUser = useAppSelector(getAuthUser);
+  const isErrorPopupOpen = useAppSelector(getErrorPopupOpen);
   const dispatch = useAppDispatch();
   const [
     editUserById,
@@ -35,7 +37,7 @@ const useEditUser = () => {
 
   useEffect(() => {
     if (isErrorEditUser) {
-      dispatch(setNotificationPopupOpen(true));
+      dispatch(setErrorPopupOpen(true));
     }
   }, [isErrorEditUser]);
 
@@ -46,6 +48,7 @@ const useEditUser = () => {
   }, [isSuccessEditUser]);
 
   return {
+    isErrorPopupOpen,
     isLoadingEditUser,
     editUserErrorMessage,
     onSubmit,

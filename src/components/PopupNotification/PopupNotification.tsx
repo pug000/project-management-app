@@ -1,13 +1,12 @@
 import React, { memo, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 
 import Button from 'components/Button/Button';
 
 import { notificationAnimation, progressBarAnimation } from 'utils/animations';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import { getNotificationPopupOpen } from 'redux/selectors/popupSelectors';
-import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
+import { useAppDispatch } from 'hooks/useRedux';
 
 import defaultTheme from 'styles/theme';
 import {
@@ -22,24 +21,30 @@ import {
 
 interface PopupNotificationProps {
   text?: string;
+  isPopupShown: boolean;
+  setPopupShown: ActionCreatorWithPayload<boolean>;
   backgroundColor?: string;
 }
 
-function PopupNotification({ text, backgroundColor }: PopupNotificationProps) {
-  const isNotificationPopupOpen = useAppSelector(getNotificationPopupOpen);
+function PopupNotification({
+  isPopupShown,
+  setPopupShown,
+  text,
+  backgroundColor,
+}: PopupNotificationProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isNotificationPopupOpen) {
+    if (isPopupShown) {
       setTimeout(() => {
-        dispatch(setNotificationPopupOpen(false));
+        dispatch(setPopupShown(false));
       }, 3000);
     }
-  }, [isNotificationPopupOpen]);
+  }, [isPopupShown]);
 
   return (
     <AnimatePresence>
-      {isNotificationPopupOpen && (
+      {isPopupShown && (
         <PopupWrapper $variants={notificationAnimation}>
           <Popup $backgroundColor={backgroundColor}>
             <PopupText>{text}</PopupText>
@@ -48,7 +53,7 @@ function PopupNotification({ text, backgroundColor }: PopupNotificationProps) {
                 type="button"
                 width="30px"
                 backgroundColor={defaultTheme.colors.transparent}
-                callback={() => dispatch(setNotificationPopupOpen(false))}
+                callback={() => dispatch(setPopupShown(false))}
               >
                 <CloseIcon />
               </Button>

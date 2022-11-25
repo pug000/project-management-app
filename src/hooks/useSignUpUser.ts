@@ -3,8 +3,9 @@ import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useSignInMutation, useSignUpMutation } from 'redux/api/authApiSlice';
+import { getErrorPopupOpen } from 'redux/selectors/popupSelectors';
 import { getAuthUser, getLoggedIn, getUser } from 'redux/selectors/userSelectors';
-import { setNotificationPopupOpen } from 'redux/slices/popupSlice';
+import { setErrorPopupOpen } from 'redux/slices/popupSlice';
 import { setLoggedIn } from 'redux/slices/userSlice';
 
 import { UserFormValues } from 'ts/interfaces';
@@ -13,6 +14,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useSignUpUser = () => {
   const user = useAppSelector(getUser);
+  const isErrorPopupOpen = useAppSelector(getErrorPopupOpen);
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
   const [isLoadingAuth, setLoadingAuth] = useState(false);
@@ -48,7 +50,7 @@ const useSignUpUser = () => {
 
   useEffect(() => {
     if (isErrorSignUp) {
-      dispatch(setNotificationPopupOpen(true));
+      dispatch(setErrorPopupOpen(true));
     }
   }, [isErrorSignUp]);
 
@@ -69,6 +71,7 @@ const useSignUpUser = () => {
   }, [isLoadingSignIn, isLoadingSignUp, isErrorSignUp, isSuccessSignIn]);
 
   return {
+    isErrorPopupOpen,
     isLoadingAuth,
     signUpErrorMessage,
     onSubmit,

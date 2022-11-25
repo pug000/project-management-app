@@ -145,7 +145,7 @@ const loadAnimation: Variants = {
   },
 };
 
-const warningAnimation: Variants = {
+const popupAnimation: Variants = {
   initial: {
     opacity: 0,
     scale: 0.8,
@@ -175,5 +175,5 @@ export {
   notificationAnimation,
   progressBarAnimation,
   loadAnimation,
-  warningAnimation,
+  popupAnimation,
 };

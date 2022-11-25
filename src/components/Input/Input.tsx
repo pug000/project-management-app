@@ -25,6 +25,7 @@ interface InputProps<T extends FieldValues> {
   placeholderText?: string;
   name: Path<T>;
   minLength?: ValidationRule<number>;
+  maxLength?: ValidationRule<number>;
   required?: string;
   pattern?: ValidationRule<RegExp>;
   errors?: FieldError;
@@ -38,6 +39,7 @@ function Input<T extends FieldValues>({
   placeholderText,
   name,
   minLength,
+  maxLength,
   required,
   pattern,
   errors,
@@ -78,6 +80,7 @@ function Input<T extends FieldValues>({
           {...register(name, {
             required,
             minLength,
+            maxLength,
             pattern,
             onChange: () => errors && clearErrors(name),
           })}
@@ -94,6 +97,7 @@ Input.defaultProps = {
   placeholderText: '',
   errors: undefined,
   disabled: false,
+  maxLength: undefined,
   minLength: undefined,
   required: undefined,
   pattern: undefined,

@@ -103,7 +103,21 @@
         "title": "Projects",
         "newProjectButton": "New project",
         "emptyContainerText": "It seems you don't have any projects yet.",
-        "emptyContainerButton": "Click here to create a new project"
+        "emptyContainerButton": "Click here to create a new project",
+        "successful": "Project successfully created"
+      },
+      "editForm": {
+        "button": "Ok",
+        "titleMinLength": "title should contain more than 3 characters",
+        "titleMaxLength": "title can't be longer than 50 characters",
+        "required": "this field can't be empty"
+      },
+      "editProjectForm": {
+        "newProjectTitle": "Create new project",
+        "editTitle": "Edit your project",
+        "title": "Project title",
+        "description": "Project description",
+        "descriptionMaxLength": "project description can't be longer than 80 characters"
       }
     }
   },
@@ -211,7 +225,21 @@
         "title": "Проекты",
         "newProjectButton": "Новый проект",
         "emptyContainerText": "Похоже, у вас еще нет проектов.",
-        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект"
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект",
+        "successful": "Проект успешно создан"
+      },
+      "editForm": {
+        "button": "Ok",
+        "titleMinLength": "название не может быть короче 3 символов",
+        "titleMaxLength": "название не может быть длиннее 50 символов",
+        "required": "это поле не может быть пустым"
+      },
+      "editProjectForm": {
+        "newProjectTitle": "Создать новый проект",
+        "editTitle": "Изменить проект",
+        "title": "Название проекта",
+        "description": "Описание проекта",
+        "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
       }
     }
   }
