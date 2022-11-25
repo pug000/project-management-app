@@ -31,10 +31,13 @@ const projectsApiSlice = apiSlice.injectEndpoints({
     }),
     getProjectById: builder.query<Project, string>({
       query: (id: string) => addFetchOptions(`${Endpoints.boards}${id}`, Methods.get),
-      transformResponse: ({ title, ...project }: ProjectData) => ({
-        ...project,
-        ...JSON.parse(title),
-      }),
+      transformResponse: (project: ProjectData) =>
+        project
+          ? {
+              ...project,
+              ...JSON.parse(project.title),
+            }
+          : undefined,
       providesTags: ['Project'],
     }),
     createProject: builder.mutation<ProjectData, OmitProjectData>({
