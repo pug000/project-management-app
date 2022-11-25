@@ -1,7 +1,9 @@
 import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { IconsProps } from 'ts/interfaces';
+import { MdOutlineDelete } from 'react-icons/md';
+
+import { ColorProps, IconsProps } from 'ts/interfaces';
 
 const MainWrapper = styled.main`
   display: flex;
@@ -112,6 +114,20 @@ const StyledPrevIcon = styled(GrPrevious)<IconsProps>`
   }
 `;
 
+const StyledDeleteIcon = styled(MdOutlineDelete).attrs({
+  style: {
+    width: '100%',
+    height: '100%',
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.red};
+  }
+`;
+
 export {
   MainWrapper,
   Title,
@@ -123,4 +139,5 @@ export {
   LinkWrapper,
   StyledLink,
   StyledPrevIcon,
+  StyledDeleteIcon,
 };

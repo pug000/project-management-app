@@ -17,7 +17,7 @@ import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
 
 import defaultTheme from 'styles/theme';
-import { MainWrapper, StyledPrevIcon } from 'styles/styles';
+import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
 
 import {
   ProjectContainer,
@@ -25,7 +25,6 @@ import {
   ProjectControlsWrapper,
   ProjectDescription,
   ProjectTitle,
-  StyledDeleteIcon,
 } from './ProjectPage.style';
 
 function ProjectPage() {

@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import { MdOutlineDelete } from 'react-icons/md';
-
-import { IconsProps } from 'ts/interfaces';
 
 const ProjectControls = styled.section`
   display: flex;
@@ -35,7 +32,7 @@ const ProjectControlsWrapper = styled.div`
 const ProjectTitle = styled.h1`
   font-family: ${({ theme }) => theme.fonts.title};
   font-weight: ${({ theme }) => theme.fontsWeight.medium};
-  font-size: ${({ theme }) => theme.fontSizes.h2};
+  font-size: ${({ theme }) => theme.fontSizes.h3};
   color: ${({ theme }) => theme.colors.title};
 
   @media (max-width: 600px) {
@@ -59,26 +56,10 @@ const ProjectContainer = styled.section`
   border-radius: 10px;
 `;
 
-const StyledDeleteIcon = styled(MdOutlineDelete).attrs({
-  style: {
-    width: '100%',
-    height: '100%',
-  },
-})<IconsProps>`
-  color: ${({ $isDisabled, theme }) =>
-    $isDisabled ? theme.colors.transparent : theme.colors.grey};
-  transition: ${({ theme }) => theme.effects.transition};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.pink};
-  }
-`;
-
 export {
   ProjectControls,
   ProjectControlsWrapper,
   ProjectTitle,
   ProjectDescription,
   ProjectContainer,
-  StyledDeleteIcon,
 };
