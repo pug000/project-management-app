@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   popup: popupSlice,
   project: projectSlice,
   column: columnSlice,
+
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

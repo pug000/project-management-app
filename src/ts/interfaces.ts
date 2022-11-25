@@ -104,10 +104,6 @@ interface ColumnData {
   order: number;
   boardId: string;
 }
-
-interface ColumnElement extends Pick<ColumnData, '_id' | 'title'> {
-  description: string;
-}
 interface EditFormValues {
   title: string;
   description: string;
@@ -132,6 +128,5 @@ export type {
   ProjectData,
   Project,
   ColumnData,
-  ColumnElement,
   EditFormValues,
 };
