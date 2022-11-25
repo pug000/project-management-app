@@ -106,6 +106,12 @@
         "emptyContainerButton": "Click here to create a new project",
         "successful": "Project successfully created"
       },
+      "projectPage": {
+        "newColumnButton": "New column",
+        "emptyContainerText": "It seems you don't have any columns yet.",
+        "emptyContainerButton": "Click here to create a new column",
+        "successful": "Column successfully created"
+      },
       "editForm": {
         "button": "Ok",
         "titleMinLength": "title should contain more than 3 characters",
@@ -227,6 +233,12 @@
         "emptyContainerText": "Похоже, у вас еще нет проектов.",
         "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект",
         "successful": "Проект успешно создан"
+      },
+      "projectPage": {
+        "newColumnButton": "Новая колонка",
+        "emptyContainerText": "Похоже, у вас еще нет колонок",
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новую колонку",
+        "successful": "Колонка успешно создана"
       },
       "editForm": {
         "button": "Ok",
