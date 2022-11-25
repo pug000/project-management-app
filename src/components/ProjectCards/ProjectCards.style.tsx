@@ -18,6 +18,8 @@ const CardsWrapper = styled.div`
   ${StyledLink} {
     max-width: 300px;
     width: 100%;
+    height: 100%;
+    display: flex;
 
     &:hover {
       opacity: 1;
@@ -110,6 +112,8 @@ const CardDescriptionWrapper = styled.div`
 
 const CardDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.text};
+  word-wrap: break-word;
+  overflow: hidden;
 `;
 
 export {
