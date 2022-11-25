@@ -48,6 +48,17 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
         addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
       invalidatesTags: ['Project'],
     }),
+    getProjectById: builder.query<Project, string>({
+      query: (id: string) => addFetchOptions(`${Endpoints.boards}${id}`, Methods.get),
+      transformResponse: (project: ProjectData) =>
+        project
+          ? {
+              ...project,
+              ...JSON.parse(project.title),
+            }
+          : undefined,
+      providesTags: ['Project'],
+    }),
   }),
 });
 
@@ -56,4 +67,5 @@ export const {
   useCreateProjectMutation,
   useUpdateProjectMutation,
   useDeleteProjectByIdMutation,
+  useGetProjectByIdQuery,
 } = projectsApiSlice;

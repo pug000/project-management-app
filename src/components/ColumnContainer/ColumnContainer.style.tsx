@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { MainWrapper } from 'styles/styles';
 
 const ColumnWrapper = styled(MainWrapper)`
+  width: 100%;
+  height: auto;
+  min-height: 75vh;
   flex-direction: row;
   justify-content: space-evenly;
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
@@ -12,6 +15,7 @@ const ColumnsContainer = styled.div`
   max-width: 300px;
   width: 100%;
   height: auto;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   gap: 10px;

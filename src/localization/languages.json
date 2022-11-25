@@ -118,6 +118,10 @@
         "title": "Project title",
         "description": "Project description",
         "descriptionMaxLength": "project description can't be longer than 80 characters"
+      },
+      "columnContainer": {
+        "newColumnButton": "New column",
+        "successful": "Column successfully created"
       }
     }
   },
@@ -240,6 +244,10 @@
         "title": "Название проекта",
         "description": "Описание проекта",
         "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
+      },
+      "columnContainer": {
+        "newColumnButton": "Новая колонка",
+        "successful": "Колонка успешно создана"
       }
     }
   }
