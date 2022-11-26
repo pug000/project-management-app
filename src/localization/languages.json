@@ -122,6 +122,11 @@
       "columnContainer": {
         "newColumnButton": "New column",
         "successful": "Column successfully created"
+      },
+      "editColumnForm": {
+        "newColumnTitle": "Create new column",
+        "editTitle": "Edit your column",
+        "title": "Column title"
       }
     }
   },
@@ -248,6 +253,11 @@
       "columnContainer": {
         "newColumnButton": "Новая колонка",
         "successful": "Колонка успешно создана"
+      },
+      "editColumnForm": {
+        "newColumnTitle": "Создать новую колонку",
+        "editTitle": "Изменить колонку",
+        "title": "Название колонки"
       }
     }
   }

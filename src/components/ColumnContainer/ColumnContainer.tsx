@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import useCreateColumn from 'hooks/useCreateColumn';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 import { setCreationPopupOpen, setDeletePopupOpen } from 'redux/slices/popupSlice';
@@ -14,7 +15,7 @@ import { useGetProjectByIdQuery } from 'redux/api/projectsApiSlice';
 
 import Button from 'components/Button/Button';
 import Task from 'components/Task/Task';
-import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
+import PopupWithFormColumnTask from 'components/PopupWithFormColumnTask/PopupWithFormColumnTask';
 
 import { BiEdit } from 'react-icons/bi';
 import { MdOutlineDelete } from 'react-icons/md';
@@ -47,10 +48,7 @@ function ColumnContainer() {
     { skip: !id && !isLoggedIn }
   );
 
-  // const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumnMutation(
-  //   id ?? '',
-  //   { skip: !id && !isLoggedIn }
-  // );
+  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
 
   return (
     <MainWrapper>
@@ -94,13 +92,13 @@ function ColumnContainer() {
             </ColumnsContainer>
           ))}
       </ColumnWrapper>
-      {/* <PopupWithForm
+      <PopupWithFormColumnTask
         isPopupShown={isCreationPopupOpen}
         setPopupShown={setCreationPopupOpen}
-        keyPrefix="editProjectForm"
-        formTitleText="newProjectTitle"
+        keyPrefix="editColumnForm"
+        formTitleText="newColumnTitle"
         onSubmit={onSubmit}
-      /> */}
+      />
     </MainWrapper>
   );
 }

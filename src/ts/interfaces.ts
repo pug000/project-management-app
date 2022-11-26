@@ -98,16 +98,20 @@ interface ProjectData {
 interface Project extends ProjectData {
   description: string;
 }
+interface EditFormValues {
+  title: string;
+  description: string;
+  color: string;
+}
 interface ColumnData {
   _id: string;
   title: string;
   order: number;
   boardId: string;
 }
-interface EditFormValues {
+interface ColumnFormValue {
+  id?: string;
   title: string;
-  description: string;
-  color: string;
 }
 
 export type {
@@ -129,4 +133,5 @@ export type {
   Project,
   ColumnData,
   EditFormValues,
+  ColumnFormValue,
 };
