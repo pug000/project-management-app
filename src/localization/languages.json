@@ -124,6 +124,9 @@
         "title": "Project title",
         "description": "Project description",
         "descriptionMaxLength": "project description can't be longer than 80 characters"
+      },
+      "editColumnForm": {
+        "title": "Column title"
       }
     }
   },
@@ -252,6 +255,9 @@
         "title": "Название проекта",
         "description": "Описание проекта",
         "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
+      },
+      "editColumnForm": {
+        "title": "Название колонки"
       }
     }
   }
