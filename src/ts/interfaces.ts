@@ -111,7 +111,7 @@ interface ColumnData {
 }
 interface ColumnFormValue {
   id?: string;
-  title: string;
+  body: { title: string; order: number };
 }
 
 export type {

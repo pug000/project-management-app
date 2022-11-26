@@ -42,10 +42,10 @@ function EditForm<T>({ keyPrefix, onSubmit }: EditFormProps<T>) {
     >
       <Input
         type="text"
-        name="title"
+        name="body.title"
         register={register}
         clearErrors={clearErrors}
-        errors={errors.title}
+        errors={errors.body?.title}
         placeholderText={t(`${keyPrefix}.title`)}
         minLength={{
           value: 3,

@@ -14,9 +14,9 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
           : ['Column'],
     }),
     createColumn: builder.mutation<ColumnData, ColumnFormValue>({
-      query: ({ id, title }) => ({
+      query: ({ id, body }) => ({
         ...addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.post),
-        title,
+        body,
       }),
       invalidatesTags: ['Column'],
     }),

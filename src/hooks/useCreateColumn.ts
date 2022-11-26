@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import getSelectedColumn from 'redux/selectors/columnSelectors';
 import { ColumnFormValue } from 'ts/interfaces';
 
 import { useCreateColumnMutation } from 'redux/api/columnApiSlice';
 import { getCreationPopupOpen } from 'redux/selectors/popupSelectors';
 
 import { useAppSelector } from './useRedux';
+import { defaultColumnFormValues } from 'utils/constants';
 
 const useCreateColumn = (idProject: string) => {
   const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
@@ -19,7 +19,10 @@ const useCreateColumn = (idProject: string) => {
     async (formValues) => {
       await createColumn({
         id: idProject,
-        title: formValues.title,
+        body: {
+          title: formValues.body.title,
+          order: defaultColumnFormValues.body.order,
+        },
       });
     },
     [isCreationPopupOpen]

@@ -262,7 +262,7 @@ const defaultFormItemValues: EditFormValues = {
 
 const defaultColumnFormValues: ColumnFormValue = {
   id: '',
-  title: '',
+  body: { title: '', order: 0 },
 };
 
 export {
