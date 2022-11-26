@@ -89,11 +89,6 @@ const CardButton = styled.button.attrs({
 const IconWrapper = styled.div`
   width: 25px;
   height: 25px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const CardTitle = styled.h5`

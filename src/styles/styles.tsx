@@ -2,6 +2,7 @@ import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { MdOutlineDelete } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
 
 import { ColorProps, IconsProps } from 'ts/interfaces';
 
@@ -128,6 +129,20 @@ const StyledDeleteIcon = styled(MdOutlineDelete).attrs({
   }
 `;
 
+const StyledEditIcon = styled(BiEdit).attrs({
+  style: {
+    width: '100%',
+    height: '100%',
+  },
+})`
+  color: ${({ theme }) => theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+`;
+
 export {
   MainWrapper,
   Title,
@@ -140,4 +155,5 @@ export {
   StyledLink,
   StyledPrevIcon,
   StyledDeleteIcon,
+  StyledEditIcon,
 };

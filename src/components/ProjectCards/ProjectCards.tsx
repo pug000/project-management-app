@@ -8,9 +8,7 @@ import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
 import { Project } from 'ts/interfaces';
 
-import { BiEdit } from 'react-icons/bi';
-
-import { StyledDeleteIcon, StyledLink } from 'styles/styles';
+import { StyledDeleteIcon, StyledEditIcon, StyledLink } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 import {
   Card,
@@ -60,7 +58,7 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
               <CardButtonWrapper>
                 <CardButton onClick={(event) => editProjectOnClick(event, project)}>
                   <IconWrapper>
-                    <BiEdit color={defaultTheme.colors.grey} />
+                    <StyledEditIcon />
                   </IconWrapper>
                 </CardButton>
                 <CardButton onClick={(event) => deleteProjectOnClick(event, project)}>
