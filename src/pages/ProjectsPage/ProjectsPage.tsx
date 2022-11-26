@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useCreateProject from 'hooks/useCreateProject';
+import useGetAllProject from 'hooks/useGetAllProjects';
+import useEditProject from 'hooks/useEditProject';
 
-import { useGetAllProjectsQuery } from 'redux/api/projectsApiSlice';
-import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { setSelectedProject } from 'redux/slices/projectSlice';
+import getSelectedProject from 'redux/selectors/projectSelectors';
 import {
   setDeletePopupOpen,
   setCreationPopupOpen,
@@ -23,24 +25,15 @@ import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
-import getSelectedProject from 'redux/selectors/projectSelectors';
-import useEditProject from 'hooks/useEditProject';
-import { setSelectedProject } from 'redux/slices/projectSlice';
 import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPage.style';
 
 function ProjectsPage() {
-  const isLoggedIn = useAppSelector(getLoggedIn);
   const selectedProject = useAppSelector(getSelectedProject);
-
-  const { data: projects, isFetching: isProjectsListLoading } = useGetAllProjectsQuery(
-    undefined,
-    { skip: !isLoggedIn }
-  );
+  const { projects, isProjectsListLoading } = useGetAllProject();
   const { isDeletePopupOpen, isLoadingDeleteProject, deleteProject } =
     useDeleteProject(selectedProject);
   const { isEditPopupOpen, isLoadingEditProject, editOnSubmit } =
     useEditProject(selectedProject);
-
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
   const dispatch = useAppDispatch();
   const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateProject();

@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -8,21 +8,16 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useCreateColumn from 'hooks/useCreateColumn';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { setCreationPopupOpen, setDeletePopupOpen } from 'redux/slices/popupSlice';
-import { setSelectedColumn } from 'redux/slices/columnSlice';
-import { useGetAllColumnsQuery, useCreateColumnMutation } from 'redux/api/columnApiSlice';
-import { useGetProjectByIdQuery } from 'redux/api/projectsApiSlice';
+// import { setCreationPopupOpen, setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 
 import Button from 'components/Button/Button';
 import Task from 'components/Task/Task';
-import PopupWithFormColumnTask from 'components/PopupWithFormColumnTask/PopupWithFormColumnTask';
 
 import { BiEdit } from 'react-icons/bi';
 import { MdOutlineDelete } from 'react-icons/md';
 import defaultTheme from 'styles/theme';
 
-import { MainWrapper } from 'styles/styles';
-import { ProjectsControls, ProjectsTitle } from 'pages/ProjectsPage/ProjectsPage.style';
 import {
   ColumnWrapper,
   ColumnsContainer,
@@ -43,63 +38,36 @@ function ColumnContainer() {
     id ?? '',
     { skip: !id && !isLoggedIn }
   );
-  const { data: project, isFetching: isProjectByIdLoading } = useGetProjectByIdQuery(
-    id ?? '',
-    { skip: !id && !isLoggedIn }
-  );
-
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
 
   return (
-    <MainWrapper>
-      <ProjectsControls>
-        {project && <ProjectsTitle>{project.title}</ProjectsTitle>}
-        <Button
-          type="button"
-          width="130px"
-          backgroundColor={defaultTheme.colors.transparent}
-          color={defaultTheme.colors.primaryColor}
-          callback={() => dispatch(setCreationPopupOpen(true))}
-        >
-          {t('newColumnButton')}
-        </Button>
-      </ProjectsControls>
-      <ColumnWrapper>
-        {columns?.length &&
-          columns.map((column) => (
-            <ColumnsContainer key={column._id}>
-              <ColumnHeader>
-                <ColumnTitle>{column.title}</ColumnTitle>
-                <ColumnHeaderButtonWrapper>
-                  <ColumnHeaderButton onClick={() => console.log('edit')}>
-                    <IconWrapper>
-                      <BiEdit color={defaultTheme.colors.grey} />
-                    </IconWrapper>
-                  </ColumnHeaderButton>
-                  <ColumnHeaderButton onClick={(event) => console.log('del')}>
-                    <IconWrapper>
-                      <MdOutlineDelete color={defaultTheme.colors.pink} />
-                    </IconWrapper>
-                  </ColumnHeaderButton>
-                </ColumnHeaderButtonWrapper>
-              </ColumnHeader>
-              <Button type="button" callback={() => console.log('add task')}>
-                Add task
-              </Button>
-              <ColumnTaskContainer>
-                <Task title="hello" />
-              </ColumnTaskContainer>
-            </ColumnsContainer>
-          ))}
-      </ColumnWrapper>
-      <PopupWithFormColumnTask
-        isPopupShown={isCreationPopupOpen}
-        setPopupShown={setCreationPopupOpen}
-        keyPrefix="editColumnForm"
-        formTitleText="newColumnTitle"
-        onSubmit={onSubmit}
-      />
-    </MainWrapper>
+    <ColumnWrapper>
+      {columns?.length &&
+        columns.map((column) => (
+          <ColumnsContainer key={column._id}>
+            <ColumnHeader>
+              <ColumnTitle>{column.title}</ColumnTitle>
+              <ColumnHeaderButtonWrapper>
+                <ColumnHeaderButton onClick={() => console.log('edit')}>
+                  <IconWrapper>
+                    <BiEdit color={defaultTheme.colors.grey} />
+                  </IconWrapper>
+                </ColumnHeaderButton>
+                <ColumnHeaderButton onClick={(event) => console.log('del')}>
+                  <IconWrapper>
+                    <MdOutlineDelete color={defaultTheme.colors.pink} />
+                  </IconWrapper>
+                </ColumnHeaderButton>
+              </ColumnHeaderButtonWrapper>
+            </ColumnHeader>
+            <Button type="button" callback={() => console.log('add task')}>
+              Add task
+            </Button>
+            <ColumnTaskContainer>
+              <Task title="hello" />
+            </ColumnTaskContainer>
+          </ColumnsContainer>
+        ))}
+    </ColumnWrapper>
   );
 }
 

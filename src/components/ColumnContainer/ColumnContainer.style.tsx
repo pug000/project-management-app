@@ -1,18 +1,15 @@
 import styled from 'styled-components';
-import { MainWrapper } from 'styles/styles';
 
-const ColumnWrapper = styled(MainWrapper)`
+const ColumnWrapper = styled.div`
+  display: flex;
+  overflow: auto;
   width: 100%;
-  height: auto;
-  min-height: 75vh;
-  flex-direction: row;
-  justify-content: space-evenly;
-  background-color: ${({ theme }) => theme.colors.backgroundGrey};
-  padding: 10px 0;
+  height: 100%;
+  gap: 25px;
 `;
 
 const ColumnsContainer = styled.div`
-  max-width: 300px;
+  min-width: 300px;
   width: 100%;
   height: auto;
   min-height: 75vh;
@@ -28,7 +25,7 @@ const ColumnsContainer = styled.div`
 `;
 
 const ColumnHeader = styled.div`
-  min-width: 100%;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
@@ -85,9 +82,7 @@ const IconWrapper = styled.div`
 
 const ColumnTaskContainer = styled.div`
   width: 100%;
-  min-height: 600px;
-  max-height: 1000px;
-  overflow-y: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
