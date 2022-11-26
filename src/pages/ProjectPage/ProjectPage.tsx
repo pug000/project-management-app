@@ -13,7 +13,6 @@ import { getLoggedIn } from 'redux/selectors/userSelectors';
 
 import { backButtonAnimation } from 'utils/animations';
 
-import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer';
 import Loader from 'components/Loader/Loader';
@@ -35,8 +34,12 @@ import {
 function ProjectPage() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
-  const { selectedProject, isLoadingSelectedProject, isSuccessSelectedProject } =
-    useGetProjectById();
+  const {
+    selectedProject,
+    isLoadingSelectedProject,
+    isSuccessSelectedProject,
+    isNavigate,
+  } = useGetProjectById();
   const { isLoadingDeleteProject, isDeletePopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
   const { id } = useParams();
@@ -48,76 +51,74 @@ function ProjectPage() {
   const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
 
   return (
-    <ProtectedRoute>
-      <MainWrapper>
-        <ProjectControls>
-          <ProjectControlsWrapper>
+    <MainWrapper>
+      <ProjectControls>
+        <ProjectControlsWrapper>
+          <Button
+            type="button"
+            width="30px"
+            animation={backButtonAnimation}
+            backgroundColor={defaultTheme.colors.transparent}
+            color={defaultTheme.colors.primaryColor}
+            callback={() => navigate(-1)}
+          >
+            <StyledPrevIcon $isDisabled={isLoadingSelectedProject} />
+          </Button>
+          <ProjectTitle>{selectedProject?.title}</ProjectTitle>
+          {selectedProject && (
             <Button
               type="button"
               width="30px"
-              animation={backButtonAnimation}
               backgroundColor={defaultTheme.colors.transparent}
-              color={defaultTheme.colors.primaryColor}
-              callback={() => navigate(-1)}
+              color={defaultTheme.colors.pink}
+              callback={() => dispatch(setDeletePopupOpen(true))}
             >
-              <StyledPrevIcon $isDisabled={isLoadingSelectedProject} />
+              <StyledDeleteIcon />
             </Button>
-            <ProjectTitle>{selectedProject?.title}</ProjectTitle>
-            {selectedProject && (
-              <Button
-                type="button"
-                width="30px"
-                backgroundColor={defaultTheme.colors.transparent}
-                color={defaultTheme.colors.pink}
-                callback={() => dispatch(setDeletePopupOpen(true))}
-              >
-                <StyledDeleteIcon />
-              </Button>
-            )}
-          </ProjectControlsWrapper>
-          <ProjectControlsWrapper>
-            <Button
-              type="button"
-              width="130px"
-              backgroundColor={defaultTheme.colors.transparent}
-              color={defaultTheme.colors.primaryColor}
-              callback={() => dispatch(setCreationPopupOpen(true))}
-            >
-              {t('newColumnButton')}
-            </Button>
-          </ProjectControlsWrapper>
-        </ProjectControls>
-        <ProjectDescription>{selectedProject?.description}</ProjectDescription>
-        <ProjectContainer>
-          {(isLoadingSelectedProject || isLoadingDeleteProject || isCreationLoading) && (
-            <Loader />
           )}
-          {selectedProject || columns ? (
-            <ColumnContainer />
-          ) : (
-            <NoResultsContainer
-              text="projectPage.emptyContainerText"
-              buttonText="projectPage.emptyContainerButton"
-              setPopupShown={setCreationPopupOpen}
-            />
-          )}
-        </ProjectContainer>
-        <PopupWarning
-          isPopupShown={isDeletePopupOpen}
-          setPopupShown={setDeletePopupOpen}
-          text="deleteProject"
-          actionOnYes={deleteProject}
-        />
-        {!selectedProject && isSuccessSelectedProject && <Navigate to="*" />}
-        <PopupWithFormColumnTask
-          isPopupShown={isCreationPopupOpen}
-          setPopupShown={setCreationPopupOpen}
-          keyPrefix="editColumnForm"
-          formTitleText="newColumnTitle"
-          onSubmit={onSubmit}
-        />
-      </MainWrapper>
-    </ProtectedRoute>
+        </ProjectControlsWrapper>
+        <ProjectControlsWrapper>
+          <Button
+            type="button"
+            width="130px"
+            backgroundColor={defaultTheme.colors.transparent}
+            color={defaultTheme.colors.primaryColor}
+            callback={() => dispatch(setCreationPopupOpen(true))}
+          >
+            {t('newColumnButton')}
+          </Button>
+        </ProjectControlsWrapper>
+      </ProjectControls>
+      <ProjectDescription>{selectedProject?.description}</ProjectDescription>
+      <ProjectContainer>
+        {(isLoadingSelectedProject || isLoadingDeleteProject || isCreationLoading) && (
+          <Loader />
+        )}
+        {selectedProject || columns ? (
+          <ColumnContainer />
+        ) : (
+          <NoResultsContainer
+            text="projectPage.emptyContainerText"
+            buttonText="projectPage.emptyContainerButton"
+            setPopupShown={setCreationPopupOpen}
+          />
+        )}
+      </ProjectContainer>
+      <PopupWarning
+        isPopupShown={isDeletePopupOpen}
+        setPopupShown={setDeletePopupOpen}
+        text="deleteProject"
+        actionOnYes={deleteProject}
+      />
+      {isNavigate && <Navigate to="*" />}
+      <PopupWithFormColumnTask
+        isPopupShown={isCreationPopupOpen}
+        setPopupShown={setCreationPopupOpen}
+        keyPrefix="editColumnForm"
+        formTitleText="newColumnTitle"
+        onSubmit={onSubmit}
+      />
+    </MainWrapper>
   );
 }
 
