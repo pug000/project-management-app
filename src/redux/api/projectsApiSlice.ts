@@ -6,7 +6,7 @@ import apiSlice from './apiSlice';
 
 type OmitProjectData = Omit<ProjectData, '_id'>;
 
-export const projectsApiSlice = apiSlice.injectEndpoints({
+const projectsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllProjects: builder.query<Project[], void>({
       query: () => addFetchOptions(`${Endpoints.boards}`, Methods.get),
@@ -28,6 +28,17 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
         result
           ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
           : ['Project'],
+    }),
+    getProjectById: builder.query<Project, string>({
+      query: (id: string) => addFetchOptions(`${Endpoints.boards}${id}`, Methods.get),
+      transformResponse: (project: ProjectData) =>
+        project
+          ? {
+              ...project,
+              ...JSON.parse(project.title),
+            }
+          : undefined,
+      providesTags: ['Project'],
     }),
     createProject: builder.mutation<ProjectData, OmitProjectData>({
       query: (body: OmitProjectData) => ({
@@ -53,6 +64,7 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetAllProjectsQuery,
+  useGetProjectByIdQuery,
   useCreateProjectMutation,
   useUpdateProjectMutation,
   useDeleteProjectByIdMutation,

@@ -1,4 +1,5 @@
 import React, { memo, useCallback } from 'react';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
@@ -7,12 +8,10 @@ import { setDeletePopupOpen } from 'redux/slices/popupSlice';
 
 import { Project } from 'ts/interfaces';
 
-import { MdOutlineDelete } from 'react-icons/md';
 import { BiEdit } from 'react-icons/bi';
 
-import { StyledLink } from 'styles/styles';
+import { StyledDeleteIcon, StyledLink } from 'styles/styles';
 import defaultTheme from 'styles/theme';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import {
   Card,
   CardButton,
@@ -66,7 +65,7 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
                 </CardButton>
                 <CardButton onClick={(event) => deleteProjectOnClick(event, project)}>
                   <IconWrapper>
-                    <MdOutlineDelete color={defaultTheme.colors.pink} />
+                    <StyledDeleteIcon $color={defaultTheme.colors.pink} />
                   </IconWrapper>
                 </CardButton>
               </CardButtonWrapper>
