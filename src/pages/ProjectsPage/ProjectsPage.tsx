@@ -36,7 +36,7 @@ function ProjectsPage() {
     useEditProject(selectedProject);
   const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
   const dispatch = useAppDispatch();
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateProject();
+  const { isCreationPopupOpen, isLoadingCreateProject, onSubmit } = useCreateProject();
 
   return (
     <ProtectedRoute>
@@ -56,7 +56,7 @@ function ProjectsPage() {
         <ProjectsContainer>
           {(isProjectsListLoading ||
             isLoadingDeleteProject ||
-            isCreationLoading ||
+            isLoadingCreateProject ||
             isLoadingEditProject) && <Loader />}
           {projects?.length ? (
             <ProjectCards projects={projects} setEditPopupOpen={setEditPopupOpen} />

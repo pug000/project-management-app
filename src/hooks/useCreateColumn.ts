@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
 import { ColumnFormValue } from 'ts/interfaces';
 
@@ -10,17 +11,18 @@ import { defaultColumnFormValues } from 'utils/constants';
 
 import { useAppSelector } from './useRedux';
 
-const useCreateColumn = (idProject: string) => {
+const useCreateColumn = () => {
   const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
+  const { id } = useParams();
   const [
     createColumn,
-    { isLoading: isCreationLoading, isSuccess: isSuccessCreateColumn },
+    { isLoading: isLoadingCreateColumn, isSuccess: isSuccessCreateColumn },
   ] = useCreateColumnMutation();
 
   const onSubmit: SubmitHandler<ColumnFormValue> = useCallback(
     async (formValues) => {
       await createColumn({
-        id: idProject,
+        id,
         body: {
           title: formValues.body.title,
           order: defaultColumnFormValues.body.order,
@@ -33,7 +35,7 @@ const useCreateColumn = (idProject: string) => {
   return {
     isSuccessCreateColumn,
     isCreationPopupOpen,
-    isCreationLoading,
+    isLoadingCreateColumn,
     onSubmit,
   };
 };

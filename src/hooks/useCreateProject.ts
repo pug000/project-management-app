@@ -13,7 +13,7 @@ const useCreateProject = () => {
   const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
   const [
     createProject,
-    { isLoading: isCreationLoading, isSuccess: isSuccessCreateProject },
+    { isLoading: isLoadingCreateProject, isSuccess: isSuccessCreateProject },
   ] = useCreateProjectMutation();
   const user = useAppSelector(getUser);
 
@@ -31,7 +31,7 @@ const useCreateProject = () => {
   return {
     isSuccessCreateProject,
     isCreationPopupOpen,
-    isCreationLoading,
+    isLoadingCreateProject,
     onSubmit,
   };
 };

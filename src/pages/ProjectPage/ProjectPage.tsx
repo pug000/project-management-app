@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
@@ -36,22 +36,22 @@ import {
 } from './ProjectPage.style';
 
 function ProjectPage() {
-  const { id } = useParams();
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
+  const { isCreationPopupOpen, isLoadingCreateColumn, onSubmit } = useCreateColumn();
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
-  const { columns, isColumnListLoading } = useGetAllColumns();
-  const isLoadingProjectPage =
-    isLoadingSelectedProject ||
-    isLoadingDeleteProject ||
-    isCreationLoading ||
-    isColumnListLoading ||
-    isLoadingDeleteColumn;
+  const { columns, isLoadingColumnList } = useGetAllColumns();
+  const isLoadingProjectPage = [
+    isLoadingSelectedProject,
+    isLoadingColumnList,
+    isLoadingDeleteProject,
+    isLoadingDeleteColumn,
+    isLoadingCreateColumn,
+  ].some((loader) => loader);
 
   return (
     <MainWrapper>
