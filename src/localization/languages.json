@@ -97,7 +97,8 @@
         "no": "No",
         "signOut": "Are you sure you want to sign out?",
         "deleteProfile": "Are you sure you want to delete the profile?",
-        "deleteProject": "Are you sure you want to delete the project?"
+        "deleteProject": "Are you sure you want to delete the project?",
+        "deleteColumn": "Are you sure you want to delete the column?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -125,7 +126,14 @@
         "description": "Project description",
         "descriptionMaxLength": "project description can't be longer than 80 characters"
       },
+      "columnContainer": {
+        "newColumnButton": "New column",
+        "successful": "Column successfully created",
+        "newTaskButton": "New task"
+      },
       "editColumnForm": {
+        "newColumnTitle": "Create new column",
+        "editTitle": "Edit your column",
         "title": "Column title"
       }
     }
@@ -228,7 +236,8 @@
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?",
         "deleteProfile": "Вы уверены, что хотите удалить профиль?",
-        "deleteProject": "Вы уверены, что хотите удалить проект?"
+        "deleteProject": "Вы уверены, что хотите удалить проект?",
+        "deleteColumn": "Вы уверены, что хотите удалить колонку?"
       },
       "projectsPage": {
         "title": "Проекты",
@@ -256,7 +265,14 @@
         "description": "Описание проекта",
         "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
       },
+      "columnContainer": {
+        "newColumnButton": "Новая колонка",
+        "successful": "Колонка успешно создана",
+        "newTaskButton": "Новая задача"
+      },
       "editColumnForm": {
+        "newColumnTitle": "Создать новую колонку",
+        "editTitle": "Изменить колонку",
         "title": "Название колонки"
       }
     }

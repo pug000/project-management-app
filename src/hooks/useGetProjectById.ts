@@ -13,12 +13,19 @@ const useGetProjectById = () => {
     data: selectedProject,
     isFetching: isLoadingSelectedProject,
     isSuccess: isSuccessSelectedProject,
-  } = useGetProjectByIdQuery(id ?? '', { skip: !isLoggedIn && !id });
+    isError: isErrorSelectedProject,
+    isUninitialized,
+  } = useGetProjectByIdQuery(id ?? '', { skip: !isLoggedIn });
+
+  const isNavigate =
+    !selectedProject &&
+    (isUninitialized || isErrorSelectedProject || isSuccessSelectedProject);
 
   return {
     selectedProject,
     isLoadingSelectedProject,
     isSuccessSelectedProject,
+    isNavigate,
   };
 };
 
