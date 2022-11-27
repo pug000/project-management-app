@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useParams } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
@@ -13,8 +13,6 @@ import {
   setDeleteColumnPopupOpen,
   setDeleteProjectPopupOpen,
 } from 'redux/slices/popupSlice';
-import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
-import { getLoggedIn } from 'redux/selectors/userSelectors';
 
 import { backButtonAnimation } from 'utils/animations';
 
@@ -28,6 +26,7 @@ import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFor
 import defaultTheme from 'styles/theme';
 import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
 
+import useGetAllColumns from 'hooks/useGetAllColumns';
 import {
   ProjectContainer,
   ProjectControls,
@@ -37,20 +36,16 @@ import {
 } from './ProjectPage.style';
 
 function ProjectPage() {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
-  const { id } = useParams();
-  const isLoggedIn = useAppSelector(getLoggedIn);
-  const { data: columns, isFetching: isColumnListLoading } = useGetAllColumnsQuery(
-    id ?? '',
-    { skip: !isLoggedIn }
-  );
   const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
+  const { columns, isColumnListLoading } = useGetAllColumns();
   const isLoadingProjectPage =
     isLoadingSelectedProject ||
     isLoadingDeleteProject ||
