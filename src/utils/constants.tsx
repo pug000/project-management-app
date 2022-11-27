@@ -35,7 +35,7 @@ const defaultUserFormValues: UserFormValues = {
 const radioInputList: RadioInputItem[] = [
   {
     id: 'primary',
-    value: theme.colors.primaryColor,
+    value: theme.colors.darkBlue,
     checked: true,
   },
   {
