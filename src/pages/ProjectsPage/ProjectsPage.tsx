@@ -29,14 +29,20 @@ import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPa
 
 function ProjectsPage() {
   const selectedProject = useAppSelector(getSelectedProject);
+  const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
+  const dispatch = useAppDispatch();
   const { projects, isProjectsListLoading } = useGetAllProject();
   const { isDeleteProjectPopupOpen, isLoadingDeleteProject, deleteProject } =
     useDeleteProject(selectedProject);
   const { isEditPopupOpen, isLoadingEditProject, editOnSubmit } =
     useEditProject(selectedProject);
-  const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
-  const dispatch = useAppDispatch();
   const { isCreationPopupOpen, isLoadingCreateProject, onSubmit } = useCreateProject();
+  const isLoadingProjectsPage = [
+    isProjectsListLoading,
+    isLoadingCreateProject,
+    isLoadingEditProject,
+    isLoadingDeleteProject,
+  ].some((loader) => loader);
 
   return (
     <ProtectedRoute>
@@ -54,10 +60,6 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {(isProjectsListLoading ||
-            isLoadingDeleteProject ||
-            isLoadingCreateProject ||
-            isLoadingEditProject) && <Loader />}
           {projects?.length ? (
             <ProjectCards projects={projects} setEditPopupOpen={setEditPopupOpen} />
           ) : (
@@ -90,6 +92,7 @@ function ProjectsPage() {
           onSubmit={editOnSubmit}
           setSelectedItem={setSelectedProject}
         />
+        {isLoadingProjectsPage && <Loader />}
       </MainWrapper>
     </ProtectedRoute>
   );
