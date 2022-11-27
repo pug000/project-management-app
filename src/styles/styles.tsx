@@ -1,7 +1,7 @@
 import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { MdOutlineDelete, MdClose } from 'react-icons/md';
+import { MdOutlineDelete, MdClose, MdEdit } from 'react-icons/md';
 import { BiEdit } from 'react-icons/bi';
 import { FiCheck } from 'react-icons/fi';
 
@@ -138,8 +138,22 @@ const StyledEditIcon = styled(BiEdit).attrs({
   style: {
     ...baseIconStyles,
   },
-})`
-  color: ${({ theme }) => theme.colors.grey};
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+`;
+
+const StyledEditTextIcon = styled(MdEdit).attrs({
+  style: {
+    width: '80%',
+    height: '80%',
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
   transition: ${({ theme }) => theme.effects.transition};
 
   &:hover {
@@ -186,6 +200,7 @@ export {
   StyledPrevIcon,
   StyledDeleteIcon,
   StyledEditIcon,
+  StyledEditTextIcon,
   StyledConfirmIcon,
   StyledCloseIcon,
 };
