@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface PopupState {
   isWarningPopupOpen: boolean;
   isDeletePopupOpen: boolean;
+  isDeleteProjectPopupOpen: boolean;
+  isDeleteColumnPopupOpen: boolean;
   isSuccessPopupOpen: boolean;
   isErrorPopupOpen: boolean;
   isCreationPopupOpen: boolean;
@@ -12,6 +14,8 @@ interface PopupState {
 const initialState: PopupState = {
   isWarningPopupOpen: false,
   isDeletePopupOpen: false,
+  isDeleteProjectPopupOpen: false,
+  isDeleteColumnPopupOpen: false,
   isSuccessPopupOpen: false,
   isErrorPopupOpen: false,
   isCreationPopupOpen: false,
@@ -28,6 +32,13 @@ const popupSlice = createSlice({
 
     setDeletePopupOpen(state, { payload }: PayloadAction<boolean>) {
       state.isDeletePopupOpen = payload;
+    },
+    setDeleteProjectPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isDeleteProjectPopupOpen = payload;
+    },
+
+    setDeleteColumnPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isDeleteColumnPopupOpen = payload;
     },
 
     setSuccessPopupOpen(state, { payload }: PayloadAction<boolean>) {
@@ -51,6 +62,8 @@ const popupSlice = createSlice({
 export const {
   setWarningPopupOpen,
   setDeletePopupOpen,
+  setDeleteProjectPopupOpen,
+  setDeleteColumnPopupOpen,
   setSuccessPopupOpen,
   setErrorPopupOpen,
   setCreationPopupOpen,

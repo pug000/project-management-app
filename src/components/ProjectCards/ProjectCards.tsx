@@ -4,7 +4,7 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import { useAppDispatch } from 'hooks/useRedux';
 
 import { setSelectedProject } from 'redux/slices/projectSlice';
-import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { setDeleteProjectPopupOpen } from 'redux/slices/popupSlice';
 
 import { Project } from 'ts/interfaces';
 
@@ -36,7 +36,7 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
       event.preventDefault();
       dispatch(setSelectedProject(project));
-      dispatch(setDeletePopupOpen(true));
+      dispatch(setDeleteProjectPopupOpen(true));
     },
     []
   );
