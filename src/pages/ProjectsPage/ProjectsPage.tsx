@@ -10,7 +10,7 @@ import useEditProject from 'hooks/useEditProject';
 import { setSelectedProject } from 'redux/slices/projectSlice';
 import getSelectedProject from 'redux/selectors/projectSelectors';
 import {
-  setDeletePopupOpen,
+  setDeleteProjectPopupOpen,
   setCreationPopupOpen,
   setEditPopupOpen,
 } from 'redux/slices/popupSlice';
@@ -30,7 +30,7 @@ import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPa
 function ProjectsPage() {
   const selectedProject = useAppSelector(getSelectedProject);
   const { projects, isProjectsListLoading } = useGetAllProject();
-  const { isDeletePopupOpen, isLoadingDeleteProject, deleteProject } =
+  const { isDeleteProjectPopupOpen, isLoadingDeleteProject, deleteProject } =
     useDeleteProject(selectedProject);
   const { isEditPopupOpen, isLoadingEditProject, editOnSubmit } =
     useEditProject(selectedProject);
@@ -69,8 +69,8 @@ function ProjectsPage() {
           )}
         </ProjectsContainer>
         <PopupWarning
-          isPopupShown={isDeletePopupOpen}
-          setPopupShown={setDeletePopupOpen}
+          isPopupShown={isDeleteProjectPopupOpen}
+          setPopupShown={setDeleteProjectPopupOpen}
           actionOnYes={deleteProject}
           text="deleteProject"
         />

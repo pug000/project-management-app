@@ -13,6 +13,15 @@ const getDeletePopupOpen = createSelector(
   (state) => state.isDeletePopupOpen
 );
 
+const getDeleteProjectPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isDeleteProjectPopupOpen
+);
+const getDeleteColumnPopupOpen = createSelector(
+  getBasePopupState,
+  (state) => state.isDeleteColumnPopupOpen
+);
+
 const getErrorPopupOpen = createSelector(
   getBasePopupState,
   (state) => state.isErrorPopupOpen
@@ -36,6 +45,8 @@ const getEditPopupOpen = createSelector(
 export {
   getWarningPopupOpen,
   getDeletePopupOpen,
+  getDeleteProjectPopupOpen,
+  getDeleteColumnPopupOpen,
   getErrorPopupOpen,
   getSuccessPopupOpen,
   getCreationPopupOpen,

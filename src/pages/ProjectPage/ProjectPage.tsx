@@ -7,7 +7,7 @@ import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
 
-import { setCreationPopupOpen, setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { setCreationPopupOpen, setDeleteProjectPopupOpen } from 'redux/slices/popupSlice';
 import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 
@@ -40,7 +40,7 @@ function ProjectPage() {
     isSuccessSelectedProject,
     isNavigate,
   } = useGetProjectById();
-  const { isLoadingDeleteProject, isDeletePopupOpen, deleteProject, navigate } =
+  const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
   const { id } = useParams();
   const isLoggedIn = useAppSelector(getLoggedIn);
@@ -71,7 +71,7 @@ function ProjectPage() {
               width="30px"
               backgroundColor={defaultTheme.colors.transparent}
               color={defaultTheme.colors.pink}
-              callback={() => dispatch(setDeletePopupOpen(true))}
+              callback={() => dispatch(setDeleteProjectPopupOpen(true))}
             >
               <StyledDeleteIcon />
             </Button>
@@ -91,9 +91,10 @@ function ProjectPage() {
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
-        {(isLoadingSelectedProject || isLoadingDeleteProject || isCreationLoading) && (
-          <Loader />
-        )}
+        {(isLoadingSelectedProject ||
+          isLoadingDeleteProject ||
+          isCreationLoading ||
+          isColumnListLoading) && <Loader />}
         {selectedProject || columns ? (
           <ColumnContainer />
         ) : (
@@ -105,8 +106,8 @@ function ProjectPage() {
         )}
       </ProjectContainer>
       <PopupWarning
-        isPopupShown={isDeletePopupOpen}
-        setPopupShown={setDeletePopupOpen}
+        isPopupShown={isDeleteProjectPopupOpen}
+        setPopupShown={setDeleteProjectPopupOpen}
         text="deleteProject"
         actionOnYes={deleteProject}
       />

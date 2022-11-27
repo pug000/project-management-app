@@ -97,7 +97,8 @@
         "no": "No",
         "signOut": "Are you sure you want to sign out?",
         "deleteProfile": "Are you sure you want to delete the profile?",
-        "deleteProject": "Are you sure you want to delete the project?"
+        "deleteProject": "Are you sure you want to delete the project?",
+        "deleteColumn": "Are you sure you want to delete the column?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -234,7 +235,8 @@
         "no": "Нет",
         "signOut": "Вы уверены, что хотите выйти?",
         "deleteProfile": "Вы уверены, что хотите удалить профиль?",
-        "deleteProject": "Вы уверены, что хотите удалить проект?"
+        "deleteProject": "Вы уверены, что хотите удалить проект?",
+        "deleteColumn": "Вы уверены, что хотите удалить колонку?"
       },
       "projectsPage": {
         "title": "Проекты",

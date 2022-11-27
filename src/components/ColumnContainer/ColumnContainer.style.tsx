@@ -10,6 +10,7 @@ const ColumnWrapper = styled.div`
 
 const ColumnsContainer = styled.div`
   min-width: 300px;
+  max-width: 300px;
   width: 100%;
   height: auto;
   min-height: 75vh;
@@ -17,6 +18,7 @@ const ColumnsContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+  margin-bottom: 10px;
   border-radius: 10px;
   border-left: 5px solid ${({ theme }) => theme.colors.grey};
   box-shadow: 0px 10px 13px rgb(0 0 0 / 2%);

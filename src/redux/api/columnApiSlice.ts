@@ -1,7 +1,10 @@
+import { setCreationPopupOpen, setEditPopupOpen } from 'redux/slices/popupSlice';
 import { Endpoints, Methods } from 'ts/enums';
 import { ColumnData, ColumnFormValue } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
 import apiSlice from './apiSlice';
+
+type OmitColumnData = Omit<ColumnData, 'title' | 'order'>;
 
 export const columnsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -18,9 +21,39 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
         ...addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.post),
         body,
       }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(setCreationPopupOpen(false));
+          dispatch(setEditPopupOpen(false));
+        } catch (error) {
+          throw new Error(`${error}`);
+        }
+      },
       invalidatesTags: ['Column'],
+    }),
+    deleteColumnById: builder.mutation<ColumnData, ColumnData>({
+      query: ({ _id, boardId }) =>
+        addFetchOptions(
+          `${Endpoints.boards}${boardId}/${Endpoints.columns}${_id}`,
+          Methods.delete
+        ),
+      invalidatesTags: ['Column'],
+    }),
+    getColumnById: builder.query<ColumnData, OmitColumnData>({
+      query: ({ _id, boardId }) =>
+        addFetchOptions(
+          `${Endpoints.boards}${boardId}/${Endpoints.columns}${_id}`,
+          Methods.get
+        ),
+      providesTags: ['Column'],
     }),
   }),
 });
 
-export const { useGetAllColumnsQuery, useCreateColumnMutation } = columnsApiSlice;
+export const {
+  useGetAllColumnsQuery,
+  useCreateColumnMutation,
+  useDeleteColumnByIdMutation,
+  useGetColumnByIdQuery,
+} = columnsApiSlice;
