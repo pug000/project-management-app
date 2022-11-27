@@ -128,7 +128,8 @@
       },
       "columnContainer": {
         "newColumnButton": "New column",
-        "successful": "Column successfully created"
+        "successful": "Column successfully created",
+        "newTaskButton": "New task"
       },
       "editColumnForm": {
         "newColumnTitle": "Create new column",
@@ -266,7 +267,8 @@
       },
       "columnContainer": {
         "newColumnButton": "Новая колонка",
-        "successful": "Колонка успешно создана"
+        "successful": "Колонка успешно создана",
+        "newTaskButton": "Новая задача"
       },
       "editColumnForm": {
         "newColumnTitle": "Создать новую колонку",

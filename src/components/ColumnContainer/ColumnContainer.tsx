@@ -77,7 +77,7 @@ function ColumnContainer() {
                 </ColumnHeaderButton>
               </ColumnHeaderButtonWrapper>
             </ColumnHeader>
-            <Button type="button">Add task</Button>
+            <Button type="button">{t('newTaskButton')}</Button>
             <ColumnTaskContainer>
               <Task title="hello" />
             </ColumnTaskContainer>

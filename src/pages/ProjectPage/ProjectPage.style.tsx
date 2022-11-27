@@ -46,12 +46,11 @@ const ProjectDescription = styled.p`
 `;
 
 const ProjectContainer = styled.section`
-  /* display: flex; */
-  /* overflow: auto; */
+  display: flex;
+  justify-content: center;
   padding: 20px;
   width: 100%;
   height: 100%;
-  /* gap: 25px; */
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
   border-radius: 10px;
 `;

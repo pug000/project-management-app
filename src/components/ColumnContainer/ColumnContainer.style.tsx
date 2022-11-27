@@ -13,7 +13,6 @@ const ColumnsContainer = styled.div`
   max-width: 300px;
   width: 100%;
   height: auto;
-  min-height: 75vh;
   display: flex;
   flex-direction: column;
   gap: 10px;

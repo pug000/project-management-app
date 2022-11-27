@@ -41,7 +41,6 @@ const TaskContainer = styled.textarea`
   width: 100%;
   min-height: 50px;
   max-height: 200px;
-  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
   gap: 10px;

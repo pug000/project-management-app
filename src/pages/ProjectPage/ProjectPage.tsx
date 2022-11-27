@@ -95,7 +95,7 @@ function ProjectPage() {
           isLoadingDeleteProject ||
           isCreationLoading ||
           isColumnListLoading) && <Loader />}
-        {selectedProject || columns ? (
+        {columns?.length ? (
           <ColumnContainer />
         ) : (
           <NoResultsContainer
