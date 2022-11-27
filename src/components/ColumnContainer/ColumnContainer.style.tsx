@@ -22,7 +22,7 @@ const ColumnsContainer = styled.div`
   border-left: 5px solid ${({ theme }) => theme.colors.grey};
   box-shadow: 0px 10px 13px rgb(0 0 0 / 2%);
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
-  cursor: pointer;
+  cursor: default;
 `;
 
 const ColumnHeader = styled.div`
@@ -40,47 +40,6 @@ const ColumnTitle = styled.h3`
   text-align: left;
 `;
 
-const ColumnHeaderButtonWrapper = styled.div`
-  display: flex;
-  gap: 5px;
-
-  button {
-    padding: 0;
-  }
-`;
-
-const ColumnHeaderButton = styled.button.attrs({
-  type: 'button',
-})`
-  border: none;
-  outline: none;
-  background-color: ${({ theme }) => theme.colors.transparent};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.effects.transition};
-
-  &:hover {
-    opacity: ${({ theme }) => theme.effects.hoverOpacity};
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:active {
-    opacity: ${({ theme }) => theme.effects.activeOpacity};
-  }
-`;
-
-const IconWrapper = styled.div`
-  width: 25px;
-  height: 25px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
 const ColumnTaskContainer = styled.div`
   width: 100%;
   height: 65vh;
@@ -94,9 +53,6 @@ export {
   ColumnWrapper,
   ColumnsContainer,
   ColumnHeader,
-  ColumnHeaderButtonWrapper,
-  ColumnHeaderButton,
   ColumnTitle,
-  IconWrapper,
   ColumnTaskContainer,
 };

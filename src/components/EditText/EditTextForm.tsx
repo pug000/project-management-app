@@ -1,34 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
+import { ColumnFormValues } from 'ts/interfaces';
+
 import defaultTheme from 'styles/theme';
-
 import { StyledCloseIcon, StyledConfirmIcon } from 'styles/styles';
-
 import { Form } from './EditText.styles';
 
 interface EditTextFormProps {
-  text?: string;
-  toggleEditingText: () => void;
-  onSubmit: SubmitHandler<{ title: string }>;
+  title?: string;
+  onSubmit: SubmitHandler<ColumnFormValues>;
+  disableEditingOnClick: () => void;
 }
 
-function EditTextForm({ text, toggleEditingText, onSubmit }: EditTextFormProps) {
+function EditTextForm({ title, disableEditingOnClick, onSubmit }: EditTextFormProps) {
   const { t, i18n } = useTranslation('translation');
   const {
     register,
     handleSubmit,
     clearErrors,
     trigger,
+    setFocus,
     formState: { errors },
   } = useForm<{ title: string }>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: { title: text },
+    defaultValues: { title },
   });
 
   useEffect(() => {
@@ -36,6 +37,10 @@ function EditTextForm({ text, toggleEditingText, onSubmit }: EditTextFormProps) 
       trigger(['title']);
     }
   }, [i18n.language]);
+
+  useEffect(() => {
+    setFocus('title');
+  }, []);
 
   return (
     <Form
@@ -71,7 +76,7 @@ function EditTextForm({ text, toggleEditingText, onSubmit }: EditTextFormProps) 
         type="button"
         width="25px"
         backgroundColor={defaultTheme.colors.transparent}
-        callback={toggleEditingText}
+        callback={disableEditingOnClick}
       >
         <StyledCloseIcon />
       </Button>
@@ -80,7 +85,7 @@ function EditTextForm({ text, toggleEditingText, onSubmit }: EditTextFormProps) 
 }
 
 EditTextForm.defaultProps = {
-  text: '',
+  title: '',
 };
 
-export default EditTextForm;
+export default memo(EditTextForm);

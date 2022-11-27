@@ -1,5 +1,4 @@
 import React, { memo, useCallback } from 'react';
-
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'hooks/useRedux';
@@ -9,23 +8,14 @@ import { setSelectedColumn } from 'redux/slices/columnSlice';
 
 import Button from 'components/Button/Button';
 import Task from 'components/Task/Task';
+import EditText from 'components/EditText/EditText';
 
 import { ColumnData } from 'ts/interfaces';
-
-import { BiEdit } from 'react-icons/bi';
-
-import { StyledDeleteIcon } from 'styles/styles';
-import defaultTheme from 'styles/theme';
 
 import {
   ColumnWrapper,
   ColumnsContainer,
-  ColumnHeader,
-  ColumnHeaderButtonWrapper,
-  ColumnHeaderButton,
-  ColumnTitle,
   ColumnTaskContainer,
-  IconWrapper,
 } from './ColumnContainer.style';
 
 interface ColumnsProps {
@@ -46,22 +36,13 @@ function ColumnContainer({ columns }: ColumnsProps) {
       {columns?.length &&
         columns.map((column) => (
           <ColumnsContainer key={column._id}>
-            <ColumnHeader>
-              <ColumnTitle>{column.title}</ColumnTitle>
-              <ColumnHeaderButtonWrapper>
-                <ColumnHeaderButton>
-                  <IconWrapper>
-                    <BiEdit color={defaultTheme.colors.grey} />
-                  </IconWrapper>
-                </ColumnHeaderButton>
-                <ColumnHeaderButton onClick={() => deleteColumnOnClick(column)}>
-                  <IconWrapper>
-                    <StyledDeleteIcon color={defaultTheme.colors.pink} />
-                  </IconWrapper>
-                </ColumnHeaderButton>
-              </ColumnHeaderButtonWrapper>
-            </ColumnHeader>
-            <Button type="button">{t('newTaskButton')}</Button>
+            <EditText
+              title={column.title}
+              item={column}
+              setSelectedItem={setSelectedColumn}
+              deleteItemOnClick={deleteColumnOnClick}
+              onSubmit={() => {}}
+            />
             <ColumnTaskContainer>
               <Task title="hello" />
               <Task title="hello" />
@@ -78,6 +59,7 @@ function ColumnContainer({ columns }: ColumnsProps) {
               <Task title="hello" />
               <Task title="hello" />
             </ColumnTaskContainer>
+            <Button type="button">{t('newTaskButton')}</Button>
           </ColumnsContainer>
         ))}
     </ColumnWrapper>
