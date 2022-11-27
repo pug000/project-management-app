@@ -7,13 +7,13 @@ import Input from 'components/Input/Input';
 
 import { defaultColumnFormValues } from 'utils/constants';
 
-import { ColumnFormValue } from 'ts/interfaces';
+import { ColumnFormValues } from 'ts/interfaces';
 
 import { Form } from 'styles/styles';
 
 interface EditFormProps<T> {
   keyPrefix: string;
-  onSubmit: SubmitHandler<ColumnFormValue>;
+  onSubmit: SubmitHandler<ColumnFormValues>;
   selectedItem?: T | null;
 }
 
@@ -25,12 +25,11 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<ColumnFormValue>({
+  } = useForm<ColumnFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: selectedItem ?? defaultColumnFormValues,
   });
-  const isFormValid = Object.values(errors).every((error) => !error?.message);
 
   return (
     <Form
@@ -41,10 +40,10 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     >
       <Input
         type="text"
-        name="body.title"
+        name="title"
         register={register}
         clearErrors={clearErrors}
-        errors={errors.body?.title}
+        errors={errors.title}
         placeholderText={t(`${keyPrefix}.title`)}
         minLength={{
           value: 3,
@@ -56,7 +55,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
         }}
         required={t('editForm.required')}
       />
-      <Button type="submit" disabled={!isFormValid}>
+      <Button type="submit" disabled={!!errors.title?.message}>
         {t('editForm.button')}
       </Button>
     </Form>

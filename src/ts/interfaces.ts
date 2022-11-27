@@ -103,15 +103,16 @@ interface EditFormValues {
   description: string;
   color: string;
 }
-interface ColumnData {
-  _id: string;
+
+interface ColumnFormValues {
   title: string;
-  order: number;
-  boardId: string;
 }
-interface ColumnFormValue {
-  id?: string;
-  body: { title: string; order: number };
+interface Column extends ColumnFormValues {
+  order: number;
+}
+interface ColumnData extends Column {
+  _id: string;
+  boardId: string;
 }
 
 export type {
@@ -131,7 +132,8 @@ export type {
   MainPageElement,
   ProjectData,
   Project,
-  ColumnData,
   EditFormValues,
-  ColumnFormValue,
+  ColumnFormValues,
+  Column,
+  ColumnData,
 };

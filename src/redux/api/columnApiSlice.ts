@@ -1,10 +1,15 @@
 import { setCreationPopupOpen, setEditPopupOpen } from 'redux/slices/popupSlice';
 import { Endpoints, Methods } from 'ts/enums';
-import { ColumnData, ColumnFormValue } from 'ts/interfaces';
+import { ColumnData, Column } from 'ts/interfaces';
 import { addFetchOptions } from 'utils/functions';
 import apiSlice from './apiSlice';
 
 type OmitColumnData = Omit<ColumnData, 'title' | 'order'>;
+
+interface ColumnResponse {
+  id: string;
+  body: Column;
+}
 
 export const columnsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,7 +21,7 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ _id }) => ({ type: 'Column' as const, _id })), 'Column']
           : ['Column'],
     }),
-    createColumn: builder.mutation<ColumnData, ColumnFormValue>({
+    createColumn: builder.mutation<ColumnData, ColumnResponse>({
       query: ({ id, body }) => ({
         ...addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.post),
         body,

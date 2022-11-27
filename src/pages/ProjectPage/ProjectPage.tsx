@@ -120,7 +120,7 @@ function ProjectPage() {
         isPopupShown={isCreationPopupOpen}
         setPopupShown={setCreationPopupOpen}
         keyPrefix="editColumnForm"
-        formTitleText="newColumnTitle"
+        title="newColumnTitle"
         onSubmit={onSubmit}
       />
       {isLoadingProjectPage && <Loader />}

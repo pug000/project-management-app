@@ -9,7 +9,7 @@ import {
   MainPageElement,
   EditFormValues,
   RadioInputItem,
-  ColumnFormValue,
+  ColumnFormValues,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -260,9 +260,8 @@ const defaultFormItemValues: EditFormValues = {
   color: '',
 };
 
-const defaultColumnFormValues: ColumnFormValue = {
-  id: '',
-  body: { title: '', order: 0 },
+const defaultColumnFormValues: ColumnFormValues = {
+  title: '',
 };
 
 export {
