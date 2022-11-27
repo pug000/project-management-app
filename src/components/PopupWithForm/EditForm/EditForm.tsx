@@ -25,8 +25,9 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors, isSubmitted },
     trigger,
+    setFocus,
+    formState: { errors, isSubmitted },
   } = useForm<EditFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -39,6 +40,10 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
       trigger(['title', 'description']);
     }
   }, [i18n.language, isSubmitted]);
+
+  useEffect(() => {
+    setFocus('title');
+  }, []);
 
   return (
     <Form

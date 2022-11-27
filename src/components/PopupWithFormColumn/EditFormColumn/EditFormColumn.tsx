@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -24,12 +24,17 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     register,
     handleSubmit,
     clearErrors,
+    setFocus,
     formState: { errors },
   } = useForm<ColumnFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: selectedItem ?? defaultColumnFormValues,
   });
+
+  useEffect(() => {
+    setFocus('title');
+  }, []);
 
   return (
     <Form
