@@ -4,12 +4,12 @@ import { useDeleteColumnByIdMutation } from 'redux/api/columnApiSlice';
 import { getDeleteColumnPopupOpen } from 'redux/selectors/popupSelectors';
 import { setDeleteColumnPopupOpen } from 'redux/slices/popupSlice';
 import { setSelectedColumn } from 'redux/slices/columnSlice';
-
-import { ColumnData } from 'ts/interfaces';
+import getSelectedColumn from 'redux/selectors/columnSelectors';
 
 import { useAppSelector, useAppDispatch } from './useRedux';
 
-const useDeleteColumn = (selectedColumn: ColumnData | null | undefined) => {
+const useDeleteColumn = () => {
+  const selectedColumn = useAppSelector(getSelectedColumn);
   const isDeleteColumnPopupOpen = useAppSelector(getDeleteColumnPopupOpen);
   const dispatch = useAppDispatch();
   const [deleteColumnById, { isLoading: isLoadingDeleteColumn }] =

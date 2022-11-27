@@ -2,18 +2,13 @@ import React, { memo, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-import useDeleteColumn from 'hooks/useDeleteColumn';
-
-import getSelectedColumn from 'redux/selectors/columnSelectors';
+import { useAppDispatch } from 'hooks/useRedux';
 
 import { setDeleteColumnPopupOpen } from 'redux/slices/popupSlice';
 import { setSelectedColumn } from 'redux/slices/columnSlice';
 
 import Button from 'components/Button/Button';
 import Task from 'components/Task/Task';
-import PopupWarning from 'components/PopupWarning/PopupWarning';
-import Loader from 'components/Loader/Loader';
 
 import { ColumnData } from 'ts/interfaces';
 
@@ -38,7 +33,6 @@ interface ColumnsProps {
 }
 
 function ColumnContainer({ columns }: ColumnsProps) {
-  const selectedColumn = useAppSelector(getSelectedColumn);
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
   const dispatch = useAppDispatch();
 
@@ -47,12 +41,8 @@ function ColumnContainer({ columns }: ColumnsProps) {
     dispatch(setDeleteColumnPopupOpen(true));
   }, []);
 
-  const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
-    useDeleteColumn(selectedColumn);
-
   return (
     <ColumnWrapper>
-      {isLoadingDeleteColumn && <Loader />}
       {columns?.length &&
         columns.map((column) => (
           <ColumnsContainer key={column._id}>
@@ -90,12 +80,6 @@ function ColumnContainer({ columns }: ColumnsProps) {
             </ColumnTaskContainer>
           </ColumnsContainer>
         ))}
-      <PopupWarning
-        isPopupShown={isDeleteColumnPopupOpen}
-        setPopupShown={setDeleteColumnPopupOpen}
-        text="deleteColumn"
-        actionOnYes={deleteColumn}
-      />
     </ColumnWrapper>
   );
 }

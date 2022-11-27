@@ -6,8 +6,13 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
+import useDeleteColumn from 'hooks/useDeleteColumn';
 
-import { setCreationPopupOpen, setDeleteProjectPopupOpen } from 'redux/slices/popupSlice';
+import {
+  setCreationPopupOpen,
+  setDeleteColumnPopupOpen,
+  setDeleteProjectPopupOpen,
+} from 'redux/slices/popupSlice';
 import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
 
@@ -41,9 +46,17 @@ function ProjectPage() {
   const isLoggedIn = useAppSelector(getLoggedIn);
   const { data: columns, isFetching: isColumnListLoading } = useGetAllColumnsQuery(
     id ?? '',
-    { skip: !id && !isLoggedIn }
+    { skip: !isLoggedIn }
   );
   const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
+  const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
+    useDeleteColumn();
+  const isLoadingProjectPage =
+    isLoadingSelectedProject ||
+    isLoadingDeleteProject ||
+    isCreationLoading ||
+    isColumnListLoading ||
+    isLoadingDeleteColumn;
 
   return (
     <MainWrapper>
@@ -86,10 +99,6 @@ function ProjectPage() {
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
-        {(isLoadingSelectedProject ||
-          isLoadingDeleteProject ||
-          isCreationLoading ||
-          isColumnListLoading) && <Loader />}
         {columns?.length ? (
           <ColumnContainer columns={columns} />
         ) : (
@@ -106,7 +115,12 @@ function ProjectPage() {
         text="deleteProject"
         actionOnYes={deleteProject}
       />
-      {isNavigate && <Navigate to="*" />}
+      <PopupWarning
+        isPopupShown={isDeleteColumnPopupOpen}
+        setPopupShown={setDeleteColumnPopupOpen}
+        text="deleteColumn"
+        actionOnYes={deleteColumn}
+      />
       <PopupWithFormColumnTask
         isPopupShown={isCreationPopupOpen}
         setPopupShown={setCreationPopupOpen}
@@ -114,6 +128,8 @@ function ProjectPage() {
         formTitleText="newColumnTitle"
         onSubmit={onSubmit}
       />
+      {isLoadingProjectPage && <Loader />}
+      {isNavigate && <Navigate to="*" />}
     </MainWrapper>
   );
 }
