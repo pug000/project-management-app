@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useDeleteProjectByIdMutation } from 'redux/api/projectsApiSlice';
@@ -30,6 +30,15 @@ const useDeleteProject = (selectedProject: Project | null | undefined) => {
       }
     }
   }, [selectedProject]);
+
+  useEffect(
+    () => () => {
+      if (isDeleteProjectPopupOpen) {
+        dispatch(setDeleteProjectPopupOpen(false));
+      }
+    },
+    []
+  );
 
   return {
     isLoadingDeleteProject,

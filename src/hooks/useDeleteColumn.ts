@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useDeleteColumnByIdMutation } from 'redux/api/columnApiSlice';
 import { getDeleteColumnPopupOpen } from 'redux/selectors/popupSelectors';
@@ -22,6 +22,15 @@ const useDeleteColumn = () => {
       await deleteColumnById(selectedColumn);
     }
   }, [selectedColumn]);
+
+  useEffect(
+    () => () => {
+      if (isDeleteColumnPopupOpen) {
+        dispatch(setDeleteColumnPopupOpen(false));
+      }
+    },
+    []
+  );
 
   return {
     isLoadingDeleteColumn,

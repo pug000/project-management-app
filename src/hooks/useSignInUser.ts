@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
   const isErrorPopupOpen = useAppSelector(getErrorPopupOpen);
-  const [isLoadingAuth, setLoadingAuth] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
@@ -66,15 +65,7 @@ const useSignInUser = () => {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    if (isLoadingSignIn || isLoadingGetUser) {
-      setLoadingAuth(true);
-    }
-
-    if (isErrorSignIn || isSuccessGetUser) {
-      setLoadingAuth(false);
-    }
-  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn, isSuccessGetUser]);
+  const isLoadingAuth = [isLoadingSignIn, isLoadingGetUser].some((loader) => loader);
 
   return {
     isErrorPopupOpen,

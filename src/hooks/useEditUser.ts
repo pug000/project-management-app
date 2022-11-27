@@ -47,6 +47,15 @@ const useEditUser = () => {
     }
   }, [isSuccessEditUser]);
 
+  useEffect(
+    () => () => {
+      if (isErrorPopupOpen) {
+        dispatch(setErrorPopupOpen(false));
+      }
+    },
+    []
+  );
+
   return {
     isErrorPopupOpen,
     isLoadingEditUser,

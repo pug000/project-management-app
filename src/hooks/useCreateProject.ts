@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import { EditFormValues } from 'ts/interfaces';
@@ -6,11 +6,13 @@ import { EditFormValues } from 'ts/interfaces';
 import { useCreateProjectMutation } from 'redux/api/projectsApiSlice';
 import { getCreationPopupOpen } from 'redux/selectors/popupSelectors';
 import { getUser } from 'redux/selectors/userSelectors';
+import { setCreationPopupOpen } from 'redux/slices/popupSlice';
 
-import { useAppSelector } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useCreateProject = () => {
   const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
+  const dispatch = useAppDispatch();
   const [
     createProject,
     { isLoading: isLoadingCreateProject, isSuccess: isSuccessCreateProject },
@@ -26,6 +28,15 @@ const useCreateProject = () => {
       });
     },
     [isCreationPopupOpen]
+  );
+
+  useEffect(
+    () => () => {
+      if (isCreationPopupOpen) {
+        dispatch(setCreationPopupOpen(false));
+      }
+    },
+    []
   );
 
   return {
