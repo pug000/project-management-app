@@ -15,7 +15,7 @@ import defaultTheme from 'styles/theme';
 import { MdClose } from 'react-icons/md';
 
 import Button from 'components/Button/Button';
-import EditFormColumnTask from './EditFormColumnTask/EditFormColumnTask';
+import EditFormColumn from './EditFormColumn/EditFormColumn';
 
 import {
   Background,
@@ -23,7 +23,7 @@ import {
   PopupTitle,
   CloseButtonWrapper,
   PopupWrapper,
-} from './PopupWithFormColumnTask.style';
+} from './PopupWithFormColumn.style';
 
 interface PopupWithFormProps<T> {
   isPopupShown: boolean;
@@ -61,7 +61,7 @@ function PopupWithFormColumnTask<T>({
           <Background onClick={closePopup} />
           <Popup>
             <PopupTitle>{t(`${formTitleText}`)}</PopupTitle>
-            <EditFormColumnTask
+            <EditFormColumn
               keyPrefix={keyPrefix}
               onSubmit={onSubmit}
               selectedItem={selectedItem}

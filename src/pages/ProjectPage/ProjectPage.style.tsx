@@ -51,6 +51,7 @@ const ProjectContainer = styled.section`
   padding: 20px;
   width: 100%;
   height: 100%;
+  overflow-y: none;
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
   border-radius: 10px;
 `;

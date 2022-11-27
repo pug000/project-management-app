@@ -4,7 +4,7 @@ const ColumnWrapper = styled.div`
   display: flex;
   overflow: auto;
   width: 100%;
-  height: 100%;
+  height: 61vh;
   gap: 25px;
 `;
 
@@ -12,7 +12,7 @@ const ColumnsContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   width: 100%;
-  height: auto;
+  height: 58vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -83,7 +83,8 @@ const IconWrapper = styled.div`
 
 const ColumnTaskContainer = styled.div`
   width: 100%;
-  height: auto;
+  height: 65vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -18,7 +18,7 @@ import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
 import ColumnContainer from 'components/ColumnContainer/ColumnContainer';
-import PopupWithFormColumnTask from 'components/PopupWithFormColumnTask/PopupWithFormColumnTask';
+import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFormColumn';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
@@ -34,12 +34,7 @@ import {
 function ProjectPage() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
-  const {
-    selectedProject,
-    isLoadingSelectedProject,
-    isSuccessSelectedProject,
-    isNavigate,
-  } = useGetProjectById();
+  const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
   const { id } = useParams();
@@ -96,7 +91,7 @@ function ProjectPage() {
           isCreationLoading ||
           isColumnListLoading) && <Loader />}
         {columns?.length ? (
-          <ColumnContainer />
+          <ColumnContainer columns={columns} />
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"

@@ -1,10 +1,9 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
-import Textarea from 'components/Textarea/Textarea';
 
 import { defaultColumnFormValues } from 'utils/constants';
 
@@ -18,8 +17,8 @@ interface EditFormProps<T> {
   selectedItem?: T | null;
 }
 
-function EditForm<T>({ keyPrefix, onSubmit }: EditFormProps<T>) {
-  const { t, i18n } = useTranslation('translation');
+function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
+  const { t } = useTranslation('translation');
 
   const {
     register,
@@ -29,7 +28,7 @@ function EditForm<T>({ keyPrefix, onSubmit }: EditFormProps<T>) {
   } = useForm<ColumnFormValue>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: defaultColumnFormValues,
+    defaultValues: selectedItem ?? defaultColumnFormValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
 

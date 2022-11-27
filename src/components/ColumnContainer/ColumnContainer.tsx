@@ -2,13 +2,9 @@ import React, { memo, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { useParams } from 'react-router-dom';
-
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteColumn from 'hooks/useDeleteColumn';
 
-import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
 import getSelectedColumn from 'redux/selectors/columnSelectors';
 
 import { setDeleteColumnPopupOpen } from 'redux/slices/popupSlice';
@@ -37,16 +33,14 @@ import {
   IconWrapper,
 } from './ColumnContainer.style';
 
-function ColumnContainer() {
-  const isLoggedIn = useAppSelector(getLoggedIn);
+interface ColumnsProps {
+  columns: ColumnData[];
+}
+
+function ColumnContainer({ columns }: ColumnsProps) {
   const selectedColumn = useAppSelector(getSelectedColumn);
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
   const dispatch = useAppDispatch();
-  const { id } = useParams();
-  const { data: columns, isFetching: isColumnListLoading } = useGetAllColumnsQuery(
-    id ?? '',
-    { skip: !id && !isLoggedIn }
-  );
 
   const deleteColumnOnClick = useCallback((column: ColumnData) => {
     dispatch(setSelectedColumn(column));
@@ -58,7 +52,7 @@ function ColumnContainer() {
 
   return (
     <ColumnWrapper>
-      {(isColumnListLoading || isLoadingDeleteColumn) && <Loader />}
+      {isLoadingDeleteColumn && <Loader />}
       {columns?.length &&
         columns.map((column) => (
           <ColumnsContainer key={column._id}>
@@ -79,6 +73,19 @@ function ColumnContainer() {
             </ColumnHeader>
             <Button type="button">{t('newTaskButton')}</Button>
             <ColumnTaskContainer>
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
+              <Task title="hello" />
               <Task title="hello" />
             </ColumnTaskContainer>
           </ColumnsContainer>
