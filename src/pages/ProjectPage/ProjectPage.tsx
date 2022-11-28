@@ -1,15 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
+import useDeleteColumn from 'hooks/useDeleteColumn';
+import useGetAllColumns from 'hooks/useGetAllColumns';
+import useEditColumnTitle from 'hooks/useEditColumnTitle';
 
-import { setCreationPopupOpen, setDeleteProjectPopupOpen } from 'redux/slices/popupSlice';
-import { useGetAllColumnsQuery } from 'redux/api/columnApiSlice';
-import { getLoggedIn } from 'redux/selectors/userSelectors';
+import { setDeleteProjectPopupOpen } from 'redux/slices/projectSlice';
+import {
+  setCreateColumnPopupOpen,
+  setDeleteColumnPopupOpen,
+} from 'redux/slices/columnSlice';
 
 import { backButtonAnimation } from 'utils/animations';
 
@@ -17,13 +22,13 @@ import PopupWarning from 'components/PopupWarning/PopupWarning';
 import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
-import ColumnContainer from 'components/ColumnContainer/ColumnContainer';
+import Columns from 'components/Columns/Columns';
 import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFormColumn';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
-
 import {
+  ProjectButtonWrapper,
   ProjectContainer,
   ProjectControls,
   ProjectControlsWrapper,
@@ -37,13 +42,19 @@ function ProjectPage() {
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
-  const { id } = useParams();
-  const isLoggedIn = useAppSelector(getLoggedIn);
-  const { data: columns, isFetching: isColumnListLoading } = useGetAllColumnsQuery(
-    id ?? '',
-    { skip: !id && !isLoggedIn }
-  );
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateColumn(id ?? '');
+  const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit } = useCreateColumn();
+  const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
+    useDeleteColumn();
+  const { columns, isLoadingColumnList } = useGetAllColumns();
+  const { isLoadingEditColumnTitle } = useEditColumnTitle();
+  const isLoadingProjectPage = [
+    isLoadingSelectedProject,
+    isLoadingColumnList,
+    isLoadingDeleteProject,
+    isLoadingDeleteColumn,
+    isLoadingCreateColumn,
+    isLoadingEditColumnTitle,
+  ].some((loader) => loader);
 
   return (
     <MainWrapper>
@@ -72,31 +83,27 @@ function ProjectPage() {
             </Button>
           )}
         </ProjectControlsWrapper>
-        <ProjectControlsWrapper>
+        <ProjectButtonWrapper>
           <Button
             type="button"
             width="130px"
             backgroundColor={defaultTheme.colors.transparent}
             color={defaultTheme.colors.primaryColor}
-            callback={() => dispatch(setCreationPopupOpen(true))}
+            callback={() => dispatch(setCreateColumnPopupOpen(true))}
           >
             {t('newColumnButton')}
           </Button>
-        </ProjectControlsWrapper>
+        </ProjectButtonWrapper>
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
-        {(isLoadingSelectedProject ||
-          isLoadingDeleteProject ||
-          isCreationLoading ||
-          isColumnListLoading) && <Loader />}
         {columns?.length ? (
-          <ColumnContainer columns={columns} />
+          <Columns columns={columns} />
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"
             buttonText="projectPage.emptyContainerButton"
-            setPopupShown={setCreationPopupOpen}
+            setPopupShown={setCreateColumnPopupOpen}
           />
         )}
       </ProjectContainer>
@@ -106,14 +113,21 @@ function ProjectPage() {
         text="deleteProject"
         actionOnYes={deleteProject}
       />
-      {isNavigate && <Navigate to="*" />}
+      <PopupWarning
+        isPopupShown={isDeleteColumnPopupOpen}
+        setPopupShown={setDeleteColumnPopupOpen}
+        text="deleteColumn"
+        actionOnYes={deleteColumn}
+      />
       <PopupWithFormColumnTask
-        isPopupShown={isCreationPopupOpen}
-        setPopupShown={setCreationPopupOpen}
+        isPopupShown={isCreateColumnPopupOpen}
+        setPopupShown={setCreateColumnPopupOpen}
         keyPrefix="editColumnForm"
-        formTitleText="newColumnTitle"
+        title="newColumnTitle"
         onSubmit={onSubmit}
       />
+      {isLoadingProjectPage && <Loader />}
+      {isNavigate && <Navigate to="*" />}
     </MainWrapper>
   );
 }

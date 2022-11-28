@@ -8,7 +8,7 @@ import { useAppDispatch } from 'hooks/useRedux';
 
 import { popupAnimation } from 'utils/animations';
 
-import { ColumnFormValue } from 'ts/interfaces';
+import { ColumnFormValues } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 
@@ -25,33 +25,26 @@ import {
   PopupWrapper,
 } from './PopupWithFormColumn.style';
 
-interface PopupWithFormProps<T> {
+interface PopupWithFormProps {
   isPopupShown: boolean;
   setPopupShown: ActionCreatorWithPayload<boolean>;
   keyPrefix: string;
-  formTitleText: string;
-  onSubmit: SubmitHandler<ColumnFormValue>;
-  selectedItem?: T | null;
-  setSelectedItem?: ActionCreatorWithPayload<T | null>;
+  title: string;
+  onSubmit: SubmitHandler<ColumnFormValues>;
 }
 
-function PopupWithFormColumnTask<T>({
+function PopupWithFormColumnTask({
   isPopupShown,
   setPopupShown,
   keyPrefix,
-  formTitleText,
+  title,
   onSubmit,
-  selectedItem,
-  setSelectedItem,
-}: PopupWithFormProps<T>) {
+}: PopupWithFormProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
 
   const closePopup = useCallback(() => {
     dispatch(setPopupShown(false));
-    if (selectedItem && setSelectedItem) {
-      dispatch(setSelectedItem(null));
-    }
   }, []);
 
   return (
@@ -60,12 +53,8 @@ function PopupWithFormColumnTask<T>({
         <PopupWrapper $variants={popupAnimation}>
           <Background onClick={closePopup} />
           <Popup>
-            <PopupTitle>{t(`${formTitleText}`)}</PopupTitle>
-            <EditFormColumn
-              keyPrefix={keyPrefix}
-              onSubmit={onSubmit}
-              selectedItem={selectedItem}
-            />
+            <PopupTitle>{t(`${title}`)}</PopupTitle>
+            <EditFormColumn keyPrefix={keyPrefix} onSubmit={onSubmit} />
             <CloseButtonWrapper>
               <Button
                 type="button"
@@ -82,10 +71,5 @@ function PopupWithFormColumnTask<T>({
     </AnimatePresence>
   );
 }
-
-PopupWithFormColumnTask.defaultProps = {
-  selectedItem: null,
-  setSelectedItem: undefined,
-};
 
 export default PopupWithFormColumnTask;

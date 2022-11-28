@@ -8,4 +8,14 @@ const getSelectedColumn = createSelector(
   (state) => state.selectedColumn
 );
 
-export default getSelectedColumn;
+const getDeleteColumnPopupOpen = createSelector(
+  getBaseColumnState,
+  (state) => state.isDeleteColumnPopupOpen
+);
+
+const getCreateColumnPopupOpen = createSelector(
+  getBaseColumnState,
+  (state) => state.isCreateColumnPopupOpen
+);
+
+export { getSelectedColumn, getDeleteColumnPopupOpen, getCreateColumnPopupOpen };

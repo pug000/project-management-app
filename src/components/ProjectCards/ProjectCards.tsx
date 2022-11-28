@@ -1,16 +1,16 @@
 import React, { memo, useCallback } from 'react';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
-import { setSelectedProject } from 'redux/slices/projectSlice';
-import { setDeleteProjectPopupOpen } from 'redux/slices/popupSlice';
+import {
+  setSelectedProject,
+  setDeleteProjectPopupOpen,
+  setEditProjectPopupOpen,
+} from 'redux/slices/projectSlice';
 
 import { Project } from 'ts/interfaces';
 
-import { BiEdit } from 'react-icons/bi';
-
-import { StyledDeleteIcon, StyledLink } from 'styles/styles';
+import { StyledDeleteIcon, StyledEditIcon, StyledLink } from 'styles/styles';
 import defaultTheme from 'styles/theme';
 import {
   Card,
@@ -26,10 +26,9 @@ import {
 
 interface ProjectCardsProps {
   projects: Project[];
-  setEditPopupOpen: ActionCreatorWithPayload<boolean, 'popup/setEditPopupOpen'>;
 }
 
-function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
+function ProjectCards({ projects }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
 
   const deleteProjectOnClick = useCallback(
@@ -45,7 +44,7 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
       event.preventDefault();
       dispatch(setSelectedProject(project));
-      dispatch(setEditPopupOpen(true));
+      dispatch(setEditProjectPopupOpen(true));
     },
     []
   );
@@ -60,7 +59,7 @@ function ProjectCards({ projects, setEditPopupOpen }: ProjectCardsProps) {
               <CardButtonWrapper>
                 <CardButton onClick={(event) => editProjectOnClick(event, project)}>
                   <IconWrapper>
-                    <BiEdit color={defaultTheme.colors.grey} />
+                    <StyledEditIcon />
                   </IconWrapper>
                 </CardButton>
                 <CardButton onClick={(event) => deleteProjectOnClick(event, project)}>

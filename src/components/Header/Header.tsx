@@ -3,10 +3,8 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { setLoggedOut } from 'redux/slices/userSlice';
-import { setWarningPopupOpen } from 'redux/slices/popupSlice';
-import { getWarningPopupOpen } from 'redux/selectors/popupSelectors';
+import { getLoggedIn, getLogoutUserPopupOpen } from 'redux/selectors/userSelectors';
+import { setLoggedOut, setLogoutUserPopupOpen } from 'redux/slices/userSlice';
 
 import { headerSignItems, headerLinkItems, headerItemsIfLoggedIn } from 'utils/constants';
 
@@ -29,7 +27,7 @@ function Header() {
   const isLoggedIn = useAppSelector(getLoggedIn);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isWarningPopupOpen = useAppSelector(getWarningPopupOpen);
+  const isLogoutUserPopupOpen = useAppSelector(getLogoutUserPopupOpen);
   const [isSticky, setSticky] = useState(false);
 
   const stickyHeader = useCallback(() => {
@@ -40,21 +38,27 @@ function Header() {
     }
   }, []);
 
-  const openWarningPopup = useCallback((id: string) => {
+  const openLogoutUserPopup = useCallback((id: string) => {
     if (id === 'signOut') {
-      dispatch(setWarningPopupOpen(true));
+      dispatch(setLogoutUserPopupOpen(true));
     }
   }, []);
 
   const signOut = useCallback(() => {
     dispatch(setLoggedOut());
-    dispatch(setWarningPopupOpen(false));
+    dispatch(setLogoutUserPopupOpen(false));
     navigate('/');
   }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', stickyHeader);
-    return () => window.removeEventListener('scroll', stickyHeader);
+    return () => {
+      window.removeEventListener('scroll', stickyHeader);
+
+      if (isLogoutUserPopupOpen) {
+        dispatch(setLogoutUserPopupOpen(false));
+      }
+    };
   }, []);
 
   return (
@@ -76,7 +80,7 @@ function Header() {
                 to={link}
                 key={id}
                 id={id}
-                onClick={() => openWarningPopup(id)}
+                onClick={() => openLogoutUserPopup(id)}
                 end
               >
                 <Button
@@ -96,8 +100,8 @@ function Header() {
       <PopupWarning
         text="signOut"
         actionOnYes={signOut}
-        isPopupShown={isWarningPopupOpen}
-        setPopupShown={setWarningPopupOpen}
+        isPopupShown={isLogoutUserPopupOpen}
+        setPopupShown={setLogoutUserPopupOpen}
       />
     </HeaderWrapper>
   );

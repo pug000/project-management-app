@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getLoggedIn } from 'redux/selectors/userSelectors';
-import { setWarningPopupOpen } from 'redux/slices/popupSlice';
+import { setLogoutUserPopupOpen } from 'redux/slices/userSlice';
 
 import {
   menuItemAnimation,
@@ -12,7 +12,6 @@ import {
   menuWrapperAnimation,
 } from 'utils/animations';
 import { headerItemsIfLoggedIn, headerLinkItems, headerSignItems } from 'utils/constants';
-
 import {
   MenuWrapper,
   MenuLink,
@@ -33,7 +32,7 @@ function MenuNavigation({ toggleMenu }: MenuNavigationProps) {
 
   const toggleMenuOnClick = (id: string) => {
     if (id === 'signOut') {
-      dispatch(setWarningPopupOpen(true));
+      dispatch(setLogoutUserPopupOpen(true));
     }
 
     toggleMenu();

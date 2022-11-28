@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import useSignInUser from 'hooks/useSignInUser';
 
-import { backButtonAnimation } from 'utils/animations';
+import { setErrorNotificationPopupOpen } from 'redux/slices/userSlice';
 
-import { setErrorPopupOpen } from 'redux/slices/popupSlice';
+import { backButtonAnimation } from 'utils/animations';
 
 import AuthForm from 'components/AuthForm/AuthForm';
 import Loader from 'components/Loader/Loader';
@@ -27,7 +27,7 @@ import {
 import defaultTheme from 'styles/theme';
 
 function SignInPage() {
-  const { isErrorPopupOpen, isLoadingAuth, signInErrorMessage, onSubmit } =
+  const { isErrorNotificationPopupOpen, isLoadingAuth, signInErrorMessage, onSubmit } =
     useSignInUser();
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
@@ -59,8 +59,8 @@ function SignInPage() {
       {isLoadingAuth && <Loader />}
       {signInErrorMessage && (
         <PopupNotification
-          isPopupShown={isErrorPopupOpen}
-          setPopupShown={setErrorPopupOpen}
+          isPopupShown={isErrorNotificationPopupOpen}
+          setPopupShown={setErrorNotificationPopupOpen}
           text={t(`${signInErrorMessage}`)}
           backgroundColor={defaultTheme.colors.pink}
         />

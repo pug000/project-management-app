@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import useEditUser from 'hooks/useEditUser';
 
+import { setErrorNotificationPopupOpen } from 'redux/slices/userSlice';
+
 import { backButtonAnimation } from 'utils/animations';
 
 import Button from 'components/Button/Button';
@@ -24,13 +26,16 @@ import {
   StyledPrevIcon,
   Title,
 } from 'styles/styles';
-import { setErrorPopupOpen } from 'redux/slices/popupSlice';
 
 function EditProfilePage() {
   const navigate = useNavigate();
   const { t } = useTranslation('translation');
-  const { isErrorPopupOpen, isLoadingEditUser, editUserErrorMessage, onSubmit } =
-    useEditUser();
+  const {
+    isErrorNotificationPopupOpen,
+    isLoadingEditUser,
+    editUserErrorMessage,
+    onSubmit,
+  } = useEditUser();
 
   return (
     <ProtectedRoute>
@@ -64,8 +69,8 @@ function EditProfilePage() {
         {isLoadingEditUser && <Loader />}
         {editUserErrorMessage && (
           <PopupNotification
-            isPopupShown={isErrorPopupOpen}
-            setPopupShown={setErrorPopupOpen}
+            isPopupShown={isErrorNotificationPopupOpen}
+            setPopupShown={setErrorNotificationPopupOpen}
             text={t(`${editUserErrorMessage}`)}
             backgroundColor={defaultTheme.colors.pink}
           />

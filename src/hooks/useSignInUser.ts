@@ -1,13 +1,19 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useSignInMutation } from 'redux/api/authApiSlice';
 import { useGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { getErrorPopupOpen } from 'redux/selectors/popupSelectors';
-import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
-import { setErrorPopupOpen } from 'redux/slices/popupSlice';
-import { setLoggedIn, setUser } from 'redux/slices/userSlice';
+import {
+  getAuthUser,
+  getErrorNotificationPopupOpen,
+  getLoggedIn,
+} from 'redux/selectors/userSelectors';
+import {
+  setErrorNotificationPopupOpen,
+  setLoggedIn,
+  setUser,
+} from 'redux/slices/userSlice';
 
 import { UserFormValues } from 'ts/interfaces';
 
@@ -16,8 +22,7 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 const useSignInUser = () => {
   const authUser = useAppSelector(getAuthUser);
   const isLoggedIn = useAppSelector(getLoggedIn);
-  const isErrorPopupOpen = useAppSelector(getErrorPopupOpen);
-  const [isLoadingAuth, setLoadingAuth] = useState(false);
+  const isErrorNotificationPopupOpen = useAppSelector(getErrorNotificationPopupOpen);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
@@ -27,6 +32,7 @@ const useSignInUser = () => {
       isLoading: isLoadingSignIn,
       isError: isErrorSignIn,
       error: signInErrorMessage,
+      reset,
     },
   ] = useSignInMutation();
   const {
@@ -51,12 +57,13 @@ const useSignInUser = () => {
         })
       );
       dispatch(setLoggedIn(true));
+      reset();
     }
   }, [isSuccessGetUser]);
 
   useEffect(() => {
     if (isErrorSignIn) {
-      dispatch(setErrorPopupOpen(true));
+      dispatch(setErrorNotificationPopupOpen(true));
     }
   }, [isErrorSignIn]);
 
@@ -66,18 +73,10 @@ const useSignInUser = () => {
     }
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    if (isLoadingSignIn || isLoadingGetUser) {
-      setLoadingAuth(true);
-    }
-
-    if (isErrorSignIn || isSuccessGetUser) {
-      setLoadingAuth(false);
-    }
-  }, [isLoadingSignIn, isLoadingGetUser, isErrorSignIn, isSuccessGetUser]);
+  const isLoadingAuth = [isLoadingSignIn, isLoadingGetUser].some((loader) => loader);
 
   return {
-    isErrorPopupOpen,
+    isErrorNotificationPopupOpen,
     isLoadingAuth,
     signInErrorMessage,
     onSubmit,

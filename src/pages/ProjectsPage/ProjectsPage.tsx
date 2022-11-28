@@ -7,13 +7,13 @@ import useCreateProject from 'hooks/useCreateProject';
 import useGetAllProject from 'hooks/useGetAllProjects';
 import useEditProject from 'hooks/useEditProject';
 
-import { setSelectedProject } from 'redux/slices/projectSlice';
-import getSelectedProject from 'redux/selectors/projectSelectors';
 import {
+  setCreateProjectPopupOpen,
   setDeleteProjectPopupOpen,
-  setCreationPopupOpen,
-  setEditPopupOpen,
-} from 'redux/slices/popupSlice';
+  setEditProjectPopupOpen,
+  setSelectedProject,
+} from 'redux/slices/projectSlice';
+import { getSelectedProject } from 'redux/selectors/projectSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -29,14 +29,21 @@ import { ProjectsControls, ProjectsTitle, ProjectsContainer } from './ProjectsPa
 
 function ProjectsPage() {
   const selectedProject = useAppSelector(getSelectedProject);
+  const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
+  const dispatch = useAppDispatch();
   const { projects, isProjectsListLoading } = useGetAllProject();
   const { isDeleteProjectPopupOpen, isLoadingDeleteProject, deleteProject } =
     useDeleteProject(selectedProject);
-  const { isEditPopupOpen, isLoadingEditProject, editOnSubmit } =
+  const { isEditProjectPopupOpen, isLoadingEditProject, editOnSubmit } =
     useEditProject(selectedProject);
-  const { t } = useTranslation('translation', { keyPrefix: 'projectsPage' });
-  const dispatch = useAppDispatch();
-  const { isCreationPopupOpen, isCreationLoading, onSubmit } = useCreateProject();
+  const { isCreateProjectPopupOpen, isLoadingCreateProject, onSubmit } =
+    useCreateProject();
+  const isLoadingProjectsPage = [
+    isProjectsListLoading,
+    isLoadingCreateProject,
+    isLoadingEditProject,
+    isLoadingDeleteProject,
+  ].some((loader) => loader);
 
   return (
     <ProtectedRoute>
@@ -48,23 +55,19 @@ function ProjectsPage() {
             width="130px"
             backgroundColor={defaultTheme.colors.transparent}
             color={defaultTheme.colors.primaryColor}
-            callback={() => dispatch(setCreationPopupOpen(true))}
+            callback={() => dispatch(setCreateProjectPopupOpen(true))}
           >
             {t('newProjectButton')}
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {(isProjectsListLoading ||
-            isLoadingDeleteProject ||
-            isCreationLoading ||
-            isLoadingEditProject) && <Loader />}
           {projects?.length ? (
-            <ProjectCards projects={projects} setEditPopupOpen={setEditPopupOpen} />
+            <ProjectCards projects={projects} />
           ) : (
             <NoResultsContainer
               text="projectsPage.emptyContainerText"
               buttonText="projectsPage.emptyContainerButton"
-              setPopupShown={setCreationPopupOpen}
+              setPopupShown={setCreateProjectPopupOpen}
             />
           )}
         </ProjectsContainer>
@@ -75,21 +78,22 @@ function ProjectsPage() {
           text="deleteProject"
         />
         <PopupWithForm
-          isPopupShown={isCreationPopupOpen}
-          setPopupShown={setCreationPopupOpen}
+          isPopupShown={isCreateProjectPopupOpen}
+          setPopupShown={setCreateProjectPopupOpen}
           keyPrefix="editProjectForm"
           formTitleText="newProjectTitle"
           onSubmit={onSubmit}
         />
         <PopupWithForm
-          isPopupShown={isEditPopupOpen}
-          setPopupShown={setEditPopupOpen}
+          isPopupShown={isEditProjectPopupOpen}
+          setPopupShown={setEditProjectPopupOpen}
           keyPrefix="editProjectForm"
           formTitleText="editTitle"
           selectedItem={selectedProject}
           onSubmit={editOnSubmit}
           setSelectedItem={setSelectedProject}
         />
+        {isLoadingProjectsPage && <Loader />}
       </MainWrapper>
     </ProtectedRoute>
   );

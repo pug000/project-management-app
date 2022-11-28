@@ -25,6 +25,14 @@ const CardsWrapper = styled.div`
       opacity: 1;
     }
   }
+
+  @media (max-width: 380px) {
+    grid-template-columns: repeat(auto-fill, 270px);
+
+    ${StyledLink} {
+      max-width: 270px;
+    }
+  }
 `;
 
 const Card = styled.div`
@@ -89,11 +97,6 @@ const CardButton = styled.button.attrs({
 const IconWrapper = styled.div`
   width: 25px;
   height: 25px;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const CardTitle = styled.h5`

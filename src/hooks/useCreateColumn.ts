@@ -1,39 +1,52 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 
-import { ColumnFormValue } from 'ts/interfaces';
+import { ColumnFormValues } from 'ts/interfaces';
 
 import { useCreateColumnMutation } from 'redux/api/columnApiSlice';
-import { getCreationPopupOpen } from 'redux/selectors/popupSelectors';
+import { getCreateColumnPopupOpen } from 'redux/selectors/columnSelectors';
+import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
 
-import { defaultColumnFormValues } from 'utils/constants';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
-import { useAppSelector } from './useRedux';
-
-const useCreateColumn = (idProject: string) => {
-  const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
+const useCreateColumn = () => {
+  const isCreateColumnPopupOpen = useAppSelector(getCreateColumnPopupOpen);
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
   const [
     createColumn,
-    { isLoading: isCreationLoading, isSuccess: isSuccessCreateColumn },
+    { isLoading: isLoadingCreateColumn, isSuccess: isSuccessCreateColumn },
   ] = useCreateColumnMutation();
 
-  const onSubmit: SubmitHandler<ColumnFormValue> = useCallback(
+  const onSubmit: SubmitHandler<ColumnFormValues> = useCallback(
     async (formValues) => {
-      await createColumn({
-        id: idProject,
-        body: {
-          title: formValues.body.title,
-          order: defaultColumnFormValues.body.order,
-        },
-      });
+      if (id) {
+        await createColumn({
+          id,
+          body: {
+            ...formValues,
+            order: 0,
+          },
+        });
+      }
     },
-    [isCreationPopupOpen]
+    [isCreateColumnPopupOpen]
+  );
+
+  useEffect(
+    () => () => {
+      if (isCreateColumnPopupOpen) {
+        dispatch(setCreateColumnPopupOpen(false));
+      }
+    },
+    []
   );
 
   return {
     isSuccessCreateColumn,
-    isCreationPopupOpen,
-    isCreationLoading,
+    isCreateColumnPopupOpen,
+    isLoadingCreateColumn,
     onSubmit,
   };
 };

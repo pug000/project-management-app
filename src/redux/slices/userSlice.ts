@@ -6,12 +6,18 @@ interface UserState {
   user: User | null;
   authUser: AuthUser | null;
   isLoggedIn: boolean;
+  isDeleteUserPopupOpen: boolean;
+  isLogoutUserPopupOpen: boolean;
+  isErrorNotificationPopupOpen: boolean;
 }
 
 const initialState: UserState = {
   user: null,
   authUser: null,
   isLoggedIn: false,
+  isDeleteUserPopupOpen: false,
+  isLogoutUserPopupOpen: false,
+  isErrorNotificationPopupOpen: false,
 };
 
 const userSlice = createSlice({
@@ -30,6 +36,18 @@ const userSlice = createSlice({
       state.isLoggedIn = payload;
     },
 
+    setDeleteUserPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isDeleteUserPopupOpen = payload;
+    },
+
+    setLogoutUserPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isLogoutUserPopupOpen = payload;
+    },
+
+    setErrorNotificationPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isErrorNotificationPopupOpen = payload;
+    },
+
     setLoggedOut(state) {
       state.user = null;
       state.authUser = null;
@@ -38,6 +56,14 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, setLoggedIn, setAuthUser, setLoggedOut } = userSlice.actions;
+export const {
+  setUser,
+  setLoggedIn,
+  setAuthUser,
+  setDeleteUserPopupOpen,
+  setLogoutUserPopupOpen,
+  setErrorNotificationPopupOpen,
+  setLoggedOut,
+} = userSlice.actions;
 
 export default userSlice.reducer;

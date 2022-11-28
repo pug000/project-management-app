@@ -1,15 +1,17 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import { useUpdateProjectMutation } from 'redux/api/projectsApiSlice';
-import { getEditPopupOpen } from 'redux/selectors/popupSelectors';
+import { getEditProjectPopupOpen } from 'redux/selectors/projectSelectors';
+import { setEditProjectPopupOpen } from 'redux/slices/projectSlice';
 
 import { EditFormValues, Project } from 'ts/interfaces';
 
-import { useAppSelector } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useEditProject = (selectedProject: Project | null) => {
-  const isEditPopupOpen = useAppSelector(getEditPopupOpen);
+  const isEditProjectPopupOpen = useAppSelector(getEditProjectPopupOpen);
+  const dispatch = useAppDispatch();
   const [editProject, { isLoading: isLoadingEditProject }] = useUpdateProjectMutation();
 
   const editOnSubmit: SubmitHandler<EditFormValues> = useCallback(
@@ -22,11 +24,20 @@ const useEditProject = (selectedProject: Project | null) => {
         });
       }
     },
-    [isEditPopupOpen]
+    [isEditProjectPopupOpen]
+  );
+
+  useEffect(
+    () => () => {
+      if (isEditProjectPopupOpen) {
+        dispatch(setEditProjectPopupOpen(false));
+      }
+    },
+    []
   );
 
   return {
-    isEditPopupOpen,
+    isEditProjectPopupOpen,
     isLoadingEditProject,
     editOnSubmit,
   };

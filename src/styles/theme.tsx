@@ -66,7 +66,7 @@ const defaultTheme: DefaultTheme = {
     yellow: '#faea73',
     grey: '#969FA4',
     black: '#1f1f1f',
-    darkBlue: '#0070a0',
+    darkBlue: '#006b99',
     primaryColor: '#0070a0',
     transparent: 'transparent',
   },

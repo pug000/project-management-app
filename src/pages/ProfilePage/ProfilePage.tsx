@@ -16,9 +16,9 @@ import { ImagesContainer, ImageWrapper, ProfileSection } from './ProfilePage.sty
 function ProfilePage() {
   const {
     isLoadingDeleteUser,
-    isDeletePopupOpen,
+    isDeleteUserPopupOpen,
     deleteUserProfile,
-    setDeletePopupOpen,
+    setDeleteUserPopupOpen,
   } = useDeleteUser();
 
   return (
@@ -34,8 +34,8 @@ function ProfilePage() {
         </ProfileSection>
         {isLoadingDeleteUser && <Loader />}
         <PopupWarning
-          isPopupShown={isDeletePopupOpen}
-          setPopupShown={setDeletePopupOpen}
+          isPopupShown={isDeleteUserPopupOpen}
+          setPopupShown={setDeleteUserPopupOpen}
           actionOnYes={deleteUserProfile}
           text="deleteProfile"
         />

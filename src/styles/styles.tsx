@@ -1,9 +1,16 @@
 import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { MdOutlineDelete } from 'react-icons/md';
+import { MdOutlineDelete, MdClose, MdEdit } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
+import { FiCheck } from 'react-icons/fi';
 
 import { ColorProps, IconsProps } from 'ts/interfaces';
+
+const baseIconStyles = {
+  width: '100%',
+  height: '100%',
+};
 
 const MainWrapper = styled.main`
   display: flex;
@@ -116,8 +123,60 @@ const StyledPrevIcon = styled(GrPrevious)<IconsProps>`
 
 const StyledDeleteIcon = styled(MdOutlineDelete).attrs({
   style: {
-    width: '100%',
-    height: '100%',
+    ...baseIconStyles,
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.red};
+  }
+`;
+
+const StyledEditIcon = styled(BiEdit).attrs({
+  style: {
+    ...baseIconStyles,
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+`;
+
+const StyledEditTextIcon = styled(MdEdit).attrs({
+  style: {
+    width: '80%',
+    height: '80%',
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+`;
+
+const StyledConfirmIcon = styled(FiCheck).attrs({
+  style: {
+    ...baseIconStyles,
+  },
+})<ColorProps>`
+  color: ${({ $color, theme }) => $color ?? theme.colors.grey};
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primaryColor};
+  }
+`;
+
+const StyledCloseIcon = styled(MdClose).attrs({
+  style: {
+    ...baseIconStyles,
   },
 })<ColorProps>`
   color: ${({ $color, theme }) => $color ?? theme.colors.grey};
@@ -140,4 +199,8 @@ export {
   StyledLink,
   StyledPrevIcon,
   StyledDeleteIcon,
+  StyledEditIcon,
+  StyledEditTextIcon,
+  StyledConfirmIcon,
+  StyledCloseIcon,
 };

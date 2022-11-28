@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { getUser } from 'redux/selectors/userSelectors';
-import { setDeletePopupOpen } from 'redux/slices/popupSlice';
+import { setDeleteUserPopupOpen } from 'redux/slices/userSlice';
 
 import Button from 'components/Button/Button';
 
@@ -29,7 +29,7 @@ function Profile() {
 
   const showPopupOrEditPageOnClick = useCallback((id: number) => {
     if (id === 2) {
-      dispatch(setDeletePopupOpen(true));
+      dispatch(setDeleteUserPopupOpen(true));
     } else {
       navigate('/profile/edit');
     }
