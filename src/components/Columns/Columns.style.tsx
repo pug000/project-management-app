@@ -4,8 +4,8 @@ const ColumnWrapper = styled.div`
   display: flex;
   overflow: auto;
   width: 100%;
-  height: 61vh;
   gap: 25px;
+  height: calc(100vh - 430px);
 
   &::-webkit-scrollbar {
     width: 16px;
@@ -32,7 +32,6 @@ const ColumnsContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   width: 100%;
-  height: 58vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -43,6 +42,14 @@ const ColumnsContainer = styled.div`
   box-shadow: 0px 10px 13px rgb(0 0 0 / 2%);
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   cursor: default;
+
+  @media (max-width: 400px) {
+    min-width: 270px;
+  }
+
+  @media (max-width: 360px) {
+    min-width: 240px;
+  }
 `;
 
 const ColumnHeader = styled.div`
@@ -62,7 +69,6 @@ const ColumnTitle = styled.h3`
 
 const ColumnTaskContainer = styled.div`
   width: 100%;
-  height: 65vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;

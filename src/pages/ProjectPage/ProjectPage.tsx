@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
@@ -56,8 +56,28 @@ function ProjectPage() {
     isLoadingEditColumnTitle,
   ].some((loader) => loader);
 
+  const ref = useRef<HTMLElement | null>(null);
+  const [buttonText, setButtonText] = useState(`${t('newColumnButton')}`);
+  const [buttonWidth, setButtonWidth] = useState('130px');
+
+  const changeButton = useCallback(() => {
+    if (ref.current && ref.current.offsetWidth <= 800) {
+      setButtonText('+');
+      setButtonWidth('30px');
+    } else {
+      setButtonText(`${t('newColumnButton')}`);
+      setButtonWidth('130px');
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', changeButton);
+
+    return () => window.removeEventListener('resize', changeButton);
+  }, []);
+
   return (
-    <MainWrapper>
+    <MainWrapper ref={ref}>
       <ProjectControls>
         <ProjectControlsWrapper>
           <Button
@@ -86,12 +106,12 @@ function ProjectPage() {
         <ProjectButtonWrapper>
           <Button
             type="button"
-            width="130px"
+            width={buttonWidth}
             backgroundColor={defaultTheme.colors.transparent}
             color={defaultTheme.colors.primaryColor}
             callback={() => dispatch(setCreateColumnPopupOpen(true))}
           >
-            {t('newColumnButton')}
+            {buttonText}
           </Button>
         </ProjectButtonWrapper>
       </ProjectControls>

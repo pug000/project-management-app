@@ -11,6 +11,10 @@ const ProjectControls = styled.section`
   Button {
     margin-top: 6px;
   }
+
+  @media (max-width: 530px) {
+    gap: 10px;
+  }
 `;
 
 const ProjectControlsWrapper = styled.div`
@@ -51,11 +55,13 @@ const ProjectButtonWrapper = styled.div`
 const ProjectDescription = styled.p`
   align-self: flex-start;
   margin-bottom: 15px;
+  word-break: break-all;
 `;
 
 const ProjectContainer = styled.section`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 20px;
   width: 100%;
   height: 100%;
