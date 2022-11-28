@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
-import { ColumnData, ColumnFormValues } from 'ts/interfaces';
+import { ColumnData } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 import { StyledCloseIcon, StyledConfirmIcon } from 'styles/styles';
@@ -13,11 +13,11 @@ import { Form } from './EditText.styles';
 
 interface EditTextFormProps {
   item: ColumnData;
-  onSubmit: (formValues: ColumnFormValues, item: ColumnData) => void;
   toggleEditingTextOnClick: () => void;
+  editText: (title: string, item: ColumnData) => void;
 }
 
-function EditTextForm({ item, onSubmit, toggleEditingTextOnClick }: EditTextFormProps) {
+function EditTextForm({ item, toggleEditingTextOnClick, editText }: EditTextFormProps) {
   const { t, i18n } = useTranslation('translation');
   const {
     register,
@@ -47,7 +47,7 @@ function EditTextForm({ item, onSubmit, toggleEditingTextOnClick }: EditTextForm
       aria-label="form"
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit((form) => onSubmit(form, item))}
+      onSubmit={handleSubmit(({ title }) => editText(title, item))}
     >
       <Input
         type="text"

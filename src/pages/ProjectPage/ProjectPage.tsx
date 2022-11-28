@@ -8,6 +8,7 @@ import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
 import useDeleteColumn from 'hooks/useDeleteColumn';
 import useGetAllColumns from 'hooks/useGetAllColumns';
+import useEditColumnTitle from 'hooks/useEditColumnTitle';
 
 import { setDeleteProjectPopupOpen } from 'redux/slices/projectSlice';
 import {
@@ -44,12 +45,14 @@ function ProjectPage() {
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
   const { columns, isLoadingColumnList } = useGetAllColumns();
+  const { isLoadingEditColumnTitle } = useEditColumnTitle();
   const isLoadingProjectPage = [
     isLoadingSelectedProject,
     isLoadingColumnList,
     isLoadingDeleteProject,
     isLoadingDeleteColumn,
     isLoadingCreateColumn,
+    isLoadingEditColumnTitle,
   ].some((loader) => loader);
 
   return (

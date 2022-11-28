@@ -8,14 +8,16 @@ import { useAppSelector } from './useRedux';
 const useGetAllColumns = () => {
   const { id } = useParams();
   const isLoggedIn = useAppSelector(getLoggedIn);
-  const { data: columns, isFetching: isLoadingColumnList } = useGetAllColumnsQuery(
-    id ?? '',
-    { skip: !isLoggedIn }
-  );
+  const {
+    data: columns,
+    isFetching: isLoadingColumnList,
+    isSuccess: isSuccessGetColumnList,
+  } = useGetAllColumnsQuery(id ?? '', { skip: !isLoggedIn });
 
   return {
     columns,
     isLoadingColumnList,
+    isSuccessGetColumnList,
   };
 };
 

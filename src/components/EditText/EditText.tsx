@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import Button from 'components/Button/Button';
 
-import { ColumnData, ColumnFormValues } from 'ts/interfaces';
+import { ColumnData } from 'ts/interfaces';
 
 import { StyledDeleteIcon, StyledEditTextIcon } from 'styles/styles';
 import defaultTheme from 'styles/theme';
@@ -17,16 +17,30 @@ import EditTextForm from './EditTextForm';
 
 interface EditTextProps {
   item: ColumnData;
-  onSubmit: (formValues: ColumnFormValues, item: ColumnData) => void;
+  isSuccess: boolean;
+  isLoading: boolean;
   deleteItemOnClick: (column: ColumnData) => void;
+  editText: (title: string, item: ColumnData) => void;
 }
 
-function EditText({ item, onSubmit, deleteItemOnClick }: EditTextProps) {
+function EditText({
+  item,
+  isSuccess,
+  isLoading,
+  deleteItemOnClick,
+  editText,
+}: EditTextProps) {
   const [isEditingText, setEditingText] = useState(false);
 
   const toggleEditingTextOnClick = useCallback(() => {
     setEditingText((prev) => !prev);
   }, [isEditingText]);
+
+  useEffect(() => {
+    if (isSuccess && !isLoading) {
+      setEditingText(false);
+    }
+  }, [isSuccess, isLoading]);
 
   return (
     <EditTextContainer>
@@ -34,7 +48,7 @@ function EditText({ item, onSubmit, deleteItemOnClick }: EditTextProps) {
         <EditTextForm
           item={item}
           toggleEditingTextOnClick={toggleEditingTextOnClick}
-          onSubmit={onSubmit}
+          editText={editText}
         />
       ) : (
         <EditTextWrapper>

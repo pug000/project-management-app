@@ -2,6 +2,8 @@ import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'hooks/useRedux';
+import useGetAllColumns from 'hooks/useGetAllColumns';
+import useEditColumnTitle from 'hooks/useEditColumnTitle';
 
 import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
 
@@ -20,6 +22,8 @@ interface ColumnsProps {
 function Columns({ columns }: ColumnsProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
   const dispatch = useAppDispatch();
+  const { isSuccessGetColumnList, isLoadingColumnList } = useGetAllColumns();
+  const { editColumnTitle } = useEditColumnTitle();
 
   const deleteColumnOnClick = useCallback((column: ColumnData) => {
     dispatch(setSelectedColumn(column));
@@ -33,8 +37,10 @@ function Columns({ columns }: ColumnsProps) {
           <ColumnsContainer key={column._id}>
             <EditText
               item={column}
+              isSuccess={isSuccessGetColumnList}
+              isLoading={isLoadingColumnList}
               deleteItemOnClick={deleteColumnOnClick}
-              onSubmit={() => {}}
+              editText={editColumnTitle}
             />
             <ColumnTaskContainer>
               <Task title="hello" />
