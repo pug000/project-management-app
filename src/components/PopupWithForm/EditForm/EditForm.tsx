@@ -1,12 +1,14 @@
 import React, { memo, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useParams } from 'react-router-dom';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 import Textarea from 'components/Textarea/Textarea';
+import RadioInput from 'components/RadioInput/RadioInput';
 
-import { defaultFormItemValues } from 'utils/constants';
+import { defaultFormItemValues, radioInputList } from 'utils/constants';
 
 import { EditFormValues } from 'ts/interfaces';
 
@@ -20,7 +22,8 @@ interface EditFormProps<T> {
 
 function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
   const { t, i18n } = useTranslation('translation');
-
+  const { id } = useParams();
+  const { pathname } = useLocation();
   const {
     register,
     handleSubmit,
@@ -80,6 +83,14 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
           message: t(`${keyPrefix}.descriptionMaxLength`),
         }}
       />
+      {pathname === `/projects/${id}` && (
+        <RadioInput
+          name="color"
+          text={t('projects.color')}
+          radioInputs={radioInputList}
+          register={register}
+        />
+      )}
       <Button type="submit" disabled={!isFormValid}>
         {t('editForm.button')}
       </Button>
