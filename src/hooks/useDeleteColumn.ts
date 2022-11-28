@@ -1,10 +1,11 @@
 import { useCallback, useEffect } from 'react';
 
 import { useDeleteColumnByIdMutation } from 'redux/api/columnApiSlice';
-import { getDeleteColumnPopupOpen } from 'redux/selectors/popupSelectors';
-import { setDeleteColumnPopupOpen } from 'redux/slices/popupSlice';
-import { setSelectedColumn } from 'redux/slices/columnSlice';
-import getSelectedColumn from 'redux/selectors/columnSelectors';
+import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
+import {
+  getDeleteColumnPopupOpen,
+  getSelectedColumn,
+} from 'redux/selectors/columnSelectors';
 
 import { useAppSelector, useAppDispatch } from './useRedux';
 

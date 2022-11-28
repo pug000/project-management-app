@@ -9,4 +9,26 @@ const getAuthUser = createSelector(getBaseUserState, (state) => state.authUser);
 
 const getLoggedIn = createSelector(getBaseUserState, (state) => state.isLoggedIn);
 
-export { getUser, getAuthUser, getLoggedIn };
+const getDeleteUserPopupOpen = createSelector(
+  getBaseUserState,
+  (state) => state.isDeleteUserPopupOpen
+);
+
+const getLogoutUserPopupOpen = createSelector(
+  getBaseUserState,
+  (state) => state.isLogoutUserPopupOpen
+);
+
+const getErrorNotificationPopupOpen = createSelector(
+  getBaseUserState,
+  (state) => state.isErrorNotificationPopupOpen
+);
+
+export {
+  getUser,
+  getAuthUser,
+  getLoggedIn,
+  getDeleteUserPopupOpen,
+  getLogoutUserPopupOpen,
+  getErrorNotificationPopupOpen,
+};

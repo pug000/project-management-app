@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
-import { setDeleteColumnPopupOpen } from 'redux/slices/popupSlice';
-import { setSelectedColumn } from 'redux/slices/columnSlice';
+import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
 
 import Button from 'components/Button/Button';
 import Task from 'components/Task/Task';

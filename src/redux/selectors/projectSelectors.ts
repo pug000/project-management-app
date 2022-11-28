@@ -8,4 +8,24 @@ const getSelectedProject = createSelector(
   (state) => state.selectedProject
 );
 
-export default getSelectedProject;
+const getDeleteProjectPopupOpen = createSelector(
+  getBaseProjectState,
+  (state) => state.isDeleteProjectPopupOpen
+);
+
+const getCreateProjectPopupOpen = createSelector(
+  getBaseProjectState,
+  (state) => state.isCreateProjectPopupOpen
+);
+
+const getEditProjectPopupOpen = createSelector(
+  getBaseProjectState,
+  (state) => state.isEditProjectPopupOpen
+);
+
+export {
+  getSelectedProject,
+  getDeleteProjectPopupOpen,
+  getCreateProjectPopupOpen,
+  getEditProjectPopupOpen,
+};

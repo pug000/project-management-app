@@ -5,13 +5,13 @@ import { useParams } from 'react-router-dom';
 import { ColumnFormValues } from 'ts/interfaces';
 
 import { useCreateColumnMutation } from 'redux/api/columnApiSlice';
-import { getCreationPopupOpen } from 'redux/selectors/popupSelectors';
-import { setCreationPopupOpen } from 'redux/slices/popupSlice';
+import { getCreateColumnPopupOpen } from 'redux/selectors/columnSelectors';
+import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
 
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useCreateColumn = () => {
-  const isCreationPopupOpen = useAppSelector(getCreationPopupOpen);
+  const isCreateColumnPopupOpen = useAppSelector(getCreateColumnPopupOpen);
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const [
@@ -31,13 +31,13 @@ const useCreateColumn = () => {
         });
       }
     },
-    [isCreationPopupOpen]
+    [isCreateColumnPopupOpen]
   );
 
   useEffect(
     () => () => {
-      if (isCreationPopupOpen) {
-        dispatch(setCreationPopupOpen(false));
+      if (isCreateColumnPopupOpen) {
+        dispatch(setCreateColumnPopupOpen(false));
       }
     },
     []
@@ -45,7 +45,7 @@ const useCreateColumn = () => {
 
   return {
     isSuccessCreateColumn,
-    isCreationPopupOpen,
+    isCreateColumnPopupOpen,
     isLoadingCreateColumn,
     onSubmit,
   };

@@ -2,15 +2,13 @@ import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useDeleteUserByIdMutation } from 'redux/api/userApiSlice';
-import { getDeletePopupOpen } from 'redux/selectors/popupSelectors';
-import { getAuthUser } from 'redux/selectors/userSelectors';
-import { setDeletePopupOpen } from 'redux/slices/popupSlice';
-import { setLoggedOut } from 'redux/slices/userSlice';
+import { getAuthUser, getDeleteUserPopupOpen } from 'redux/selectors/userSelectors';
+import { setDeleteUserPopupOpen, setLoggedOut } from 'redux/slices/userSlice';
 
 import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useDeleteUser = () => {
-  const isDeletePopupOpen = useAppSelector(getDeletePopupOpen);
+  const isDeleteUserPopupOpen = useAppSelector(getDeleteUserPopupOpen);
   const authUser = useAppSelector(getAuthUser);
   const dispatch = useAppDispatch();
   const [
@@ -21,7 +19,7 @@ const useDeleteUser = () => {
 
   const deleteUserProfile = useCallback(async () => {
     if (authUser?._id) {
-      dispatch(setDeletePopupOpen(false));
+      dispatch(setDeleteUserPopupOpen(false));
       await deleteUserById(authUser._id);
     }
   }, []);
@@ -35,8 +33,8 @@ const useDeleteUser = () => {
 
   useEffect(
     () => () => {
-      if (isDeletePopupOpen) {
-        dispatch(setDeletePopupOpen(false));
+      if (isDeleteUserPopupOpen) {
+        dispatch(setDeleteUserPopupOpen(false));
       }
     },
     []
@@ -44,9 +42,9 @@ const useDeleteUser = () => {
 
   return {
     isLoadingDeleteUser,
-    isDeletePopupOpen,
+    isDeleteUserPopupOpen,
     deleteUserProfile,
-    setDeletePopupOpen,
+    setDeleteUserPopupOpen,
   };
 };
 

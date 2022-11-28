@@ -7,12 +7,13 @@ import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
 import useDeleteColumn from 'hooks/useDeleteColumn';
+import useGetAllColumns from 'hooks/useGetAllColumns';
 
+import { setDeleteProjectPopupOpen } from 'redux/slices/projectSlice';
 import {
-  setCreationPopupOpen,
+  setCreateColumnPopupOpen,
   setDeleteColumnPopupOpen,
-  setDeleteProjectPopupOpen,
-} from 'redux/slices/popupSlice';
+} from 'redux/slices/columnSlice';
 
 import { backButtonAnimation } from 'utils/animations';
 
@@ -25,8 +26,6 @@ import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFor
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
-
-import useGetAllColumns from 'hooks/useGetAllColumns';
 import {
   ProjectContainer,
   ProjectControls,
@@ -41,7 +40,7 @@ function ProjectPage() {
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
-  const { isCreationPopupOpen, isLoadingCreateColumn, onSubmit } = useCreateColumn();
+  const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit } = useCreateColumn();
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
   const { columns, isLoadingColumnList } = useGetAllColumns();
@@ -86,7 +85,7 @@ function ProjectPage() {
             width="130px"
             backgroundColor={defaultTheme.colors.transparent}
             color={defaultTheme.colors.primaryColor}
-            callback={() => dispatch(setCreationPopupOpen(true))}
+            callback={() => dispatch(setCreateColumnPopupOpen(true))}
           >
             {t('newColumnButton')}
           </Button>
@@ -100,7 +99,7 @@ function ProjectPage() {
           <NoResultsContainer
             text="projectPage.emptyContainerText"
             buttonText="projectPage.emptyContainerButton"
-            setPopupShown={setCreationPopupOpen}
+            setPopupShown={setCreateColumnPopupOpen}
           />
         )}
       </ProjectContainer>
@@ -117,8 +116,8 @@ function ProjectPage() {
         actionOnYes={deleteColumn}
       />
       <PopupWithFormColumnTask
-        isPopupShown={isCreationPopupOpen}
-        setPopupShown={setCreationPopupOpen}
+        isPopupShown={isCreateColumnPopupOpen}
+        setPopupShown={setCreateColumnPopupOpen}
         keyPrefix="editColumnForm"
         title="newColumnTitle"
         onSubmit={onSubmit}

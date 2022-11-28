@@ -1,7 +1,11 @@
-import { setCreationPopupOpen, setEditPopupOpen } from 'redux/slices/popupSlice';
+// import { setEditPopupOpen } from 'redux/slices/popupSlice';
+import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
+
+import { addFetchOptions } from 'utils/functions';
+
 import { Endpoints, Methods } from 'ts/enums';
 import { ColumnData, Column } from 'ts/interfaces';
-import { addFetchOptions } from 'utils/functions';
+
 import apiSlice from './apiSlice';
 
 type OmitColumnData = Omit<ColumnData, 'title' | 'order'>;
@@ -29,8 +33,8 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           await queryFulfilled;
-          dispatch(setCreationPopupOpen(false));
-          dispatch(setEditPopupOpen(false));
+          dispatch(setCreateColumnPopupOpen(false));
+          // dispatch(setEditPopupOpen(false));
         } catch (error) {
           throw new Error(`${error}`);
         }
