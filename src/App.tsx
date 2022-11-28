@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useEffect } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -25,6 +25,7 @@ function App() {
   const authUser = useAppSelector(getAuthUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [isFooterShown, setFooterShown] = useState(true);
 
   const signOutUser = useCallback(() => {
     if (isLoggedIn && authUser?.exp) {
@@ -54,12 +55,15 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit" element={<EditProfilePage />} />
             <Route path="projects" element={<ProjectsPage />} />
-            <Route path="projects/:id" element={<ProjectPage />} />
+            <Route
+              path="projects/:id"
+              element={<ProjectPage setFooterShown={setFooterShown} />}
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
-      <Footer />
+      {isFooterShown && <Footer />}
     </>
   );
 }

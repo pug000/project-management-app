@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAppDispatch } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
@@ -36,13 +36,18 @@ import {
   ProjectTitle,
 } from './ProjectPage.style';
 
-function ProjectPage() {
+interface ProjectPageProps {
+  setFooterShown: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ProjectPage({ setFooterShown }: ProjectPageProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
-  const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit } = useCreateColumn();
+  const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit, id } =
+    useCreateColumn();
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
   const { columns, isLoadingColumnList } = useGetAllColumns();
@@ -56,24 +61,32 @@ function ProjectPage() {
     isLoadingEditColumnTitle,
   ].some((loader) => loader);
 
-  const ref = useRef<HTMLElement | null>(null);
   const [buttonText, setButtonText] = useState(`${t('newColumnButton')}`);
   const [buttonWidth, setButtonWidth] = useState('130px');
+  const location = useLocation();
+  const ref = useRef<HTMLElement | null>(null);
 
-  const changeButton = useCallback(() => {
+  const changeProjectPageLayout = () => {
     if (ref.current && ref.current.offsetWidth <= 800) {
       setButtonText('+');
       setButtonWidth('30px');
+      if (location.pathname === `/projects/${id}`) {
+        setFooterShown(false);
+      }
     } else {
       setButtonText(`${t('newColumnButton')}`);
       setButtonWidth('130px');
+      setFooterShown(true);
     }
-  }, []);
+  };
 
   useEffect(() => {
-    window.addEventListener('resize', changeButton);
-
-    return () => window.removeEventListener('resize', changeButton);
+    window.addEventListener('resize', changeProjectPageLayout);
+    changeProjectPageLayout();
+    return () => {
+      window.removeEventListener('resize', changeProjectPageLayout);
+      setFooterShown(true);
+    };
   }, []);
 
   return (
@@ -152,4 +165,4 @@ function ProjectPage() {
   );
 }
 
-export default ProjectPage;
+export default memo(ProjectPage);

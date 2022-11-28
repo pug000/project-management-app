@@ -48,6 +48,7 @@ const useCreateColumn = () => {
     isCreateColumnPopupOpen,
     isLoadingCreateColumn,
     onSubmit,
+    id,
   };
 };
 

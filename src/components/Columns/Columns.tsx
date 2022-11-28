@@ -36,29 +36,18 @@ function Columns({ columns }: ColumnsProps) {
       {columns?.length &&
         columns.map((column) => (
           <ColumnsContainer key={column._id}>
-            <EditText
-              item={column}
-              isSuccess={isSuccessGetColumnList}
-              isLoading={isLoadingColumnList}
-              deleteItemOnClick={deleteColumnOnClick}
-              editText={editColumnTitle}
-            />
-            <ColumnTaskContainer>
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-              <Task title="hello" />
-            </ColumnTaskContainer>
+            <div>
+              <EditText
+                item={column}
+                isSuccess={isSuccessGetColumnList}
+                isLoading={isLoadingColumnList}
+                deleteItemOnClick={deleteColumnOnClick}
+                editText={editColumnTitle}
+              />
+              <ColumnTaskContainer>
+                <Task title="hello" />
+              </ColumnTaskContainer>
+            </div>
             <Button
               type="button"
               backgroundColor={defaultTheme.colors.transparent}

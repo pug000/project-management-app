@@ -7,6 +7,10 @@ const ColumnWrapper = styled.div`
   gap: 25px;
   height: calc(100vh - 430px);
 
+  @media (max-width: 800px) {
+    height: calc(100vh - 320px);
+  }
+
   &::-webkit-scrollbar {
     width: 16px;
     background-color: ${({ theme }) => theme.colors.backgroundGrey};
@@ -34,6 +38,7 @@ const ColumnsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   padding: 10px;
   margin-bottom: 10px;
@@ -95,13 +100,10 @@ const ColumnTaskContainer = styled.div`
   }
 `;
 
-const ColumnButtonWrapper = styled.div``;
-
 export {
   ColumnWrapper,
   ColumnsContainer,
   ColumnHeader,
   ColumnTitle,
   ColumnTaskContainer,
-  ColumnButtonWrapper,
 };

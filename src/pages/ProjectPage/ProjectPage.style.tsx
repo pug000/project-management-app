@@ -68,6 +68,10 @@ const ProjectContainer = styled.section`
   overflow-y: none;
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
   border-radius: 10px;
+
+  @media (max-width: 800px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export {
