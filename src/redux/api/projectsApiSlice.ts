@@ -35,6 +35,7 @@ const projectsApiSlice = apiSlice.injectEndpoints({
           ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
           : ['Project'],
     }),
+
     getProjectById: builder.query<Project, string>({
       query: (id: string) => addFetchOptions(`${Endpoints.boards}${id}`, Methods.get),
       transformResponse: (project: ProjectData) =>
@@ -46,6 +47,7 @@ const projectsApiSlice = apiSlice.injectEndpoints({
           : undefined,
       providesTags: ['Project'],
     }),
+
     createProject: builder.mutation<ProjectData, OmitProjectData>({
       query: (body: OmitProjectData) => ({
         ...addFetchOptions(`${Endpoints.boards}`, Methods.post),
@@ -60,6 +62,7 @@ const projectsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Project'],
     }),
+
     deleteProjectById: builder.mutation<ProjectData, string>({
       query: (_id: string) =>
         addFetchOptions(`${Endpoints.boards}${_id}`, Methods.delete),
