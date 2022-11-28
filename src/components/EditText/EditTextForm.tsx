@@ -60,7 +60,7 @@ function EditTextForm({ item, toggleEditingTextOnClick, editText }: EditTextForm
           message: t('editForm.titleMinLength'),
         }}
         maxLength={{
-          value: 50,
+          value: 25,
           message: t('editForm.titleMaxLength'),
         }}
         required={t('editForm.required')}

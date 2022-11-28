@@ -28,6 +28,7 @@ import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFor
 import defaultTheme from 'styles/theme';
 import { MainWrapper, StyledPrevIcon, StyledDeleteIcon } from 'styles/styles';
 import {
+  ProjectButtonWrapper,
   ProjectContainer,
   ProjectControls,
   ProjectControlsWrapper,
@@ -82,7 +83,7 @@ function ProjectPage() {
             </Button>
           )}
         </ProjectControlsWrapper>
-        <ProjectControlsWrapper>
+        <ProjectButtonWrapper>
           <Button
             type="button"
             width="130px"
@@ -92,7 +93,7 @@ function ProjectPage() {
           >
             {t('newColumnButton')}
           </Button>
-        </ProjectControlsWrapper>
+        </ProjectButtonWrapper>
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>

@@ -16,6 +16,7 @@ const ProjectControls = styled.section`
 const ProjectControlsWrapper = styled.div`
   display: flex;
   gap: 10px;
+  overflow-x: hidden;
 
   Button {
     padding: 0;
@@ -34,10 +35,17 @@ const ProjectTitle = styled.h1`
   font-weight: ${({ theme }) => theme.fontsWeight.medium};
   font-size: ${({ theme }) => theme.fontSizes.h3};
   color: ${({ theme }) => theme.colors.title};
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media (max-width: 600px) {
     font-size: ${({ theme }) => theme.fontSizes.h3};
   }
+`;
+
+const ProjectButtonWrapper = styled.div`
+  display: flex;
 `;
 
 const ProjectDescription = styled.p`
@@ -62,4 +70,5 @@ export {
   ProjectTitle,
   ProjectDescription,
   ProjectContainer,
+  ProjectButtonWrapper,
 };

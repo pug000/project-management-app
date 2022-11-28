@@ -64,7 +64,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
           message: t('editForm.titleMinLength'),
         }}
         maxLength={{
-          value: 50,
+          value: 25,
           message: t('editForm.titleMaxLength'),
         }}
         required={t('editForm.required')}
