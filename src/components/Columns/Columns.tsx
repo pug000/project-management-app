@@ -8,13 +8,13 @@ import useEditColumnTitle from 'hooks/useEditColumnTitle';
 import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
 
 import Button from 'components/Button/Button';
-import Task from 'components/Task/Task';
 import EditText from 'components/EditText/EditText';
+import TaskCards from 'components/TaskCards/TaskCards';
 
 import { ColumnData } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
-import { ColumnWrapper, ColumnsContainer, ColumnTaskContainer } from './Columns.style';
+import { ColumnWrapper, ColumnsContainer } from './Columns.style';
 
 interface ColumnsProps {
   columns: ColumnData[];
@@ -43,7 +43,8 @@ function Columns({ columns }: ColumnsProps) {
               deleteItemOnClick={deleteColumnOnClick}
               editText={editColumnTitle}
             />
-            <ColumnTaskContainer>
+            <TaskCards />
+            {/* <ColumnTaskContainer>
               <Task title="hello" />
               <Task title="hello" />
               <Task title="hello" />
@@ -58,7 +59,7 @@ function Columns({ columns }: ColumnsProps) {
               <Task title="hello" />
               <Task title="hello" />
               <Task title="hello" />
-            </ColumnTaskContainer>
+            </ColumnTaskContainer> */}
             <Button
               type="button"
               backgroundColor={defaultTheme.colors.transparent}
