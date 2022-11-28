@@ -13,6 +13,7 @@ import EditText from 'components/EditText/EditText';
 
 import { ColumnData } from 'ts/interfaces';
 
+import defaultTheme from 'styles/theme';
 import { ColumnWrapper, ColumnsContainer, ColumnTaskContainer } from './Columns.style';
 
 interface ColumnsProps {
@@ -58,7 +59,13 @@ function Columns({ columns }: ColumnsProps) {
               <Task title="hello" />
               <Task title="hello" />
             </ColumnTaskContainer>
-            <Button type="button">{t('newTaskButton')}</Button>
+            <Button
+              type="button"
+              backgroundColor={defaultTheme.colors.transparent}
+              color={defaultTheme.colors.grey}
+            >
+              {`+ ${t('newTaskButton')}`}
+            </Button>
           </ColumnsContainer>
         ))}
     </ColumnWrapper>
