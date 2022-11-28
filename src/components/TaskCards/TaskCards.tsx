@@ -1,12 +1,13 @@
 import React, { memo } from 'react';
 
-import Button from 'components/Button/Button';
-
 import { useGetAllTasksQuery } from 'redux/api/tasksApiSlice';
 
+import Button from 'components/Button/Button';
+
 import theme from 'styles/theme';
+import { Task } from 'ts/interfaces';
 import {
-  Task,
+  StyledTask,
   TaskHeader,
   TaskTitle,
   TasksWrapper,
@@ -17,28 +18,30 @@ import {
 interface TasksCardsProps {
   boardId: string;
   columnId: string;
+  showDeletePopupOnClick: (task: Task) => void;
 }
 
-function TaskCards({ boardId, columnId }: TasksCardsProps) {
+function TaskCards({ boardId, columnId, showDeletePopupOnClick }: TasksCardsProps) {
   const { data: tasks } = useGetAllTasksQuery({ boardId, columnId });
 
   return (
     <TasksWrapper>
       {tasks &&
         tasks.map((task) => (
-          <Task key={task._id} $backgroundColor={task.color}>
+          <StyledTask key={task._id} $backgroundColor={task.color}>
             <TaskHeader>
               <TaskTitle>{task.title}</TaskTitle>
               <Button
                 type="button"
                 width={theme.fontSizes.text}
                 backgroundColor={theme.colors.transparent}
+                callback={() => showDeletePopupOnClick(task)}
               >
                 <StyledRemoveIcon />
               </Button>
             </TaskHeader>
             <TaskDescription>{task.description}</TaskDescription>
-          </Task>
+          </StyledTask>
         ))}
     </TasksWrapper>
   );

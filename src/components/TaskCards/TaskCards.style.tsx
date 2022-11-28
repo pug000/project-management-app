@@ -33,7 +33,7 @@ const TasksWrapper = styled.div`
   }
 `;
 
-const Task = styled.div<BackgroundColorProps>`
+const StyledTask = styled.div<BackgroundColorProps>`
   width: auto;
   min-height: 100px;
   max-height: 200px;
@@ -80,4 +80,11 @@ const StyledRemoveIcon = styled(AiFillDelete).attrs({
   color: ${({ theme }) => theme.colors.backgroundWhite};
 `;
 
-export { Task, TaskHeader, TaskTitle, TaskDescription, TasksWrapper, StyledRemoveIcon };
+export {
+  StyledTask,
+  TaskHeader,
+  TaskTitle,
+  TaskDescription,
+  TasksWrapper,
+  StyledRemoveIcon,
+};

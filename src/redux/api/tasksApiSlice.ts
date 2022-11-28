@@ -70,7 +70,7 @@ const tasksApiSlice = apiSlice.injectEndpoints({
       query: ({ boardId, columnId, id }) => ({
         ...addFetchOptions(
           `${Endpoints.boards}${boardId}/${Endpoints.columns}${columnId}/${Endpoints.tasks}${id}`,
-          Methods.put
+          Methods.delete
         ),
       }),
       invalidatesTags: ['Task'],

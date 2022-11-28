@@ -5,15 +5,17 @@ import { useAppDispatch } from 'hooks/useRedux';
 import useGetAllColumns from 'hooks/useGetAllColumns';
 import useEditColumnTitle from 'hooks/useEditColumnTitle';
 import useCreateTask from 'hooks/useCreateTask';
+import useDeleteTask from 'hooks/useDeleteTask';
 
 import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
-import { setCreateTaskPopupOpen } from 'redux/slices/taskSlice';
+import { setCreateTaskPopupOpen, setDeleteTaskPopupOpen } from 'redux/slices/taskSlice';
 
 import Button from 'components/Button/Button';
 import EditText from 'components/EditText/EditText';
 import TaskCards from 'components/TaskCards/TaskCards';
 import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
 import Loader from 'components/Loader/Loader';
+import PopupWarning from 'components/PopupWarning/PopupWarning';
 
 import { ColumnData } from 'ts/interfaces';
 
@@ -31,6 +33,12 @@ function Columns({ columns }: ColumnsProps) {
   const { editColumnTitle } = useEditColumnTitle();
   const { isCreateTaskPopupOpen, isLoadingCreateTask, onSubmit, showCreateTaskPopup } =
     useCreateTask();
+  const {
+    isDeleteTaskPopupOpen,
+    isLoadingDeleteTask,
+    deleteTask,
+    showDeletePopupOnClick,
+  } = useDeleteTask();
 
   const deleteColumnOnClick = useCallback((column: ColumnData) => {
     dispatch(setSelectedColumn(column));
@@ -49,7 +57,11 @@ function Columns({ columns }: ColumnsProps) {
               deleteItemOnClick={deleteColumnOnClick}
               editText={editColumnTitle}
             />
-            <TaskCards boardId={column.boardId} columnId={column._id} />
+            <TaskCards
+              boardId={column.boardId}
+              columnId={column._id}
+              showDeletePopupOnClick={showDeletePopupOnClick}
+            />
             <Button
               type="button"
               backgroundColor={defaultTheme.colors.transparent}
@@ -67,7 +79,13 @@ function Columns({ columns }: ColumnsProps) {
         keyPrefix="editTaskForm"
         onSubmit={onSubmit}
       />
-      {isLoadingCreateTask && <Loader />}
+      <PopupWarning
+        isPopupShown={isDeleteTaskPopupOpen}
+        setPopupShown={setDeleteTaskPopupOpen}
+        text="deleteTask"
+        actionOnYes={deleteTask}
+      />
+      {(isLoadingCreateTask || isLoadingDeleteTask) && <Loader />}
     </ColumnWrapper>
   );
 }

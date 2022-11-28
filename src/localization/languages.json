@@ -98,7 +98,8 @@
         "signOut": "Are you sure you want to sign out?",
         "deleteProfile": "Are you sure you want to delete the profile?",
         "deleteProject": "Are you sure you want to delete the project?",
-        "deleteColumn": "Are you sure you want to delete the column?"
+        "deleteColumn": "Are you sure you want to delete the column?",
+        "deleteTask": "Are you sure you want to delete the task?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -244,7 +245,8 @@
         "signOut": "Вы уверены, что хотите выйти?",
         "deleteProfile": "Вы уверены, что хотите удалить профиль?",
         "deleteProject": "Вы уверены, что хотите удалить проект?",
-        "deleteColumn": "Вы уверены, что хотите удалить колонку?"
+        "deleteColumn": "Вы уверены, что хотите удалить колонку?",
+        "deleteTask": "Вы уверены, что хотите удалить задачу?"
       },
       "projectsPage": {
         "title": "Проекты",

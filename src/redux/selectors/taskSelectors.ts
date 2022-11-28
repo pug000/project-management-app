@@ -10,4 +10,9 @@ const getCreateTaskPopupOpen = createSelector(
   (state) => state.isCreateTaskPopupOpen
 );
 
-export { getSelectedTask, getCreateTaskPopupOpen };
+const getDeleteTaskPopupOpen = createSelector(
+  getBaseTaskState,
+  (state) => state.isDeleteTaskPopupOpen
+);
+
+export { getSelectedTask, getCreateTaskPopupOpen, getDeleteTaskPopupOpen };
