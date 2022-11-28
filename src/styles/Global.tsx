@@ -16,6 +16,26 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.text};
     background-color: ${({ theme }) => theme.colors.backgroundWhite};
 
+    &::-webkit-scrollbar {
+      width: 16px;
+      background-color: ${({ theme }) => theme.colors.backgroundWhite};
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 16px;
+      background-color: ${({ theme }) => theme.colors.backgroundWhite};
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #babac0;
+      border-radius: 16px;
+      border: 4px solid ${({ theme }) => theme.colors.backgroundWhite};
+    }
+
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
     @media screen and (max-width: 600px) {
       font-size: ${({ theme }) => theme.fontSizes.smallText};
     }

@@ -6,6 +6,26 @@ const ColumnWrapper = styled.div`
   width: 100%;
   height: 61vh;
   gap: 25px;
+
+  &::-webkit-scrollbar {
+    width: 16px;
+    background-color: ${({ theme }) => theme.colors.backgroundGrey};
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.colors.backgroundWhite};
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 4px solid ${({ theme }) => theme.colors.backgroundWhite};
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
 `;
 
 const ColumnsContainer = styled.div`
@@ -47,7 +67,29 @@ const ColumnTaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  &::-webkit-scrollbar {
+    width: 16px;
+    background-color: ${({ theme }) => theme.colors.backgroundWhite};
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 16px;
+    background-color: ${({ theme }) => theme.colors.backgroundWhite};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 4px solid ${({ theme }) => theme.colors.backgroundWhite};
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
 `;
+
+const ColumnButtonWrapper = styled.div``;
 
 export {
   ColumnWrapper,
@@ -55,4 +97,5 @@ export {
   ColumnHeader,
   ColumnTitle,
   ColumnTaskContainer,
+  ColumnButtonWrapper,
 };
