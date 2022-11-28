@@ -21,7 +21,7 @@ import PopupWarning from 'components/PopupWarning/PopupWarning';
 import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer';
 import Loader from 'components/Loader/Loader';
 import Button from 'components/Button/Button';
-import ColumnContainer from 'components/ColumnContainer/ColumnContainer';
+import Columns from 'components/Columns/Columns';
 import PopupWithFormColumnTask from 'components/PopupWithFormColumn/PopupWithFormColumn';
 
 import defaultTheme from 'styles/theme';
@@ -94,7 +94,7 @@ function ProjectPage() {
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
         {columns?.length ? (
-          <ColumnContainer columns={columns} />
+          <Columns columns={columns} />
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"

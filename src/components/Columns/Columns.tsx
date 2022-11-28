@@ -11,17 +11,13 @@ import EditText from 'components/EditText/EditText';
 
 import { ColumnData } from 'ts/interfaces';
 
-import {
-  ColumnWrapper,
-  ColumnsContainer,
-  ColumnTaskContainer,
-} from './ColumnContainer.style';
+import { ColumnWrapper, ColumnsContainer, ColumnTaskContainer } from './Columns.style';
 
 interface ColumnsProps {
   columns: ColumnData[];
 }
 
-function ColumnContainer({ columns }: ColumnsProps) {
+function Columns({ columns }: ColumnsProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
   const dispatch = useAppDispatch();
 
@@ -65,4 +61,4 @@ function ColumnContainer({ columns }: ColumnsProps) {
   );
 }
 
-export default memo(ColumnContainer);
+export default memo(Columns);
