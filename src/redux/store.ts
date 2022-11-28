@@ -14,11 +14,13 @@ import apiSlice from './api/apiSlice';
 import userSlice from './slices/userSlice';
 import projectSlice from './slices/projectSlice';
 import columnSlice from './slices/columnSlice';
+import taskSlice from './slices/taskSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
   project: projectSlice,
   column: columnSlice,
+  task: taskSlice,
 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
@@ -27,7 +29,7 @@ const persistConfig = {
   key: 'root',
   storage,
   version: 1,
-  blacklist: ['apiSlice', 'project', 'column'],
+  blacklist: ['apiSlice', 'project', 'column', 'task'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
