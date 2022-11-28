@@ -25,6 +25,14 @@ const CardsWrapper = styled.div`
       opacity: 1;
     }
   }
+
+  @media (max-width: 380px) {
+    grid-template-columns: repeat(auto-fill, 270px);
+
+    ${StyledLink} {
+      max-width: 270px;
+    }
+  }
 `;
 
 const Card = styled.div`
