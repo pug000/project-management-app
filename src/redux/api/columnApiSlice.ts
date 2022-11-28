@@ -1,4 +1,3 @@
-// import { setEditPopupOpen } from 'redux/slices/popupSlice';
 import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
 
 import { addFetchOptions } from 'utils/functions';
@@ -20,27 +19,28 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
     getAllColumns: builder.query<ColumnData[], string>({
       query: (id) =>
         addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.get),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          await queryFulfilled;
+          dispatch(setCreateColumnPopupOpen(false));
+        } catch (error) {
+          throw new Error(`${error}`);
+        }
+      },
       providesTags: (result) =>
         result
           ? [...result.map(({ _id }) => ({ type: 'Column' as const, _id })), 'Column']
           : ['Column'],
     }),
+
     createColumn: builder.mutation<ColumnData, ColumnResponse>({
       query: ({ id, body }) => ({
         ...addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.post),
         body,
       }),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
-        try {
-          await queryFulfilled;
-          dispatch(setCreateColumnPopupOpen(false));
-          // dispatch(setEditPopupOpen(false));
-        } catch (error) {
-          throw new Error(`${error}`);
-        }
-      },
       invalidatesTags: ['Column'],
     }),
+
     deleteColumnById: builder.mutation<ColumnData, ColumnData>({
       query: ({ _id, boardId }) =>
         addFetchOptions(
@@ -49,6 +49,18 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
         ),
       invalidatesTags: ['Column'],
     }),
+
+    updateColumnById: builder.mutation<ColumnData, ColumnData>({
+      query: ({ _id, boardId, ...body }) => ({
+        ...addFetchOptions(
+          `${Endpoints.boards}${boardId}/${Endpoints.columns}${_id}`,
+          Methods.put
+        ),
+        body,
+      }),
+      invalidatesTags: ['Column'],
+    }),
+
     getColumnById: builder.query<ColumnData, OmitColumnData>({
       query: ({ _id, boardId }) =>
         addFetchOptions(
@@ -64,5 +76,6 @@ export const {
   useGetAllColumnsQuery,
   useCreateColumnMutation,
   useDeleteColumnByIdMutation,
+  useUpdateColumnByIdMutation,
   useGetColumnByIdQuery,
 } = columnsApiSlice;
