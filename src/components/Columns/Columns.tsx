@@ -32,9 +32,7 @@ function Columns({ columns }: ColumnsProps) {
         columns.map((column) => (
           <ColumnsContainer key={column._id}>
             <EditText
-              title={column.title}
               item={column}
-              setSelectedItem={setSelectedColumn}
               deleteItemOnClick={deleteColumnOnClick}
               onSubmit={() => {}}
             />

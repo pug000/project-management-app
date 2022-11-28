@@ -1,23 +1,23 @@
 import React, { memo, useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 
-import { ColumnFormValues } from 'ts/interfaces';
+import { ColumnData, ColumnFormValues } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 import { StyledCloseIcon, StyledConfirmIcon } from 'styles/styles';
 import { Form } from './EditText.styles';
 
 interface EditTextFormProps {
-  title?: string;
-  onSubmit: SubmitHandler<ColumnFormValues>;
-  disableEditingOnClick: () => void;
+  item: ColumnData;
+  onSubmit: (formValues: ColumnFormValues, item: ColumnData) => void;
+  toggleEditingTextOnClick: () => void;
 }
 
-function EditTextForm({ title, disableEditingOnClick, onSubmit }: EditTextFormProps) {
+function EditTextForm({ item, onSubmit, toggleEditingTextOnClick }: EditTextFormProps) {
   const { t, i18n } = useTranslation('translation');
   const {
     register,
@@ -29,7 +29,7 @@ function EditTextForm({ title, disableEditingOnClick, onSubmit }: EditTextFormPr
   } = useForm<{ title: string }>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    defaultValues: { title },
+    defaultValues: { title: item.title },
   });
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function EditTextForm({ title, disableEditingOnClick, onSubmit }: EditTextFormPr
       aria-label="form"
       noValidate
       autoComplete="off"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((form) => onSubmit(form, item))}
     >
       <Input
         type="text"
@@ -76,16 +76,12 @@ function EditTextForm({ title, disableEditingOnClick, onSubmit }: EditTextFormPr
         type="button"
         width="25px"
         backgroundColor={defaultTheme.colors.transparent}
-        callback={disableEditingOnClick}
+        callback={toggleEditingTextOnClick}
       >
         <StyledCloseIcon />
       </Button>
     </Form>
   );
 }
-
-EditTextForm.defaultProps = {
-  title: '',
-};
 
 export default memo(EditTextForm);
