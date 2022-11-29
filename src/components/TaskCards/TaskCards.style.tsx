@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { BackgroundColorProps } from 'ts/interfaces';
 
-import { AiFillDelete } from 'react-icons/ai';
+import { IoClose } from 'react-icons/io5';
 
 const TasksWrapper = styled.div`
   width: 100%;
@@ -44,7 +44,8 @@ const StyledTask = styled.div<BackgroundColorProps>`
   background-color: ${({ $backgroundColor, theme }) =>
     $backgroundColor ?? theme.colors.primaryColor};
   transition: ${({ theme }) => theme.effects.transition};
-  cursor: pointer;
+  cursor: grab;
+  gap: 5px;
 `;
 
 const TaskHeader = styled.div`
@@ -53,9 +54,30 @@ const TaskHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   transition: ${({ theme }) => theme.effects.transition};
+  gap: 20px;
+`;
 
-  Button {
-    padding: 0;
+const TaskButton = styled.button.attrs({
+  type: 'button',
+})`
+  background-color: ${({ theme }) => theme.colors.transparent};
+  border: none;
+  outline: none;
+  min-width: 25px;
+  transition: ${({ theme }) => theme.effects.transition};
+  cursor: pointer;
+
+  &:hover:enabled {
+    opacity: ${({ theme }) => theme.effects.hoverOpacity};
+  }
+
+  &:active:enabled {
+    opacity: ${({ theme }) => theme.effects.activeOpacity};
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -63,20 +85,36 @@ const TaskTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.text};
   font-family: ${({ theme }) => theme.fonts.title};
   text-align: left;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: ${({ theme }) => theme.effects.transition};
+
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.backgroundWhite};
+    text-decoration: underline;
+  }
+`;
+
+const TaskDescriptionWrapper = styled.div`
+  display: flex;
 `;
 
 const TaskDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.text};
-  word-wrap: break-word;
-  overflow: hidden;
+  font-size: ${({ theme }) => theme.fontSizes.smallText};
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    cursor: pointer;
+    color: ${({ theme }) => theme.colors.backgroundWhite};
+    text-decoration: underline;
+  }
 `;
 
-const StyledRemoveIcon = styled(AiFillDelete).attrs({
-  styles: {
-    width: '100%',
-    height: '100%',
-  },
-})`
+const StyledRemoveIcon = styled(IoClose)`
   color: ${({ theme }) => theme.colors.backgroundWhite};
 `;
 
@@ -84,7 +122,9 @@ export {
   StyledTask,
   TaskHeader,
   TaskTitle,
+  TaskDescriptionWrapper,
   TaskDescription,
   TasksWrapper,
+  TaskButton,
   StyledRemoveIcon,
 };

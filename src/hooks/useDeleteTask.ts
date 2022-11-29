@@ -13,10 +13,14 @@ const useDeleteTask = (selectedTask: Task | null) => {
   const [deleteTaskById, { isLoading: isLoadingDeleteTask }] = useDeleteTaskMutation();
   const dispatch = useAppDispatch();
 
-  const showDeletePopupOnClick = useCallback((task: Task) => {
-    dispatch(setSelectedTask(task));
-    dispatch(setDeleteTaskPopupOpen(true));
-  }, []);
+  const showDeletePopupOnClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, task: Task) => {
+      event.stopPropagation();
+      dispatch(setSelectedTask(task));
+      dispatch(setDeleteTaskPopupOpen(true));
+    },
+    []
+  );
 
   const deleteTask = useCallback(async () => {
     if (selectedTask) {

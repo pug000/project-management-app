@@ -2,10 +2,8 @@ import React, { memo } from 'react';
 
 import useGetAllTasks from 'hooks/useGetAllTasks';
 
-import Button from 'components/Button/Button';
-
-import theme from 'styles/theme';
 import { Task } from 'ts/interfaces';
+
 import {
   StyledTask,
   TaskHeader,
@@ -13,13 +11,18 @@ import {
   TasksWrapper,
   StyledRemoveIcon,
   TaskDescription,
+  TaskButton,
+  TaskDescriptionWrapper,
 } from './TaskCards.style';
 
 interface TasksCardsProps {
   boardId: string;
   columnId: string;
   showEditPopupOnClick: (task: Task) => void;
-  showDeletePopupOnClick: (task: Task) => void;
+  showDeletePopupOnClick: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    task: Task
+  ) => void;
 }
 
 function TaskCards({
@@ -34,23 +37,20 @@ function TaskCards({
     <TasksWrapper>
       {tasks &&
         tasks.map((task) => (
-          <StyledTask
-            key={task._id}
-            $backgroundColor={task.color}
-            onClick={() => showEditPopupOnClick(task)}
-          >
+          <StyledTask key={task._id} $backgroundColor={task.color}>
             <TaskHeader>
-              <TaskTitle>{task.title}</TaskTitle>
-              <Button
-                type="button"
-                width={theme.fontSizes.text}
-                backgroundColor={theme.colors.transparent}
-                callback={() => showDeletePopupOnClick(task)}
-              >
+              <TaskTitle onClick={() => showEditPopupOnClick(task)}>
+                {task.title}
+              </TaskTitle>
+              <TaskButton onClick={(event) => showDeletePopupOnClick(event, task)}>
                 <StyledRemoveIcon />
-              </Button>
+              </TaskButton>
             </TaskHeader>
-            <TaskDescription>{task.description}</TaskDescription>
+            <TaskDescriptionWrapper>
+              <TaskDescription onClick={() => showEditPopupOnClick(task)}>
+                {task.description}
+              </TaskDescription>
+            </TaskDescriptionWrapper>
           </StyledTask>
         ))}
     </TasksWrapper>
