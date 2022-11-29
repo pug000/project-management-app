@@ -24,11 +24,12 @@ interface SearchBarProps {
 function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps) {
   const { t } = useTranslation('translation');
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, clearErrors, reset } = useForm<SearchBarValues>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    defaultValues: defaultSearchBarValues,
-  });
+  const { register, handleSubmit, clearErrors, reset, setValue } =
+    useForm<SearchBarValues>({
+      mode: 'onSubmit',
+      reValidateMode: 'onSubmit',
+      defaultValues: defaultSearchBarValues,
+    });
 
   const onSearchSubmit: SubmitHandler<SearchBarValues> = ({ ...formValues }) => {
     if (defaultProjects) {
@@ -36,6 +37,7 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
         project.title.toLowerCase().includes(formValues.title.toLowerCase())
       );
       dispatch(setSearchedProjects(newProjectsList));
+      localStorage.setItem('searchedProjectsData', formValues.title);
     }
   };
 
@@ -43,10 +45,14 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
     if (!isDefaultProjectsLoading && defaultProjects) {
       dispatch(setSearchedProjects(defaultProjects));
     }
-  }, [defaultProjects]);
 
-  useEffect(() => {
-    reset();
+    const dataFromLocalStorage = localStorage.getItem('searchedProjectsData');
+    if (dataFromLocalStorage) {
+      setValue('title', dataFromLocalStorage);
+      onSearchSubmit({ title: dataFromLocalStorage });
+    } else {
+      reset();
+    }
   }, [defaultProjects]);
 
   return (
@@ -67,7 +73,14 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
         <Button type="submit" width="30px">
           <IoMdSearch />
         </Button>
-        <Button type="submit" width="30px" callback={() => reset()}>
+        <Button
+          type="submit"
+          width="30px"
+          callback={() => {
+            localStorage.removeItem('searchedProjectsData');
+            reset();
+          }}
+        >
           <IoMdClose />
         </Button>
       </Form>
