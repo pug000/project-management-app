@@ -72,38 +72,4 @@ const ColumnTitle = styled.h3`
   text-align: left;
 `;
 
-const ColumnTaskContainer = styled.div`
-  width: 100%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  &::-webkit-scrollbar {
-    width: 16px;
-    background-color: ${({ theme }) => theme.colors.backgroundWhite};
-  }
-
-  &::-webkit-scrollbar-track {
-    border-radius: 16px;
-    background-color: ${({ theme }) => theme.colors.backgroundWhite};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #babac0;
-    border-radius: 16px;
-    border: 4px solid ${({ theme }) => theme.colors.backgroundWhite};
-  }
-
-  &::-webkit-scrollbar-button {
-    display: none;
-  }
-`;
-
-export {
-  ColumnWrapper,
-  ColumnsContainer,
-  ColumnHeader,
-  ColumnTitle,
-  ColumnTaskContainer,
-};
+export { ColumnWrapper, ColumnsContainer, ColumnHeader, ColumnTitle };
