@@ -6,6 +6,7 @@ interface TaskState {
   selectedTask: Task | null;
   isCreateTaskPopupOpen: boolean;
   isDeleteTaskPopupOpen: boolean;
+  isEditTaskPopupOpen: boolean;
   isLoadingGetAllTasks: boolean;
 }
 
@@ -13,6 +14,7 @@ const initialState: TaskState = {
   selectedTask: null,
   isCreateTaskPopupOpen: false,
   isDeleteTaskPopupOpen: false,
+  isEditTaskPopupOpen: false,
   isLoadingGetAllTasks: false,
 };
 
@@ -32,6 +34,10 @@ const taskSlice = createSlice({
       state.isDeleteTaskPopupOpen = payload;
     },
 
+    setEditTaskPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isEditTaskPopupOpen = payload;
+    },
+
     setLoadingGetAllTasks(state, { payload }: PayloadAction<boolean>) {
       state.isLoadingGetAllTasks = payload;
     },
@@ -43,6 +49,7 @@ export const {
   setCreateTaskPopupOpen,
   setDeleteTaskPopupOpen,
   setLoadingGetAllTasks,
+  setEditTaskPopupOpen,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

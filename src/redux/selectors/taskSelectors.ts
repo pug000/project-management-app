@@ -18,6 +18,11 @@ const getDeleteTaskPopupOpen = createSelector(
   (state) => state.isDeleteTaskPopupOpen
 );
 
+const getEditTaskPopupOpen = createSelector(
+  getBaseTaskState,
+  (state) => state.isEditTaskPopupOpen
+);
+
 const getLoadingTasksList = createSelector(
   getBaseTaskState,
   (state) => state.isLoadingGetAllTasks
@@ -34,4 +39,5 @@ export {
   getDeleteTaskPopupOpen,
   getAllTasks,
   getLoadingTasksList,
+  getEditTaskPopupOpen,
 };
