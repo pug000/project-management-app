@@ -18,7 +18,7 @@ const useEditTask = (selectedTask: Task | null) => {
     dispatch(setEditTaskPopupOpen(true));
   }, []);
 
-  const editOnSubmit: SubmitHandler<EditFormValues> = useCallback(
+  const editTaskOnSubmit: SubmitHandler<EditFormValues> = useCallback(
     async ({ title, color, description }) => {
       if (selectedTask) {
         const { boardId, columnId, userId, users, order } = selectedTask;
@@ -55,7 +55,7 @@ const useEditTask = (selectedTask: Task | null) => {
     isEditTaskPopupOpen,
     isLoadingEditTask,
     showEditPopupOnClick,
-    editOnSubmit,
+    editTaskOnSubmit,
   };
 };
 

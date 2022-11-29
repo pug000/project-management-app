@@ -24,7 +24,7 @@ const useCreateTask = () => {
     dispatch(setCreateTaskPopupOpen(true));
   }, []);
 
-  const onSubmit: SubmitHandler<EditFormValues> = useCallback(
+  const createTaskOnSubmit: SubmitHandler<EditFormValues> = useCallback(
     async ({ title, ...formValues }) => {
       if (selectedColumn) {
         await createTask({
@@ -62,7 +62,7 @@ const useCreateTask = () => {
   return {
     isCreateTaskPopupOpen,
     isLoadingCreateTask,
-    onSubmit,
+    createTaskOnSubmit,
     showCreateTaskPopup,
   };
 };

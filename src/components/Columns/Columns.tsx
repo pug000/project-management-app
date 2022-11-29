@@ -39,10 +39,18 @@ function Columns({ columns }: ColumnsProps) {
   const dispatch = useAppDispatch();
   const { isSuccessGetColumnList, isLoadingColumnList } = useGetAllColumns();
   const { editColumnTitle } = useEditColumnTitle();
-  const { isCreateTaskPopupOpen, isLoadingCreateTask, onSubmit, showCreateTaskPopup } =
-    useCreateTask();
-  const { isEditTaskPopupOpen, isLoadingEditTask, editOnSubmit, showEditPopupOnClick } =
-    useEditTask(selectedTask);
+  const {
+    isCreateTaskPopupOpen,
+    isLoadingCreateTask,
+    createTaskOnSubmit,
+    showCreateTaskPopup,
+  } = useCreateTask();
+  const {
+    isEditTaskPopupOpen,
+    isLoadingEditTask,
+    editTaskOnSubmit,
+    showEditPopupOnClick,
+  } = useEditTask(selectedTask);
   const {
     isDeleteTaskPopupOpen,
     isLoadingDeleteTask,
@@ -94,7 +102,7 @@ function Columns({ columns }: ColumnsProps) {
         setPopupShown={setCreateTaskPopupOpen}
         formTitleText="newTaskTitle"
         keyPrefix="editTaskForm"
-        onSubmit={onSubmit}
+        onSubmit={createTaskOnSubmit}
       />
       <PopupWithForm
         isPopupShown={isEditTaskPopupOpen}
@@ -103,7 +111,7 @@ function Columns({ columns }: ColumnsProps) {
         setSelectedItem={setSelectedTask}
         formTitleText="editTitle"
         keyPrefix="editTaskForm"
-        onSubmit={editOnSubmit}
+        onSubmit={editTaskOnSubmit}
       />
       <PopupWarning
         isPopupShown={isDeleteTaskPopupOpen}
