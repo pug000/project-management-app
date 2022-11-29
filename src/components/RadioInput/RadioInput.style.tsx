@@ -10,7 +10,7 @@ const RadioInputContainer = styled.div`
 
 const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSizes.smallText};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.grey};
 `;
 
 const RadioInputWrapper = styled.div`

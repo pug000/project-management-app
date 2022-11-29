@@ -41,7 +41,7 @@
         "title": "Title",
         "description": "Description",
         "descriptionPlaceholder": "Project description",
-        "color": "Color",
+        "color": "Task color",
         "save": "Save",
         "cancel": "Cancel",
         "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
@@ -98,7 +98,8 @@
         "signOut": "Are you sure you want to sign out?",
         "deleteProfile": "Are you sure you want to delete the profile?",
         "deleteProject": "Are you sure you want to delete the project?",
-        "deleteColumn": "Are you sure you want to delete the column?"
+        "deleteColumn": "Are you sure you want to delete the column?",
+        "deleteTask": "Are you sure you want to delete the task?"
       },
       "projectsPage": {
         "title": "Projects",
@@ -125,6 +126,13 @@
         "title": "Project title",
         "description": "Project description",
         "descriptionMaxLength": "project description can't be longer than 80 characters"
+      },
+      "editTaskForm": {
+        "newTaskTitle": "Create new task",
+        "editTitle": "Edit your task",
+        "title": "Task title",
+        "description": "Task description",
+        "descriptionMaxLength": "task description can't be longer than 80 characters"
       },
       "columnContainer": {
         "newColumnButton": "New column",
@@ -183,7 +191,7 @@
         "title": "Название",
         "description": "Описание",
         "descriptionPlaceholder": "Описание проекта",
-        "color": "Цвет",
+        "color": "Цвет задачи",
         "save": "Сохранить",
         "cancel": "Отменить",
         "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
@@ -240,7 +248,8 @@
         "signOut": "Вы уверены, что хотите выйти?",
         "deleteProfile": "Вы уверены, что хотите удалить профиль?",
         "deleteProject": "Вы уверены, что хотите удалить проект?",
-        "deleteColumn": "Вы уверены, что хотите удалить колонку?"
+        "deleteColumn": "Вы уверены, что хотите удалить колонку?",
+        "deleteTask": "Вы уверены, что хотите удалить задачу?"
       },
       "projectsPage": {
         "title": "Проекты",
@@ -267,6 +276,13 @@
         "title": "Название проекта",
         "description": "Описание проекта",
         "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
+      },
+      "editTaskForm": {
+        "newTaskTitle": "Создать новую задачу",
+        "editTitle": "Изменить задачу",
+        "title": "Название задачи",
+        "description": "Описание задачи",
+        "descriptionMaxLength": "описание задачи не может быть длиннее 80 символов"
       },
       "columnContainer": {
         "newColumnButton": "Новая колонка",

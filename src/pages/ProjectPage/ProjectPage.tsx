@@ -2,7 +2,7 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
 import useGetProjectById from 'hooks/useGetProjectById';
 import useCreateColumn from 'hooks/useCreateColumn';
@@ -15,6 +15,7 @@ import {
   setCreateColumnPopupOpen,
   setDeleteColumnPopupOpen,
 } from 'redux/slices/columnSlice';
+import { getLoadingTasksList } from 'redux/selectors/taskSelectors';
 
 import { backButtonAnimation } from 'utils/animations';
 
@@ -41,6 +42,7 @@ interface ProjectPageProps {
 }
 
 function ProjectPage({ setFooterShown }: ProjectPageProps) {
+  const isLoadingGetAllTasks = useAppSelector(getLoadingTasksList);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
@@ -59,6 +61,7 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
     isLoadingDeleteColumn,
     isLoadingCreateColumn,
     isLoadingEditColumnTitle,
+    isLoadingGetAllTasks,
   ].some((loader) => loader);
 
   const [buttonText, setButtonText] = useState(`${t('newColumnButton')}`);
