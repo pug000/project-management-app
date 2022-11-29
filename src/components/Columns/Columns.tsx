@@ -1,14 +1,21 @@
 import React, { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useGetAllColumns from 'hooks/useGetAllColumns';
 import useEditColumnTitle from 'hooks/useEditColumnTitle';
 import useCreateTask from 'hooks/useCreateTask';
 import useDeleteTask from 'hooks/useDeleteTask';
+import useEditTask from 'hooks/useEditTask';
 
 import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
-import { setCreateTaskPopupOpen, setDeleteTaskPopupOpen } from 'redux/slices/taskSlice';
+import {
+  setCreateTaskPopupOpen,
+  setDeleteTaskPopupOpen,
+  setEditTaskPopupOpen,
+  setSelectedTask,
+} from 'redux/slices/taskSlice';
+import { getSelectedTask } from 'redux/selectors/taskSelectors';
 
 import Button from 'components/Button/Button';
 import EditText from 'components/EditText/EditText';
@@ -27,18 +34,27 @@ interface ColumnsProps {
 }
 
 function Columns({ columns }: ColumnsProps) {
+  const selectedTask = useAppSelector(getSelectedTask);
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
   const dispatch = useAppDispatch();
   const { isSuccessGetColumnList, isLoadingColumnList } = useGetAllColumns();
   const { editColumnTitle } = useEditColumnTitle();
   const { isCreateTaskPopupOpen, isLoadingCreateTask, onSubmit, showCreateTaskPopup } =
     useCreateTask();
+  const { isEditTaskPopupOpen, isLoadingEditTask, editOnSubmit, showEditPopupOnClick } =
+    useEditTask(selectedTask);
   const {
     isDeleteTaskPopupOpen,
     isLoadingDeleteTask,
     deleteTask,
     showDeletePopupOnClick,
-  } = useDeleteTask();
+  } = useDeleteTask(selectedTask);
+  const isLoadingColumns = [
+    isLoadingColumnList,
+    isLoadingCreateTask,
+    isLoadingEditTask,
+    isLoadingDeleteTask,
+  ].some((loader) => loader);
 
   const deleteColumnOnClick = useCallback((column: ColumnData) => {
     dispatch(setSelectedColumn(column));
@@ -60,6 +76,7 @@ function Columns({ columns }: ColumnsProps) {
             <TaskCards
               boardId={column.boardId}
               columnId={column._id}
+              showEditPopupOnClick={showEditPopupOnClick}
               showDeletePopupOnClick={showDeletePopupOnClick}
             />
             <Button
@@ -75,9 +92,18 @@ function Columns({ columns }: ColumnsProps) {
       <PopupWithForm
         isPopupShown={isCreateTaskPopupOpen}
         setPopupShown={setCreateTaskPopupOpen}
-        formTitleText="editTitle"
+        formTitleText="newTaskTitle"
         keyPrefix="editTaskForm"
         onSubmit={onSubmit}
+      />
+      <PopupWithForm
+        isPopupShown={isEditTaskPopupOpen}
+        setPopupShown={setEditTaskPopupOpen}
+        selectedItem={selectedTask}
+        setSelectedItem={setSelectedTask}
+        formTitleText="editTitle"
+        keyPrefix="editTaskForm"
+        onSubmit={editOnSubmit}
       />
       <PopupWarning
         isPopupShown={isDeleteTaskPopupOpen}
@@ -85,7 +111,7 @@ function Columns({ columns }: ColumnsProps) {
         text="deleteTask"
         actionOnYes={deleteTask}
       />
-      {(isLoadingCreateTask || isLoadingDeleteTask) && <Loader />}
+      {isLoadingColumns && <Loader />}
     </ColumnWrapper>
   );
 }

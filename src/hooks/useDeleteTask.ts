@@ -1,15 +1,14 @@
 import { useCallback, useEffect } from 'react';
 
 import { useDeleteTaskMutation } from 'redux/api/tasksApiSlice';
-import { getSelectedTask, getDeleteTaskPopupOpen } from 'redux/selectors/taskSelectors';
+import { getDeleteTaskPopupOpen } from 'redux/selectors/taskSelectors';
 import { setSelectedTask, setDeleteTaskPopupOpen } from 'redux/slices/taskSlice';
 
 import { Task } from 'ts/interfaces';
 
 import { useAppSelector, useAppDispatch } from './useRedux';
 
-const useDeleteTask = () => {
-  const selectedTask = useAppSelector(getSelectedTask);
+const useDeleteTask = (selectedTask: Task | null) => {
   const isDeleteTaskPopupOpen = useAppSelector(getDeleteTaskPopupOpen);
   const [deleteTaskById, { isLoading: isLoadingDeleteTask }] = useDeleteTaskMutation();
   const dispatch = useAppDispatch();
@@ -32,7 +31,7 @@ const useDeleteTask = () => {
     if (!isDeleteTaskPopupOpen && selectedTask) {
       dispatch(setSelectedTask(null));
     }
-  }, [isDeleteTaskPopupOpen, selectedTask]);
+  }, [isDeleteTaskPopupOpen]);
 
   useEffect(
     () => () => {

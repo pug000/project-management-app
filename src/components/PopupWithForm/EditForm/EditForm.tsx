@@ -30,6 +30,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     clearErrors,
     trigger,
     setFocus,
+    getValues,
     formState: { errors, isSubmitted },
   } = useForm<EditFormValues>({
     mode: 'onSubmit',
@@ -89,6 +90,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
           text={t('projects.color')}
           radioInputs={radioInputList}
           register={register}
+          defaultValue={getValues().color}
         />
       )}
       <Button type="submit" disabled={!isFormValid}>

@@ -18,17 +18,27 @@ import {
 interface TasksCardsProps {
   boardId: string;
   columnId: string;
+  showEditPopupOnClick: (task: Task) => void;
   showDeletePopupOnClick: (task: Task) => void;
 }
 
-function TaskCards({ boardId, columnId, showDeletePopupOnClick }: TasksCardsProps) {
+function TaskCards({
+  boardId,
+  columnId,
+  showEditPopupOnClick,
+  showDeletePopupOnClick,
+}: TasksCardsProps) {
   const { tasks } = useGetAllTasks(boardId, columnId);
 
   return (
     <TasksWrapper>
       {tasks &&
         tasks.map((task) => (
-          <StyledTask key={task._id} $backgroundColor={task.color}>
+          <StyledTask
+            key={task._id}
+            $backgroundColor={task.color}
+            onClick={() => showEditPopupOnClick(task)}
+          >
             <TaskHeader>
               <TaskTitle>{task.title}</TaskTitle>
               <Button

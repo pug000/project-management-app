@@ -1,4 +1,8 @@
-import { setCreateTaskPopupOpen, setLoadingGetAllTasks } from 'redux/slices/taskSlice';
+import {
+  setCreateTaskPopupOpen,
+  setEditTaskPopupOpen,
+  setLoadingGetAllTasks,
+} from 'redux/slices/taskSlice';
 import { RootState } from 'redux/store';
 
 import { addFetchOptions } from 'utils/functions';
@@ -31,6 +35,7 @@ const tasksApiSlice = apiSlice.injectEndpoints({
           dispatch(setLoadingGetAllTasks(true));
           await queryFulfilled;
           dispatch(setLoadingGetAllTasks(false));
+          dispatch(setEditTaskPopupOpen(false));
           dispatch(setCreateTaskPopupOpen(false));
         } catch (error) {
           throw new Error(`${error}`);
@@ -59,7 +64,10 @@ const tasksApiSlice = apiSlice.injectEndpoints({
           `${Endpoints.boards}${boardId}/${Endpoints.columns}${columnId}/${Endpoints.tasks}${id}`,
           Methods.put
         ),
-        body,
+        body: {
+          ...body,
+          columnId,
+        },
       }),
       invalidatesTags: ['Task'],
     }),
