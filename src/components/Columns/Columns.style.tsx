@@ -4,8 +4,12 @@ const ColumnWrapper = styled.div`
   display: flex;
   overflow: auto;
   width: 100%;
-  height: 61vh;
   gap: 25px;
+  height: calc(100vh - 430px);
+
+  @media (max-width: 800px) {
+    height: calc(100vh - 320px);
+  }
 
   &::-webkit-scrollbar {
     width: 16px;
@@ -32,9 +36,9 @@ const ColumnsContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   width: 100%;
-  height: 58vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
   padding: 10px;
   margin-bottom: 10px;
@@ -43,6 +47,14 @@ const ColumnsContainer = styled.div`
   box-shadow: 0px 10px 13px rgb(0 0 0 / 2%);
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   cursor: default;
+
+  @media (max-width: 400px) {
+    min-width: 270px;
+  }
+
+  @media (max-width: 360px) {
+    min-width: 240px;
+  }
 `;
 
 const ColumnHeader = styled.div`

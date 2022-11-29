@@ -115,6 +115,10 @@ interface ColumnData extends Column {
   boardId: string;
 }
 
+interface SearchBarValues {
+  title: string;
+}
+
 interface NewTask extends Column {
   description: string;
   userId: string;
@@ -157,6 +161,7 @@ export type {
   ColumnFormValues,
   Column,
   ColumnData,
+  SearchBarValues,
   NewTask,
   TaskData,
   Task,

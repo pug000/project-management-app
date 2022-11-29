@@ -7,6 +7,10 @@ const ProjectsControls = styled.section`
   width: 100%;
   margin-bottom: 15px;
 
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+  }
+
   Button {
     margin-top: 6px;
   }

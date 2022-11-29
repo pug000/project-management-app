@@ -13,7 +13,10 @@ import {
   setEditProjectPopupOpen,
   setSelectedProject,
 } from 'redux/slices/projectSlice';
-import { getSelectedProject } from 'redux/selectors/projectSelectors';
+import {
+  getSearchedProjects,
+  getSelectedProject,
+} from 'redux/selectors/projectSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -22,6 +25,7 @@ import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer
 import ProjectCards from 'components/ProjectCards/ProjectCards';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
+import SearchBar from 'components/SearchBar/SearchBar';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
@@ -45,11 +49,17 @@ function ProjectsPage() {
     isLoadingDeleteProject,
   ].some((loader) => loader);
 
+  const searchedProjects = useAppSelector(getSearchedProjects);
+
   return (
     <ProtectedRoute>
       <MainWrapper>
         <ProjectsControls>
           <ProjectsTitle>{t('title')}</ProjectsTitle>
+          <SearchBar
+            defaultProjects={projects}
+            isDefaultProjectsLoading={isProjectsListLoading}
+          />
           <Button
             type="button"
             width="130px"
@@ -61,8 +71,8 @@ function ProjectsPage() {
           </Button>
         </ProjectsControls>
         <ProjectsContainer>
-          {projects?.length ? (
-            <ProjectCards projects={projects} />
+          {searchedProjects?.length ? (
+            <ProjectCards projects={searchedProjects} />
           ) : (
             <NoResultsContainer
               text="projectsPage.emptyContainerText"

@@ -34,6 +34,7 @@ const useDeleteProject = (selectedProject: Project | null | undefined) => {
     () => () => {
       if (isDeleteProjectPopupOpen) {
         dispatch(setDeleteProjectPopupOpen(false));
+        dispatch(setSelectedProject(null));
       }
     },
     []

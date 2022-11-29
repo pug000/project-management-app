@@ -6,7 +6,7 @@ import { IoClose } from 'react-icons/io5';
 
 const TasksWrapper = styled.div`
   width: 100%;
-  height: 65vh;
+  height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -46,6 +46,10 @@ const StyledTask = styled.div<BackgroundColorProps>`
   transition: ${({ theme }) => theme.effects.transition};
   cursor: grab;
   gap: 5px;
+
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 const TaskHeader = styled.div`
@@ -106,12 +110,6 @@ const TaskDescription = styled.p`
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  &:hover {
-    cursor: pointer;
-    color: ${({ theme }) => theme.colors.backgroundWhite};
-    text-decoration: underline;
-  }
 `;
 
 const StyledRemoveIcon = styled(IoClose)`

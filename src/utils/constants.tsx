@@ -10,6 +10,7 @@ import {
   EditFormValues,
   RadioInputItem,
   ColumnFormValues,
+  SearchBarValues,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -264,6 +265,10 @@ const defaultColumnFormValues: ColumnFormValues = {
   title: '',
 };
 
+const defaultSearchBarValues: SearchBarValues = {
+  title: '',
+};
+
 export {
   baseUrl,
   authors,
@@ -283,4 +288,5 @@ export {
   projectDescriptionValidation,
   defaultFormItemValues,
   defaultColumnFormValues,
+  defaultSearchBarValues,
 };

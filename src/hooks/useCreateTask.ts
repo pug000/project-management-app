@@ -43,12 +43,6 @@ const useCreateTask = () => {
     [isCreateTaskPopupOpen]
   );
 
-  useEffect(() => {
-    if (!isCreateTaskPopupOpen && selectedColumn) {
-      dispatch(setSelectedColumn(null));
-    }
-  }, [isCreateTaskPopupOpen, selectedColumn]);
-
   useEffect(
     () => () => {
       if (isCreateTaskPopupOpen) {

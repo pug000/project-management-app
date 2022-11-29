@@ -47,9 +47,7 @@ function TaskCards({
               </TaskButton>
             </TaskHeader>
             <TaskDescriptionWrapper>
-              <TaskDescription onClick={() => showEditPopupOnClick(task)}>
-                {task.description}
-              </TaskDescription>
+              <TaskDescription>{task.description}</TaskDescription>
             </TaskDescriptionWrapper>
           </StyledTask>
         ))}

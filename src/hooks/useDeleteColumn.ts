@@ -28,6 +28,7 @@ const useDeleteColumn = () => {
     () => () => {
       if (isDeleteColumnPopupOpen) {
         dispatch(setDeleteColumnPopupOpen(false));
+        dispatch(setSelectedColumn(null));
       }
     },
     []
