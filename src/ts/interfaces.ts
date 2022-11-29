@@ -115,6 +115,10 @@ interface ColumnData extends Column {
   boardId: string;
 }
 
+interface SearchBarValues {
+  title: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -136,4 +140,5 @@ export type {
   ColumnFormValues,
   Column,
   ColumnData,
+  SearchBarValues,
 };

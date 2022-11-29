@@ -135,6 +135,9 @@
         "newColumnTitle": "Create new column",
         "editTitle": "Edit your column",
         "title": "Column title"
+      },
+      "searchBar": {
+        "placeholder": "Find a project..."
       }
     }
   },
@@ -274,6 +277,9 @@
         "newColumnTitle": "Создать новую колонку",
         "editTitle": "Изменить колонку",
         "title": "Название колонки"
+      },
+      "searchBar": {
+        "placeholder": "Найти проект..."
       }
     }
   }

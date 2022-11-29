@@ -22,6 +22,7 @@ import NoResultsContainer from 'components/NoResultsContainer/NoResultsContainer
 import ProjectCards from 'components/ProjectCards/ProjectCards';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
+import SearchBar from 'components/SearchBar/SearchBar';
 
 import defaultTheme from 'styles/theme';
 import { MainWrapper } from 'styles/styles';
@@ -50,6 +51,7 @@ function ProjectsPage() {
       <MainWrapper>
         <ProjectsControls>
           <ProjectsTitle>{t('title')}</ProjectsTitle>
+          <SearchBar onSubmit={() => {}} />
           <Button
             type="button"
             width="130px"
