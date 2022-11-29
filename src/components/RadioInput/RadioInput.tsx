@@ -19,6 +19,7 @@ interface RadioInputProps<T extends FieldValues> {
   text?: string;
   required?: string;
   errors?: FieldError;
+  defaultValue: string;
   register: UseFormRegister<T>;
 }
 
@@ -28,6 +29,7 @@ function RadioInput<T extends FieldValues>({
   text,
   required,
   errors,
+  defaultValue,
   register,
 }: RadioInputProps<T>) {
   return (
@@ -39,7 +41,7 @@ function RadioInput<T extends FieldValues>({
             <StyledRadioInput
               type="radio"
               value={value}
-              defaultChecked={checked}
+              defaultChecked={defaultValue === value ? !!defaultValue : checked}
               id={id}
               {...register(name, {
                 required,

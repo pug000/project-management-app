@@ -115,6 +115,27 @@ interface ColumnData extends Column {
   boardId: string;
 }
 
+interface NewTask extends Column {
+  description: string;
+  userId: string;
+  users: string[];
+}
+
+interface TaskData extends NewTask {
+  _id: string;
+  boardId: string;
+  columnId: string;
+}
+
+interface Task extends TaskData {
+  color: string;
+}
+
+interface TasksProps {
+  boardId: string;
+  columnId: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -136,4 +157,8 @@ export type {
   ColumnFormValues,
   Column,
   ColumnData,
+  NewTask,
+  TaskData,
+  Task,
+  TasksProps,
 };

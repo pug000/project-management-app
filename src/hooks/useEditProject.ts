@@ -3,7 +3,7 @@ import { SubmitHandler } from 'react-hook-form';
 
 import { useUpdateProjectMutation } from 'redux/api/projectsApiSlice';
 import { getEditProjectPopupOpen } from 'redux/selectors/projectSelectors';
-import { setEditProjectPopupOpen } from 'redux/slices/projectSlice';
+import { setEditProjectPopupOpen, setSelectedProject } from 'redux/slices/projectSlice';
 
 import { EditFormValues, Project } from 'ts/interfaces';
 
@@ -31,6 +31,7 @@ const useEditProject = (selectedProject: Project | null) => {
     () => () => {
       if (isEditProjectPopupOpen) {
         dispatch(setEditProjectPopupOpen(false));
+        dispatch(setSelectedProject(null));
       }
     },
     []
