@@ -6,12 +6,14 @@ interface TaskState {
   selectedTask: Task | null;
   isCreateTaskPopupOpen: boolean;
   isDeleteTaskPopupOpen: boolean;
+  isLoadingGetAllTasks: boolean;
 }
 
 const initialState: TaskState = {
   selectedTask: null,
   isCreateTaskPopupOpen: false,
   isDeleteTaskPopupOpen: false,
+  isLoadingGetAllTasks: false,
 };
 
 const taskSlice = createSlice({
@@ -29,10 +31,18 @@ const taskSlice = createSlice({
     setDeleteTaskPopupOpen(state, { payload }: PayloadAction<boolean>) {
       state.isDeleteTaskPopupOpen = payload;
     },
+
+    setLoadingGetAllTasks(state, { payload }: PayloadAction<boolean>) {
+      state.isLoadingGetAllTasks = payload;
+    },
   },
 });
 
-export const { setSelectedTask, setCreateTaskPopupOpen, setDeleteTaskPopupOpen } =
-  taskSlice.actions;
+export const {
+  setSelectedTask,
+  setCreateTaskPopupOpen,
+  setDeleteTaskPopupOpen,
+  setLoadingGetAllTasks,
+} = taskSlice.actions;
 
 export default taskSlice.reducer;

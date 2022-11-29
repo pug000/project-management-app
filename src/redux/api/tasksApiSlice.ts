@@ -1,16 +1,12 @@
-import { setCreateTaskPopupOpen } from 'redux/slices/taskSlice';
+import { setCreateTaskPopupOpen, setLoadingGetAllTasks } from 'redux/slices/taskSlice';
+import { RootState } from 'redux/store';
 
 import { addFetchOptions } from 'utils/functions';
 
 import { Endpoints, Methods } from 'ts/enums';
-import { NewTask, Task, TaskData } from 'ts/interfaces';
+import { NewTask, Task, TaskData, TasksProps } from 'ts/interfaces';
 
 import apiSlice from './apiSlice';
-
-interface TasksProps {
-  boardId: string;
-  columnId: string;
-}
 
 interface MutationTaskProps extends TasksProps {
   id: string;
@@ -32,7 +28,9 @@ const tasksApiSlice = apiSlice.injectEndpoints({
         })),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
+          dispatch(setLoadingGetAllTasks(true));
           await queryFulfilled;
+          dispatch(setLoadingGetAllTasks(false));
           dispatch(setCreateTaskPopupOpen(false));
         } catch (error) {
           throw new Error(`${error}`);
@@ -84,3 +82,8 @@ export const {
   useUpdateTaskMutation,
   useDeleteTaskMutation,
 } = tasksApiSlice;
+
+const getBaseAllTasks = (state: RootState, query: TasksProps) =>
+  tasksApiSlice.endpoints.getAllTasks.select(query)(state);
+
+export { getBaseAllTasks };

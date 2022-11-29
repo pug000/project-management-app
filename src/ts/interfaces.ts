@@ -131,6 +131,11 @@ interface Task extends TaskData {
   color: string;
 }
 
+interface TasksProps {
+  boardId: string;
+  columnId: string;
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -155,4 +160,5 @@ export type {
   NewTask,
   TaskData,
   Task,
+  TasksProps,
 };
