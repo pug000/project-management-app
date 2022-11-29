@@ -6,7 +6,7 @@ import { getSelectedColumn } from 'redux/selectors/columnSelectors';
 import { getCreateTaskPopupOpen } from 'redux/selectors/taskSelectors';
 import { getAuthUser } from 'redux/selectors/userSelectors';
 import { setSelectedColumn } from 'redux/slices/columnSlice';
-import { setCreateTaskPopupOpen } from 'redux/slices/taskSlice';
+import { setCreateTaskPopupOpen, setSelectedTask } from 'redux/slices/taskSlice';
 
 import { ColumnData, EditFormValues } from 'ts/interfaces';
 
@@ -53,6 +53,7 @@ const useCreateTask = () => {
     () => () => {
       if (isCreateTaskPopupOpen) {
         dispatch(setCreateTaskPopupOpen(false));
+        dispatch(setSelectedTask(null));
       }
     },
     []
