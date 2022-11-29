@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { useGetAllTasksQuery } from 'redux/api/tasksApiSlice';
+import useGetAllTasks from 'hooks/useGetAllTasks';
 
 import Button from 'components/Button/Button';
 
@@ -22,7 +22,7 @@ interface TasksCardsProps {
 }
 
 function TaskCards({ boardId, columnId, showDeletePopupOnClick }: TasksCardsProps) {
-  const { data: tasks } = useGetAllTasksQuery({ boardId, columnId });
+  const { tasks } = useGetAllTasks(boardId, columnId);
 
   return (
     <TasksWrapper>
