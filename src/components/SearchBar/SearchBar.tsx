@@ -2,6 +2,9 @@ import React, { memo, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import { useAppDispatch } from 'hooks/useRedux';
+import { setSearchedProjects } from 'redux/slices/projectSlice';
+
 import { Project, SearchBarValues } from 'ts/interfaces';
 import { defaultSearchBarValues } from 'utils/constants';
 
@@ -14,23 +17,33 @@ import { Form } from 'styles/styles';
 import SearchBarWrapper from './SearchBar.style';
 
 interface SearchBarProps {
-  onSubmit: SubmitHandler<SearchBarValues>;
   defaultProjects: Project[] | undefined;
+  isDefaultProjectsLoading: boolean;
 }
 
-function SearchBar({ onSubmit, defaultProjects }: SearchBarProps) {
+function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps) {
   const { t } = useTranslation('translation');
-  const {
-    register,
-    handleSubmit,
-    clearErrors,
-    formState: { errors },
-    reset,
-  } = useForm<SearchBarValues>({
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit, clearErrors, reset } = useForm<SearchBarValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: defaultSearchBarValues,
   });
+
+  const onSearchSubmit: SubmitHandler<SearchBarValues> = ({ ...formValues }) => {
+    if (defaultProjects) {
+      const newProjectsList = defaultProjects?.filter((project) =>
+        project.title.toLowerCase().includes(formValues.title.toLowerCase())
+      );
+      dispatch(setSearchedProjects(newProjectsList));
+    }
+  };
+
+  useEffect(() => {
+    if (!isDefaultProjectsLoading && defaultProjects) {
+      dispatch(setSearchedProjects(defaultProjects));
+    }
+  }, [defaultProjects]);
 
   useEffect(() => {
     reset();
@@ -42,27 +55,19 @@ function SearchBar({ onSubmit, defaultProjects }: SearchBarProps) {
         aria-label="form"
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSearchSubmit)}
       >
         <Input
           type="search"
           name="title"
           register={register}
           clearErrors={clearErrors}
-          errors={errors.title}
           placeholderText={t('searchBar.placeholder')}
         />
         <Button type="submit" width="30px">
           <IoMdSearch />
         </Button>
-        <Button
-          type="submit"
-          width="30px"
-          callback={() => {
-            reset();
-            handleSubmit(onSubmit);
-          }}
-        >
+        <Button type="submit" width="30px" callback={() => reset()}>
           <IoMdClose />
         </Button>
       </Form>

@@ -23,9 +23,15 @@ const getEditProjectPopupOpen = createSelector(
   (state) => state.isEditProjectPopupOpen
 );
 
+const getSearchedProjects = createSelector(
+  getBaseProjectState,
+  (state) => state.searchedProjects
+);
+
 export {
   getSelectedProject,
   getDeleteProjectPopupOpen,
   getCreateProjectPopupOpen,
   getEditProjectPopupOpen,
+  getSearchedProjects,
 };

@@ -1,6 +1,5 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
@@ -14,9 +13,10 @@ import {
   setEditProjectPopupOpen,
   setSelectedProject,
 } from 'redux/slices/projectSlice';
-import { getSelectedProject } from 'redux/selectors/projectSelectors';
-
-import { Project, SearchBarValues } from 'ts/interfaces';
+import {
+  getSearchedProjects,
+  getSelectedProject,
+} from 'redux/selectors/projectSelectors';
 
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import Button from 'components/Button/Button';
@@ -49,29 +49,17 @@ function ProjectsPage() {
     isLoadingDeleteProject,
   ].some((loader) => loader);
 
-  const [searchedProjects, setSearchedProjects] = useState<Project[]>([]);
-
-  const onSearchSubmit: SubmitHandler<SearchBarValues> = ({ ...formValues }) => {
-    if (projects) {
-      const newProjectsList = projects?.filter((project) =>
-        project.title.toLowerCase().includes(formValues.title.toLowerCase())
-      );
-      setSearchedProjects(newProjectsList);
-    }
-  };
-
-  useEffect(() => {
-    if (!isProjectsListLoading && projects) {
-      setSearchedProjects(projects);
-    }
-  }, [projects]);
+  const searchedProjects = useAppSelector(getSearchedProjects);
 
   return (
     <ProtectedRoute>
       <MainWrapper>
         <ProjectsControls>
           <ProjectsTitle>{t('title')}</ProjectsTitle>
-          <SearchBar onSubmit={onSearchSubmit} defaultProjects={projects} />
+          <SearchBar
+            defaultProjects={projects}
+            isDefaultProjectsLoading={isProjectsListLoading}
+          />
           <Button
             type="button"
             width="130px"

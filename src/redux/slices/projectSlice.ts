@@ -7,6 +7,7 @@ interface ProjectState {
   isDeleteProjectPopupOpen: boolean;
   isCreateProjectPopupOpen: boolean;
   isEditProjectPopupOpen: boolean;
+  searchedProjects: Project[];
 }
 
 const initialState: ProjectState = {
@@ -14,6 +15,7 @@ const initialState: ProjectState = {
   isDeleteProjectPopupOpen: false,
   isCreateProjectPopupOpen: false,
   isEditProjectPopupOpen: false,
+  searchedProjects: [],
 };
 
 const projectSlice = createSlice({
@@ -35,6 +37,10 @@ const projectSlice = createSlice({
     setEditProjectPopupOpen(state, { payload }: PayloadAction<boolean>) {
       state.isEditProjectPopupOpen = payload;
     },
+
+    setSearchedProjects(state, { payload }: PayloadAction<Project[]>) {
+      state.searchedProjects = payload;
+    },
   },
 });
 
@@ -43,6 +49,7 @@ export const {
   setDeleteProjectPopupOpen,
   setCreateProjectPopupOpen,
   setEditProjectPopupOpen,
+  setSearchedProjects,
 } = projectSlice.actions;
 
 export default projectSlice.reducer;
