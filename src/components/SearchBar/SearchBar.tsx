@@ -31,7 +31,7 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
       defaultValues: defaultSearchBarValues,
     });
 
-  const onSearchSubmit: SubmitHandler<SearchBarValues> = ({ ...formValues }) => {
+  const onSearchSubmit: SubmitHandler<SearchBarValues> = (formValues) => {
     if (defaultProjects) {
       const newProjectsList = defaultProjects?.filter((project) =>
         project.title.toLowerCase().includes(formValues.title.toLowerCase())
@@ -39,6 +39,11 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
       dispatch(setSearchedProjects(newProjectsList));
       localStorage.setItem('searchedProjectsData', formValues.title);
     }
+  };
+
+  const resetOnClick = () => {
+    localStorage.removeItem('searchedProjectsData');
+    reset();
   };
 
   useEffect(() => {
@@ -73,14 +78,7 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
         <Button type="submit" width="30px">
           <IoMdSearch />
         </Button>
-        <Button
-          type="submit"
-          width="30px"
-          callback={() => {
-            localStorage.removeItem('searchedProjectsData');
-            reset();
-          }}
-        >
+        <Button type="submit" width="30px" callback={resetOnClick}>
           <IoMdClose />
         </Button>
       </Form>
