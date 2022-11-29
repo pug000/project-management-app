@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { SearchBarValues } from 'ts/interfaces';
+import { Project, SearchBarValues } from 'ts/interfaces';
 import { defaultSearchBarValues } from 'utils/constants';
 
 import { IoMdClose, IoMdSearch } from 'react-icons/io';
@@ -15,20 +15,26 @@ import SearchBarWrapper from './SearchBar.style';
 
 interface SearchBarProps {
   onSubmit: SubmitHandler<SearchBarValues>;
+  defaultProjects: Project[] | undefined;
 }
 
-function SearchBar({ onSubmit }: SearchBarProps) {
+function SearchBar({ onSubmit, defaultProjects }: SearchBarProps) {
   const { t } = useTranslation('translation');
   const {
     register,
     handleSubmit,
     clearErrors,
     formState: { errors },
+    reset,
   } = useForm<SearchBarValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: defaultSearchBarValues,
   });
+
+  useEffect(() => {
+    reset();
+  }, [defaultProjects]);
 
   return (
     <SearchBarWrapper>
@@ -49,7 +55,14 @@ function SearchBar({ onSubmit }: SearchBarProps) {
         <Button type="submit" width="30px">
           <IoMdSearch />
         </Button>
-        <Button type="button" width="30px">
+        <Button
+          type="submit"
+          width="30px"
+          callback={() => {
+            reset();
+            handleSubmit(onSubmit);
+          }}
+        >
           <IoMdClose />
         </Button>
       </Form>
