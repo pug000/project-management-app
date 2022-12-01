@@ -44,7 +44,8 @@
         "color": "Task color",
         "save": "Save",
         "cancel": "Cancel",
-        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters"
+        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters",
+        "projectOwner": "project created by"
       },
       "home": {
         "text": "Home"
@@ -194,7 +195,8 @@
         "color": "Цвет задачи",
         "save": "Сохранить",
         "cancel": "Отменить",
-        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов."
+        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов.",
+        "projectOwner": "проект создал(а)"
       },
       "home": {
         "text": "Главная"

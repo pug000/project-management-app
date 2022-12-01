@@ -1,4 +1,5 @@
 import React, { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
@@ -22,6 +23,9 @@ import {
   CardsWrapper,
   CardTitle,
   IconWrapper,
+  CardOwnerWrapper,
+  CardOwner,
+  CardOwnerName,
 } from './ProjectCards.style';
 
 interface ProjectCardsProps {
@@ -30,6 +34,7 @@ interface ProjectCardsProps {
 
 function ProjectCards({ projects }: ProjectCardsProps) {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('translation', { keyPrefix: 'projects' });
 
   const deleteProjectOnClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, project: Project) => {
@@ -72,6 +77,11 @@ function ProjectCards({ projects }: ProjectCardsProps) {
             <CardDescriptionWrapper>
               <CardDescription>{project.description}</CardDescription>
             </CardDescriptionWrapper>
+            <CardOwnerWrapper>
+              <CardOwner>
+                {t('projectOwner')} <CardOwnerName>{project.owner}</CardOwnerName>
+              </CardOwner>
+            </CardOwnerWrapper>
           </Card>
         </StyledLink>
       ))}
