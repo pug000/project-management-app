@@ -17,6 +17,12 @@ interface MutationTaskProps extends TasksProps {
   body: NewTask;
 }
 
+interface TaskOrder {
+  _id: string;
+  order: number;
+  columnId: string;
+}
+
 const tasksApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllTasks: builder.query<Task[], TasksProps>({
@@ -26,10 +32,12 @@ const tasksApiSlice = apiSlice.injectEndpoints({
           Methods.get
         ),
       transformResponse: (tasks: TaskData[]) =>
-        tasks.map((data) => ({
-          ...data,
-          ...JSON.parse(data.description),
-        })),
+        tasks
+          .map((data) => ({
+            ...data,
+            ...JSON.parse(data.description),
+          }))
+          .sort((a, b) => a.order - b.order),
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           dispatch(setLoadingGetAllTasks(true));
@@ -72,6 +80,14 @@ const tasksApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Task'],
     }),
 
+    updateOrderTask: builder.mutation<TaskData[], TaskOrder[]>({
+      query: (body) => ({
+        ...addFetchOptions(`${Endpoints.tasksSet}`, Methods.patch),
+        body,
+      }),
+      invalidatesTags: ['Task'],
+    }),
+
     deleteTask: builder.mutation<TaskData, Omit<MutationTaskProps, 'body'>>({
       query: ({ boardId, columnId, id }) => ({
         ...addFetchOptions(
@@ -88,6 +104,7 @@ export const {
   useGetAllTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskMutation,
+  useUpdateOrderTaskMutation,
   useDeleteTaskMutation,
 } = tasksApiSlice;
 

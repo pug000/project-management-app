@@ -14,6 +14,11 @@ interface ColumnResponse {
   body: Column;
 }
 
+interface ColumnOrder {
+  _id: string;
+  order: number;
+}
+
 export const columnsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllColumns: builder.query<ColumnData[], string>({
@@ -27,9 +32,11 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
           throw new Error(`${error}`);
         }
       },
+      transformResponse: (columns: ColumnData[]) =>
+        columns.sort((a, b) => a.order - b.order),
       providesTags: (result) =>
         result
-          ? [...result.map(({ _id }) => ({ type: 'Column' as const, _id })), 'Column']
+          ? [...result.map(({ _id }) => ({ type: 'Column' as const, id: _id })), 'Column']
           : ['Column'],
     }),
 
@@ -61,6 +68,14 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Column'],
     }),
 
+    updateOrderColumn: builder.mutation<ColumnData[], ColumnOrder[]>({
+      query: (body) => ({
+        ...addFetchOptions(`${Endpoints.columnsSet}`, Methods.patch),
+        body,
+      }),
+      invalidatesTags: ['Column'],
+    }),
+
     getColumnById: builder.query<ColumnData, OmitColumnData>({
       query: ({ _id, boardId }) =>
         addFetchOptions(
@@ -77,5 +92,6 @@ export const {
   useCreateColumnMutation,
   useDeleteColumnByIdMutation,
   useUpdateColumnByIdMutation,
+  useUpdateOrderColumnMutation,
   useGetColumnByIdQuery,
 } = columnsApiSlice;
