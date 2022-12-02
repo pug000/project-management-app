@@ -1,6 +1,9 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
@@ -46,13 +49,13 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
+  const { columnList, isLoadingColumnList } = useGetAllColumns();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
   const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit, id } =
-    useCreateColumn();
+    useCreateColumn(columnList);
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
-  const { columns, isLoadingColumnList } = useGetAllColumns();
   const { isLoadingEditColumnTitle } = useEditColumnTitle();
   const isLoadingProjectPage = [
     isLoadingSelectedProject,
@@ -133,8 +136,10 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
-        {columns?.length ? (
-          <Columns columns={columns} />
+        {columnList?.length ? (
+          <DndProvider backend={window.innerWidth <= 915 ? TouchBackend : HTML5Backend}>
+            <Columns />
+          </DndProvider>
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"

@@ -5,6 +5,7 @@ import { addFetchOptions } from 'utils/functions';
 import { Endpoints, Methods } from 'ts/enums';
 import { ColumnData, Column } from 'ts/interfaces';
 
+import { RootState } from 'redux/store';
 import apiSlice from './apiSlice';
 
 type OmitColumnData = Omit<ColumnData, 'title' | 'order'>;
@@ -19,7 +20,7 @@ interface ColumnOrder {
   order: number;
 }
 
-export const columnsApiSlice = apiSlice.injectEndpoints({
+const columnsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllColumns: builder.query<ColumnData[], string>({
       query: (id) =>
@@ -95,3 +96,8 @@ export const {
   useUpdateOrderColumnMutation,
   useGetColumnByIdQuery,
 } = columnsApiSlice;
+
+const getBaseAllColumns = (state: RootState, id: string) =>
+  columnsApiSlice.endpoints.getAllColumns.select(id)(state);
+
+export { getBaseAllColumns };
