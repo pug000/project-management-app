@@ -134,7 +134,7 @@ const CardOwner = styled.p`
 const CardOwnerName = styled.span`
   display: inline-block;
   background-color: ${({ theme }) => theme.colors.backgroundGrey};
-  padding: 0 5px;
+  padding: 0 7px 0 5px;
   border-radius: 3px;
   color: ${({ theme }) => theme.colors.primaryColor};
 `;
