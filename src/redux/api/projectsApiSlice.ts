@@ -32,7 +32,10 @@ const projectsApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result) =>
         result
-          ? [...result.map(({ _id }) => ({ type: 'Project' as const, _id })), 'Project']
+          ? [
+              ...result.map(({ _id }) => ({ type: 'Project' as const, id: _id })),
+              'Project',
+            ]
           : ['Project'],
     }),
 

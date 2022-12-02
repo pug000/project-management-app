@@ -15,6 +15,10 @@ interface UpdatedUserData {
 
 const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query<UserDataOmitPassword[], void>({
+      query: () => addFetchOptions(`${Endpoints.users}`, Methods.get),
+    }),
+
     getUserById: builder.query<UserDataOmitPassword, string>({
       query: (id: string) => addFetchOptions(`${Endpoints.users}${id}`, Methods.get),
     }),
@@ -44,5 +48,9 @@ const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUserByIdQuery, useDeleteUserByIdMutation, useEditUserByIdMutation } =
-  userApiSlice;
+export const {
+  useGetAllUsersQuery,
+  useGetUserByIdQuery,
+  useDeleteUserByIdMutation,
+  useEditUserByIdMutation,
+} = userApiSlice;

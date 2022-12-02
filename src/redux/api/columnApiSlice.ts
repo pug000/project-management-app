@@ -29,7 +29,7 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
       },
       providesTags: (result) =>
         result
-          ? [...result.map(({ _id }) => ({ type: 'Column' as const, _id })), 'Column']
+          ? [...result.map(({ _id }) => ({ type: 'Column' as const, id: _id })), 'Column']
           : ['Column'],
     }),
 
