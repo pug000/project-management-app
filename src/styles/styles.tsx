@@ -1,11 +1,15 @@
 import { GrPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { StylesConfig, GroupBase } from 'react-select';
+
 import { MdOutlineDelete, MdClose, MdEdit } from 'react-icons/md';
 import { BiEdit } from 'react-icons/bi';
 import { FiCheck } from 'react-icons/fi';
 
-import { ColorProps, IconsProps } from 'ts/interfaces';
+import { ColorProps, IconsProps, SelectOptions } from 'ts/interfaces';
+
+import defaultTheme from './theme';
 
 const baseIconStyles = {
   width: '100%',
@@ -187,6 +191,27 @@ const StyledCloseIcon = styled(MdClose).attrs({
   }
 `;
 
+const selectorStyles: StylesConfig<
+  string | SelectOptions,
+  boolean,
+  GroupBase<SelectOptions>
+> = {
+  control: (base, { isFocused }) => ({
+    ...base,
+    outline: 'none',
+    border: isFocused
+      ? `1px solid ${defaultTheme.colors.primaryColor}`
+      : `1px solid ${defaultTheme.colors.grey}`,
+    borderRadius: '3px',
+    color: `${defaultTheme.colors.grey}`,
+    boxShadow: isFocused ? `0px 10px 13px rgba(0, 0, 0, 0.07)` : 'none',
+    transition: `${defaultTheme.effects.transition}`,
+    '&:hover': {
+      border: `1px solid ${defaultTheme.colors.primaryColor}`,
+    },
+  }),
+};
+
 export {
   MainWrapper,
   Title,
@@ -203,4 +228,5 @@ export {
   StyledEditTextIcon,
   StyledConfirmIcon,
   StyledCloseIcon,
+  selectorStyles,
 };

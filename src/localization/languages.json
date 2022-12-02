@@ -41,7 +41,6 @@
         "title": "Title",
         "description": "Description",
         "descriptionPlaceholder": "Project description",
-        "color": "Task color",
         "save": "Save",
         "cancel": "Cancel",
         "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters",
@@ -119,7 +118,9 @@
         "button": "Ok",
         "titleMinLength": "title should contain more than 3 characters",
         "titleMaxLength": "title can't be longer than 25 characters",
-        "required": "this field can't be empty"
+        "required": "this field can't be empty",
+        "color": "Task color",
+        "responsible": "Choose who's responsible"
       },
       "editProjectForm": {
         "newProjectTitle": "Create new project",
@@ -192,7 +193,6 @@
         "title": "Название",
         "description": "Описание",
         "descriptionPlaceholder": "Описание проекта",
-        "color": "Цвет задачи",
         "save": "Сохранить",
         "cancel": "Отменить",
         "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов.",
@@ -270,7 +270,9 @@
         "button": "Ok",
         "titleMinLength": "название не может быть короче 3 символов",
         "titleMaxLength": "название не может быть длиннее 25 символов",
-        "required": "это поле не может быть пустым"
+        "required": "это поле не может быть пустым",
+        "color": "Цвет задачи",
+        "responsible": "Выберете ответственного"
       },
       "editProjectForm": {
         "newProjectTitle": "Создать новый проект",

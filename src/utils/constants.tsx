@@ -11,6 +11,7 @@ import {
   RadioInputItem,
   ColumnFormValues,
   SearchBarValues,
+  SelectOptions,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -259,6 +260,7 @@ const defaultFormItemValues: EditFormValues = {
   title: '',
   description: '',
   color: '',
+  responsibleUser: '',
 };
 
 const defaultColumnFormValues: ColumnFormValues = {
@@ -268,6 +270,13 @@ const defaultColumnFormValues: ColumnFormValues = {
 const defaultSearchBarValues: SearchBarValues = {
   title: '',
 };
+
+const defaultSelectOptions: SelectOptions[] = [
+  {
+    value: '',
+    label: '',
+  },
+];
 
 export {
   baseUrl,
@@ -289,4 +298,5 @@ export {
   defaultFormItemValues,
   defaultColumnFormValues,
   defaultSearchBarValues,
+  defaultSelectOptions,
 };

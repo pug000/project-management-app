@@ -19,9 +19,9 @@ const useEditTask = (selectedTask: Task | null) => {
   }, []);
 
   const editTaskOnSubmit: SubmitHandler<EditFormValues> = useCallback(
-    async ({ title, color, description }) => {
+    async ({ title, color, description, responsibleUser }) => {
       if (selectedTask) {
-        const { boardId, columnId, userId, users, order } = selectedTask;
+        const { boardId, columnId, userId, order } = selectedTask;
         dispatch(setEditTaskPopupOpen(false));
         dispatch(setSelectedTask(null));
         await editTask({
@@ -32,7 +32,7 @@ const useEditTask = (selectedTask: Task | null) => {
             title,
             description: JSON.stringify({ color, description }),
             userId,
-            users,
+            users: [responsibleUser],
             order,
           },
         });

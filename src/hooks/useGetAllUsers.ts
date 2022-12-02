@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useGetAllUsersQuery } from 'redux/api/userApiSlice';
 import { getLoggedIn } from 'redux/selectors/userSelectors';
+
+import { SelectOptions } from 'ts/interfaces';
+import { defaultSelectOptions } from 'utils/constants';
 
 import { useAppSelector } from './useRedux';
 
@@ -9,8 +13,20 @@ const useGetAllUsers = () => {
     skip: !isLoggedIn,
   });
 
+  const [usersList, setUsersList] = useState<SelectOptions[]>(defaultSelectOptions);
+
+  useEffect(() => {
+    if (!isUsersListLoading && users) {
+      const usersOptions = users?.map((user) => ({
+        value: user.name ?? '',
+        label: user.name ?? '',
+      }));
+      setUsersList(usersOptions);
+    }
+  }, []);
+
   return {
-    users,
+    usersList,
     isUsersListLoading,
   };
 };

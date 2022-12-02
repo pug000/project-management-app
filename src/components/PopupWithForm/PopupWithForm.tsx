@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from 'hooks/useRedux';
+import useGetAllUsers from 'hooks/useGetAllUsers';
 
 import { popupAnimation } from 'utils/animations';
 
@@ -46,6 +47,7 @@ function PopupWithForm<T>({
 }: PopupWithFormProps<T>) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
+  const { isUsersListLoading } = useGetAllUsers();
 
   const closePopup = useCallback(() => {
     dispatch(setPopupShown(false));
@@ -56,7 +58,7 @@ function PopupWithForm<T>({
 
   return (
     <AnimatePresence>
-      {isPopupShown && (
+      {isPopupShown && !isUsersListLoading && (
         <PopupWrapper $variants={popupAnimation}>
           <Background onClick={closePopup} />
           <Popup>
