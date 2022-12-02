@@ -1,15 +1,18 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import React, { lazy, Suspense, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import useCheckUserToken from 'hooks/useCheckUserToken';
 
-import { getAuthUser, getLoggedIn } from 'redux/selectors/userSelectors';
-import { setLoggedOut } from 'redux/slices/userSlice';
+import { setTokeInvalidPopupOpen } from 'redux/slices/userSlice';
 
 import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Loader from 'components/Loader/Loader';
+import PopupNotification from 'components/PopupNotification/PopupNotification';
+
+import defaultTheme from 'styles/theme';
 
 const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const SignUpPage = lazy(() => import('pages/SignUpPage/SignUpPage'));
@@ -21,27 +24,9 @@ const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
 const EditProfilePage = lazy(() => import('pages/EditProfilePage/EditProfilePage'));
 
 function App() {
-  const isLoggedIn = useAppSelector(getLoggedIn);
-  const authUser = useAppSelector(getAuthUser);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const { t } = useTranslation('translation');
+  const { isTokenInvalidPopupOpen, tokenInvalidErrorMessage } = useCheckUserToken();
   const [isFooterShown, setFooterShown] = useState(true);
-
-  const signOutUser = useCallback(() => {
-    if (isLoggedIn && authUser?.exp) {
-      const currentDate = new Date();
-      const signOutDate = new Date(authUser.exp * 1000);
-
-      if (currentDate >= signOutDate) {
-        dispatch(setLoggedOut());
-        navigate('/');
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    signOutUser();
-  }, []);
 
   return (
     <>
@@ -63,6 +48,14 @@ function App() {
           </Routes>
         </Suspense>
       </ErrorBoundary>
+      {tokenInvalidErrorMessage && (
+        <PopupNotification
+          isPopupShown={isTokenInvalidPopupOpen}
+          setPopupShown={setTokeInvalidPopupOpen}
+          backgroundColor={defaultTheme.colors.pink}
+          text={t(`${tokenInvalidErrorMessage}`)}
+        />
+      )}
       {isFooterShown && <Footer />}
     </>
   );

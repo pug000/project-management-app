@@ -34,7 +34,9 @@ const projectsApiSlice = apiSlice.injectEndpoints({
             dispatch(setEditProjectPopupOpen(false));
           }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       providesTags: (result) =>

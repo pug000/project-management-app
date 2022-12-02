@@ -51,7 +51,9 @@ const tasksApiSlice = apiSlice.injectEndpoints({
             dispatch(setEditTaskPopupOpen(false));
           }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       providesTags: (result) =>

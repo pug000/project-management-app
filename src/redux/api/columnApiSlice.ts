@@ -33,7 +33,9 @@ const columnsApiSlice = apiSlice.injectEndpoints({
             dispatch(setCreateColumnPopupOpen(false));
           }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       transformResponse: (columns: ColumnData[]) =>

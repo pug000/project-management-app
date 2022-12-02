@@ -17,6 +17,8 @@ const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUserById: builder.query<UserDataOmitPassword, string>({
       query: (id: string) => addFetchOptions(`${Endpoints.users}${id}`, Methods.get),
+      transformErrorResponse: ({ status }): string =>
+        status === 403 ? 'authorization.tokenInvalid' : 'authorization.error',
     }),
 
     deleteUserById: builder.mutation<UserDataOmitPassword, string>({
@@ -44,5 +46,9 @@ const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUserByIdQuery, useDeleteUserByIdMutation, useEditUserByIdMutation } =
-  userApiSlice;
+export const {
+  useGetUserByIdQuery,
+  useLazyGetUserByIdQuery,
+  useDeleteUserByIdMutation,
+  useEditUserByIdMutation,
+} = userApiSlice;

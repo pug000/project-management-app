@@ -15,6 +15,7 @@ const PopupWrapper = styled(motion.div).attrs<VariantsProps>(({ $variants }) => 
   width: 100%;
   top: 0;
   z-index: 8;
+  justify-self: center;
 `;
 
 const Popup = styled.div<BackgroundColorProps>`

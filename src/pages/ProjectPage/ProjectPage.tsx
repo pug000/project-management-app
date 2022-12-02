@@ -168,7 +168,7 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
         onSubmit={onSubmit}
       />
       {isLoadingProjectPage && <Loader />}
-      {isNavigate && <Navigate to="*" />}
+      {isNavigate && <Navigate to="/" />}
     </MainWrapper>
   );
 }

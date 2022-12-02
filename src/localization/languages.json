@@ -11,7 +11,8 @@
         "namePattern": "name should contain only letters(eng)",
         "loginPattern": "login should contain only letters(eng) and digits",
         "passwordPattern": "password should contain only letters(eng), digits and ! @ # ~ &",
-        "error": "Authorization error. Try again later"
+        "error": "Authorization error. Try again later",
+        "tokenInvalid": "Sorry your token isn't valid any more. You were logged out."
       },
       "signUp": {
         "title": "Sign Up",
@@ -161,7 +162,8 @@
         "namePattern": "имя может содержать только латинские буквы",
         "loginPattern": "логин может содержать только латинские буквы и цифры",
         "passwordPattern": "пароль может содержать только латинские буквы, цифры и ! @ # ~ &",
-        "error": "Ошибка авторизации. Попробуйте позже"
+        "error": "Ошибка авторизации. Попробуйте позже",
+        "tokenInvalid": "Извините, ваш токен больше недействителен. Был произведен выход из системы."
       },
       "signUp": {
         "title": "Регистрация",
