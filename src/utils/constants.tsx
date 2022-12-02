@@ -22,7 +22,7 @@ import YellowSvg from 'pages/ProfilePage/SvgElements/YellowSvg';
 
 const baseUrl = 'https://project-management-ka5v.onrender.com/';
 
-const nameValidation = /^(?=[a-zA-Z._]*$)(?!.*[_.]).*/gm;
+const nameValidation = /^(?=[a-zA-Z._ ]*$)(?!.*[_.]).*/gm;
 
 const loginValidation = /^(?=[a-zA-Z0-9._]*$)(?!.*[_.])[^_.].*/gm;
 

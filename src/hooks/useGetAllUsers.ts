@@ -23,7 +23,7 @@ const useGetAllUsers = () => {
       }));
       setUsersList(usersOptions);
     }
-  }, []);
+  }, [users]);
 
   return {
     usersList,

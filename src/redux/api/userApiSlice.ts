@@ -17,6 +17,10 @@ const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllUsers: builder.query<UserDataOmitPassword[], void>({
       query: () => addFetchOptions(`${Endpoints.users}`, Methods.get),
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ _id }) => ({ type: 'User' as const, id: _id })), 'User']
+          : ['User'],
     }),
 
     getUserById: builder.query<UserDataOmitPassword, string>({
@@ -44,6 +48,7 @@ const userApiSlice = apiSlice.injectEndpoints({
       },
       transformErrorResponse: ({ status }): string =>
         status === 409 ? 'signUp.error' : 'authorization.error',
+      invalidatesTags: ['User'],
     }),
   }),
 });
