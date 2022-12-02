@@ -148,6 +148,9 @@
       },
       "searchBar": {
         "placeholder": "Find a project..."
+      },
+      "task": {
+        "responsible": "responsible: "
       }
     }
   },
@@ -300,6 +303,9 @@
       },
       "searchBar": {
         "placeholder": "Найти проект..."
+      },
+      "task": {
+        "responsible": "ответственный: "
       }
     }
   }
