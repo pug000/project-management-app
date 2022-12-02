@@ -26,13 +26,15 @@ const useDropColumnList = (
 
   const [, drop] = useDrop({
     accept: type,
-    drop() {
-      updateOrder(
-        columnList.map(({ _id }, index) => ({
-          _id,
-          order: index,
-        }))
-      );
+    drop(item, monitor) {
+      if (monitor.didDrop()) {
+        updateOrder(
+          columnList.map(({ _id }, index) => ({
+            _id,
+            order: index,
+          }))
+        );
+      }
     },
   });
 

@@ -2,15 +2,16 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useDragColumn from 'hooks/useDragColumn';
+import useGetAllTasks from 'hooks/useGetAllTasks';
 
 import Button from 'components/Button/Button';
 import EditText from 'components/EditText/EditText';
-import TaskCards from 'components/TaskCards/TaskCards';
+import TaskCard from 'components/TaskCard/TaskCard';
 
 import { ColumnData, Task } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
-import { ColumnsContainer } from './Columns.style';
+import { ColumnsContainer, TasksWrapper } from './Columns.style';
 
 interface ColumnProps {
   column: ColumnData;
@@ -41,6 +42,7 @@ function Column({
   showDeletePopupOnClick,
 }: ColumnProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
+  const { tasks } = useGetAllTasks(column.boardId, column._id);
   const { dragRef, handlerId, isDragging } = useDragColumn(
     column,
     columnIndex,
@@ -63,12 +65,16 @@ function Column({
         deleteItemOnClick={deleteColumnOnClick}
         editText={editColumnTitle}
       />
-      <TaskCards
-        boardId={column.boardId}
-        columnId={column._id}
-        showEditPopupOnClick={showEditPopupOnClick}
-        showDeletePopupOnClick={showDeletePopupOnClick}
-      />
+      <TasksWrapper>
+        {tasks.map((task) => (
+          <TaskCard
+            key={task._id}
+            task={task}
+            showEditPopupOnClick={showEditPopupOnClick}
+            showDeletePopupOnClick={showDeletePopupOnClick}
+          />
+        ))}
+      </TasksWrapper>
       <Button
         type="button"
         backgroundColor={defaultTheme.colors.transparent}
