@@ -33,13 +33,10 @@ function SearchBar({ defaultProjects, isDefaultProjectsLoading }: SearchBarProps
 
   const onSearchSubmit: SubmitHandler<SearchBarValues> = (formValues) => {
     if (defaultProjects) {
-      dispatch(
-        setSearchedProjects(
-          defaultProjects?.filter((project) =>
-            project.title.toLowerCase().includes(formValues.title.toLowerCase())
-          )
-        )
+      const newProjectsList = defaultProjects?.filter((project) =>
+        project.title.toLowerCase().includes(formValues.title.toLowerCase())
       );
+      dispatch(setSearchedProjects(newProjectsList));
       localStorage.setItem('searchedProjectsData', formValues.title);
     }
   };
