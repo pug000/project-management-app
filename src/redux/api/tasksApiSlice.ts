@@ -38,13 +38,18 @@ const tasksApiSlice = apiSlice.injectEndpoints({
             ...JSON.parse(data.description),
           }))
           .sort((a, b) => a.order - b.order),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+      onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
         try {
           dispatch(setLoadingGetAllTasks(true));
+          const { isEditTaskPopupOpen, isCreateTaskPopupOpen } = (getState() as RootState)
+            .task;
           await queryFulfilled;
           dispatch(setLoadingGetAllTasks(false));
-          dispatch(setEditTaskPopupOpen(false));
-          dispatch(setCreateTaskPopupOpen(false));
+          if (isCreateTaskPopupOpen) {
+            dispatch(setCreateTaskPopupOpen(false));
+          } else if (isEditTaskPopupOpen) {
+            dispatch(setEditTaskPopupOpen(false));
+          }
         } catch (error) {
           throw new Error(`${error}`);
         }

@@ -1,11 +1,11 @@
 import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
+import { RootState } from 'redux/store';
 
 import { addFetchOptions } from 'utils/functions';
 
 import { Endpoints, Methods } from 'ts/enums';
 import { ColumnData, Column } from 'ts/interfaces';
 
-import { RootState } from 'redux/store';
 import apiSlice from './apiSlice';
 
 type OmitColumnData = Omit<ColumnData, 'title' | 'order'>;
@@ -25,10 +25,13 @@ const columnsApiSlice = apiSlice.injectEndpoints({
     getAllColumns: builder.query<ColumnData[], string>({
       query: (id) =>
         addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.get),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+      onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
         try {
+          const { isCreateColumnPopupOpen } = (getState() as RootState).column;
           await queryFulfilled;
-          dispatch(setCreateColumnPopupOpen(false));
+          if (isCreateColumnPopupOpen) {
+            dispatch(setCreateColumnPopupOpen(false));
+          }
         } catch (error) {
           throw new Error(`${error}`);
         }
