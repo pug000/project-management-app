@@ -1,4 +1,5 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
+import { DragDropContext, Droppable } from '@hello-pangea/dnd';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useGetAllColumns from 'hooks/useGetAllColumns';
@@ -6,7 +7,7 @@ import useEditColumnTitle from 'hooks/useEditColumnTitle';
 import useCreateTask from 'hooks/useCreateTask';
 import useDeleteTask from 'hooks/useDeleteTask';
 import useEditTask from 'hooks/useEditTask';
-import useDropColumnList from 'hooks/useDropColumnList';
+import useDragAndDrop from 'hooks/useDragAndDrop';
 
 import { setDeleteColumnPopupOpen, setSelectedColumn } from 'redux/slices/columnSlice';
 import {
@@ -21,13 +22,15 @@ import PopupWithForm from 'components/PopupWithForm/PopupWithForm';
 import Loader from 'components/Loader/Loader';
 import PopupWarning from 'components/PopupWarning/PopupWarning';
 
-import { ColumnData } from 'ts/interfaces';
+import { ColumnData, TaskList } from 'ts/interfaces';
 
 import { ColumnWrapper } from './Columns.style';
+
 import Column from './Column';
 
 function Columns() {
   const selectedTask = useAppSelector(getSelectedTask);
+  const [taskList, setTaskList] = useState<TaskList>({});
   const dispatch = useAppDispatch();
   const { columnList, isSuccessGetColumnList, isLoadingColumnList, setColumnList } =
     useGetAllColumns();
@@ -37,7 +40,7 @@ function Columns() {
     isLoadingCreateTask,
     createTaskOnSubmit,
     showCreateTaskPopup,
-  } = useCreateTask();
+  } = useCreateTask(taskList);
   const {
     isEditTaskPopupOpen,
     isLoadingEditTask,
@@ -56,11 +59,7 @@ function Columns() {
     isLoadingEditTask,
     isLoadingDeleteTask,
   ].some((loader) => loader);
-  const { drop, moveColumns } = useDropColumnList(
-    columnList,
-    'columnList',
-    setColumnList
-  );
+  const { onDragEnd } = useDragAndDrop(columnList, setColumnList, taskList, setTaskList);
 
   const deleteColumnOnClick = useCallback((column: ColumnData) => {
     dispatch(setSelectedColumn(column));
@@ -68,22 +67,32 @@ function Columns() {
   }, []);
 
   return (
-    <ColumnWrapper ref={drop}>
-      {columnList.map((column, index) => (
-        <Column
-          key={column._id}
-          column={column}
-          columnIndex={index}
-          moveColumns={moveColumns}
-          isSuccessGetColumnList={isSuccessGetColumnList}
-          isLoadingColumnList={isLoadingColumnList}
-          deleteColumnOnClick={deleteColumnOnClick}
-          editColumnTitle={editColumnTitle}
-          showEditPopupOnClick={showEditPopupOnClick}
-          showDeletePopupOnClick={showDeletePopupOnClick}
-          showCreateTaskPopup={showCreateTaskPopup}
-        />
-      ))}
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="columnList" direction="horizontal" type="column">
+          {(providedDrop) => (
+            <ColumnWrapper ref={providedDrop.innerRef} {...providedDrop.droppableProps}>
+              {columnList.map((column, index) => (
+                <Column
+                  key={column._id}
+                  column={column}
+                  columnIndex={index}
+                  isSuccessGetColumnList={isSuccessGetColumnList}
+                  isLoadingColumnList={isLoadingColumnList}
+                  taskList={taskList}
+                  setTaskList={setTaskList}
+                  deleteColumnOnClick={deleteColumnOnClick}
+                  editColumnTitle={editColumnTitle}
+                  showEditPopupOnClick={showEditPopupOnClick}
+                  showDeletePopupOnClick={showDeletePopupOnClick}
+                  showCreateTaskPopup={showCreateTaskPopup}
+                />
+              ))}
+              {providedDrop.placeholder}
+            </ColumnWrapper>
+          )}
+        </Droppable>
+      </DragDropContext>
       <PopupWithForm
         isPopupShown={isCreateTaskPopupOpen}
         setPopupShown={setCreateTaskPopupOpen}
@@ -107,7 +116,7 @@ function Columns() {
         actionOnYes={deleteTask}
       />
       {isLoadingColumns && <Loader />}
-    </ColumnWrapper>
+    </>
   );
 }
 

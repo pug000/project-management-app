@@ -7,13 +7,17 @@ import { useAppSelector } from './useRedux';
 
 const useGetAllTasks = (boardId: string, columnId: string) => {
   const isLoggedIn = useAppSelector(getLoggedIn);
-  useGetAllTasksQuery({ boardId, columnId }, { skip: !isLoggedIn });
+  const { isSuccess: isSuccessGetAllTasks } = useGetAllTasksQuery(
+    { boardId, columnId },
+    { skip: !isLoggedIn }
+  );
   const tasks = useAppSelector((state: RootState) =>
     getAllTasks(state, { boardId, columnId })
   );
 
   return {
     tasks,
+    isSuccessGetAllTasks,
   };
 };
 

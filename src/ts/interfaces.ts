@@ -140,6 +140,10 @@ interface TasksProps {
   columnId: string;
 }
 
+interface TaskList {
+  [columnId: string]: Task[];
+}
+
 export type {
   ColorProps,
   BackgroundColorProps,
@@ -166,4 +170,5 @@ export type {
   TaskData,
   Task,
   TasksProps,
+  TaskList,
 };

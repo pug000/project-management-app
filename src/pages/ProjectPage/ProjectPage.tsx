@@ -1,9 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { TouchBackend } from 'react-dnd-touch-backend';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useDeleteProject from 'hooks/useDeleteProject';
@@ -137,9 +134,7 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
         {columnList?.length ? (
-          <DndProvider backend={window.innerWidth <= 915 ? TouchBackend : HTML5Backend}>
-            <Columns />
-          </DndProvider>
+          <Columns />
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"
