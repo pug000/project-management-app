@@ -11,7 +11,7 @@ import TaskCard from 'components/TaskCard/TaskCard';
 import { ColumnData, Task } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
-import { ColumnsContainer, TasksWrapper } from './Columns.style';
+import { ColumnContainer, TasksWrapper } from './Columns.style';
 
 interface ColumnProps {
   column: ColumnData;
@@ -64,7 +64,7 @@ function Column({
   return (
     <Draggable draggableId={column._id} index={columnIndex}>
       {(providedDrag) => (
-        <ColumnsContainer
+        <ColumnContainer
           ref={providedDrag.innerRef}
           {...providedDrag.draggableProps}
           {...providedDrag.dragHandleProps}
@@ -93,7 +93,6 @@ function Column({
               </TasksWrapper>
             )}
           </Droppable>
-
           <Button
             type="button"
             backgroundColor={defaultTheme.colors.transparent}
@@ -102,7 +101,7 @@ function Column({
           >
             {`+ ${t('newTaskButton')}`}
           </Button>
-        </ColumnsContainer>
+        </ColumnContainer>
       )}
     </Draggable>
   );

@@ -32,7 +32,7 @@ const ColumnWrapper = styled.div`
   }
 `;
 
-const ColumnsContainer = styled.div`
+const ColumnContainer = styled.div`
   min-width: 300px;
   max-width: 300px;
   width: 100%;
@@ -101,4 +101,4 @@ const TasksWrapper = styled.div`
   }
 `;
 
-export { ColumnWrapper, ColumnsContainer, ColumnHeader, ColumnTitle, TasksWrapper };
+export { ColumnWrapper, ColumnContainer, ColumnHeader, ColumnTitle, TasksWrapper };

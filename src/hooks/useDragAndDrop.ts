@@ -71,17 +71,17 @@ const useDragAndDrop = (
           })),
         ]);
       } else {
-        const copied = [...sourceTasks];
-        const [reorderTask] = copied.splice(source.index, 1);
-        copied.splice(destination.index, 0, reorderTask);
+        const copiedSourceTasks = [...sourceTasks];
+        const [reorderTask] = copiedSourceTasks.splice(source.index, 1);
+        copiedSourceTasks.splice(destination.index, 0, reorderTask);
 
         setTaskList((prev) => ({
           ...prev,
-          [source.droppableId]: copied,
+          [source.droppableId]: copiedSourceTasks,
         }));
 
         updateOrderTask(
-          copied.map(({ _id, columnId }, index) => ({
+          copiedSourceTasks.map(({ _id, columnId }, index) => ({
             _id,
             columnId,
             order: index,
