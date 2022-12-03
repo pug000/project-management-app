@@ -97,6 +97,7 @@ interface ProjectData {
 
 interface Project extends ProjectData {
   description: string;
+  responsibleUser: string;
 }
 interface EditFormValues {
   title: string;

@@ -93,6 +93,7 @@ function ProjectsPage() {
           keyPrefix="editProjectForm"
           formTitleText="newProjectTitle"
           onSubmit={onSubmit}
+          maxDescriptionLength={80}
         />
         <PopupWithForm
           isPopupShown={isEditProjectPopupOpen}
@@ -102,6 +103,7 @@ function ProjectsPage() {
           selectedItem={selectedProject}
           onSubmit={editOnSubmit}
           setSelectedItem={setSelectedProject}
+          maxDescriptionLength={80}
         />
         {isLoadingProjectsPage && <Loader />}
       </MainWrapper>

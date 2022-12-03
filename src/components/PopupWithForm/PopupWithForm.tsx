@@ -34,6 +34,7 @@ interface PopupWithFormProps<T> {
   onSubmit: SubmitHandler<EditFormValues>;
   selectedItem?: T | null;
   setSelectedItem?: ActionCreatorWithPayload<T | null>;
+  maxDescriptionLength: number;
 }
 
 function PopupWithForm<T>({
@@ -44,6 +45,7 @@ function PopupWithForm<T>({
   onSubmit,
   selectedItem,
   setSelectedItem,
+  maxDescriptionLength,
 }: PopupWithFormProps<T>) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix });
@@ -67,6 +69,7 @@ function PopupWithForm<T>({
               keyPrefix={keyPrefix}
               onSubmit={onSubmit}
               selectedItem={selectedItem}
+              maxDescriptionLength={maxDescriptionLength}
             />
             <CloseButtonWrapper>
               <Button

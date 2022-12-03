@@ -17,10 +17,13 @@ const useEditProject = (selectedProject: Project | null) => {
   const editOnSubmit: SubmitHandler<EditFormValues> = useCallback(
     async ({ color, ...formValues }) => {
       if (selectedProject) {
-        const { description, ...projectData } = selectedProject;
+        const { description, responsibleUser, ...projectData } = selectedProject;
         await editProject({
           ...projectData,
-          title: JSON.stringify({ ...formValues }),
+          title: JSON.stringify({
+            title: formValues.title,
+            description: formValues.description,
+          }),
         });
       }
     },

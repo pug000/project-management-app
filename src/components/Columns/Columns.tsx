@@ -99,6 +99,7 @@ function Columns() {
         formTitleText="newTaskTitle"
         keyPrefix="editTaskForm"
         onSubmit={createTaskOnSubmit}
+        maxDescriptionLength={200}
       />
       <PopupWithForm
         isPopupShown={isEditTaskPopupOpen}
@@ -108,6 +109,7 @@ function Columns() {
         formTitleText="editTitle"
         keyPrefix="editTaskForm"
         onSubmit={editTaskOnSubmit}
+        maxDescriptionLength={200}
       />
       <PopupWarning
         isPopupShown={isDeleteTaskPopupOpen}

@@ -21,9 +21,15 @@ interface EditFormProps<T> {
   keyPrefix: string;
   onSubmit: SubmitHandler<EditFormValues>;
   selectedItem?: T | null;
+  maxDescriptionLength: number;
 }
 
-function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
+function EditForm<T>({
+  keyPrefix,
+  onSubmit,
+  selectedItem,
+  maxDescriptionLength,
+}: EditFormProps<T>) {
   const { t, i18n } = useTranslation('translation');
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -88,7 +94,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
         errors={errors.description}
         placeholderText={t(`${keyPrefix}.description`)}
         maxLength={{
-          value: 80,
+          value: maxDescriptionLength,
           message: t(`${keyPrefix}.descriptionMaxLength`),
         }}
       />

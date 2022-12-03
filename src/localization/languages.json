@@ -135,7 +135,7 @@
         "editTitle": "Edit your task",
         "title": "Task title",
         "description": "Task description",
-        "descriptionMaxLength": "task description can't be longer than 80 characters"
+        "descriptionMaxLength": "task description can't be longer than 200 characters"
       },
       "columnContainer": {
         "newColumnButton": "New column",
