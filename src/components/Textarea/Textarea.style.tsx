@@ -22,8 +22,7 @@ const StyledTextarea = styled.textarea`
   outline: none;
   transition: ${({ theme }) => theme.effects.transition};
 
-  &:focus,
-  &:hover {
+  &:focus {
     border: solid 1px ${({ theme }) => theme.colors.primaryColor};
     box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.07);
   }

@@ -1,7 +1,10 @@
 import React, { memo, useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useParams } from 'react-router-dom';
+import ReactSelect from 'react-select';
+
+import useGetAllUsers from 'hooks/useGetAllUsers';
 
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
@@ -10,9 +13,9 @@ import RadioInput from 'components/RadioInput/RadioInput';
 
 import { defaultFormItemValues, radioInputList } from 'utils/constants';
 
-import { EditFormValues } from 'ts/interfaces';
+import { EditFormValues, SelectOptions } from 'ts/interfaces';
 
-import { Form } from 'styles/styles';
+import { Form, selectorStyles } from 'styles/styles';
 
 interface EditFormProps<T> {
   keyPrefix: string;
@@ -24,6 +27,7 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
   const { t, i18n } = useTranslation('translation');
   const { id } = useParams();
   const { pathname } = useLocation();
+  const { usersList, isUsersListLoading } = useGetAllUsers();
   const {
     register,
     handleSubmit,
@@ -32,12 +36,16 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
     setFocus,
     getValues,
     formState: { errors, isSubmitted },
+    control,
   } = useForm<EditFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: selectedItem ?? defaultFormItemValues,
   });
   const isFormValid = Object.values(errors).every((error) => !error?.message);
+
+  const getValueFromOption = (value: string) =>
+    value ? usersList.find((user) => user.value === value) : '';
 
   useEffect(() => {
     if (isSubmitted) {
@@ -85,13 +93,29 @@ function EditForm<T>({ keyPrefix, onSubmit, selectedItem }: EditFormProps<T>) {
         }}
       />
       {pathname === `/projects/${id}` && (
-        <RadioInput
-          name="color"
-          text={t('projects.color')}
-          radioInputs={radioInputList}
-          register={register}
-          defaultValue={getValues().color}
-        />
+        <>
+          <RadioInput
+            name="color"
+            text={t('editForm.color')}
+            radioInputs={radioInputList}
+            register={register}
+            defaultValue={getValues().color}
+          />
+          <Controller
+            control={control}
+            name="responsibleUser"
+            render={({ field: { onChange, value } }) => (
+              <ReactSelect
+                isLoading={isUsersListLoading}
+                options={usersList}
+                placeholder={t('editForm.responsible')}
+                value={getValueFromOption(value)}
+                onChange={(newValue) => onChange((newValue as SelectOptions).value)}
+                styles={selectorStyles}
+              />
+            )}
+          />
+        </>
       )}
       <Button type="submit" disabled={!isFormValid}>
         {t('editForm.button')}

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useGetAllTasks from 'hooks/useGetAllTasks';
 
@@ -13,6 +14,9 @@ import {
   TaskDescription,
   TaskButton,
   TaskDescriptionWrapper,
+  TaskResponsibleWrapper,
+  TaskResponsible,
+  TaskResponsibleName,
 } from './TaskCards.style';
 
 interface TasksCardsProps {
@@ -31,6 +35,7 @@ function TaskCards({
   showEditPopupOnClick,
   showDeletePopupOnClick,
 }: TasksCardsProps) {
+  const { t } = useTranslation('translation', { keyPrefix: 'task' });
   const { tasks } = useGetAllTasks(boardId, columnId);
 
   return (
@@ -49,6 +54,14 @@ function TaskCards({
             <TaskDescriptionWrapper>
               <TaskDescription>{task.description}</TaskDescription>
             </TaskDescriptionWrapper>
+            {task.users[0] && (
+              <TaskResponsibleWrapper>
+                <TaskResponsible>
+                  {t('responsible')}
+                  <TaskResponsibleName> {task.users[0]} </TaskResponsibleName>
+                </TaskResponsible>
+              </TaskResponsibleWrapper>
+            )}
           </StyledTask>
         ))}
     </TasksWrapper>

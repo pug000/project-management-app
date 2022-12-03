@@ -110,10 +110,30 @@ const TaskDescription = styled.p`
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  height: 20px;
 `;
 
 const StyledRemoveIcon = styled(IoClose)`
   color: ${({ theme }) => theme.colors.backgroundWhite};
+`;
+
+const TaskResponsibleWrapper = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.smallNoteText};
+  word-break: break-word;
+  overflow: hidden;
+`;
+
+const TaskResponsible = styled.p`
+  font-style: italic;
+  color: ${({ theme }) => theme.colors.grey};
+`;
+
+const TaskResponsibleName = styled.span`
+  display: inline-block;
+  background-color: ${({ theme }) => theme.colors.backgroundWhite};
+  padding: 0 7px 0 5px;
+  border-radius: 3px;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export {
@@ -125,4 +145,7 @@ export {
   TasksWrapper,
   TaskButton,
   StyledRemoveIcon,
+  TaskResponsibleWrapper,
+  TaskResponsible,
+  TaskResponsibleName,
 };

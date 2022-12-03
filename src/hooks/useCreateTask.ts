@@ -34,7 +34,7 @@ const useCreateTask = () => {
             title,
             description: JSON.stringify({ ...formValues }),
             userId: authUser?._id ?? '',
-            users: [],
+            users: [formValues.responsibleUser],
             order: 0,
           },
         });
