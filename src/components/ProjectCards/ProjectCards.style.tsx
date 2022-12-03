@@ -37,9 +37,10 @@ const CardsWrapper = styled.div`
 
 const Card = styled.div`
   width: 100%;
-  min-height: 150px;
+  min-height: 185px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   padding: 20px;
   border-radius: 10px;
@@ -119,6 +120,25 @@ const CardDescription = styled.p`
   overflow: hidden;
 `;
 
+const CardOwnerWrapper = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.smallNoteText};
+  word-break: break-word;
+  overflow: hidden;
+`;
+
+const CardOwner = styled.p`
+  font-style: italic;
+  color: ${({ theme }) => theme.colors.grey};
+`;
+
+const CardOwnerName = styled.span`
+  display: inline-block;
+  background-color: ${({ theme }) => theme.colors.backgroundGrey};
+  padding: 0 7px 0 5px;
+  border-radius: 3px;
+  color: ${({ theme }) => theme.colors.primaryColor};
+`;
+
 export {
   CardsWrapper,
   Card,
@@ -129,4 +149,7 @@ export {
   CardDescriptionWrapper,
   CardDescription,
   IconWrapper,
+  CardOwnerWrapper,
+  CardOwner,
+  CardOwnerName,
 };

@@ -1,5 +1,6 @@
 import { Draggable } from '@hello-pangea/dnd';
 import React, { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Task } from 'ts/interfaces';
 
@@ -11,6 +12,9 @@ import {
   TaskDescription,
   TaskButton,
   TaskDescriptionWrapper,
+  TaskResponsibleWrapper,
+  TaskResponsible,
+  TaskResponsibleName,
 } from './TaskCard.style';
 
 interface TasksCardProps {
@@ -29,6 +33,8 @@ function TaskCard({
   showEditPopupOnClick,
   showDeletePopupOnClick,
 }: TasksCardProps) {
+  const { t } = useTranslation('translation', { keyPrefix: 'task' });
+
   return (
     <Draggable draggableId={task._id} index={taskIndex}>
       {(providedDrag) => (
@@ -48,6 +54,14 @@ function TaskCard({
           <TaskDescriptionWrapper>
             <TaskDescription>{task.description}</TaskDescription>
           </TaskDescriptionWrapper>
+          {task.users[0] && (
+            <TaskResponsibleWrapper>
+              <TaskResponsible>
+                {t('responsible')}
+                <TaskResponsibleName> {task.users[0]} </TaskResponsibleName>
+              </TaskResponsible>
+            </TaskResponsibleWrapper>
+          )}
         </StyledTask>
       )}
     </Draggable>

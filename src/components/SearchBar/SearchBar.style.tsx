@@ -21,6 +21,12 @@ const SearchBarWrapper = styled.div`
   }
 
   Input {
+    margin-top: 5px;
+
+    & ~ label {
+      top: 6px;
+    }
+
     &:focus ~ label,
     &:disabled ~ label {
       transform: none;

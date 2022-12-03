@@ -34,7 +34,7 @@ const useCreateTask = (taskList: TaskList) => {
             title,
             description: JSON.stringify({ ...formValues }),
             userId: authUser?._id ?? '',
-            users: [],
+            users: [formValues.responsibleUser],
             order: taskList[selectedColumn._id] ? taskList[selectedColumn._id].length : 0,
           },
         });

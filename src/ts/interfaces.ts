@@ -102,6 +102,7 @@ interface EditFormValues {
   title: string;
   description: string;
   color: string;
+  responsibleUser: string;
 }
 
 interface ColumnFormValues {
@@ -139,9 +140,13 @@ interface TasksProps {
   boardId: string;
   columnId: string;
 }
-
 interface TaskList {
   [columnId: string]: Task[];
+}
+
+interface SelectOptions {
+  value: string;
+  label: string;
 }
 
 export type {
@@ -171,4 +176,5 @@ export type {
   Task,
   TasksProps,
   TaskList,
+  SelectOptions,
 };

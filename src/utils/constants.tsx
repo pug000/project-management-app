@@ -11,6 +11,7 @@ import {
   RadioInputItem,
   ColumnFormValues,
   SearchBarValues,
+  SelectOptions,
 } from 'ts/interfaces';
 
 import { GrProjects, GrTask } from 'react-icons/gr';
@@ -21,7 +22,7 @@ import YellowSvg from 'pages/ProfilePage/SvgElements/YellowSvg';
 
 const baseUrl = 'https://project-management-ka5v.onrender.com/';
 
-const nameValidation = /^(?=[a-zA-Z._]*$)(?!.*[_.]).*/gm;
+const nameValidation = /^(?=[a-zA-Z._ ]*$)(?!.*[_.]).*/gm;
 
 const loginValidation = /^(?=[a-zA-Z0-9._]*$)(?!.*[_.])[^_.].*/gm;
 
@@ -259,6 +260,7 @@ const defaultFormItemValues: EditFormValues = {
   title: '',
   description: '',
   color: '',
+  responsibleUser: '',
 };
 
 const defaultColumnFormValues: ColumnFormValues = {
@@ -268,6 +270,13 @@ const defaultColumnFormValues: ColumnFormValues = {
 const defaultSearchBarValues: SearchBarValues = {
   title: '',
 };
+
+const defaultSelectOptions: SelectOptions[] = [
+  {
+    value: '',
+    label: '',
+  },
+];
 
 export {
   baseUrl,
@@ -289,4 +298,5 @@ export {
   defaultFormItemValues,
   defaultColumnFormValues,
   defaultSearchBarValues,
+  defaultSelectOptions,
 };

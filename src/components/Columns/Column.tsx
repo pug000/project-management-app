@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Draggable, Droppable } from '@hello-pangea/dnd';
 
 import useGetAllTasks from 'hooks/useGetAllTasks';
 
@@ -10,7 +11,6 @@ import TaskCard from 'components/TaskCard/TaskCard';
 import { ColumnData, Task } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
-import { Draggable, Droppable } from '@hello-pangea/dnd';
 import { ColumnsContainer, TasksWrapper } from './Columns.style';
 
 interface ColumnProps {
