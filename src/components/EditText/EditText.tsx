@@ -11,6 +11,7 @@ import {
   EditTextContainer,
   StyledEditText,
   TextWrapper,
+  EditTextElement,
 } from './EditText.styles';
 
 import EditTextForm from './EditTextForm';
@@ -52,28 +53,30 @@ function EditText({
         />
       ) : (
         <EditTextWrapper>
-          <TextWrapper>
-            <StyledEditText onClick={toggleEditingTextOnClick}>
-              {item.title}
-            </StyledEditText>
+          <EditTextElement>
+            <TextWrapper>
+              <StyledEditText onClick={toggleEditingTextOnClick}>
+                {item.title}
+              </StyledEditText>
+              <Button
+                type="button"
+                width="25px"
+                backgroundColor={defaultTheme.colors.transparent}
+                callback={toggleEditingTextOnClick}
+              >
+                <StyledEditTextIcon />
+              </Button>
+            </TextWrapper>
             <Button
               type="button"
               width="25px"
               backgroundColor={defaultTheme.colors.transparent}
-              callback={toggleEditingTextOnClick}
+              color={defaultTheme.colors.pink}
+              callback={() => deleteItemOnClick(item)}
             >
-              <StyledEditTextIcon />
+              <StyledDeleteIcon />
             </Button>
-          </TextWrapper>
-          <Button
-            type="button"
-            width="25px"
-            backgroundColor={defaultTheme.colors.transparent}
-            color={defaultTheme.colors.pink}
-            callback={() => deleteItemOnClick(item)}
-          >
-            <StyledDeleteIcon />
-          </Button>
+          </EditTextElement>
         </EditTextWrapper>
       )}
     </EditTextContainer>

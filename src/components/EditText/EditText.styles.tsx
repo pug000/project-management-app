@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 import { InputErrorText } from 'components/Input/Input.style';
+import StyledButton from 'components/Button/Button.style';
+
+const EditTextElement = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
 const StyledEditText = styled.h5`
   font-size: ${({ theme }) => theme.fontSizes.h5};
@@ -39,6 +45,11 @@ const EditTextContainer = styled.div`
 const TextWrapper = styled.div`
   display: flex;
   width: 100%;
+
+  ${StyledButton} {
+    padding: 0;
+    align-self: center;
+  }
 `;
 
 const EditTextWrapper = styled.div`
@@ -50,8 +61,15 @@ const EditTextWrapper = styled.div`
 
   Button {
     padding: 0;
-    align-self: flex-start;
+    align-self: flex-end;
   }
 `;
 
-export { Form, EditTextContainer, EditTextWrapper, TextWrapper, StyledEditText };
+export {
+  Form,
+  EditTextContainer,
+  EditTextWrapper,
+  TextWrapper,
+  StyledEditText,
+  EditTextElement,
+};
