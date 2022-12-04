@@ -16,6 +16,10 @@ const StyledEditText = styled.h5`
   white-space: nowrap;
   overflow: hidden;
   max-width: 210px;
+
+  @media (max-width: 400px) {
+    max-width: 170px;
+  }
 `;
 
 const Form = styled.form`
