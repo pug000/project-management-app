@@ -2,7 +2,7 @@
 
 _**Project Management App** is an application that helps a team or group of developers achieve their goals._
 
-[Link to the deploy](https://pug000.github.io/project-management-app/ "PMA")
+[Link to the deploy](https://pug000.github.io/project-management-app/#/ "PMA")
 
 ## Usage
 
