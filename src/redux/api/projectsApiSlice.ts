@@ -2,6 +2,7 @@ import {
   setCreateProjectPopupOpen,
   setEditProjectPopupOpen,
 } from 'redux/slices/projectSlice';
+import { RootState } from 'redux/store';
 
 import { addFetchOptions } from 'utils/functions';
 
@@ -21,13 +22,21 @@ const projectsApiSlice = apiSlice.injectEndpoints({
           ...data,
           ...JSON.parse(title),
         })),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+      onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
         try {
+          const { isCreateProjectPopupOpen, isEditProjectPopupOpen } = (
+            getState() as RootState
+          ).project;
           await queryFulfilled;
-          dispatch(setCreateProjectPopupOpen(false));
-          dispatch(setEditProjectPopupOpen(false));
+          if (isCreateProjectPopupOpen) {
+            dispatch(setCreateProjectPopupOpen(false));
+          } else if (isEditProjectPopupOpen) {
+            dispatch(setEditProjectPopupOpen(false));
+          }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       providesTags: (result) =>
@@ -58,6 +67,7 @@ const projectsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Project'],
     }),
+
     updateProject: builder.mutation<ProjectData, ProjectData>({
       query: ({ _id, ...body }: ProjectData) => ({
         ...addFetchOptions(`${Endpoints.boards}${_id}`, Methods.put),

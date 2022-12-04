@@ -97,6 +97,7 @@ interface ProjectData {
 
 interface Project extends ProjectData {
   description: string;
+  responsibleUser: string;
 }
 interface EditFormValues {
   title: string;
@@ -140,6 +141,9 @@ interface TasksProps {
   boardId: string;
   columnId: string;
 }
+interface TaskList {
+  [columnId: string]: Task[];
+}
 
 interface SelectOptions {
   value: string;
@@ -172,5 +176,6 @@ export type {
   TaskData,
   Task,
   TasksProps,
+  TaskList,
   SelectOptions,
 };

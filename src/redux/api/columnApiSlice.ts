@@ -1,4 +1,5 @@
 import { setCreateColumnPopupOpen } from 'redux/slices/columnSlice';
+import { RootState } from 'redux/store';
 
 import { addFetchOptions } from 'utils/functions';
 
@@ -14,19 +15,31 @@ interface ColumnResponse {
   body: Column;
 }
 
-export const columnsApiSlice = apiSlice.injectEndpoints({
+interface ColumnOrder {
+  _id: string;
+  order: number;
+}
+
+const columnsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllColumns: builder.query<ColumnData[], string>({
       query: (id) =>
         addFetchOptions(`${Endpoints.boards}${id}/${Endpoints.columns}`, Methods.get),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+      onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
         try {
+          const { isCreateColumnPopupOpen } = (getState() as RootState).column;
           await queryFulfilled;
-          dispatch(setCreateColumnPopupOpen(false));
+          if (isCreateColumnPopupOpen) {
+            dispatch(setCreateColumnPopupOpen(false));
+          }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
+      transformResponse: (columns: ColumnData[]) =>
+        columns.sort((a, b) => a.order - b.order),
       providesTags: (result) =>
         result
           ? [...result.map(({ _id }) => ({ type: 'Column' as const, id: _id })), 'Column']
@@ -61,6 +74,14 @@ export const columnsApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Column'],
     }),
 
+    updateOrderColumn: builder.mutation<ColumnData[], ColumnOrder[]>({
+      query: (body) => ({
+        ...addFetchOptions(`${Endpoints.columnsSet}`, Methods.patch),
+        body,
+      }),
+      invalidatesTags: ['Column'],
+    }),
+
     getColumnById: builder.query<ColumnData, OmitColumnData>({
       query: ({ _id, boardId }) =>
         addFetchOptions(
@@ -77,5 +98,11 @@ export const {
   useCreateColumnMutation,
   useDeleteColumnByIdMutation,
   useUpdateColumnByIdMutation,
+  useUpdateOrderColumnMutation,
   useGetColumnByIdQuery,
 } = columnsApiSlice;
+
+const getBaseAllColumns = (state: RootState, id: string) =>
+  columnsApiSlice.endpoints.getAllColumns.select(id)(state);
+
+export { getBaseAllColumns };

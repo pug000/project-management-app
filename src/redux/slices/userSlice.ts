@@ -9,6 +9,7 @@ interface UserState {
   isDeleteUserPopupOpen: boolean;
   isLogoutUserPopupOpen: boolean;
   isErrorNotificationPopupOpen: boolean;
+  isTokenInvalidPopupOpen: boolean;
 }
 
 const initialState: UserState = {
@@ -18,6 +19,7 @@ const initialState: UserState = {
   isDeleteUserPopupOpen: false,
   isLogoutUserPopupOpen: false,
   isErrorNotificationPopupOpen: false,
+  isTokenInvalidPopupOpen: false,
 };
 
 const userSlice = createSlice({
@@ -48,6 +50,10 @@ const userSlice = createSlice({
       state.isErrorNotificationPopupOpen = payload;
     },
 
+    setTokeInvalidPopupOpen(state, { payload }: PayloadAction<boolean>) {
+      state.isTokenInvalidPopupOpen = payload;
+    },
+
     setLoggedOut(state) {
       state.user = null;
       state.authUser = null;
@@ -63,6 +69,7 @@ export const {
   setDeleteUserPopupOpen,
   setLogoutUserPopupOpen,
   setErrorNotificationPopupOpen,
+  setTokeInvalidPopupOpen,
   setLoggedOut,
 } = userSlice.actions;
 

@@ -24,6 +24,11 @@ const getErrorNotificationPopupOpen = createSelector(
   (state) => state.isErrorNotificationPopupOpen
 );
 
+const getTokenInvalidPopupOpen = createSelector(
+  getBaseUserState,
+  (state) => state.isTokenInvalidPopupOpen
+);
+
 export {
   getUser,
   getAuthUser,
@@ -31,4 +36,5 @@ export {
   getDeleteUserPopupOpen,
   getLogoutUserPopupOpen,
   getErrorNotificationPopupOpen,
+  getTokenInvalidPopupOpen,
 };

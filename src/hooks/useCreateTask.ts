@@ -8,11 +8,11 @@ import { getAuthUser } from 'redux/selectors/userSelectors';
 import { setSelectedColumn } from 'redux/slices/columnSlice';
 import { setCreateTaskPopupOpen, setSelectedTask } from 'redux/slices/taskSlice';
 
-import { ColumnData, EditFormValues } from 'ts/interfaces';
+import { ColumnData, EditFormValues, TaskList } from 'ts/interfaces';
 
 import { useAppDispatch, useAppSelector } from './useRedux';
 
-const useCreateTask = () => {
+const useCreateTask = (taskList: TaskList) => {
   const isCreateTaskPopupOpen = useAppSelector(getCreateTaskPopupOpen);
   const authUser = useAppSelector(getAuthUser);
   const selectedColumn = useAppSelector(getSelectedColumn);
@@ -35,7 +35,7 @@ const useCreateTask = () => {
             description: JSON.stringify({ ...formValues }),
             userId: authUser?._id ?? '',
             users: [formValues.responsibleUser],
-            order: 0,
+            order: taskList[selectedColumn._id] ? taskList[selectedColumn._id].length : 0,
           },
         });
       }

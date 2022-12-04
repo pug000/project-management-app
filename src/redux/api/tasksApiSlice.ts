@@ -17,6 +17,12 @@ interface MutationTaskProps extends TasksProps {
   body: NewTask;
 }
 
+interface TaskOrder {
+  _id: string;
+  order: number;
+  columnId: string;
+}
+
 const tasksApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllTasks: builder.query<Task[], TasksProps>({
@@ -26,19 +32,28 @@ const tasksApiSlice = apiSlice.injectEndpoints({
           Methods.get
         ),
       transformResponse: (tasks: TaskData[]) =>
-        tasks.map((data) => ({
-          ...data,
-          ...JSON.parse(data.description),
-        })),
-      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        tasks
+          .map((data) => ({
+            ...data,
+            ...JSON.parse(data.description),
+          }))
+          .sort((a, b) => a.order - b.order),
+      onQueryStarted: async (_, { dispatch, queryFulfilled, getState }) => {
         try {
           dispatch(setLoadingGetAllTasks(true));
+          const { isEditTaskPopupOpen, isCreateTaskPopupOpen } = (getState() as RootState)
+            .task;
           await queryFulfilled;
           dispatch(setLoadingGetAllTasks(false));
-          dispatch(setEditTaskPopupOpen(false));
-          dispatch(setCreateTaskPopupOpen(false));
+          if (isCreateTaskPopupOpen) {
+            dispatch(setCreateTaskPopupOpen(false));
+          } else if (isEditTaskPopupOpen) {
+            dispatch(setEditTaskPopupOpen(false));
+          }
         } catch (error) {
-          throw new Error(`${error}`);
+          if (error instanceof Error) {
+            throw error;
+          }
         }
       },
       providesTags: (result) =>
@@ -72,6 +87,14 @@ const tasksApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Task'],
     }),
 
+    updateOrderTask: builder.mutation<TaskData[], TaskOrder[]>({
+      query: (body) => ({
+        ...addFetchOptions(`${Endpoints.tasksSet}`, Methods.patch),
+        body,
+      }),
+      invalidatesTags: ['Task'],
+    }),
+
     deleteTask: builder.mutation<TaskData, Omit<MutationTaskProps, 'body'>>({
       query: ({ boardId, columnId, id }) => ({
         ...addFetchOptions(
@@ -88,6 +111,7 @@ export const {
   useGetAllTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskMutation,
+  useUpdateOrderTaskMutation,
   useDeleteTaskMutation,
 } = tasksApiSlice;
 

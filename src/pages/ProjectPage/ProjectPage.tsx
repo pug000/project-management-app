@@ -46,13 +46,13 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'projectPage' });
   const { selectedProject, isLoadingSelectedProject, isNavigate } = useGetProjectById();
+  const { columnList, isLoadingColumnList } = useGetAllColumns();
   const { isLoadingDeleteProject, isDeleteProjectPopupOpen, deleteProject, navigate } =
     useDeleteProject(selectedProject);
   const { isCreateColumnPopupOpen, isLoadingCreateColumn, onSubmit, id } =
-    useCreateColumn();
+    useCreateColumn(columnList);
   const { isLoadingDeleteColumn, isDeleteColumnPopupOpen, deleteColumn } =
     useDeleteColumn();
-  const { columns, isLoadingColumnList } = useGetAllColumns();
   const { isLoadingEditColumnTitle } = useEditColumnTitle();
   const isLoadingProjectPage = [
     isLoadingSelectedProject,
@@ -133,8 +133,8 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
       </ProjectControls>
       <ProjectDescription>{selectedProject?.description}</ProjectDescription>
       <ProjectContainer>
-        {columns?.length ? (
-          <Columns columns={columns} />
+        {columnList?.length ? (
+          <Columns />
         ) : (
           <NoResultsContainer
             text="projectPage.emptyContainerText"
@@ -163,7 +163,7 @@ function ProjectPage({ setFooterShown }: ProjectPageProps) {
         onSubmit={onSubmit}
       />
       {isLoadingProjectPage && <Loader />}
-      {isNavigate && <Navigate to="*" />}
+      {isNavigate && <Navigate to="/" />}
     </MainWrapper>
   );
 }

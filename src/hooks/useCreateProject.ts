@@ -20,7 +20,7 @@ const useCreateProject = () => {
   const user = useAppSelector(getUser);
 
   const onSubmit: SubmitHandler<EditFormValues> = useCallback(
-    async ({ color, ...formValues }) => {
+    async ({ color, responsibleUser, ...formValues }) => {
       await createProject({
         title: JSON.stringify({ ...formValues }),
         owner: user?.name ?? '',

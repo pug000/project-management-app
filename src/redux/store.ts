@@ -16,21 +16,28 @@ import projectSlice from './slices/projectSlice';
 import columnSlice from './slices/columnSlice';
 import taskSlice from './slices/taskSlice';
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  version: 1,
+  whitelist: [],
+};
+
+const userConfig = {
+  key: 'user',
+  storage,
+  version: 1,
+  whitelist: ['user', 'authUser', 'isLoggedIn'],
+};
+
 const rootReducer = combineReducers({
-  user: userSlice,
+  user: persistReducer(userConfig, userSlice),
   project: projectSlice,
   column: columnSlice,
   task: taskSlice,
 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  version: 1,
-  blacklist: ['apiSlice', 'project', 'column', 'task'],
-};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
