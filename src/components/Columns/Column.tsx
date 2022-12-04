@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Draggable, Droppable } from '@hello-pangea/dnd';
 
@@ -8,7 +8,7 @@ import Button from 'components/Button/Button';
 import EditText from 'components/EditText/EditText';
 import TaskCard from 'components/TaskCard/TaskCard';
 
-import { ColumnData, Task } from 'ts/interfaces';
+import { ColumnData, Task, TaskList } from 'ts/interfaces';
 
 import defaultTheme from 'styles/theme';
 import { ColumnContainer, TasksWrapper } from './Columns.style';
@@ -18,14 +18,8 @@ interface ColumnProps {
   columnIndex: number;
   isSuccessGetColumnList: boolean;
   isLoadingColumnList: boolean;
-  taskList: {
-    [id: string]: Task[];
-  };
-  setTaskList: React.Dispatch<
-    React.SetStateAction<{
-      [id: string]: Task[];
-    }>
-  >;
+  taskList: TaskList;
+  setTaskList: React.Dispatch<React.SetStateAction<TaskList>>;
   showCreateTaskPopup: (column: ColumnData) => void;
   editColumnTitle: (title: string, item: ColumnData) => void;
   deleteColumnOnClick: (column: ColumnData) => void;
@@ -50,16 +44,7 @@ function Column({
   showDeletePopupOnClick,
 }: ColumnProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'columnContainer' });
-  const { tasks, isSuccessGetAllTasks } = useGetAllTasks(column.boardId, column._id);
-
-  useEffect(() => {
-    if (tasks && isSuccessGetAllTasks) {
-      setTaskList((prev) => ({
-        ...prev,
-        [column._id]: tasks,
-      }));
-    }
-  }, [tasks, isSuccessGetAllTasks]);
+  useGetAllTasks(column.boardId, column._id, setTaskList);
 
   return (
     <Draggable draggableId={column._id} index={columnIndex}>
