@@ -63,11 +63,16 @@ function Column({
 
   return (
     <Draggable draggableId={column._id} index={columnIndex}>
-      {(providedDrag) => (
+      {(providedDrag, snapshot) => (
         <ColumnContainer
           ref={providedDrag.innerRef}
           {...providedDrag.draggableProps}
           {...providedDrag.dragHandleProps}
+          $isDragging={snapshot.isDragging}
+          style={{
+            ...providedDrag.draggableProps.style,
+            cursor: 'default',
+          }}
         >
           <EditText
             item={column}

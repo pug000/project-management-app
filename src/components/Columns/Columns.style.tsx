@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface DragProps {
+  $isDragging?: boolean;
+}
+
 const ColumnWrapper = styled.div`
   display: flex;
   overflow: auto;
@@ -32,7 +36,7 @@ const ColumnWrapper = styled.div`
   }
 `;
 
-const ColumnContainer = styled.div`
+const ColumnContainer = styled.div<DragProps>`
   min-width: 300px;
   max-width: 300px;
   width: 100%;
@@ -43,7 +47,9 @@ const ColumnContainer = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
-  border-left: 5px solid ${({ theme }) => theme.colors.grey};
+  border-left: 5px solid
+    ${({ $isDragging, theme }) =>
+      $isDragging ? theme.colors.primaryColor : theme.colors.grey};
   box-shadow: 0px 10px 13px rgb(0 0 0 / 2%);
   background-color: ${({ theme }) => theme.colors.backgroundWhite};
   cursor: default;
