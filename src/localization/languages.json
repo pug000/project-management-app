@@ -1,0 +1,314 @@
+{
+  "en": {
+    "translation": {
+      "authorization": {
+        "name": "Name",
+        "login": "Login",
+        "password": "Password",
+        "required": "{{value, lowercase}} can't be empty",
+        "nameMinLength": "name should contain more than {{count}} characters",
+        "authMinLength": "{{value, lowercase}} should contain more than {{count}} characters",
+        "namePattern": "name should contain only letters(eng)",
+        "loginPattern": "login should contain only letters(eng) and digits",
+        "passwordPattern": "password should contain only letters(eng), digits and ! @ # ~ &",
+        "error": "Authorization error. Try again later",
+        "tokenInvalid": "Sorry your token isn't valid any more. You were logged out."
+      },
+      "signUp": {
+        "title": "Sign Up",
+        "text": "Sign Up",
+        "account": "Already have an account? Sign In",
+        "error": "This login already exists"
+      },
+      "signIn": {
+        "title": "Sign In",
+        "text": "Sign In",
+        "account": "Still don't have an account? Sing Up",
+        "error": "Incorrect login or password!"
+      },
+      "signOut": {
+        "text": "Sign Out"
+      },
+      "profile": {
+        "title": "My profile",
+        "text": "Save",
+        "edit": "Edit profile",
+        "delete": "Delete profile",
+        "successful": "Profile has been changed",
+        "back": "Leave without changes"
+      },
+      "projects": {
+        "text": "Projects",
+        "title": "Title",
+        "description": "Description",
+        "descriptionPlaceholder": "Project description",
+        "save": "Save",
+        "cancel": "Cancel",
+        "maxLength": "a project {{value, lowercase}} can't be longer than {{count}} characters",
+        "projectOwner": "project created by"
+      },
+      "home": {
+        "text": "Home"
+      },
+      "other": {
+        "or": "or",
+        "and": "and"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App for The Rolling Scopes School",
+        "authors": "Our team on GitHub",
+        "roma": "Roman Troshin",
+        "nastya": "Anastasiya Sachko",
+        "artem": "Artsiom Kharytonchyk"
+      },
+      "protected": {
+        "text": "To see the content of this page sign up or sign in if you have an account"
+      },
+      "homePage": {
+        "title1": "All your tasks now automated",
+        "text1": "Project Management App is a simple and convenient way to organize your team. Start working by signing up and creating your first project.",
+        "buttonIfLoggedIn": "To projects",
+        "buttonIfNotLoggedIn": "Sign Up",
+        "blockTitle1": "Projects",
+        "blockText1": "In PMA you can create all your projects and easily manage them.",
+        "blockTitle2": "Columns",
+        "blockText2": "Group of tasks are called columns. To control the progress of tasks implementation move them between columns.",
+        "blockTitle3": "Tasks",
+        "blockText3": "Create tasks and choose one of your team-member who will be responsible for the task.",
+        "subtitle": "Everything's under control",
+        "title2": "PMA will take care of task management",
+        "listItem1": "All in one place",
+        "listItem2": "Control of the progress",
+        "listItem3": "Safe and secure",
+        "team": "Our team",
+        "roma": "Roman Troshin",
+        "nastya": "Anastasiya Sachko",
+        "artem": "Artsiom Kharytonchyk",
+        "romaDescription": "Frontend-developer, team-lead",
+        "nastyaDescription": "Frontend-developer",
+        "artemDescription": "Frontend-developer"
+      },
+      "notFound": {
+        "title": "Something went wrong!",
+        "text": "Unfortunately, this page does not exist.",
+        "button": "Return to Home page"
+      },
+      "warningPopup": {
+        "yes": "Yes",
+        "no": "No",
+        "signOut": "Are you sure you want to sign out?",
+        "deleteProfile": "Are you sure you want to delete the profile?",
+        "deleteProject": "Are you sure you want to delete the project?",
+        "deleteColumn": "Are you sure you want to delete the column?",
+        "deleteTask": "Are you sure you want to delete the task?"
+      },
+      "projectsPage": {
+        "title": "Projects",
+        "newProjectButton": "New project",
+        "emptyContainerText": "It seems you don't have any projects yet.",
+        "emptyContainerButton": "Click here to create a new project",
+        "successful": "Project successfully created"
+      },
+      "projectPage": {
+        "newColumnButton": "New column",
+        "emptyContainerText": "It seems you don't have any columns yet.",
+        "emptyContainerButton": "Click here to create a new column",
+        "successful": "Column successfully created"
+      },
+      "editForm": {
+        "button": "Ok",
+        "titleMinLength": "title should contain more than 3 characters",
+        "titleMaxLength": "title can't be longer than 25 characters",
+        "required": "this field can't be empty",
+        "color": "Task color",
+        "responsible": "Choose who's responsible"
+      },
+      "editProjectForm": {
+        "newProjectTitle": "Create new project",
+        "editTitle": "Edit your project",
+        "title": "Project title",
+        "description": "Project description",
+        "descriptionMaxLength": "project description can't be longer than 80 characters"
+      },
+      "editTaskForm": {
+        "newTaskTitle": "Create new task",
+        "editTitle": "Edit your task",
+        "title": "Task title",
+        "description": "Task description",
+        "descriptionMaxLength": "task description can't be longer than 200 characters"
+      },
+      "columnContainer": {
+        "newColumnButton": "New column",
+        "successful": "Column successfully created",
+        "newTaskButton": "New task"
+      },
+      "editColumnForm": {
+        "newColumnTitle": "Create new column",
+        "editTitle": "Edit your column",
+        "title": "Column title"
+      },
+      "searchBar": {
+        "placeholder": "Find a project..."
+      },
+      "task": {
+        "responsible": "responsible: "
+      }
+    }
+  },
+  "ru": {
+    "translation": {
+      "authorization": {
+        "name": "Имя",
+        "login": "Логин",
+        "password": "Пароль",
+        "required": "{{value, lowercase}} не может быть пустым",
+        "nameMinLength": "имя должно состоять как минимум из {{count}} символов",
+        "authMinLength": "{{value, lowercase}} должен состоять как минимум из {{count}} символов",
+        "namePattern": "имя может содержать только латинские буквы",
+        "loginPattern": "логин может содержать только латинские буквы и цифры",
+        "passwordPattern": "пароль может содержать только латинские буквы, цифры и ! @ # ~ &",
+        "error": "Ошибка авторизации. Попробуйте позже",
+        "tokenInvalid": "Извините, ваш токен больше недействителен. Был произведен выход из системы."
+      },
+      "signUp": {
+        "title": "Регистрация",
+        "text": "Зарегистрироваться",
+        "account": "Уже есть учетная запись? Войти",
+        "error": "Этот логин уже занят"
+      },
+      "signIn": {
+        "title": "Вход",
+        "text": "Войти",
+        "account": "Ещё нет учетной записи? Зарегистрироваться",
+        "error": "Неверный логин или пароль!"
+      },
+      "signOut": {
+        "text": "Выход"
+      },
+      "profile": {
+        "title": "Мой профиль",
+        "text": "Сохранить",
+        "edit": "Изменить профиль",
+        "delete": "Удалить профиль",
+        "successful": "Профиль был изменен",
+        "back": "Оставить без изменений"
+      },
+      "projects": {
+        "text": "Проекты",
+        "title": "Название",
+        "description": "Описание",
+        "descriptionPlaceholder": "Описание проекта",
+        "save": "Сохранить",
+        "cancel": "Отменить",
+        "maxLength": "{{value, lowercase}} проекта не может быть длиннее {{count}} символов.",
+        "projectOwner": "проект создал(а)"
+      },
+      "home": {
+        "text": "Главная"
+      },
+      "other": {
+        "or": "или",
+        "and": "и"
+      },
+      "footer": {
+        "copyright": "© 2022 Project Management App для The Rolling Scopes School",
+        "authors": "Наша команда на GitHub",
+        "roma": "Роман Трошин",
+        "nastya": "Анастасия Сачко",
+        "artem": "Артём Харитончик"
+      },
+      "protected": {
+        "text": "Вам необходимо зайти под вашей учетной записью или зарегистрироваться"
+      },
+      "homePage": {
+        "title1": "Теперь все задачи автоматизированы",
+        "text1": "Project Management App это простой и удобный способ организовать свою команду. Для начала зарегистрируйтесь и создайте свой первый проект.",
+        "buttonIfLoggedIn": "К проектам",
+        "buttonIfNotLoggedIn": "Регистрация",
+        "blockTitle1": "Проекты",
+        "blockText1": "В PMA вы можете создать все свои проекты и легко ими управлять.",
+        "blockTitle2": "Колонки",
+        "blockText2": "Группы задач - это колонки. Для контроля за ходом выполнения задач перемещайте их между колонками.",
+        "blockTitle3": "Задачи",
+        "blockText3": "Создавайте задачи и выбирайте, кто из команды будет отвечать за задачу.",
+        "subtitle": "Всё под контролем",
+        "title2": "PMA позаботится о ваших задачах",
+        "listItem1": "Всё в одном месте",
+        "listItem2": "Контроль прогресса",
+        "listItem3": "Надёжно и безопасно",
+        "team": "Наша команда",
+        "roma": "Роман Трошин",
+        "nastya": "Анастасия Сачко",
+        "artem": "Артём Харитончик",
+        "romaDescription": "Frontend-разработчик, team-lead",
+        "nastyaDescription": "Frontend-разработчик",
+        "artemDescription": "Frontend-разработчик"
+      },
+      "notFound": {
+        "title": "Что-то пошло не так!",
+        "text": "К сожалению, данная страница не существует.",
+        "button": "Вернуться на Главную"
+      },
+      "warningPopup": {
+        "yes": "Да",
+        "no": "Нет",
+        "signOut": "Вы уверены, что хотите выйти?",
+        "deleteProfile": "Вы уверены, что хотите удалить профиль?",
+        "deleteProject": "Вы уверены, что хотите удалить проект?",
+        "deleteColumn": "Вы уверены, что хотите удалить колонку?",
+        "deleteTask": "Вы уверены, что хотите удалить задачу?"
+      },
+      "projectsPage": {
+        "title": "Проекты",
+        "newProjectButton": "Новый проект",
+        "emptyContainerText": "Похоже, у вас еще нет проектов.",
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новый проект",
+        "successful": "Проект успешно создан"
+      },
+      "projectPage": {
+        "newColumnButton": "Новая колонка",
+        "emptyContainerText": "Похоже, у вас еще нет колонок",
+        "emptyContainerButton": "Нажмите сюда, чтобы создать новую колонку",
+        "successful": "Колонка успешно создана"
+      },
+      "editForm": {
+        "button": "Ok",
+        "titleMinLength": "название не может быть короче 3 символов",
+        "titleMaxLength": "название не может быть длиннее 25 символов",
+        "required": "это поле не может быть пустым",
+        "color": "Цвет задачи",
+        "responsible": "Выберете ответственного"
+      },
+      "editProjectForm": {
+        "newProjectTitle": "Создать новый проект",
+        "editTitle": "Изменить проект",
+        "title": "Название проекта",
+        "description": "Описание проекта",
+        "descriptionMaxLength": "описание проекта не может быть длиннее 80 символов"
+      },
+      "editTaskForm": {
+        "newTaskTitle": "Создать новую задачу",
+        "editTitle": "Изменить задачу",
+        "title": "Название задачи",
+        "description": "Описание задачи",
+        "descriptionMaxLength": "описание задачи не может быть длиннее 80 символов"
+      },
+      "columnContainer": {
+        "newColumnButton": "Новая колонка",
+        "successful": "Колонка успешно создана",
+        "newTaskButton": "Новая задача"
+      },
+      "editColumnForm": {
+        "newColumnTitle": "Создать новую колонку",
+        "editTitle": "Изменить колонку",
+        "title": "Название колонки"
+      },
+      "searchBar": {
+        "placeholder": "Найти проект..."
+      },
+      "task": {
+        "responsible": "ответственный: "
+      }
+    }
+  }
+}
